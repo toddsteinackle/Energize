@@ -42,7 +42,7 @@
 // Create an ES 1.1 context
 - (id) init
 {
-    if (self = [super init])
+    if ((self = [super init]))
     {
         context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES1];
 
@@ -139,8 +139,8 @@
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // Set the colour to use when clearing the screen with glClear
-    //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    //glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
     // We are not using the depth buffer in our 2D game so depth testing can be disabled.  If depth
     // testing was required then a depth buffer would need to be created as well as enabling the depth

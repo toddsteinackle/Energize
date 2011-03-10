@@ -32,7 +32,8 @@
     sceneState = SceneState_TransitionIn;
 
     if ((self = [super initWithFrame:frame])) {
-
+        sharedImageRenderManager = [ImageRenderManager sharedImageRenderManager];
+        starfield = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"starfield.pex"];
     }
     return self;
 }
@@ -41,12 +42,16 @@
 #pragma mark update
 - (void)updateSceneWithDelta:(float)aDelta {
 
+    [starfield updateWithDelta:aDelta];
 }
 
 #pragma mark -
 #pragma mark render
 -(void)renderScene {
 
+    glClear(GL_COLOR_BUFFER_BIT);
+    [starfield renderParticles];
+    [sharedImageRenderManager renderImages];
 }
 
 #pragma mark -

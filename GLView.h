@@ -27,6 +27,9 @@
 
     int sceneState;
 
+    ImageRenderManager *sharedImageRenderManager;
+    ParticleEmitter *starfield;
+
 }
 
 @property (nonatomic, retain) OpenGLViewController *viewController;
