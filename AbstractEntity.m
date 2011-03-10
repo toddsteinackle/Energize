@@ -55,16 +55,11 @@
 #pragma mark Rendering
 
 - (void)render {
-// Debug code that allows us to draw bounding boxes for the entity
-#ifdef SCB
-        // Draw the collision bounds in green
-        glColor4f(0, 1, 0, 1);
-        drawBox([self collisionBounds]);
-
-        // Draw the movement bounds in blue
-        glColor4f(0, 0, 1, 1);
-        drawBox([self movementBounds]);
-#endif
+    // Debug code that allows us to draw bounding boxes for the entity
+    // Draw the collision bounds in green
+    glColor4f(0, 1, 0, 1);
+    drawRect(CGRectMake(pixelLocation.x - collisionXOffset, pixelLocation.y - collisionYOffset,
+                        collisionWidth, collisionHeight));
 }
 
 #pragma mark -

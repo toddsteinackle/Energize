@@ -18,6 +18,7 @@
 #import "CubeStormViewController.h"
 #import "OpenGLViewController.h"
 #import "Globals.h"
+#import "Asteroid.h"
 
 @implementation GLView
 
@@ -34,6 +35,7 @@
     if ((self = [super initWithFrame:frame])) {
         sharedImageRenderManager = [ImageRenderManager sharedImageRenderManager];
         starfield = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"starfield.pex"];
+        asteroid = [[Asteroid alloc] initWithPixelLocation:CGPointMake(500.0f, 300.0f)];
     }
     return self;
 }
@@ -43,14 +45,16 @@
 - (void)updateSceneWithDelta:(float)aDelta {
 
     [starfield updateWithDelta:aDelta];
+    [asteroid updateWithDelta:aDelta];
 }
 
 #pragma mark -
 #pragma mark render
 -(void)renderScene {
 
-    glClear(GL_COLOR_BUFFER_BIT);
+    //glClear(GL_COLOR_BUFFER_BIT);
     [starfield renderParticles];
+    [asteroid render];
     [sharedImageRenderManager renderImages];
 }
 

@@ -46,7 +46,7 @@ static NSMutableDictionary *cachedSpriteSheets = nil;
         cachedSpriteSheets = [[NSMutableDictionary alloc] init];
 
     // If a sprite sheet created with the same filename is found then return the reference to it
-    if(cachedSpriteSheet = [cachedSpriteSheets objectForKey:aImageName])
+    if((cachedSpriteSheet = [cachedSpriteSheets objectForKey:aImageName]))
         return cachedSpriteSheet;
 
     // As we have not found a sprite sheet we need to create a new one
@@ -69,7 +69,7 @@ static NSMutableDictionary *cachedSpriteSheets = nil;
         cachedSpriteSheets = [[NSMutableDictionary alloc] init];
 
     // If a sprite sheet created with the same texture name is found then return the reference to it
-    if(cachedSpriteSheet = [cachedSpriteSheets objectForKey:aSheetKey])
+    if((cachedSpriteSheet = [cachedSpriteSheets objectForKey:aSheetKey]))
         return cachedSpriteSheet;
 
     // As we have not found a sprite sheet we need to create a new one
@@ -100,7 +100,7 @@ static NSMutableDictionary *cachedSpriteSheets = nil;
 
     // Call the Image classes designated initializer so that the image we are going to use for the
     // sprite sheet is set up along with all the images properties
-    if (self = [super init]) {
+    if ((self = [super init])) {
 
         NSString *fileName = [aImageFileName lastPathComponent];
 
@@ -119,7 +119,7 @@ static NSMutableDictionary *cachedSpriteSheets = nil;
 }
 
 - (id)initWithImage:(Image*)aImage spriteSize:(CGSize)aSpriteSize spacing:(NSUInteger)aSpacing margin:(NSUInteger)aMargin{
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.image = aImage;
 
         // Sprite size and spacing

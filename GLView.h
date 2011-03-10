@@ -19,6 +19,7 @@
 @class ParticleEmitter;
 @class CubeStormAppDelegate;
 @class OpenGLViewController;
+@class Asteroid;
 
 @interface GLView : GLESGameState {
 
@@ -29,6 +30,7 @@
 
     ImageRenderManager *sharedImageRenderManager;
     ParticleEmitter *starfield;
+    Asteroid *asteroid;
 
 }
 

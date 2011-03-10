@@ -38,7 +38,7 @@ static NSMutableDictionary *cachedPackedSpriteSheets = nil;
 
     // Try to find a cached packed sprite sheet that has the same image name as the one provided.  If one is found
     // then a reference to that is returned
-    if(cachedPackedSpriteSheet = [cachedPackedSpriteSheets objectForKey:aImageName])
+    if((cachedPackedSpriteSheet = [cachedPackedSpriteSheets objectForKey:aImageName]))
         return cachedPackedSpriteSheet;
 
     // If no match is found then we create a new PackedSpriteSheet, add it to the cache and return a reference
@@ -64,7 +64,7 @@ static NSMutableDictionary *cachedPackedSpriteSheets = nil;
 
 - (id)initWithImageNamed:(NSString*)aImageFileName controlFile:(NSString*)aControlFile filter:(GLenum)aFilter {
 
-    if (self = [super init]) {
+    if ((self = [super init])) {
 
         NSString *fileName = [aImageFileName lastPathComponent];
 

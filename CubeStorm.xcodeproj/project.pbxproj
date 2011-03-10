@@ -48,6 +48,9 @@
 		5F5AA1AB12F6627C006A2A2C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F5AA1AA12F6627C006A2A2C /* AudioToolbox.framework */; };
 		5F5E29EF131DEEAE00ED7D66 /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F5E29EE131DEEAE00ED7D66 /* GLView.m */; };
 		5F73F2761301F83A0017A10A /* PauseMenuViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F73F2751301F83A0017A10A /* PauseMenuViewController-iPad.xib */; };
+		5FA4F44B13295F3D00179DC4 /* Asteroid.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FA4F44A13295F3D00179DC4 /* Asteroid.m */; };
+		5FA64494132945F7008FE442 /* pss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FA64492132945F7008FE442 /* pss.plist */; };
+		5FA64495132945F7008FE442 /* pss.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FA64493132945F7008FE442 /* pss.png */; };
 		5FA853671303538000B91098 /* AbstractEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FA853661303538000B91098 /* AbstractEntity.m */; };
 		5FA85374130356D000B91098 /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FA85373130356D000B91098 /* Primitives.m */; };
 		5FE99BAA12FDC9DF00F60AA4 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE99BA912FDC9DF00F60AA4 /* MainWindow-iPad.xib */; };
@@ -129,6 +132,10 @@
 		5F5E29ED131DEEAE00ED7D66 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
 		5F5E29EE131DEEAE00ED7D66 /* GLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLView.m; sourceTree = "<group>"; };
 		5F73F2751301F83A0017A10A /* PauseMenuViewController-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "PauseMenuViewController-iPad.xib"; sourceTree = "<group>"; };
+		5FA4F44913295F3D00179DC4 /* Asteroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Asteroid.h; sourceTree = "<group>"; };
+		5FA4F44A13295F3D00179DC4 /* Asteroid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Asteroid.m; sourceTree = "<group>"; };
+		5FA64492132945F7008FE442 /* pss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pss.plist; sourceTree = "<group>"; };
+		5FA64493132945F7008FE442 /* pss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pss.png; sourceTree = "<group>"; };
 		5FA853661303538000B91098 /* AbstractEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AbstractEntity.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5FA85372130356D000B91098 /* Primitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Primitives.h; sourceTree = "<group>"; };
 		5FA85373130356D000B91098 /* Primitives.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Primitives.m; sourceTree = "<group>"; };
@@ -173,6 +180,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				5FA6449613294700008FE442 /* Entities */,
 				5FA644911329451A008FE442 /* Data */,
 				5F5E29ED131DEEAE00ED7D66 /* GLView.h */,
 				5F5E29EE131DEEAE00ED7D66 /* GLView.m */,
@@ -262,9 +270,20 @@
 		5FA644911329451A008FE442 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				5FA64492132945F7008FE442 /* pss.plist */,
+				5FA64493132945F7008FE442 /* pss.png */,
 				5FF2A625131F347B0081BAA4 /* starfield.pex */,
 			);
 			name = Data;
+			sourceTree = "<group>";
+		};
+		5FA6449613294700008FE442 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				5FA4F44913295F3D00179DC4 /* Asteroid.h */,
+				5FA4F44A13295F3D00179DC4 /* Asteroid.m */,
+			);
+			name = Entities;
 			sourceTree = "<group>";
 		};
 		5FA9B91D12FC760F00306D2D /* GameEngine */ = {
@@ -381,6 +400,8 @@
 				5F50DDBA13019C77002F29B2 /* PauseMenuViewController.xib in Resources */,
 				5F73F2761301F83A0017A10A /* PauseMenuViewController-iPad.xib in Resources */,
 				5FF2A626131F347B0081BAA4 /* starfield.pex in Resources */,
+				5FA64494132945F7008FE442 /* pss.plist in Resources */,
+				5FA64495132945F7008FE442 /* pss.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +438,7 @@
 				5FA853671303538000B91098 /* AbstractEntity.m in Sources */,
 				5FA85374130356D000B91098 /* Primitives.m in Sources */,
 				5F5E29EF131DEEAE00ED7D66 /* GLView.m in Sources */,
+				5FA4F44B13295F3D00179DC4 /* Asteroid.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
