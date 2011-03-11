@@ -9,6 +9,9 @@
 #import "Primitives.h"
 #import "AbstractEntity.h"
 #import "SoundManager.h"
+#import "SpriteSheet.h"
+#import "Animation.h"
+#import "PackedSpriteSheet.h"
 
 @implementation AbstractEntity
 
@@ -44,6 +47,54 @@
         pixelLocation.y = aLocation.y;
     }
     return self;
+}
+
+- (void)setupAnimation:(Animation*)anim
+           spriteSheet:(NSString*)aSpriteSheet
+        animationDelay:(float)delay
+             numFrames:(int)frames {
+
+    PackedSpriteSheet *pss = [PackedSpriteSheet packedSpriteSheetForImageNamed:@"pss.png"
+                                                                   controlFile:@"pss"
+                                                                   imageFilter:GL_LINEAR];
+
+    Image *SpriteSheetImage = [pss imageForKey:aSpriteSheet];
+
+    spriteSheet = [SpriteSheet spriteSheetForImage:SpriteSheetImage
+                                          sheetKey:aSpriteSheet
+                                        spriteSize:CGSizeMake(width, height)
+                                           spacing:0
+                                            margin:0];
+    for (int i = 0; i < frames; ++i) {
+        [anim addFrameWithImage:[spriteSheet spriteImageAtCoords:CGPointMake(i, 0)] delay:delay];
+    }
+    anim.state = kAnimationState_Running;
+    anim.type = kAnimationType_Repeating;
+
+}
+
+- (void)setupVerticalAnimation:(Animation*)anim
+           spriteSheet:(NSString*)aSpriteSheet
+        animationDelay:(float)delay
+             numFrames:(int)frames {
+
+    PackedSpriteSheet *pss = [PackedSpriteSheet packedSpriteSheetForImageNamed:@"pss.png"
+                                                                   controlFile:@"pss"
+                                                                   imageFilter:GL_LINEAR];
+
+    Image *SpriteSheetImage = [pss imageForKey:aSpriteSheet];
+
+    spriteSheet = [SpriteSheet spriteSheetForImage:SpriteSheetImage
+                                          sheetKey:aSpriteSheet
+                                        spriteSize:CGSizeMake(width, height)
+                                           spacing:0
+                                            margin:0];
+    for (int i = 0; i < frames; ++i) {
+        [anim addFrameWithImage:[spriteSheet spriteImageAtCoords:CGPointMake(0, i)] delay:delay];
+    }
+    anim.state = kAnimationState_Running;
+    anim.type = kAnimationType_Repeating;
+
 }
 
 #pragma mark -

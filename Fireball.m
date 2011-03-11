@@ -1,29 +1,29 @@
 //
-//  Asteroid.m
+//  Fireball.m
 //  CubeStorm
 //
 //  Created by Todd Steinackle on 3/10/11.
 //  Copyright 2011 The No Quarter Arcade. All rights reserved.
 //
 
-#import "Asteroid.h"
+#import "Fireball.h"
 #import "GLView.h"
 #import "SoundManager.h"
 #import "Animation.h"
 
 
-@implementation Asteroid
+@implementation Fireball
 
 - (id)initWithPixelLocation:(CGPoint)aLocation {
     self = [super initWithPixelLocation:aLocation];
     if (self != nil) {
-        width = 41;
-        height = 41;
+        width = 31;
+        height = 31;
 
-        float delay = 0.08;
-        int frames = 24;
+        float delay = 0.1;
+        int frames = 8;
         animation = [[Animation alloc] init];
-        [self setupAnimation:animation spriteSheet:@"asteroid.png" animationDelay:delay numFrames:frames];
+        [self setupAnimation:animation spriteSheet:@"fire.png" animationDelay:delay numFrames:frames];
     }
     return self;
 }

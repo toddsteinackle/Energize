@@ -54,5 +54,13 @@
 - (void)updateWithDelta:(float)aDelta;
 - (void)render;
 - (void)checkForCollisionWithEntity:(AbstractEntity*)otherEntity;
+- (void)setupAnimation:(Animation*)anim
+           spriteSheet:(NSString*)aSpriteSheet
+        animationDelay:(float)delay
+             numFrames:(int)frames;
+- (void)setupVerticalAnimation:(Animation*)anim
+           spriteSheet:(NSString*)aSpriteSheet
+        animationDelay:(float)delay
+             numFrames:(int)frames;
 
 @end

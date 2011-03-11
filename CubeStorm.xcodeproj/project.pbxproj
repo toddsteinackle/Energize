@@ -13,6 +13,11 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		2899E5220DE3E06400AC0155 /* CubeStormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* CubeStormViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		5F149F1F13298034006378FB /* Cube.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F1E13298034006378FB /* Cube.m */; };
+		5F149F221329833E006378FB /* SpikeMine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F211329833E006378FB /* SpikeMine.m */; };
+		5F149F2513298616006378FB /* Explosion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F2413298616006378FB /* Explosion.m */; };
+		5F149F2813298A1D006378FB /* Guardian.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F2713298A1C006378FB /* Guardian.m */; };
+		5F149F2B1329A07F006378FB /* Fireball.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F2A1329A07E006378FB /* Fireball.m */; };
 		5F3D40AC12FF416C00358CE7 /* CubeStormAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D40A212FF416C00358CE7 /* CubeStormAppDelegate.m */; };
 		5F3D40AD12FF416C00358CE7 /* CubeStormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D40A412FF416C00358CE7 /* CubeStormViewController.m */; };
 		5F3D40AE12FF416C00358CE7 /* GLESGameState.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D40A612FF416C00358CE7 /* GLESGameState.m */; };
@@ -56,6 +61,7 @@
 		5FE99BAA12FDC9DF00F60AA4 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE99BA912FDC9DF00F60AA4 /* MainWindow-iPad.xib */; };
 		5FE99BC012FDCBB800F60AA4 /* MainMenuView-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE99BBE12FDCBB800F60AA4 /* MainMenuView-iPad.xib */; };
 		5FE99C0E12FDD48300F60AA4 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE99C0D12FDD48300F60AA4 /* GameKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		5FEC33F91329D058004A94C7 /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FEC33F81329D058004A94C7 /* Ship.m */; };
 		5FF2A626131F347B0081BAA4 /* starfield.pex in Resources */ = {isa = PBXBuildFile; fileRef = 5FF2A625131F347B0081BAA4 /* starfield.pex */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +74,16 @@
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		32CA4F630368D1EE00C91783 /* CubeStorm_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CubeStorm_Prefix.pch; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		5F149F1D13298034006378FB /* Cube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cube.h; sourceTree = "<group>"; };
+		5F149F1E13298034006378FB /* Cube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cube.m; sourceTree = "<group>"; };
+		5F149F201329833E006378FB /* SpikeMine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpikeMine.h; sourceTree = "<group>"; };
+		5F149F211329833E006378FB /* SpikeMine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpikeMine.m; sourceTree = "<group>"; };
+		5F149F2313298616006378FB /* Explosion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Explosion.h; sourceTree = "<group>"; };
+		5F149F2413298616006378FB /* Explosion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Explosion.m; sourceTree = "<group>"; };
+		5F149F2613298A1C006378FB /* Guardian.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Guardian.h; sourceTree = "<group>"; };
+		5F149F2713298A1C006378FB /* Guardian.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Guardian.m; sourceTree = "<group>"; };
+		5F149F291329A07E006378FB /* Fireball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fireball.h; sourceTree = "<group>"; };
+		5F149F2A1329A07E006378FB /* Fireball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fireball.m; sourceTree = "<group>"; };
 		5F3D40A112FF416C00358CE7 /* CubeStormAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CubeStormAppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5F3D40A212FF416C00358CE7 /* CubeStormAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CubeStormAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5F3D40A312FF416C00358CE7 /* CubeStormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CubeStormViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -143,6 +159,8 @@
 		5FE99BA912FDC9DF00F60AA4 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		5FE99BBE12FDCBB800F60AA4 /* MainMenuView-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "MainMenuView-iPad.xib"; sourceTree = "<group>"; };
 		5FE99C0D12FDD48300F60AA4 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		5FEC33F71329D057004A94C7 /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
+		5FEC33F81329D058004A94C7 /* Ship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ship.m; sourceTree = "<group>"; };
 		5FF2A625131F347B0081BAA4 /* starfield.pex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = starfield.pex; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CubeStorm-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CubeStorm-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -282,6 +300,18 @@
 			children = (
 				5FA4F44913295F3D00179DC4 /* Asteroid.h */,
 				5FA4F44A13295F3D00179DC4 /* Asteroid.m */,
+				5F149F1D13298034006378FB /* Cube.h */,
+				5F149F1E13298034006378FB /* Cube.m */,
+				5F149F201329833E006378FB /* SpikeMine.h */,
+				5F149F211329833E006378FB /* SpikeMine.m */,
+				5F149F2313298616006378FB /* Explosion.h */,
+				5F149F2413298616006378FB /* Explosion.m */,
+				5F149F2613298A1C006378FB /* Guardian.h */,
+				5F149F2713298A1C006378FB /* Guardian.m */,
+				5F149F291329A07E006378FB /* Fireball.h */,
+				5F149F2A1329A07E006378FB /* Fireball.m */,
+				5FEC33F71329D057004A94C7 /* Ship.h */,
+				5FEC33F81329D058004A94C7 /* Ship.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -439,6 +469,12 @@
 				5FA85374130356D000B91098 /* Primitives.m in Sources */,
 				5F5E29EF131DEEAE00ED7D66 /* GLView.m in Sources */,
 				5FA4F44B13295F3D00179DC4 /* Asteroid.m in Sources */,
+				5F149F1F13298034006378FB /* Cube.m in Sources */,
+				5F149F221329833E006378FB /* SpikeMine.m in Sources */,
+				5F149F2513298616006378FB /* Explosion.m in Sources */,
+				5F149F2813298A1D006378FB /* Guardian.m in Sources */,
+				5F149F2B1329A07F006378FB /* Fireball.m in Sources */,
+				5FEC33F91329D058004A94C7 /* Ship.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

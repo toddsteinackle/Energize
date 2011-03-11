@@ -19,7 +19,14 @@
 @class ParticleEmitter;
 @class CubeStormAppDelegate;
 @class OpenGLViewController;
+
 @class Asteroid;
+@class Cube;
+@class SpikeMine;
+@class Explosion;
+@class Guardian;
+@class Fireball;
+@class Ship;
 
 @interface GLView : GLESGameState {
 
@@ -30,7 +37,14 @@
 
     ImageRenderManager *sharedImageRenderManager;
     ParticleEmitter *starfield;
+
     Asteroid *asteroid;
+    Cube *cube;
+    SpikeMine *spikeMine;
+    Explosion *explosion;
+    Guardian *guardian;
+    Fireball *fireball;
+    Ship *ship;
 
 }
 

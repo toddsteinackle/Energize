@@ -19,6 +19,12 @@
 #import "OpenGLViewController.h"
 #import "Globals.h"
 #import "Asteroid.h"
+#import "Cube.h"
+#import "SpikeMine.h"
+#import "Explosion.h"
+#import "Guardian.h"
+#import "Fireball.h"
+#import "Ship.h"
 
 @implementation GLView
 
@@ -36,6 +42,12 @@
         sharedImageRenderManager = [ImageRenderManager sharedImageRenderManager];
         starfield = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"starfield.pex"];
         asteroid = [[Asteroid alloc] initWithPixelLocation:CGPointMake(500.0f, 300.0f)];
+        cube = [[Cube alloc] initWithPixelLocation:CGPointMake(100.0f, 600.0f)];
+        spikeMine = [[SpikeMine alloc] initWithPixelLocation:CGPointMake(200.0f, 600.0f)];
+        explosion = [[Explosion alloc] initWithPixelLocation:CGPointMake(300.0f, 600.0f)];
+        guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(400.0f, 600.0f)];
+        fireball = [[ Fireball alloc] initWithPixelLocation:CGPointMake(500.0f, 600.0f)];
+        ship = [[Ship alloc] initWithPixelLocation:CGPointMake(600.0f, 600.0f)];
     }
     return self;
 }
@@ -46,6 +58,12 @@
 
     [starfield updateWithDelta:aDelta];
     [asteroid updateWithDelta:aDelta];
+    [cube updateWithDelta:aDelta];
+    [spikeMine updateWithDelta:aDelta];
+    [explosion updateWithDelta:aDelta];
+    [guardian updateWithDelta:aDelta];
+    [fireball updateWithDelta:aDelta];
+    [ship updateWithDelta:aDelta];
 }
 
 #pragma mark -
@@ -55,6 +73,12 @@
     //glClear(GL_COLOR_BUFFER_BIT);
     [starfield renderParticles];
     [asteroid render];
+    [cube render];
+    [spikeMine render];
+    [explosion render];
+    [guardian render];
+    [fireball render];
+    [ship render];
     [sharedImageRenderManager renderImages];
 }
 
