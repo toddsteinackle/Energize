@@ -152,7 +152,7 @@
     // If the width or height passed in is < 0 or > 100 then log an error
     if (aImageSize.width < 0 || aImageSize.width > 100 || aImageSize.height < 0 || aImageSize.height > 100) {
 #ifdef GAMEENGINE_DEBUG
-        NSLog(@"ERROR - Image: Illegal % provided to setImageSizeToRender 'width=%f, height=%f'", aImageSize.width, aImageSize.height);
+        NSLog(@"ERROR - Image: Illegal size provided to setImageSizeToRender 'width=%f, height=%f'", aImageSize.width, aImageSize.height);
 #endif
         return;
     }
