@@ -13,6 +13,9 @@
 
     Animation *normalAnimation;
     Animation *teleportingAnimation;
+    float rotationAngle;
 }
+
+- (id)initWithPixelLocation:(CGPoint)aLocation andRotation:(float)angle;
 
 @end

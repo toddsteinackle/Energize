@@ -13,6 +13,8 @@
 // Scene States
 enum SceneState {
     SceneState_TransitionIn,
+    SceneState_Running,
+    SceneState_EntitiesAppearing,
 };
 
 // Entity states
@@ -23,7 +25,9 @@ enum EntityState {
 #pragma mark -
 #pragma mark Constants
 
-#define IPHONE_HEIGHT 480
-#define IPHONE_WIDTH 320
-#define IPAD_HEIGHT 1024
-#define IPAD_WIDTH 768
+#define IPHONE_HEIGHT 320
+#define IPHONE_WIDTH 480
+#define IPAD_HEIGHT 768
+#define IPAD_WIDTH 1024
+
+#define GUARDIAN_WIDTH 82

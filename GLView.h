@@ -34,20 +34,24 @@
     OpenGLViewController *viewController;
 
     int sceneState;
+    double lastTimeInLoop;
 
     ImageRenderManager *sharedImageRenderManager;
     ParticleEmitter *starfield;
+
+    NSMutableArray *guardians;
 
     Asteroid *asteroid;
     Cube *cube;
     SpikeMine *spikeMine;
     Explosion *explosion;
-    Guardian *guardian;
     Fireball *fireball;
     Ship *ship;
 
 }
 
 @property (nonatomic, retain) OpenGLViewController *viewController;
+
+- (void)initGuardians;
 
 @end

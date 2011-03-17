@@ -14,13 +14,14 @@
 
 @implementation Guardian
 
-- (id)initWithPixelLocation:(CGPoint)aLocation {
+- (id)initWithPixelLocation:(CGPoint)aLocation andRotation:(float)angle {
     self = [super initWithPixelLocation:aLocation];
     if (self != nil) {
         width = 82;
         height = 41;
         float delay = 0.08;
         int frames = 8;
+        rotationAngle = angle;
 
         normalAnimation = [[Animation alloc] init];
         [self setupAnimation:normalAnimation
@@ -44,6 +45,7 @@
         [self setupAnimation:teleportingAnimation
                  spriteSheet:@"baddie-teleport-4.png"
               animationDelay:delay numFrames:frames];
+        teleportingAnimation.type = kAnimationType_Once;
 
         animation = teleportingAnimation;
     }
@@ -58,7 +60,9 @@
 #ifdef COLLISION_DEBUG
     [super render];
 #endif
-    [animation renderAtPoint:CGPointMake(pixelLocation.x, pixelLocation.y)];
+    [animation renderAtPoint:CGPointMake(pixelLocation.x, pixelLocation.y)
+                       scale:Scale2fMake(1.0f, 1.0f)
+                    rotation:rotationAngle];
 }
 
 - (void)checkForCollisionWithEntity:(AbstractEntity *)otherEntity {
