@@ -72,13 +72,15 @@
             zone = guardian_left;
         }
 
-        seeking = [[Animation alloc] init];
-        [self setupAnimation:seeking
+        firing = [[Animation alloc] init];
+        [self setupAnimation:firing
                  spriteSheet:@"baddie-1.png"
               animationDelay:delay numFrames:frames];
-        [self setupAnimation:seeking
+        [self setupAnimation:firing
                  spriteSheet:@"baddie-2.png"
               animationDelay:delay numFrames:frames];
+        firing.type = kAnimationType_Repeating;
+        firing.state = kAnimationState_Stopped;
 
         delay = 0.1f;
         teleporting = [[Animation alloc] init];
@@ -98,6 +100,8 @@
 
         animation = teleporting;
         state = EntityState_Transporting;
+
+        firingTimer = 0;
     }
     return self;
 }
@@ -109,12 +113,21 @@
         case EntityState_Transporting:
             if (animation.state == kAnimationState_Stopped) {
                 state = EntityState_Alive;
-                animation = seeking;
+                animation = firing;
             }
             break;
 
         case EntityState_Alive:
             [self movementWithDelta:aDelta];
+            if (animation.currentFrame == 15) {
+                animation.state = kAnimationState_Stopped;
+                animation.currentFrame = 0;
+            }
+            firingTimer += aDelta;
+            if (firingTimer > 4) {
+                animation.state = kAnimationState_Running;
+                firingTimer = 0;
+            }
             break;
 
         default:
@@ -136,7 +149,7 @@
 }
 
 - (void)dealloc {
-    [seeking release];
+    [firing release];
     [teleporting release];
     [super dealloc];
 }

@@ -17,9 +17,10 @@ typedef enum {
 
 @interface Guardian : AbstractEntity {
 
-    Animation *seeking;
+    Animation *firing;
     Animation *teleporting;
     guardianZone zone;
+    float firingTimer;
 }
 
 - (id)initWithPixelLocation:(CGPoint)aLocation andRotation:(float)angle;
