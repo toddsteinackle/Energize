@@ -32,6 +32,27 @@ BOOL isGameCenterAvailable() {
 @dynamic animationFrameInterval;
 @synthesize gameCenterAvailable;
 @synthesize ios4orGreater;
+@synthesize SCREEN_HEIGHT;
+@synthesize SCREEN_WIDTH;
+@synthesize GUARDIAN_WIDTH;
+@synthesize GUARDIAN_HEIGHT;
+@synthesize GUARDIAN_RIGHT_BASE;
+@synthesize GUARDIAN_LEFT_BASE;
+@synthesize GUARDIAN_TOP_BASE;
+@synthesize GUARDIAN_BOTTOM_BASE;
+@synthesize GUARDIAN_LEFT_BOUND;
+@synthesize GUARDIAN_RIGHT_BOUND;
+@synthesize GUARDIAN_TOP_BOUND;
+@synthesize GUARDIAN_BOTTOM_BOUND;
+@synthesize SHIP_WIDTH;
+@synthesize SHIP_HEIGHT;
+@synthesize SHIP_SPEED;
+@synthesize SHIP_TURBO_SPEED;
+@synthesize SHIP_LEFT_BOUND;
+@synthesize SHIP_RIGHT_BOUND;
+@synthesize SHIP_TOP_BOUND;
+@synthesize SHIP_BOTTOM_BOUND;
+
 
 #pragma mark -
 #pragma mark Game Engine
@@ -157,6 +178,37 @@ BOOL isGameCenterAvailable() {
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     // Override point for customization after application launch.
+
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        SCREEN_WIDTH = 1024;
+        SCREEN_HEIGHT = 768;
+
+        GUARDIAN_WIDTH = 82;
+        GUARDIAN_HEIGHT = 41;
+        GUARDIAN_RIGHT_BASE = 867;
+        GUARDIAN_LEFT_BASE = 29;
+        GUARDIAN_TOP_BASE = 732;
+        GUARDIAN_BOTTOM_BASE = 22;
+        CGFloat padding = 10;
+        GUARDIAN_LEFT_BOUND = GUARDIAN_LEFT_BASE + GUARDIAN_HEIGHT + padding;
+        GUARDIAN_RIGHT_BOUND = GUARDIAN_RIGHT_BASE - GUARDIAN_HEIGHT - padding;
+        GUARDIAN_TOP_BOUND = GUARDIAN_TOP_BASE - GUARDIAN_HEIGHT - padding;
+        GUARDIAN_BOTTOM_BOUND = GUARDIAN_BOTTOM_BASE + GUARDIAN_HEIGHT + padding;
+
+        SHIP_WIDTH = 41;
+        SHIP_HEIGHT = 41;
+        SHIP_SPEED = 100;
+        SHIP_TURBO_SPEED = 200;
+        padding = 15;
+        SHIP_LEFT_BOUND = GUARDIAN_LEFT_BASE + GUARDIAN_HEIGHT + padding;
+        SHIP_RIGHT_BOUND = GUARDIAN_RIGHT_BASE - GUARDIAN_HEIGHT - padding;
+        SHIP_TOP_BOUND = GUARDIAN_TOP_BASE - GUARDIAN_HEIGHT - padding;
+        SHIP_BOTTOM_BOUND = GUARDIAN_BOTTOM_BASE + GUARDIAN_HEIGHT + padding;
+
+    } else {
+        SCREEN_WIDTH = 480;
+        SCREEN_HEIGHT = 320;
+    }
 
     if (isGameCenterAvailable()) {
         gameCenterAvailable = TRUE;

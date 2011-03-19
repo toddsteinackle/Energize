@@ -17,7 +17,6 @@
 #import "ParticleEmitter.h"
 #import "CubeStormViewController.h"
 #import "OpenGLViewController.h"
-#import "Constants.h"
 #import "Asteroid.h"
 #import "Cube.h"
 #import "SpikeMine.h"
@@ -87,7 +86,7 @@
 - (void)initGuardians {
     Guardian *guardian;
     // top and bottom
-    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake((IPAD_WIDTH - GUARDIAN_WIDTH) / 2, GUARDIAN_BOTTOM_BASE)
+    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake((appDelegate.SCREEN_WIDTH - appDelegate.GUARDIAN_WIDTH) / 2, appDelegate.GUARDIAN_BOTTOM_BASE)
                                            andRotation:0.0f];
     guardian.dx = 130.0;
     guardian.dy = 0;
@@ -95,7 +94,7 @@
     [guardians addObject:guardian];
     [guardian release];
 
-    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake((IPAD_WIDTH - GUARDIAN_WIDTH+180.0) / 2, GUARDIAN_TOP_BASE)
+    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake((appDelegate.SCREEN_WIDTH - appDelegate.GUARDIAN_WIDTH+180.0) / 2, appDelegate.GUARDIAN_TOP_BASE)
                                            andRotation:180.0f];
     guardian.dx = -130.0;
     guardian.dy = 0;
@@ -104,14 +103,14 @@
     [guardian release];
 
     // left and right
-    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(GUARDIAN_LEFT_BASE, (IPAD_HEIGHT - GUARDIAN_WIDTH+270.0) / 2)
+    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(appDelegate.GUARDIAN_LEFT_BASE, (appDelegate.SCREEN_HEIGHT - appDelegate.GUARDIAN_WIDTH+270.0) / 2)
                                            andRotation:270.0f];
     guardian.dx = 0;
     guardian.dy = 130.0;
     [guardians addObject:guardian];
     [guardian release];
 
-    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(GUARDIAN_RIGHT_BASE, (IPAD_HEIGHT - GUARDIAN_WIDTH+90.0) / 2)
+    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE, (appDelegate.SCREEN_HEIGHT - appDelegate.GUARDIAN_WIDTH+90.0) / 2)
                                            andRotation:90.0f];
     guardian.dx = 0;
     guardian.dy = -130.0;

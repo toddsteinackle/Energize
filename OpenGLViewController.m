@@ -11,7 +11,6 @@
 #import "CubeStormViewController.h"
 #import "CubeStormAppDelegate.h"
 #import "GLView.h"
-#import "Constants.h"
 
 
 @implementation OpenGLViewController
@@ -20,20 +19,16 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization.
-        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            glView = [[GLView alloc] initWithFrame:CGRectMake(0, 0, IPAD_WIDTH, IPAD_HEIGHT)];
-        } else {
-            glView = [[GLView alloc] initWithFrame:CGRectMake(0, 0, IPHONE_WIDTH, IPHONE_HEIGHT)];
-        }
-        self.view = glView;
-        glView.viewController = self;
+        appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             pauseMenu = [[PauseMenuViewController alloc] initWithNibName:@"PauseMenuViewController-iPad" bundle:[NSBundle mainBundle]];
         } else {
             pauseMenu = [[PauseMenuViewController alloc] initWithNibName:@"PauseMenuViewController" bundle:[NSBundle mainBundle]];
         }
         pauseMenu.callingController = self;
-        appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
+        glView = [[GLView alloc] initWithFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT)];
+        self.view = glView;
+        glView.viewController = self;
     }
     return self;
 }

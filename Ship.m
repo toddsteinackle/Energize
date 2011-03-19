@@ -10,7 +10,7 @@
 #import "GLView.h"
 #import "SoundManager.h"
 #import "Animation.h"
-#import "Constants.h"
+#import "CubeStormAppDelegate.h"
 
 
 @implementation Ship
@@ -72,7 +72,7 @@
     animation = teleporting;
     animation.type = kAnimationType_Once;
     state = EntityState_Transporting;
-    currentSpeed = SHIP_SPEED;
+    currentSpeed = appDelegate.SHIP_SPEED;
     return self;
 }
 
@@ -83,7 +83,7 @@
     switch (direction) {
         case ship_up:
             dx = 0;
-            if (pixelLocation.y > SHIP_TOP_BOUND - SHIP_HEIGHT) {
+            if (pixelLocation.y > appDelegate.SHIP_TOP_BOUND - appDelegate.SHIP_HEIGHT) {
                 dy = 0;
             } else {
                 dy = currentSpeed;
@@ -91,7 +91,7 @@
             break;
         case ship_down:
             dx = 0;
-            if (pixelLocation.y < SHIP_BOTTOM_BOUND) {
+            if (pixelLocation.y < appDelegate.SHIP_BOTTOM_BOUND) {
                 dy = 0;
             } else {
                 dy = -currentSpeed;
@@ -99,7 +99,7 @@
             break;
         case ship_left:
             dy = 0;
-            if (pixelLocation.x < SHIP_LEFT_BOUND) {
+            if (pixelLocation.x < appDelegate.SHIP_LEFT_BOUND) {
                 dx = 0;
             } else {
                 dx = -currentSpeed;
@@ -107,7 +107,7 @@
             break;
         case ship_right:
             dy = 0;
-            if (pixelLocation.x > SHIP_RIGHT_BOUND - SHIP_WIDTH) {
+            if (pixelLocation.x > appDelegate.SHIP_RIGHT_BOUND - appDelegate.SHIP_WIDTH) {
                 dx = 0;
             } else {
                 dx = currentSpeed;
@@ -133,7 +133,7 @@
 
         case EntityState_Alive:
             if (isThrusting) {
-                currentSpeed = SHIP_TURBO_SPEED;
+                currentSpeed = appDelegate.SHIP_TURBO_SPEED;
                 switch (direction) {
                     case ship_up:
                         animation = upThrust;
@@ -155,7 +155,7 @@
                         break;
                 }
             } else {
-                currentSpeed = SHIP_SPEED;
+                currentSpeed = appDelegate.SHIP_SPEED;
                 switch (direction) {
                     case ship_up:
                         animation = up;

@@ -10,8 +10,7 @@
 #import "GLView.h"
 #import "SoundManager.h"
 #import "Animation.h"
-#import "Constants.h"
-
+#import "CubeStormAppDelegate.h"
 
 @implementation Guardian
 
@@ -21,30 +20,30 @@
 
     switch (zone) {
         case guardian_top:
-            if (dx > 0 && pixelLocation.x > GUARDIAN_RIGHT_BOUND) {
+            if (dx > 0 && pixelLocation.x > appDelegate.GUARDIAN_RIGHT_BOUND) {
                 dx = -dx;
-            } else if (dx < 0 && pixelLocation.x < GUARDIAN_LEFT_BOUND + GUARDIAN_WIDTH) {
+            } else if (dx < 0 && pixelLocation.x < appDelegate.GUARDIAN_LEFT_BOUND + appDelegate.GUARDIAN_WIDTH) {
                 dx = -dx;
             }
             break;
         case guardian_bottom:
-            if (dx < 0 && pixelLocation.x < GUARDIAN_LEFT_BOUND) {
+            if (dx < 0 && pixelLocation.x < appDelegate.GUARDIAN_LEFT_BOUND) {
                 dx = -dx;
-            } else if (dx > 0 && pixelLocation.x > GUARDIAN_RIGHT_BOUND - GUARDIAN_WIDTH) {
+            } else if (dx > 0 && pixelLocation.x > appDelegate.GUARDIAN_RIGHT_BOUND - appDelegate.GUARDIAN_WIDTH) {
                 dx = -dx;
             }
             break;
         case guardian_left:
-            if (dy > 0 && pixelLocation.y > GUARDIAN_TOP_BOUND) {
+            if (dy > 0 && pixelLocation.y > appDelegate.GUARDIAN_TOP_BOUND) {
                 dy = -dy;
-            } else if (dy < 0 && pixelLocation.y < GUARDIAN_BOTTOM_BOUND + GUARDIAN_WIDTH) {
+            } else if (dy < 0 && pixelLocation.y < appDelegate.GUARDIAN_BOTTOM_BOUND + appDelegate.GUARDIAN_WIDTH) {
                 dy = -dy;
             }
             break;
         case guardian_right:
-            if (dy < 0 && pixelLocation.y < GUARDIAN_BOTTOM_BOUND) {
+            if (dy < 0 && pixelLocation.y < appDelegate.GUARDIAN_BOTTOM_BOUND) {
                 dy = -dy;
-            } else if (dy > 0 && pixelLocation.y > GUARDIAN_TOP_BOUND - GUARDIAN_WIDTH) {
+            } else if (dy > 0 && pixelLocation.y > appDelegate.GUARDIAN_TOP_BOUND - appDelegate.GUARDIAN_WIDTH) {
                 dy = -dy;
             }
             break;

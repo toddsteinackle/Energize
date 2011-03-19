@@ -11,7 +11,6 @@
 #import "SettingsMenuViewController.h"
 #import "OpenGLViewController.h"
 #import "MainMenuView.h"
-#import "Constants.h"
 
 @implementation CubeStormViewController
 
@@ -68,14 +67,10 @@
 }
 
 - (void)customInit {
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        mainMenu = [[MainMenuView alloc] initWithFrame:CGRectMake(0, 0, IPAD_WIDTH, IPAD_HEIGHT)];
-    } else {
-        mainMenu = [[MainMenuView alloc] initWithFrame:CGRectMake(0, 0, IPHONE_WIDTH, IPHONE_HEIGHT)];
-    }
-    self.view = mainMenu;
-    glViewController = [[OpenGLViewController alloc] initWithNibName:nil bundle:nil];
     appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
+    glViewController = [[OpenGLViewController alloc] initWithNibName:nil bundle:nil];
+    mainMenu = [[MainMenuView alloc] initWithFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT)];
+    self.view = mainMenu;
 }
 
 
