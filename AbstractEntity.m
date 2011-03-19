@@ -30,6 +30,7 @@
 @synthesize dyingEmitter;
 @synthesize middleX;
 @synthesize middleY;
+@synthesize animation;
 
 - (void)dealloc {
     [super dealloc];

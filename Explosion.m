@@ -20,7 +20,7 @@
         width = 61;
         height = 61;
 
-        float delay = 0.05;
+        float delay = 0.05f;
         int frames = 16;
         animation = [[Animation alloc] init];
         [self setupAnimation:animation spriteSheet:@"explosion.png" animationDelay:delay numFrames:frames];

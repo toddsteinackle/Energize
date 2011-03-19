@@ -13,6 +13,12 @@
 @class SoundManager;
 @class CubeStormAppDelegate;
 
+typedef enum {
+    EntityState_Idle,
+    EntityState_Transporting,
+    EntityState_Alive,
+} EntityState;
+
 @interface AbstractEntity : NSObject <NSCoding> {
 
     CubeStormAppDelegate *appDelegate;
@@ -23,7 +29,7 @@
     CGPoint pixelLocation;
     ParticleEmitter *dyingEmitter;
     ParticleEmitter *appearingEmitter;
-    int state;
+    EntityState state;
 
     CGFloat dx, dy;
     CGFloat collisionWidth, collisionHeight, collisionXOffset, collisionYOffset;
@@ -35,7 +41,7 @@
 
 @property (nonatomic, readonly) Image *image;
 @property (nonatomic, assign) CGPoint pixelLocation;
-@property (nonatomic, assign) int state;
+@property (nonatomic, assign) EntityState state;
 @property (nonatomic, assign) CGFloat dx;
 @property (nonatomic, assign) CGFloat dy;
 @property (nonatomic, assign) CGFloat collisionWidth;
@@ -48,6 +54,7 @@
 @property (nonatomic, readonly) ParticleEmitter *appearingEmitter;
 @property (nonatomic, assign) CGFloat middleX;
 @property (nonatomic, assign) CGFloat middleY;
+@property (nonatomic, readonly) Animation *animation;
 
 
 - (id)initWithPixelLocation:(CGPoint)aLocation;

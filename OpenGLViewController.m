@@ -11,7 +11,7 @@
 #import "CubeStormViewController.h"
 #import "CubeStormAppDelegate.h"
 #import "GLView.h"
-#import "Globals.h"
+#import "Constants.h"
 
 
 @implementation OpenGLViewController

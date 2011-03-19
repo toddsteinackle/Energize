@@ -20,7 +20,7 @@
         width = 31;
         height = 31;
 
-        float delay = 0.15;
+        float delay = 0.15f;
         int frames = 12;
         animation = [[Animation alloc] init];
         [self setupAnimation:animation spriteSheet:@"spikeball.png" animationDelay:delay numFrames:frames];

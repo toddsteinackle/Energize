@@ -20,7 +20,7 @@
         width = 31;
         height = 31;
 
-        float delay = 0.1;
+        float delay = 0.1f;
         int frames = 8;
         animation = [[Animation alloc] init];
         [self setupAnimation:animation spriteSheet:@"fire.png" animationDelay:delay numFrames:frames];

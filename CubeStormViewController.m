@@ -11,7 +11,7 @@
 #import "SettingsMenuViewController.h"
 #import "OpenGLViewController.h"
 #import "MainMenuView.h"
-#import "Globals.h"
+#import "Constants.h"
 
 @implementation CubeStormViewController
 

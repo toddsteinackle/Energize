@@ -20,7 +20,7 @@
         width = 41;
         height = 41;
 
-        float delay = 0.08;
+        float delay = 0.08f;
         int frames = 24;
         animation = [[Animation alloc] init];
         [self setupAnimation:animation spriteSheet:@"asteroid.png" animationDelay:delay numFrames:frames];

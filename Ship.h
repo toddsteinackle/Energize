@@ -8,6 +8,12 @@
 
 #import "AbstractEntity.h"
 
+typedef enum {
+    ship_up,
+    ship_down,
+    ship_right,
+    ship_left
+} shipDirection;
 
 @interface Ship : AbstractEntity {
 
@@ -22,6 +28,14 @@
     Animation *rightThrust;
     Animation *leftThrust;
 
+    shipDirection direction;
+    bool isThrusting;
+    CGFloat currentSpeed;
 }
+
+@property (nonatomic, assign) shipDirection direction;
+@property (nonatomic, assign) bool isThrusting;
+
+- (void)movementWithDelta:(float)aDelta;
 
 @end

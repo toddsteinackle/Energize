@@ -20,7 +20,7 @@
         width = 33;
         height = 33;
 
-        float delay = 0.05;
+        float delay = 0.05f;
         int frames = 15;
         animation = [[Animation alloc] init];
         [self setupAnimation:animation spriteSheet:@"boxes.png" animationDelay:delay numFrames:frames];

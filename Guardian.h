@@ -8,14 +8,22 @@
 
 #import "AbstractEntity.h"
 
+typedef enum {
+    guardian_top,
+    guardian_right,
+    guardian_bottom,
+    guardian_left
+} guardianZone;
 
 @interface Guardian : AbstractEntity {
 
-    Animation *normalAnimation;
-    Animation *teleportingAnimation;
+    Animation *seeking;
+    Animation *teleporting;
     float rotationAngle;
+    guardianZone zone;
 }
 
 - (id)initWithPixelLocation:(CGPoint)aLocation andRotation:(float)angle;
+- (void)movementWithDelta:(float)aDelta;
 
 @end

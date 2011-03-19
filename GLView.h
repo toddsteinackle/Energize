@@ -20,20 +20,24 @@
 @class CubeStormAppDelegate;
 @class OpenGLViewController;
 
-@class Asteroid;
-@class Cube;
-@class SpikeMine;
-@class Explosion;
-@class Guardian;
-@class Fireball;
 @class Ship;
+
+typedef enum {
+    SceneState_TransitionIn,
+    SceneState_Running,
+} SceneState;
 
 @interface GLView : GLESGameState {
 
     CubeStormAppDelegate *appDelegate;
     OpenGLViewController *viewController;
 
-    int sceneState;
+    UISwipeGestureRecognizer  *swipeLeftGestureRecognizer;
+    UISwipeGestureRecognizer  *swipeRightGestureRecognizer;
+    UISwipeGestureRecognizer  *swipeUpGestureRecognizer;
+    UISwipeGestureRecognizer  *swipeDownGestureRecognizer;
+
+    SceneState sceneState;
     double lastTimeInLoop;
 
     ImageRenderManager *sharedImageRenderManager;
@@ -41,11 +45,6 @@
 
     NSMutableArray *guardians;
 
-    Asteroid *asteroid;
-    Cube *cube;
-    SpikeMine *spikeMine;
-    Explosion *explosion;
-    Fireball *fireball;
     Ship *ship;
 
 }
@@ -53,5 +52,6 @@
 @property (nonatomic, retain) OpenGLViewController *viewController;
 
 - (void)initGuardians;
+- (void)handleSwipes:(UISwipeGestureRecognizer *)paramSender;
 
 @end
