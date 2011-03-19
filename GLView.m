@@ -40,11 +40,15 @@
 
     if ((self = [super initWithFrame:frame])) {
         sharedImageRenderManager = [ImageRenderManager sharedImageRenderManager];
-        starfield = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"starfield.pex"];
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            starfield = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"starfield.pex"];
+        } else {
+            starfield = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"starfield-iphone.pex"];
+        }
 
         guardians = [[NSMutableArray alloc] init];
 
-        ship = [[Ship alloc] initWithPixelLocation:CGPointMake(612.0f, 350.0f)];
+        ship = [[Ship alloc] initWithPixelLocation:CGPointMake(appDelegate.SCREEN_WIDTH / 2, appDelegate.SCREEN_HEIGHT / 2)];
 
         [self initGuardians];
     }
@@ -88,7 +92,7 @@
     // top and bottom
     guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake((appDelegate.SCREEN_WIDTH - appDelegate.GUARDIAN_WIDTH) / 2, appDelegate.GUARDIAN_BOTTOM_BASE)
                                            andRotation:0.0f];
-    guardian.dx = 130.0;
+    guardian.dx = appDelegate.GUARDIAN_SPEED_HORIZONTAL;
     guardian.dy = 0;
 
     [guardians addObject:guardian];
@@ -96,7 +100,7 @@
 
     guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake((appDelegate.SCREEN_WIDTH - appDelegate.GUARDIAN_WIDTH+180.0) / 2, appDelegate.GUARDIAN_TOP_BASE)
                                            andRotation:180.0f];
-    guardian.dx = -130.0;
+    guardian.dx = -appDelegate.GUARDIAN_SPEED_HORIZONTAL;
     guardian.dy = 0;
 
     [guardians addObject:guardian];
@@ -106,14 +110,14 @@
     guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(appDelegate.GUARDIAN_LEFT_BASE, (appDelegate.SCREEN_HEIGHT - appDelegate.GUARDIAN_WIDTH+270.0) / 2)
                                            andRotation:270.0f];
     guardian.dx = 0;
-    guardian.dy = 130.0;
+    guardian.dy = appDelegate.GUARDIAN_SPEED_VERTICAL;
     [guardians addObject:guardian];
     [guardian release];
 
     guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE, (appDelegate.SCREEN_HEIGHT - appDelegate.GUARDIAN_WIDTH+90.0) / 2)
                                            andRotation:90.0f];
     guardian.dx = 0;
-    guardian.dy = -130.0;
+    guardian.dy = -appDelegate.GUARDIAN_SPEED_VERTICAL;
 
     [guardians addObject:guardian];
     [guardian release];

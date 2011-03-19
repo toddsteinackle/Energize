@@ -127,7 +127,7 @@
     [super render];
 #endif
     [animation renderAtPoint:CGPointMake(pixelLocation.x, pixelLocation.y)
-                       scale:Scale2fMake(1.0f, 1.0f)
+                       scale:Scale2fMake(scaleWidth, scaleHeight)
                     rotation:rotationAngle];
 }
 

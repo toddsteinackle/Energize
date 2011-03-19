@@ -72,7 +72,7 @@
     animation = teleporting;
     animation.type = kAnimationType_Once;
     state = EntityState_Transporting;
-    currentSpeed = appDelegate.SHIP_SPEED;
+    currentSpeed = 0;
     return self;
 }
 
@@ -133,44 +133,51 @@
 
         case EntityState_Alive:
             if (isThrusting) {
-                currentSpeed = appDelegate.SHIP_TURBO_SPEED;
                 switch (direction) {
                     case ship_up:
                         animation = upThrust;
+                        currentSpeed = appDelegate.SHIP_TURBO_SPEED_VERTICAL;
                         break;
 
                     case ship_down:
                         animation = downThrust;
+                        currentSpeed = appDelegate.SHIP_TURBO_SPEED_VERTICAL;
                         break;
 
                     case ship_right:
                         animation = rightThrust;
+                        currentSpeed = appDelegate.SHIP_TURBO_SPEED_HORIZONTAL;
                         break;
 
                     case ship_left:
                         animation = leftThrust;
+                        currentSpeed = appDelegate.SHIP_TURBO_SPEED_HORIZONTAL;
                         break;
 
                     default:
                         break;
                 }
             } else {
-                currentSpeed = appDelegate.SHIP_SPEED;
+
                 switch (direction) {
                     case ship_up:
                         animation = up;
+                        currentSpeed = appDelegate.SHIP_SPEED_VERTICAL;
                         break;
 
                     case ship_down:
                         animation = down;
+                        currentSpeed = appDelegate.SHIP_SPEED_VERTICAL;
                         break;
 
                     case ship_right:
                         animation = right;
+                        currentSpeed = appDelegate.SHIP_SPEED_HORIZONTAL;
                         break;
 
                     case ship_left:
                         animation = left;
+                        currentSpeed = appDelegate.SHIP_SPEED_HORIZONTAL;
                         break;
 
                     default:
@@ -191,7 +198,9 @@
 #ifdef COLLISION_DEBUG
     [super render];
 #endif
-    [animation renderAtPoint:CGPointMake(pixelLocation.x, pixelLocation.y)];
+    [animation renderAtPoint:CGPointMake(pixelLocation.x, pixelLocation.y)
+                       scale:Scale2fMake(scaleWidth, scaleHeight)
+                    rotation:rotationAngle];
 }
 
 - (void)checkForCollisionWithEntity:(AbstractEntity *)otherEntity {

@@ -44,15 +44,20 @@ BOOL isGameCenterAvailable() {
 @synthesize GUARDIAN_RIGHT_BOUND;
 @synthesize GUARDIAN_TOP_BOUND;
 @synthesize GUARDIAN_BOTTOM_BOUND;
+@synthesize GUARDIAN_SPEED_HORIZONTAL;
+@synthesize GUARDIAN_SPEED_VERTICAL;
 @synthesize SHIP_WIDTH;
 @synthesize SHIP_HEIGHT;
-@synthesize SHIP_SPEED;
-@synthesize SHIP_TURBO_SPEED;
+@synthesize SHIP_SPEED_HORIZONTAL;
+@synthesize SHIP_SPEED_VERTICAL;
+@synthesize SHIP_TURBO_SPEED_HORIZONTAL;
+@synthesize SHIP_TURBO_SPEED_VERTICAL;
 @synthesize SHIP_LEFT_BOUND;
 @synthesize SHIP_RIGHT_BOUND;
 @synthesize SHIP_TOP_BOUND;
 @synthesize SHIP_BOTTOM_BOUND;
-
+@synthesize widthScaleFactor;
+@synthesize heightScaleFactor;
 
 #pragma mark -
 #pragma mark Game Engine
@@ -183,8 +188,12 @@ BOOL isGameCenterAvailable() {
         SCREEN_WIDTH = 1024;
         SCREEN_HEIGHT = 768;
 
+        widthScaleFactor = 1.0f;
+        heightScaleFactor = 1.0f;
         GUARDIAN_WIDTH = 82;
         GUARDIAN_HEIGHT = 41;
+        GUARDIAN_SPEED_HORIZONTAL = 130;
+        GUARDIAN_SPEED_VERTICAL = 130;
         GUARDIAN_RIGHT_BASE = 867;
         GUARDIAN_LEFT_BASE = 29;
         GUARDIAN_TOP_BASE = 732;
@@ -197,8 +206,10 @@ BOOL isGameCenterAvailable() {
 
         SHIP_WIDTH = 41;
         SHIP_HEIGHT = 41;
-        SHIP_SPEED = 100;
-        SHIP_TURBO_SPEED = 200;
+        SHIP_SPEED_HORIZONTAL = 100;
+        SHIP_SPEED_VERTICAL = 100;
+        SHIP_TURBO_SPEED_HORIZONTAL = 200;
+        SHIP_TURBO_SPEED_VERTICAL = 200;
         padding = 15;
         SHIP_LEFT_BOUND = GUARDIAN_LEFT_BASE + GUARDIAN_HEIGHT + padding;
         SHIP_RIGHT_BOUND = GUARDIAN_RIGHT_BASE - GUARDIAN_HEIGHT - padding;
@@ -208,6 +219,36 @@ BOOL isGameCenterAvailable() {
     } else {
         SCREEN_WIDTH = 480;
         SCREEN_HEIGHT = 320;
+
+        widthScaleFactor = 0.46875f;
+        heightScaleFactor = 0.416666667f;
+        GUARDIAN_WIDTH = 82 * widthScaleFactor;
+        GUARDIAN_HEIGHT = 41 * heightScaleFactor;
+        GUARDIAN_SPEED_HORIZONTAL = 130 * widthScaleFactor;
+        GUARDIAN_SPEED_VERTICAL = 130 * heightScaleFactor;
+        GUARDIAN_RIGHT_BASE = 867 * widthScaleFactor;
+        GUARDIAN_LEFT_BASE = 29 * widthScaleFactor;
+        GUARDIAN_TOP_BASE = 732 * heightScaleFactor;
+        GUARDIAN_BOTTOM_BASE = 22 * heightScaleFactor;
+        CGFloat widthPadding = 10 * widthScaleFactor;
+        CGFloat heightPadding = 10 * heightScaleFactor;
+        GUARDIAN_LEFT_BOUND = GUARDIAN_LEFT_BASE + GUARDIAN_HEIGHT + widthPadding;
+        GUARDIAN_RIGHT_BOUND = GUARDIAN_RIGHT_BASE - GUARDIAN_HEIGHT - widthPadding;
+        GUARDIAN_TOP_BOUND = GUARDIAN_TOP_BASE - GUARDIAN_HEIGHT - heightPadding;
+        GUARDIAN_BOTTOM_BOUND = GUARDIAN_BOTTOM_BASE + GUARDIAN_HEIGHT + heightPadding;
+
+        SHIP_WIDTH = 41 * widthScaleFactor;
+        SHIP_HEIGHT = 41 * heightScaleFactor;
+        SHIP_SPEED_HORIZONTAL = 100 * widthScaleFactor;
+        SHIP_SPEED_VERTICAL = 100 * heightScaleFactor;
+        SHIP_TURBO_SPEED_HORIZONTAL = 200 * widthScaleFactor;
+        SHIP_TURBO_SPEED_VERTICAL = 200 * heightScaleFactor;
+        widthPadding = 15 * widthScaleFactor;
+        heightPadding = 15 * heightScaleFactor;
+        SHIP_LEFT_BOUND = GUARDIAN_LEFT_BASE + GUARDIAN_HEIGHT + widthPadding;
+        SHIP_RIGHT_BOUND = GUARDIAN_RIGHT_BASE - GUARDIAN_HEIGHT - widthPadding;
+        SHIP_TOP_BOUND = GUARDIAN_TOP_BASE - GUARDIAN_HEIGHT - heightPadding;
+        SHIP_BOTTOM_BOUND = GUARDIAN_BOTTOM_BASE + GUARDIAN_HEIGHT + heightPadding;
     }
 
     if (isGameCenterAvailable()) {

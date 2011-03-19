@@ -34,9 +34,11 @@ typedef enum {
     CGFloat dx, dy;
     CGFloat collisionWidth, collisionHeight, collisionXOffset, collisionYOffset;
     CGFloat height, width;
-    CGFloat scaleFactor;
     CGFloat middleX;
     CGFloat middleY;
+
+    float scaleWidth, scaleHeight;
+    float rotationAngle;
 }
 
 @property (nonatomic, readonly) Image *image;

@@ -12,6 +12,7 @@
 #import "SpriteSheet.h"
 #import "Animation.h"
 #import "PackedSpriteSheet.h"
+#import "CubeStormAppDelegate.h"
 
 @implementation AbstractEntity
 
@@ -46,6 +47,9 @@
         appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
         pixelLocation.x = aLocation.x;
         pixelLocation.y = aLocation.y;
+        scaleWidth = appDelegate.widthScaleFactor;
+        scaleHeight = appDelegate.heightScaleFactor;
+        rotationAngle = 0.0f;
     }
     return self;
 }

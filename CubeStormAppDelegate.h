@@ -30,15 +30,22 @@
     CGFloat GUARDIAN_RIGHT_BOUND;
     CGFloat GUARDIAN_TOP_BOUND;
     CGFloat GUARDIAN_BOTTOM_BOUND;
+    CGFloat GUARDIAN_SPEED_HORIZONTAL;
+    CGFloat GUARDIAN_SPEED_VERTICAL;
 
     CGFloat SHIP_WIDTH;
     CGFloat SHIP_HEIGHT;
-    CGFloat SHIP_SPEED;
-    CGFloat SHIP_TURBO_SPEED;
+    CGFloat SHIP_SPEED_HORIZONTAL;
+    CGFloat SHIP_SPEED_VERTICAL;
+    CGFloat SHIP_TURBO_SPEED_HORIZONTAL;
+    CGFloat SHIP_TURBO_SPEED_VERTICAL;
     CGFloat SHIP_LEFT_BOUND;
     CGFloat SHIP_RIGHT_BOUND;
     CGFloat SHIP_TOP_BOUND;
     CGFloat SHIP_BOTTOM_BOUND;
+
+    float widthScaleFactor;
+    float heightScaleFactor;
 
 
 #ifdef FRAME_COUNTER
@@ -81,15 +88,22 @@
 @property (readonly, nonatomic) CGFloat GUARDIAN_RIGHT_BOUND;
 @property (readonly, nonatomic) CGFloat GUARDIAN_TOP_BOUND;
 @property (readonly, nonatomic) CGFloat GUARDIAN_BOTTOM_BOUND;
+@property (readonly, nonatomic) CGFloat GUARDIAN_SPEED_HORIZONTAL;
+@property (readonly, nonatomic) CGFloat GUARDIAN_SPEED_VERTICAL;
 
 @property (readonly, nonatomic) CGFloat SHIP_WIDTH;
 @property (readonly, nonatomic) CGFloat SHIP_HEIGHT;
-@property (readonly, nonatomic) CGFloat SHIP_SPEED;
-@property (readonly, nonatomic) CGFloat SHIP_TURBO_SPEED;
+@property (readonly, nonatomic) CGFloat SHIP_SPEED_HORIZONTAL;
+@property (readonly, nonatomic) CGFloat SHIP_SPEED_VERTICAL;
+@property (readonly, nonatomic) CGFloat SHIP_TURBO_SPEED_HORIZONTAL;
+@property (readonly, nonatomic) CGFloat SHIP_TURBO_SPEED_VERTICAL;
 @property (readonly, nonatomic) CGFloat SHIP_LEFT_BOUND;
 @property (readonly, nonatomic) CGFloat SHIP_RIGHT_BOUND;
 @property (readonly, nonatomic) CGFloat SHIP_TOP_BOUND;
 @property (readonly, nonatomic) CGFloat SHIP_BOTTOM_BOUND;
+
+@property (readonly, nonatomic) float widthScaleFactor;
+@property (readonly, nonatomic) float heightScaleFactor;
 
 - (void)startAnimation;
 - (void)stopAnimation;

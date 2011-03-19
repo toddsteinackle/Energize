@@ -36,7 +36,9 @@
 #ifdef COLLISION_DEBUG
     [super render];
 #endif
-    [animation renderAtPoint:CGPointMake(pixelLocation.x, pixelLocation.y)];
+    [animation renderAtPoint:CGPointMake(pixelLocation.x, pixelLocation.y)
+                       scale:Scale2fMake(scaleWidth, scaleHeight)
+                    rotation:rotationAngle];
 }
 
 - (void)checkForCollisionWithEntity:(AbstractEntity *)otherEntity {

@@ -19,7 +19,6 @@ typedef enum {
 
     Animation *seeking;
     Animation *teleporting;
-    float rotationAngle;
     guardianZone zone;
 }
 
