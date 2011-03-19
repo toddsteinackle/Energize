@@ -87,34 +87,34 @@
 - (void)initGuardians {
     Guardian *guardian;
     // top and bottom
-    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake((IPAD_WIDTH - GUARDIAN_WIDTH) / 2, 100.0f)
+    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake((IPAD_WIDTH - GUARDIAN_WIDTH) / 2, GUARDIAN_BOTTOM_BASE)
                                            andRotation:0.0f];
-    guardian.dx = 130.0f;
+    guardian.dx = 130.0;
     guardian.dy = 0;
 
     [guardians addObject:guardian];
     [guardian release];
 
-    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake((IPAD_WIDTH - GUARDIAN_WIDTH+180) / 2, IPAD_HEIGHT - 100.0f)
+    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake((IPAD_WIDTH - GUARDIAN_WIDTH+180.0) / 2, GUARDIAN_TOP_BASE)
                                            andRotation:180.0f];
-    guardian.dx = -130.0f;
+    guardian.dx = -130.0;
     guardian.dy = 0;
 
     [guardians addObject:guardian];
     [guardian release];
 
-    // right and left
-    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(100.0f, (IPAD_HEIGHT - GUARDIAN_WIDTH+270) / 2)
+    // left and right
+    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(GUARDIAN_LEFT_BASE, (IPAD_HEIGHT - GUARDIAN_WIDTH+270.0) / 2)
                                            andRotation:270.0f];
     guardian.dx = 0;
-    guardian.dy = 130.0f;
+    guardian.dy = 130.0;
     [guardians addObject:guardian];
     [guardian release];
 
-    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(IPAD_WIDTH - 100.0f, (IPAD_HEIGHT - GUARDIAN_WIDTH+90) / 2)
+    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(GUARDIAN_RIGHT_BASE, (IPAD_HEIGHT - GUARDIAN_WIDTH+90.0) / 2)
                                            andRotation:90.0f];
     guardian.dx = 0;
-    guardian.dy = -130.0f;
+    guardian.dy = -130.0;
 
     [guardians addObject:guardian];
     [guardian release];

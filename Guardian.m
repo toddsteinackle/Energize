@@ -18,18 +18,39 @@
 - (void)movementWithDelta:(float)aDelta {
     pixelLocation.x += dx * aDelta;
     pixelLocation.y += dy * aDelta;
-    if (zone == guardian_top || zone == guardian_bottom) {
-        if (dx > 0 && pixelLocation.x > IPAD_WIDTH - 200) {
-            dx = -dx;
-        } else if (dx < 0 && pixelLocation.x < 200) {
-            dx = -dx;
-        }
-    } else {
-        if (dy > 0 && pixelLocation.y > IPAD_HEIGHT - 150) {
-            dy = -dy;
-        } else if (dy < 0 && pixelLocation.y < 150) {
-            dy = -dy;
-        }
+
+    switch (zone) {
+        case guardian_top:
+            if (dx > 0 && pixelLocation.x > GUARDIAN_RIGHT_BOUND) {
+                dx = -dx;
+            } else if (dx < 0 && pixelLocation.x < GUARDIAN_LEFT_BOUND + GUARDIAN_WIDTH) {
+                dx = -dx;
+            }
+            break;
+        case guardian_bottom:
+            if (dx < 0 && pixelLocation.x < GUARDIAN_LEFT_BOUND) {
+                dx = -dx;
+            } else if (dx > 0 && pixelLocation.x > GUARDIAN_RIGHT_BOUND - GUARDIAN_WIDTH) {
+                dx = -dx;
+            }
+            break;
+        case guardian_left:
+            if (dy > 0 && pixelLocation.y > GUARDIAN_TOP_BOUND) {
+                dy = -dy;
+            } else if (dy < 0 && pixelLocation.y < GUARDIAN_BOTTOM_BOUND + GUARDIAN_WIDTH) {
+                dy = -dy;
+            }
+            break;
+        case guardian_right:
+            if (dy < 0 && pixelLocation.y < GUARDIAN_BOTTOM_BOUND) {
+                dy = -dy;
+            } else if (dy > 0 && pixelLocation.y > GUARDIAN_TOP_BOUND - GUARDIAN_WIDTH) {
+                dy = -dy;
+            }
+            break;
+
+        default:
+            break;
     }
 
 }
@@ -45,11 +66,11 @@
         if (rotationAngle == 0.0f) {
             zone = guardian_bottom;
         } else if (rotationAngle == 90.0f) {
-            zone = guardian_left;
+            zone = guardian_right;
         } else if (rotationAngle == 180.0f) {
             zone = guardian_top;
         } else if (rotationAngle == 270.0f) {
-            zone = guardian_right;
+            zone = guardian_left;
         }
 
         seeking = [[Animation alloc] init];

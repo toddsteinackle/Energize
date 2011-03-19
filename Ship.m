@@ -83,19 +83,35 @@
     switch (direction) {
         case ship_up:
             dx = 0;
-            dy = currentSpeed;
+            if (pixelLocation.y > SHIP_TOP_BOUND - SHIP_HEIGHT) {
+                dy = 0;
+            } else {
+                dy = currentSpeed;
+            }
             break;
         case ship_down:
             dx = 0;
-            dy = -currentSpeed;
+            if (pixelLocation.y < SHIP_BOTTOM_BOUND) {
+                dy = 0;
+            } else {
+                dy = -currentSpeed;
+            }
             break;
         case ship_left:
             dy = 0;
-            dx = -currentSpeed;
+            if (pixelLocation.x < SHIP_LEFT_BOUND) {
+                dx = 0;
+            } else {
+                dx = -currentSpeed;
+            }
             break;
         case ship_right:
             dy = 0;
-            dx = currentSpeed;
+            if (pixelLocation.x > SHIP_RIGHT_BOUND - SHIP_WIDTH) {
+                dx = 0;
+            } else {
+                dx = currentSpeed;
+            }
             break;
 
         default:
