@@ -17,8 +17,8 @@
 - (id)initWithPixelLocation:(CGPoint)aLocation {
     self = [super initWithPixelLocation:aLocation];
     if (self != nil) {
-        width = 33;
-        height = 33;
+        width = 46;
+        height = 46;
 
         float delay = 0.05f;
         int frames = 15;

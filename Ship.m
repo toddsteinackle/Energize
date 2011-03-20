@@ -21,14 +21,17 @@
 - (id)initWithPixelLocation:(CGPoint)aLocation {
     self = [super initWithPixelLocation:aLocation];
     if (self != nil) {
-        width = 41;
-        height = 41;
+        width = 57;
+        height = 57;
 
         teleporting = [[Animation alloc] init];
         float delay = 0.1f;
-        int frames = 24;
+        int frames = 12;
         [self setupAnimation:teleporting
-                 spriteSheet:@"ship-teleport.png"
+                 spriteSheet:@"ship-teleport1.png"
+              animationDelay:delay numFrames:frames];
+        [self setupAnimation:teleporting
+                 spriteSheet:@"ship-teleport2.png"
               animationDelay:delay numFrames:frames];
 
         frames = 4;
@@ -60,12 +63,15 @@
         [self setupVerticalAnimation:leftThrust spriteSheet:@"ship-left-boost2.png"
                       animationDelay:delay numFrames:frames];
 
-        frames = 12;
-        width = 61;
+        frames = 6;
+        width = 85;
         delay = 0.075;
         warp = [[Animation alloc] init];
         [self setupAnimation:warp
-                 spriteSheet:@"ship-warp.png"
+                 spriteSheet:@"ship-warp1.png"
+              animationDelay:delay numFrames:frames];
+        [self setupAnimation:warp
+                 spriteSheet:@"ship-warp2.png"
               animationDelay:delay numFrames:frames];
 
     }

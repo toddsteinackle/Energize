@@ -17,13 +17,14 @@
 - (id)initWithPixelLocation:(CGPoint)aLocation {
     self = [super initWithPixelLocation:aLocation];
     if (self != nil) {
-        width = 61;
-        height = 61;
+        width = 85;
+        height = 85;
 
         float delay = 0.05f;
-        int frames = 16;
+        int frames = 8;
         animation = [[Animation alloc] init];
-        [self setupAnimation:animation spriteSheet:@"explosion.png" animationDelay:delay numFrames:frames];
+        [self setupAnimation:animation spriteSheet:@"explosion1.png" animationDelay:delay numFrames:frames];
+        [self setupAnimation:animation spriteSheet:@"explosion2.png" animationDelay:delay numFrames:frames];
     }
     return self;
 }

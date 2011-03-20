@@ -5,84 +5,104 @@
 	<key>frames</key>
 	<dict>
 		
-		<key>asteroid.png</key>
+		<key>asteroid1.png</key>
 		<dict>
 			<key>x</key>
 			<real>2</real>
 			<key>y</key>
-			<real>231</real>
+			<real>235</real>
 			<key>width</key>
-			<real>984</real>
+			<real>684</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>984</real>
+			<real>684</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
+		</dict>
+		
+		<key>asteroid2.png</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>353</real>
+			<key>width</key>
+			<real>684</real>
+			<key>height</key>
+			<real>57</real>
+			<key>offsetX</key>
+			<real>0</real>
+			<key>offsetY</key>
+			<real>0</real>
+			<key>originalWidth</key>
+			<real>684</real>
+			<key>originalHeight</key>
+			<real>57</real>
 		</dict>
 		
 		<key>baddie-1.png</key>
 		<dict>
 			<key>x</key>
-			<real>174</real>
-			<key>y</key>
 			<real>2</real>
+			<key>y</key>
+			<real>589</real>
 			<key>width</key>
-			<real>656</real>
+			<real>920</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>656</real>
+			<real>920</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
 		</dict>
 		
 		<key>baddie-2.png</key>
 		<dict>
 			<key>x</key>
-			<real>174</real>
+			<real>2</real>
 			<key>y</key>
-			<real>45</real>
+			<real>530</real>
 			<key>width</key>
-			<real>656</real>
+			<real>920</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>656</real>
+			<real>920</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
 		</dict>
 		
 		<key>baddie-teleport-1.png</key>
 		<dict>
 			<key>x</key>
-			<real>174</real>
+			<real>2</real>
 			<key>y</key>
-			<real>88</real>
+			<real>471</real>
 			<key>width</key>
-			<real>656</real>
+			<real>920</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>656</real>
+			<real>920</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
 		</dict>
 		
 		<key>baddie-teleport-2.png</key>
@@ -90,19 +110,19 @@
 			<key>x</key>
 			<real>2</real>
 			<key>y</key>
-			<real>274</real>
+			<real>707</real>
 			<key>width</key>
-			<real>656</real>
+			<real>920</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>656</real>
+			<real>920</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
 		</dict>
 		
 		<key>baddie-teleport-3.png</key>
@@ -110,19 +130,19 @@
 			<key>x</key>
 			<real>2</real>
 			<key>y</key>
-			<real>317</real>
+			<real>648</real>
 			<key>width</key>
-			<real>656</real>
+			<real>920</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>656</real>
+			<real>920</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
 		</dict>
 		
 		<key>baddie-teleport-4.png</key>
@@ -130,519 +150,579 @@
 			<key>x</key>
 			<real>2</real>
 			<key>y</key>
-			<real>360</real>
+			<real>412</real>
 			<key>width</key>
-			<real>656</real>
+			<real>920</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>656</real>
+			<real>920</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
 		</dict>
 		
 		<key>bonus-bullet.png</key>
 		<dict>
 			<key>x</key>
-			<real>832</real>
+			<real>688</real>
 			<key>y</key>
-			<real>2</real>
+			<real>235</real>
 			<key>width</key>
-			<real>164</real>
+			<real>228</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>164</real>
+			<real>228</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
 		</dict>
 		
 		<key>bonus-shield.png</key>
 		<dict>
 			<key>x</key>
-			<real>832</real>
+			<real>684</real>
 			<key>y</key>
-			<real>45</real>
+			<real>89</real>
 			<key>width</key>
-			<real>164</real>
+			<real>228</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>164</real>
+			<real>228</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
 		</dict>
 		
 		<key>boxes.png</key>
 		<dict>
 			<key>x</key>
-			<real>174</real>
+			<real>2</real>
 			<key>y</key>
-			<real>131</real>
+			<real>766</real>
 			<key>width</key>
-			<real>495</real>
+			<real>690</real>
 			<key>height</key>
-			<real>33</real>
+			<real>46</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>495</real>
+			<real>690</real>
 			<key>originalHeight</key>
-			<real>33</real>
+			<real>46</real>
 		</dict>
 		
 		<key>debris-base.png</key>
 		<dict>
 			<key>x</key>
-			<real>703</real>
+			<real>514</real>
 			<key>y</key>
-			<real>360</real>
+			<real>294</real>
 			<key>width</key>
-			<real>288</real>
+			<real>400</real>
 			<key>height</key>
-			<real>36</real>
+			<real>50</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>288</real>
+			<real>400</real>
 			<key>originalHeight</key>
-			<real>36</real>
+			<real>50</real>
 		</dict>
 		
 		<key>debris-bubble.png</key>
 		<dict>
 			<key>x</key>
-			<real>826</real>
+			<real>684</real>
 			<key>y</key>
-			<real>317</real>
+			<real>61</real>
 			<key>width</key>
-			<real>120</real>
+			<real>168</real>
 			<key>height</key>
-			<real>15</real>
+			<real>21</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>120</real>
+			<real>168</real>
 			<key>originalHeight</key>
-			<real>15</real>
+			<real>21</real>
 		</dict>
 		
 		<key>debris-motor.png</key>
 		<dict>
 			<key>x</key>
-			<real>826</real>
+			<real>736</real>
 			<key>y</key>
-			<real>334</real>
+			<real>783</real>
 			<key>width</key>
-			<real>104</real>
+			<real>144</real>
 			<key>height</key>
-			<real>13</real>
+			<real>18</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>104</real>
+			<real>144</real>
 			<key>originalHeight</key>
-			<real>13</real>
+			<real>18</real>
 		</dict>
 		
 		<key>debris1.png</key>
 		<dict>
 			<key>x</key>
-			<real>736</real>
+			<real>684</real>
 			<key>y</key>
-			<real>446</real>
+			<real>148</real>
 			<key>width</key>
-			<real>104</real>
+			<real>144</real>
 			<key>height</key>
-			<real>13</real>
+			<real>18</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>104</real>
+			<real>144</real>
 			<key>originalHeight</key>
-			<real>13</real>
+			<real>18</real>
 		</dict>
 		
 		<key>debris2.png</key>
 		<dict>
 			<key>x</key>
-			<real>736</real>
+			<real>688</real>
 			<key>y</key>
-			<real>461</real>
+			<real>353</real>
 			<key>width</key>
-			<real>104</real>
+			<real>144</real>
 			<key>height</key>
-			<real>13</real>
+			<real>18</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>104</real>
+			<real>144</real>
 			<key>originalHeight</key>
-			<real>13</real>
+			<real>18</real>
 		</dict>
 		
 		<key>debris3.png</key>
 		<dict>
 			<key>x</key>
-			<real>842</real>
+			<real>734</real>
 			<key>y</key>
-			<real>446</real>
+			<real>822</real>
 			<key>width</key>
-			<real>104</real>
+			<real>144</real>
 			<key>height</key>
-			<real>13</real>
+			<real>18</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>104</real>
+			<real>144</real>
 			<key>originalHeight</key>
-			<real>13</real>
+			<real>18</real>
 		</dict>
 		
 		<key>debris4.png</key>
 		<dict>
 			<key>x</key>
-			<real>842</real>
+			<real>688</real>
 			<key>y</key>
-			<real>461</real>
+			<real>373</real>
 			<key>width</key>
-			<real>104</real>
+			<real>144</real>
 			<key>height</key>
-			<real>13</real>
+			<real>18</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>104</real>
+			<real>144</real>
 			<key>originalHeight</key>
-			<real>13</real>
+			<real>18</real>
 		</dict>
 		
-		<key>explosion.png</key>
+		<key>explosion1.png</key>
 		<dict>
 			<key>x</key>
 			<real>2</real>
 			<key>y</key>
-			<real>168</real>
+			<real>2</real>
 			<key>width</key>
-			<real>976</real>
+			<real>680</real>
 			<key>height</key>
-			<real>61</real>
+			<real>85</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>976</real>
+			<real>680</real>
 			<key>originalHeight</key>
-			<real>61</real>
+			<real>85</real>
+		</dict>
+		
+		<key>explosion2.png</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>89</real>
+			<key>width</key>
+			<real>680</real>
+			<key>height</key>
+			<real>85</real>
+			<key>offsetX</key>
+			<real>0</real>
+			<key>offsetY</key>
+			<real>0</real>
+			<key>originalWidth</key>
+			<real>680</real>
+			<key>originalHeight</key>
+			<real>85</real>
 		</dict>
 		
 		<key>fire.png</key>
 		<dict>
 			<key>x</key>
-			<real>705</real>
+			<real>2</real>
 			<key>y</key>
-			<real>131</real>
+			<real>977</real>
 			<key>width</key>
-			<real>248</real>
+			<real>344</real>
 			<key>height</key>
-			<real>31</real>
+			<real>43</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>248</real>
+			<real>344</real>
 			<key>originalHeight</key>
-			<real>31</real>
+			<real>43</real>
 		</dict>
 		
 		<key>shielder.png</key>
 		<dict>
 			<key>x</key>
-			<real>955</real>
+			<real>854</real>
 			<key>y</key>
-			<real>131</real>
+			<real>61</real>
 			<key>width</key>
-			<real>39</real>
+			<real>54</real>
 			<key>height</key>
-			<real>13</real>
+			<real>18</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>39</real>
+			<real>54</real>
 			<key>originalHeight</key>
-			<real>13</real>
+			<real>18</real>
 		</dict>
 		
 		<key>ship-down-boost1.png</key>
 		<dict>
 			<key>x</key>
-			<real>832</real>
+			<real>547</real>
 			<key>y</key>
-			<real>88</real>
+			<real>964</real>
 			<key>width</key>
-			<real>164</real>
+			<real>228</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>164</real>
+			<real>228</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
 		</dict>
 		
 		<key>ship-down-boost2.png</key>
 		<dict>
 			<key>x</key>
-			<real>660</real>
+			<real>785</real>
 			<key>y</key>
-			<real>274</real>
+			<real>964</real>
 			<key>width</key>
-			<real>164</real>
+			<real>228</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>164</real>
+			<real>228</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
 		</dict>
 		
 		<key>ship-left-boost1.png</key>
 		<dict>
 			<key>x</key>
-			<real>2</real>
+			<real>958</real>
 			<key>y</key>
-			<real>2</real>
+			<real>731</real>
 			<key>width</key>
-			<real>41</real>
+			<real>57</real>
 			<key>height</key>
-			<real>164</real>
+			<real>228</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>41</real>
+			<real>57</real>
 			<key>originalHeight</key>
-			<real>164</real>
+			<real>228</real>
 		</dict>
 		
 		<key>ship-left-boost2.png</key>
 		<dict>
 			<key>x</key>
-			<real>45</real>
+			<real>954</real>
 			<key>y</key>
-			<real>2</real>
+			<real>497</real>
 			<key>width</key>
-			<real>41</real>
+			<real>57</real>
 			<key>height</key>
-			<real>164</real>
+			<real>228</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>41</real>
+			<real>57</real>
 			<key>originalHeight</key>
-			<real>164</real>
+			<real>228</real>
 		</dict>
 		
 		<key>ship-mini-boost2.png</key>
 		<dict>
 			<key>x</key>
-			<real>671</real>
+			<real>808</real>
 			<key>y</key>
-			<real>131</real>
+			<real>869</real>
 			<key>width</key>
-			<real>32</real>
+			<real>45</real>
 			<key>height</key>
-			<real>32</real>
+			<real>45</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>32</real>
+			<real>45</real>
 			<key>originalHeight</key>
-			<real>32</real>
+			<real>45</real>
 		</dict>
 		
 		<key>ship-right-boost1.png</key>
 		<dict>
 			<key>x</key>
-			<real>88</real>
+			<real>964</real>
 			<key>y</key>
-			<real>2</real>
+			<real>10</real>
 			<key>width</key>
-			<real>41</real>
+			<real>57</real>
 			<key>height</key>
-			<real>164</real>
+			<real>228</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>41</real>
+			<real>57</real>
 			<key>originalHeight</key>
-			<real>164</real>
+			<real>228</real>
 		</dict>
 		
 		<key>ship-right-boost2.png</key>
 		<dict>
 			<key>x</key>
-			<real>131</real>
+			<real>961</real>
 			<key>y</key>
-			<real>2</real>
+			<real>253</real>
 			<key>width</key>
-			<real>41</real>
+			<real>57</real>
 			<key>height</key>
-			<real>164</real>
+			<real>228</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>41</real>
+			<real>57</real>
 			<key>originalHeight</key>
-			<real>164</real>
+			<real>228</real>
 		</dict>
 		
-		<key>ship-teleport.png</key>
+		<key>ship-teleport1.png</key>
 		<dict>
 			<key>x</key>
 			<real>2</real>
 			<key>y</key>
-			<real>403</real>
+			<real>176</real>
 			<key>width</key>
-			<real>984</real>
+			<real>684</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>984</real>
+			<real>684</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
+		</dict>
+		
+		<key>ship-teleport2.png</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>814</real>
+			<key>width</key>
+			<real>684</real>
+			<key>height</key>
+			<real>57</real>
+			<key>offsetX</key>
+			<real>0</real>
+			<key>offsetY</key>
+			<real>0</real>
+			<key>originalWidth</key>
+			<real>684</real>
+			<key>originalHeight</key>
+			<real>57</real>
 		</dict>
 		
 		<key>ship-up-boost1.png</key>
 		<dict>
 			<key>x</key>
-			<real>826</real>
+			<real>684</real>
 			<key>y</key>
-			<real>274</real>
+			<real>2</real>
 			<key>width</key>
-			<real>164</real>
+			<real>228</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>164</real>
+			<real>228</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
 		</dict>
 		
 		<key>ship-up-boost2.png</key>
 		<dict>
 			<key>x</key>
-			<real>660</real>
+			<real>688</real>
 			<key>y</key>
-			<real>317</real>
+			<real>176</real>
 			<key>width</key>
-			<real>164</real>
+			<real>228</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>164</real>
+			<real>228</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
 		</dict>
 		
 		<key>ship-up.png</key>
 		<dict>
 			<key>x</key>
-			<real>660</real>
+			<real>710</real>
 			<key>y</key>
-			<real>360</real>
+			<real>870</real>
 			<key>width</key>
-			<real>41</real>
+			<real>57</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>41</real>
+			<real>57</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
 		</dict>
 		
-		<key>ship-warp.png</key>
+		<key>ship-warp1.png</key>
 		<dict>
 			<key>x</key>
 			<real>2</real>
 			<key>y</key>
-			<real>446</real>
+			<real>294</real>
 			<key>width</key>
-			<real>732</real>
+			<real>510</real>
 			<key>height</key>
-			<real>41</real>
+			<real>57</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>732</real>
+			<real>510</real>
 			<key>originalHeight</key>
-			<real>41</real>
+			<real>57</real>
+		</dict>
+		
+		<key>ship-warp2.png</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>918</real>
+			<key>width</key>
+			<real>510</real>
+			<key>height</key>
+			<real>57</real>
+			<key>offsetX</key>
+			<real>0</real>
+			<key>offsetY</key>
+			<real>0</real>
+			<key>originalWidth</key>
+			<real>510</real>
+			<key>originalHeight</key>
+			<real>57</real>
 		</dict>
 		
 		<key>spikeball.png</key>
@@ -650,19 +730,19 @@
 			<key>x</key>
 			<real>2</real>
 			<key>y</key>
-			<real>489</real>
+			<real>873</real>
 			<key>width</key>
-			<real>372</real>
+			<real>516</real>
 			<key>height</key>
-			<real>31</real>
+			<real>43</real>
 			<key>offsetX</key>
 			<real>0</real>
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>372</real>
+			<real>516</real>
 			<key>originalHeight</key>
-			<real>31</real>
+			<real>43</real>
 		</dict>
 		
 	</dict>
