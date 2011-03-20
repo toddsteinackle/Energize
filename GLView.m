@@ -200,33 +200,70 @@
     NSLog(@"x -- %f y -- %f", loc.x, loc.y);
 #endif
     NSUInteger numTaps = [touch tapCount];
-    if (numTaps == 2) {
-        ship.isThrusting = !ship.isThrusting;
-    }
-    if( numTaps > 2 ) {
-        [self.viewController showPauseView];
-    }
-}
+    switch (sceneState) {
+#pragma mark SceneState_TransitionIn
+        case SceneState_TransitionIn:
+            break;
 
-- (void)handleSwipes:(UISwipeGestureRecognizer *)paramSender {
+#pragma mark SceneState_Running
+        case SceneState_Running:
+            if (numTaps == 2) {
+                if (ship.state != EntityState_Transporting) {
+                    ship.isThrusting = !ship.isThrusting;
+                    if (ship.state == EntityState_Idle) {
+                        ship.state = EntityState_Alive;
+                    }
+                }
+            }
 
-    switch (paramSender.direction) {
-        case UISwipeGestureRecognizerDirectionDown:
-            ship.direction = ship_down;
-            break;
-        case UISwipeGestureRecognizerDirectionUp:
-            ship.direction = ship_up;
-            break;
-        case UISwipeGestureRecognizerDirectionLeft:
-            ship.direction = ship_left;
-            break;
-        case UISwipeGestureRecognizerDirectionRight:
-            ship.direction = ship_right;
+            if( numTaps > 2 ) {
+                [self.viewController showPauseView];
+            }
             break;
 
         default:
             break;
     }
+}
+
+- (void)handleSwipes:(UISwipeGestureRecognizer *)paramSender {
+
+    switch (sceneState) {
+#pragma mark SceneState_TransitionIn
+        case SceneState_TransitionIn:
+            break;
+
+#pragma mark SceneState_Running
+        case SceneState_Running:
+            if (ship.state != EntityState_Transporting) {
+                if (ship.state == EntityState_Idle) {
+                    ship.state = EntityState_Alive;
+                }
+            }
+
+            switch (paramSender.direction) {
+                case UISwipeGestureRecognizerDirectionDown:
+                    ship.direction = ship_down;
+                    break;
+                case UISwipeGestureRecognizerDirectionUp:
+                    ship.direction = ship_up;
+                    break;
+                case UISwipeGestureRecognizerDirectionLeft:
+                    ship.direction = ship_left;
+                    break;
+                case UISwipeGestureRecognizerDirectionRight:
+                    ship.direction = ship_right;
+                    break;
+
+                default:
+                    break;
+            }
+            break;
+
+        default:
+            break;
+    }
+
 
 }
 

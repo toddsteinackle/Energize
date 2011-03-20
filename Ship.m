@@ -33,6 +33,10 @@
         [self setupAnimation:teleporting
                  spriteSheet:@"ship-teleport2.png"
               animationDelay:delay numFrames:frames];
+        frames = 1;
+        [self setupAnimation:teleporting
+                 spriteSheet:@"ship-up.png"
+              animationDelay:delay numFrames:frames];
 
         frames = 4;
         up = [[Animation alloc] init];
@@ -79,6 +83,8 @@
     animation.type = kAnimationType_Once;
     state = EntityState_Transporting;
     currentSpeed = 0;
+    direction = ship_up;
+    isThrusting = FALSE;
     return self;
 }
 
@@ -132,9 +138,11 @@
     switch (state) {
         case EntityState_Transporting:
             if (animation.state == kAnimationState_Stopped) {
-                state = EntityState_Alive;
-                animation = up;
+                state = EntityState_Idle;
             }
+            break;
+
+        case EntityState_Idle:
             break;
 
         case EntityState_Alive:
