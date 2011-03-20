@@ -89,8 +89,8 @@
 
 - (void)initGuardians {
     Guardian *guardian;
-    // top and bottom
-    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake((appDelegate.SCREEN_WIDTH - appDelegate.GUARDIAN_WIDTH) / 2, appDelegate.GUARDIAN_BOTTOM_BASE)
+    // bottom
+    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(appDelegate.GUARDIAN_LEFT_BASE, appDelegate.GUARDIAN_BOTTOM_BASE)
                                            andRotation:0.0f];
     guardian.dx = appDelegate.GUARDIAN_SPEED_HORIZONTAL;
     guardian.dy = 0;
@@ -98,7 +98,8 @@
     [guardians addObject:guardian];
     [guardian release];
 
-    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake((appDelegate.SCREEN_WIDTH - appDelegate.GUARDIAN_WIDTH+180.0) / 2, appDelegate.GUARDIAN_TOP_BASE)
+    // top
+    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE, appDelegate.GUARDIAN_TOP_BASE)
                                            andRotation:180.0f];
     guardian.dx = -appDelegate.GUARDIAN_SPEED_HORIZONTAL;
     guardian.dy = 0;
@@ -106,15 +107,16 @@
     [guardians addObject:guardian];
     [guardian release];
 
-    // left and right
-    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(appDelegate.GUARDIAN_LEFT_BASE, (appDelegate.SCREEN_HEIGHT - appDelegate.GUARDIAN_WIDTH+270.0) / 2)
+    // left
+    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(appDelegate.GUARDIAN_LEFT_BASE, appDelegate.GUARDIAN_TOP_BASE)
                                            andRotation:270.0f];
     guardian.dx = 0;
     guardian.dy = appDelegate.GUARDIAN_SPEED_VERTICAL;
     [guardians addObject:guardian];
     [guardian release];
 
-    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE, (appDelegate.SCREEN_HEIGHT - appDelegate.GUARDIAN_WIDTH+90.0) / 2)
+    // right
+    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE, appDelegate.GUARDIAN_BOTTOM_BASE)
                                            andRotation:90.0f];
     guardian.dx = 0;
     guardian.dy = -appDelegate.GUARDIAN_SPEED_VERTICAL;

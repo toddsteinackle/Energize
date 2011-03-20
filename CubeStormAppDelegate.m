@@ -187,10 +187,10 @@ BOOL isGameCenterAvailable() {
     GUARDIAN_HEIGHT = 57;
     GUARDIAN_SPEED_HORIZONTAL = 130;
     GUARDIAN_SPEED_VERTICAL = 130;
-    GUARDIAN_RIGHT_BASE = 867;
-    GUARDIAN_LEFT_BASE = 29;
-    GUARDIAN_TOP_BASE = 732;
-    GUARDIAN_BOTTOM_BASE = 22;
+    GUARDIAN_RIGHT_BASE = 935;
+    GUARDIAN_LEFT_BASE = 15;
+    GUARDIAN_TOP_BASE = 720;
+    GUARDIAN_BOTTOM_BASE = 15;
 
     SHIP_WIDTH = 57;
     SHIP_HEIGHT = 57;
@@ -200,18 +200,19 @@ BOOL isGameCenterAvailable() {
     SHIP_TURBO_SPEED_VERTICAL = 200;
 
     CGFloat guardian_width_padding, guardian_height_padding;
-    guardian_width_padding = guardian_height_padding = 10;
+    guardian_width_padding = guardian_height_padding = 5;
     GUARDIAN_LEFT_BOUND = GUARDIAN_LEFT_BASE + GUARDIAN_HEIGHT + guardian_width_padding;
     GUARDIAN_RIGHT_BOUND = GUARDIAN_RIGHT_BASE - GUARDIAN_HEIGHT - guardian_width_padding;
     GUARDIAN_TOP_BOUND = GUARDIAN_TOP_BASE - GUARDIAN_HEIGHT - guardian_width_padding;
     GUARDIAN_BOTTOM_BOUND = GUARDIAN_BOTTOM_BASE + GUARDIAN_HEIGHT + guardian_width_padding;
 
     CGFloat ship_width_padding, ship_height_padding;
-    ship_width_padding = ship_height_padding = 15;
+    ship_width_padding = ship_height_padding = 8;
     SHIP_LEFT_BOUND = GUARDIAN_LEFT_BASE + GUARDIAN_HEIGHT + ship_width_padding;
     SHIP_RIGHT_BOUND = GUARDIAN_RIGHT_BASE - GUARDIAN_HEIGHT - ship_width_padding;
     SHIP_TOP_BOUND = GUARDIAN_TOP_BASE - GUARDIAN_HEIGHT - ship_width_padding;
     SHIP_BOTTOM_BOUND = GUARDIAN_BOTTOM_BASE + GUARDIAN_HEIGHT + ship_width_padding;
+    NSLog(@"%f left -- %f right -- %f top -- %f bottom",  SHIP_LEFT_BOUND, SHIP_RIGHT_BOUND, SHIP_TOP_BOUND, SHIP_BOTTOM_BOUND);
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         SCREEN_WIDTH = 1024;
