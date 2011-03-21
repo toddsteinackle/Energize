@@ -43,9 +43,16 @@
     CGFloat SHIP_RIGHT_BOUND;
     CGFloat SHIP_TOP_BOUND;
     CGFloat SHIP_BOTTOM_BOUND;
+    CGFloat SHIP_STARTING_X_OFFSET;
+    CGFloat SHIP_STARTING_Y_OFFSET;
 
     float widthScaleFactor;
     float heightScaleFactor;
+
+    CGFloat gridStartingX;
+    CGFloat gridStartingY;
+
+    CGPoint gridCoordinates[63];
 
 
 #ifdef FRAME_COUNTER
@@ -101,6 +108,8 @@
 @property (readonly, nonatomic) CGFloat SHIP_RIGHT_BOUND;
 @property (readonly, nonatomic) CGFloat SHIP_TOP_BOUND;
 @property (readonly, nonatomic) CGFloat SHIP_BOTTOM_BOUND;
+@property (readonly, nonatomic) CGFloat SHIP_STARTING_X_OFFSET;
+@property (readonly, nonatomic) CGFloat SHIP_STARTING_Y_OFFSET;
 
 @property (readonly, nonatomic) float widthScaleFactor;
 @property (readonly, nonatomic) float heightScaleFactor;
@@ -112,6 +121,8 @@
 - (void)authenticateLocalPlayer;
 - (void)registerForAuthenticationNotification;
 - (void)authenticationChanged;
+- (CGPoint)getGridCoordinates:(int)index;
+- (void)calcGridCoordinates;
 
 @end
 

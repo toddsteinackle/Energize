@@ -17,26 +17,42 @@
 - (id)initWithPixelLocation:(CGPoint)aLocation {
     self = [super initWithPixelLocation:aLocation];
     if (self != nil) {
-        width = 46;
-        height = 46;
+        width = 33;
+        height = 33;
 
         float delay = 0.05f;
         int frames = 15;
         animation = [[Animation alloc] init];
         [self setupAnimation:animation spriteSheet:@"boxes.png" animationDelay:delay numFrames:frames];
+        animation.type = kAnimationType_Once;
+        state = EntityState_Alive;
     }
     return self;
 }
 
 - (void)updateWithDelta:(GLfloat)aDelta {
     [animation updateWithDelta:aDelta];
+
+    switch (state) {
+
+        case EntityState_Alive:
+            if (animation.currentFrame == 14) {
+                animation.state = kAnimationState_Stopped;
+                animation.currentFrame = 0;
+                animation.state = kAnimationState_Running;
+            }
+            break;
+
+        default:
+            break;
+    }
 }
 
 - (void)render {
 #ifdef COLLISION_DEBUG
     [super render];
 #endif
-    [animation renderAtPoint:CGPointMake(pixelLocation.x, pixelLocation.y)
+    [animation renderCenteredAtPoint:CGPointMake(pixelLocation.x, pixelLocation.y)
                        scale:Scale2fMake(scaleWidth, scaleHeight)
                     rotation:rotationAngle];
 }

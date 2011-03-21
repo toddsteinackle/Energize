@@ -525,6 +525,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_PREPROCESSOR_DEFINITIONS = (
+					FRAME_COUNTER,
 					OPENAL_DEBUG,
 					GAMEENGINE_DEBUG,
 				);

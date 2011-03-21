@@ -57,8 +57,8 @@
 - (id)initWithPixelLocation:(CGPoint)aLocation andRotation:(float)angle {
     self = [super initWithPixelLocation:aLocation];
     if (self != nil) {
-        width = 115;
-        height = 57;
+        width = 82;
+        height = 41;
         float delay = 0.08f;
         int frames = 8;
         rotationAngle = angle;

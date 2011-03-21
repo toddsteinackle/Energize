@@ -17,14 +17,13 @@
 - (id)initWithPixelLocation:(CGPoint)aLocation {
     self = [super initWithPixelLocation:aLocation];
     if (self != nil) {
-        width = 57;
-        height = 57;
+        width = 41;
+        height = 41;
 
         float delay = 0.08f;
-        int frames = 12;
+        int frames = 24;
         animation = [[Animation alloc] init];
-        [self setupAnimation:animation spriteSheet:@"asteroid1.png" animationDelay:delay numFrames:frames];
-        [self setupAnimation:animation spriteSheet:@"asteroid2.png" animationDelay:delay numFrames:frames];
+        [self setupAnimation:animation spriteSheet:@"asteroid.png" animationDelay:delay numFrames:frames];
     }
     return self;
 }

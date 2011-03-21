@@ -44,7 +44,7 @@ typedef enum {
     ParticleEmitter *starfield;
 
     NSMutableArray *guardians;
-
+    NSMutableArray *cubes;
     Ship *ship;
 
 }

@@ -56,8 +56,32 @@ BOOL isGameCenterAvailable() {
 @synthesize SHIP_RIGHT_BOUND;
 @synthesize SHIP_TOP_BOUND;
 @synthesize SHIP_BOTTOM_BOUND;
+@synthesize SHIP_STARTING_X_OFFSET;
+@synthesize SHIP_STARTING_Y_OFFSET;
 @synthesize widthScaleFactor;
 @synthesize heightScaleFactor;
+
+#pragma mark -
+#pragma mark Grid Coordinates
+
+- (CGPoint)getGridCoordinates:(int)index {
+    return gridCoordinates[index];
+}
+
+- (void)calcGridCoordinates {
+    gridStartingX = gridStartingX * widthScaleFactor;
+    gridStartingY = gridStartingY * heightScaleFactor;
+    CGFloat yOut;
+    int k = 0;
+    CGPoint coords;
+    for (int j = 0; j < 7; ++j) {
+        yOut = gridStartingY+(j*80*heightScaleFactor);
+        for (int i = 0; i < 9; ++i) {
+            coords = CGPointMake(gridStartingX+(i*80*widthScaleFactor), yOut);
+            gridCoordinates[k++] = coords;
+        }
+    }
+}
 
 #pragma mark -
 #pragma mark Game Engine
@@ -183,21 +207,23 @@ BOOL isGameCenterAvailable() {
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     // Override point for customization after application launch.
-    GUARDIAN_WIDTH = 115;
-    GUARDIAN_HEIGHT = 57;
+    GUARDIAN_WIDTH = 82;
+    GUARDIAN_HEIGHT = 41;
     GUARDIAN_SPEED_HORIZONTAL = 130;
     GUARDIAN_SPEED_VERTICAL = 130;
-    GUARDIAN_RIGHT_BASE = 935;
+    GUARDIAN_RIGHT_BASE = 945;
     GUARDIAN_LEFT_BASE = 15;
-    GUARDIAN_TOP_BASE = 720;
+    GUARDIAN_TOP_BASE = 730;
     GUARDIAN_BOTTOM_BASE = 15;
 
-    SHIP_WIDTH = 57;
-    SHIP_HEIGHT = 57;
+    SHIP_WIDTH = 41;
+    SHIP_HEIGHT = 41;
     SHIP_SPEED_HORIZONTAL = 100;
     SHIP_SPEED_VERTICAL = 100;
     SHIP_TURBO_SPEED_HORIZONTAL = 200;
     SHIP_TURBO_SPEED_VERTICAL = 200;
+    SHIP_STARTING_X_OFFSET = 20;
+    SHIP_STARTING_Y_OFFSET = 20;
 
     CGFloat guardian_width_padding, guardian_height_padding;
     guardian_width_padding = guardian_height_padding = 5;
@@ -207,12 +233,14 @@ BOOL isGameCenterAvailable() {
     GUARDIAN_BOTTOM_BOUND = GUARDIAN_BOTTOM_BASE + GUARDIAN_HEIGHT + guardian_width_padding;
 
     CGFloat ship_width_padding, ship_height_padding;
-    ship_width_padding = ship_height_padding = 8;
+    ship_width_padding = ship_height_padding = 10;
     SHIP_LEFT_BOUND = GUARDIAN_LEFT_BASE + GUARDIAN_HEIGHT + ship_width_padding;
     SHIP_RIGHT_BOUND = GUARDIAN_RIGHT_BASE - GUARDIAN_HEIGHT - ship_width_padding;
     SHIP_TOP_BOUND = GUARDIAN_TOP_BASE - GUARDIAN_HEIGHT - ship_width_padding;
     SHIP_BOTTOM_BOUND = GUARDIAN_BOTTOM_BASE + GUARDIAN_HEIGHT + ship_width_padding;
-    NSLog(@"%f left -- %f right -- %f top -- %f bottom",  SHIP_LEFT_BOUND, SHIP_RIGHT_BOUND, SHIP_TOP_BOUND, SHIP_BOTTOM_BOUND);
+
+    gridStartingX = 160;
+    gridStartingY = 132;
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         SCREEN_WIDTH = 1024;
@@ -220,6 +248,7 @@ BOOL isGameCenterAvailable() {
 
         widthScaleFactor = 1.0f;
         heightScaleFactor = 1.0f;
+        [self calcGridCoordinates];
 
     } else {
         SCREEN_WIDTH = 480;
@@ -227,6 +256,8 @@ BOOL isGameCenterAvailable() {
 
         widthScaleFactor = 0.46875f;
         heightScaleFactor = 0.416666667f;
+        [self calcGridCoordinates];
+
         GUARDIAN_WIDTH = GUARDIAN_WIDTH * widthScaleFactor;
         GUARDIAN_HEIGHT = GUARDIAN_HEIGHT * heightScaleFactor;
         GUARDIAN_SPEED_HORIZONTAL = GUARDIAN_SPEED_HORIZONTAL * widthScaleFactor;
@@ -254,6 +285,8 @@ BOOL isGameCenterAvailable() {
         SHIP_RIGHT_BOUND = GUARDIAN_RIGHT_BASE - GUARDIAN_HEIGHT - ship_width_padding;
         SHIP_TOP_BOUND = GUARDIAN_TOP_BASE - GUARDIAN_HEIGHT - ship_height_padding;
         SHIP_BOTTOM_BOUND = GUARDIAN_BOTTOM_BASE + GUARDIAN_HEIGHT + ship_height_padding;
+        SHIP_STARTING_X_OFFSET = SHIP_STARTING_X_OFFSET * widthScaleFactor;
+        SHIP_STARTING_Y_OFFSET = SHIP_STARTING_Y_OFFSET * heightScaleFactor;
     }
 
     if (isGameCenterAvailable()) {

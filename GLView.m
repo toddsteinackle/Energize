@@ -48,7 +48,15 @@
 
         guardians = [[NSMutableArray alloc] init];
 
-        ship = [[Ship alloc] initWithPixelLocation:CGPointMake(appDelegate.SCREEN_WIDTH / 2, appDelegate.SCREEN_HEIGHT / 2)];
+        cubes = [[NSMutableArray alloc] init];
+        for (int i = 1; i < 63; ++i) {
+            Cube *c = [[Cube alloc] initWithPixelLocation:CGPointMake([appDelegate getGridCoordinates:i].x, [appDelegate getGridCoordinates:i].y)];
+            [cubes addObject:c];
+            [c release];
+        }
+
+        ship = [[Ship alloc] initWithPixelLocation:CGPointMake([appDelegate getGridCoordinates:0].x-appDelegate.SHIP_STARTING_X_OFFSET,
+                                                               [appDelegate getGridCoordinates:0].y-appDelegate.SHIP_STARTING_Y_OFFSET)];
 
         [self initGuardians];
     }
@@ -79,6 +87,7 @@
 
 - (void)dealloc {
     [guardians release];
+    [cubes release];
     [ship release];
     [swipeLeftGestureRecognizer release];
     [swipeRightGestureRecognizer release];
@@ -154,6 +163,10 @@
                 [g updateWithDelta:aDelta];
             }
 
+            for (Cube *c in cubes) {
+                [c updateWithDelta:aDelta];
+            }
+
             [ship updateWithDelta:aDelta];
 
             break;
@@ -181,6 +194,9 @@
 
             for (Guardian *g in guardians) {
                 [g render];
+            }
+            for (Cube *c in cubes) {
+                [c render];
             }
 
             [ship render];
