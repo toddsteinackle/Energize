@@ -32,11 +32,6 @@ typedef enum {
     CubeStormAppDelegate *appDelegate;
     OpenGLViewController *viewController;
 
-    UISwipeGestureRecognizer  *swipeLeftGestureRecognizer;
-    UISwipeGestureRecognizer  *swipeRightGestureRecognizer;
-    UISwipeGestureRecognizer  *swipeUpGestureRecognizer;
-    UISwipeGestureRecognizer  *swipeDownGestureRecognizer;
-
     SceneState sceneState;
     double lastTimeInLoop;
 
@@ -54,7 +49,6 @@ typedef enum {
 @property (nonatomic, assign) int cubeCount;
 
 - (void)initGuardians;
-- (void)handleSwipes:(UISwipeGestureRecognizer *)paramSender;
 - (void)initLevel;
 
 @end

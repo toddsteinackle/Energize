@@ -25,9 +25,9 @@
         height = 33;
 
         float delay = 0.06f;
-        int frames = 15;
+        int frames = 12;
         animation = [[Animation alloc] init];
-        [self setupAnimation:animation spriteSheet:@"boxes.png" animationDelay:delay numFrames:frames];
+        [self setupAnimation:animation spriteSheet:@"cube1.png" animationDelay:delay numFrames:frames];
         animation.type = kAnimationType_Once;
         state = EntityState_Alive;
         collisionWidth = appDelegate.widthScaleFactor * width *.9;
@@ -47,7 +47,7 @@
 
         case EntityState_Alive:
             [animation updateWithDelta:aDelta];
-            if (animation.currentFrame == 14) {
+            if (animation.currentFrame == 11) {
                 animation.state = kAnimationState_Stopped;
                 animation.currentFrame = 0;
                 animation.state = kAnimationState_Running;

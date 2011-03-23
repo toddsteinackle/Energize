@@ -185,14 +185,14 @@
 			<real>41</real>
 		</dict>
 		
-		<key>boxes.png</key>
+		<key>cube1.png</key>
 		<dict>
 			<key>x</key>
 			<real>174</real>
 			<key>y</key>
 			<real>131</real>
 			<key>width</key>
-			<real>495</real>
+			<real>396</real>
 			<key>height</key>
 			<real>33</real>
 			<key>offsetX</key>
@@ -200,7 +200,7 @@
 			<key>offsetY</key>
 			<real>0</real>
 			<key>originalWidth</key>
-			<real>495</real>
+			<real>396</real>
 			<key>originalHeight</key>
 			<real>33</real>
 		</dict>
@@ -228,9 +228,9 @@
 		<key>debris-bubble.png</key>
 		<dict>
 			<key>x</key>
-			<real>826</real>
+			<real>856</real>
 			<key>y</key>
-			<real>317</real>
+			<real>131</real>
 			<key>width</key>
 			<real>120</real>
 			<key>height</key>
@@ -248,9 +248,9 @@
 		<key>debris-motor.png</key>
 		<dict>
 			<key>x</key>
-			<real>826</real>
+			<real>856</real>
 			<key>y</key>
-			<real>334</real>
+			<real>148</real>
 			<key>width</key>
 			<real>104</real>
 			<key>height</key>
@@ -268,9 +268,9 @@
 		<key>debris1.png</key>
 		<dict>
 			<key>x</key>
-			<real>736</real>
+			<real>826</real>
 			<key>y</key>
-			<real>446</real>
+			<real>317</real>
 			<key>width</key>
 			<real>104</real>
 			<key>height</key>
@@ -288,9 +288,9 @@
 		<key>debris2.png</key>
 		<dict>
 			<key>x</key>
-			<real>736</real>
+			<real>826</real>
 			<key>y</key>
-			<real>461</real>
+			<real>332</real>
 			<key>width</key>
 			<real>104</real>
 			<key>height</key>
@@ -308,7 +308,7 @@
 		<key>debris3.png</key>
 		<dict>
 			<key>x</key>
-			<real>842</real>
+			<real>736</real>
 			<key>y</key>
 			<real>446</real>
 			<key>width</key>
@@ -328,7 +328,7 @@
 		<key>debris4.png</key>
 		<dict>
 			<key>x</key>
-			<real>842</real>
+			<real>736</real>
 			<key>y</key>
 			<real>461</real>
 			<key>width</key>
@@ -368,7 +368,7 @@
 		<key>fire.png</key>
 		<dict>
 			<key>x</key>
-			<real>705</real>
+			<real>606</real>
 			<key>y</key>
 			<real>131</real>
 			<key>width</key>
@@ -388,9 +388,9 @@
 		<key>shielder.png</key>
 		<dict>
 			<key>x</key>
-			<real>955</real>
+			<real>980</real>
 			<key>y</key>
-			<real>131</real>
+			<real>168</real>
 			<key>width</key>
 			<real>39</real>
 			<key>height</key>
@@ -488,7 +488,7 @@
 		<key>ship-mini-boost2.png</key>
 		<dict>
 			<key>x</key>
-			<real>671</real>
+			<real>572</real>
 			<key>y</key>
 			<real>131</real>
 			<key>width</key>

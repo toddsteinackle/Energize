@@ -55,27 +55,6 @@
         [self initLevel];
     }
 
-    // Gesture Recognizers
-    swipeLeftGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
-    swipeLeftGestureRecognizer.direction = UISwipeGestureRecognizerDirectionLeft;
-    swipeLeftGestureRecognizer.numberOfTouchesRequired = 1;
-    [self addGestureRecognizer:swipeLeftGestureRecognizer];
-
-    swipeRightGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
-    swipeRightGestureRecognizer.direction = UISwipeGestureRecognizerDirectionRight;
-    swipeRightGestureRecognizer.numberOfTouchesRequired = 1;
-    [self addGestureRecognizer:swipeRightGestureRecognizer];
-
-    swipeUpGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
-    swipeUpGestureRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
-    swipeUpGestureRecognizer.numberOfTouchesRequired = 1;
-    [self addGestureRecognizer:swipeUpGestureRecognizer];
-
-    swipeDownGestureRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipes:)];
-    swipeDownGestureRecognizer.direction = UISwipeGestureRecognizerDirectionDown;
-    swipeDownGestureRecognizer.numberOfTouchesRequired = 1;
-    [self addGestureRecognizer:swipeDownGestureRecognizer];
-
     return self;
 }
 
@@ -83,10 +62,6 @@
     [guardians release];
     [cubes release];
     [ship release];
-    [swipeLeftGestureRecognizer release];
-    [swipeRightGestureRecognizer release];
-    [swipeUpGestureRecognizer release];
-    [swipeDownGestureRecognizer release];
     [super dealloc];
 }
 
@@ -265,7 +240,56 @@
 
 #pragma mark -
 #pragma mark handle input
--(void)touchesEnded:(NSSet*)touches withEvent:(UIEvent*)event {
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+
+}
+
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
+    if (ship.state != EntityState_Transporting) {
+        if (ship.state == EntityState_Idle) {
+            ship.state = EntityState_Alive;
+        }
+    }
+
+    UITouch *aTouch = [touches anyObject];
+    CGPoint loc = [aTouch locationInView:self];
+    CGPoint prevloc = [aTouch previousLocationInView:self];
+
+    float deltaX = loc.x - prevloc.x;
+    float deltaY = loc.y - prevloc.y;
+
+    float abs_dx = fabs(deltaX);
+    float abs_dy = fabs(deltaY);
+
+#ifdef INPUT_DEBUG
+    NSLog(@"loc.x -- %f prevloc.x -- %f deltaX -- %f", loc.x, prevloc.x, deltaX);
+    NSLog(@"loc.y -- %f prevloc.y -- %f deltaY -- %f", loc.y, prevloc.y, deltaY);
+#endif
+
+    const float DRAG_MIN = 5.0f;
+
+    if (abs_dx > DRAG_MIN || abs_dy > DRAG_MIN) {
+        if (deltaX > 0 && abs_dx > abs_dy) {
+            ship.direction = ship_right;
+            return;
+        }
+        if (deltaX < 0 && abs_dx > abs_dy) {
+            ship.direction = ship_left;
+            return;
+        }
+        if (deltaY < 0 && abs_dy > abs_dx) {
+            ship.direction = ship_up;
+            return;
+        }
+        if (deltaY > 0 && abs_dy > abs_dx) {
+            ship.direction = ship_down;
+            return;
+        }
+    }
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+
     UITouch* touch = [touches anyObject];
 #ifdef INPUT_DEBUG
     CGPoint loc = [touch locationInView:self];
@@ -279,7 +303,7 @@
 
 #pragma mark SceneState_Running
         case SceneState_Running:
-            if (numTaps == 2) {
+            if (numTaps == 1) {
                 if (ship.state != EntityState_Transporting) {
                     ship.isThrusting = !ship.isThrusting;
                     if (ship.state == EntityState_Idle) {
@@ -296,46 +320,10 @@
         default:
             break;
     }
+
 }
 
-- (void)handleSwipes:(UISwipeGestureRecognizer *)paramSender {
-
-    switch (sceneState) {
-#pragma mark SceneState_TransitionIn
-        case SceneState_TransitionIn:
-            break;
-
-#pragma mark SceneState_Running
-        case SceneState_Running:
-            if (ship.state != EntityState_Transporting) {
-                if (ship.state == EntityState_Idle) {
-                    ship.state = EntityState_Alive;
-                }
-            }
-
-            switch (paramSender.direction) {
-                case UISwipeGestureRecognizerDirectionDown:
-                    ship.direction = ship_down;
-                    break;
-                case UISwipeGestureRecognizerDirectionUp:
-                    ship.direction = ship_up;
-                    break;
-                case UISwipeGestureRecognizerDirectionLeft:
-                    ship.direction = ship_left;
-                    break;
-                case UISwipeGestureRecognizerDirectionRight:
-                    ship.direction = ship_right;
-                    break;
-
-                default:
-                    break;
-            }
-            break;
-
-        default:
-            break;
-    }
-
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
 
 }
 
