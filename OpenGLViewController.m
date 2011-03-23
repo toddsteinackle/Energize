@@ -28,6 +28,7 @@
         pauseMenu.callingController = self;
         glView = [[GLView alloc] initWithFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT)];
         self.view = glView;
+        appDelegate.glView = glView;
         glView.viewController = self;
     }
     return self;

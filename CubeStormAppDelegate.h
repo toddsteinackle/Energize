@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @class CubeStormViewController;
+@class GLView;
 
 @interface CubeStormAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
     CubeStormViewController *viewController;
     UIViewController *currentViewController;
+    GLView *glView;
     BOOL gameCenterAvailable;
     BOOL ios4orGreater;
 
@@ -52,7 +54,7 @@
     CGFloat gridStartingX;
     CGFloat gridStartingY;
 
-    CGPoint gridCoordinates[63];
+    CGPoint gridCoordinates[7][9];
 
 
 #ifdef FRAME_COUNTER
@@ -77,6 +79,7 @@
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet CubeStormViewController *viewController;
 @property (nonatomic, retain) IBOutlet UIViewController *currentViewController;
+@property (nonatomic, retain) GLView *glView;
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;
 @property (nonatomic) NSInteger animationFrameInterval;
 @property (readonly, nonatomic) BOOL gameCenterAvailable;
@@ -121,7 +124,7 @@
 - (void)authenticateLocalPlayer;
 - (void)registerForAuthenticationNotification;
 - (void)authenticationChanged;
-- (CGPoint)getGridCoordinates:(int)index;
+- (CGPoint)getGridCoordinates:(int)row:(int)col;
 - (void)calcGridCoordinates;
 
 @end

@@ -11,6 +11,9 @@
 
 @interface Cube : AbstractEntity {
 
+    CGPoint collisionBox;
 }
+
+@property (nonatomic, readonly) CGPoint collisionBox;
 
 @end

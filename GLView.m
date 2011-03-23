@@ -28,6 +28,7 @@
 @implementation GLView
 
 @synthesize viewController;
+@synthesize cubeCount;
 
 #pragma mark -
 #pragma mark init
@@ -47,18 +48,11 @@
         }
 
         guardians = [[NSMutableArray alloc] init];
-
         cubes = [[NSMutableArray alloc] init];
-        for (int i = 1; i < 63; ++i) {
-            Cube *c = [[Cube alloc] initWithPixelLocation:CGPointMake([appDelegate getGridCoordinates:i].x, [appDelegate getGridCoordinates:i].y)];
-            [cubes addObject:c];
-            [c release];
-        }
-
-        ship = [[Ship alloc] initWithPixelLocation:CGPointMake([appDelegate getGridCoordinates:0].x-appDelegate.SHIP_STARTING_X_OFFSET,
-                                                               [appDelegate getGridCoordinates:0].y-appDelegate.SHIP_STARTING_Y_OFFSET)];
+        ship = [[Ship alloc] initWithPixelLocation:CGPointMake(0,0)];
 
         [self initGuardians];
+        [self initLevel];
     }
 
     // Gesture Recognizers
@@ -94,6 +88,63 @@
     [swipeUpGestureRecognizer release];
     [swipeDownGestureRecognizer release];
     [super dealloc];
+}
+
+- (void)initLevel {
+
+    // [row][col]
+//    char levelMap[7][9] = {
+//        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+//    };
+
+    char levelMap[7][9] = {
+        { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '},
+        { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
+        { 'c', ' ', 'c', ' ', ' ', ' ', 'c', ' ', 'c'},
+        { 'c', ' ', 'c', ' ', 's', ' ', 'c', ' ', 'c'},
+        { 'c', ' ', 'c', ' ', ' ', ' ', 'c', ' ', 'c'},
+        { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
+        { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '}
+    };
+
+    cubeCount = 0;
+
+    for (int i = 0; i < 7; ++i) {
+        for (int j = 0; j < 9; ++j) {
+#ifdef GRID_DEBUG
+            NSLog(@"initLevel"); int k = 0;
+            NSLog(@"%d: %c", k++, levelMap[i][j]);
+#endif
+            char c = levelMap[i][j];
+            Cube *cube;
+            switch (c) {
+                case 's':
+                    ship.pixelLocation = CGPointMake([appDelegate getGridCoordinates:i:j].x-appDelegate.SHIP_STARTING_X_OFFSET,
+                                                     [appDelegate getGridCoordinates:i:j].y-appDelegate.SHIP_STARTING_Y_OFFSET);
+                    break;
+
+                case 'c':
+                    cube = [[Cube alloc] initWithPixelLocation:CGPointMake([appDelegate getGridCoordinates:i:j].x,
+                                                                           [appDelegate getGridCoordinates:i:j].y)];
+                    [cubes addObject:cube];
+                    [cube release];
+                    ++cubeCount;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+#ifdef GAMEPLAY_DEBUG
+    NSLog(@"starting cubeCount -- %i", cubeCount);
+#endif
 }
 
 - (void)initGuardians {
@@ -165,6 +216,9 @@
 
             for (Cube *c in cubes) {
                 [c updateWithDelta:aDelta];
+                if (c.state == EntityState_Alive) {
+                    [ship checkForCollisionWithCube:c];
+                }
             }
 
             [ship updateWithDelta:aDelta];

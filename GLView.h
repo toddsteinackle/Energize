@@ -46,12 +46,15 @@ typedef enum {
     NSMutableArray *guardians;
     NSMutableArray *cubes;
     Ship *ship;
+    int cubeCount;
 
 }
 
 @property (nonatomic, retain) OpenGLViewController *viewController;
+@property (nonatomic, assign) int cubeCount;
 
 - (void)initGuardians;
 - (void)handleSwipes:(UISwipeGestureRecognizer *)paramSender;
+- (void)initLevel;
 
 @end

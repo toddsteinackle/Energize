@@ -15,6 +15,8 @@ typedef enum {
     ship_left
 } shipDirection;
 
+@class Cube;
+
 @interface Ship : AbstractEntity {
 
     Animation *teleporting;
@@ -37,5 +39,6 @@ typedef enum {
 @property (nonatomic, assign) bool isThrusting;
 
 - (void)movementWithDelta:(float)aDelta;
+- (void)checkForCollisionWithCube:(Cube *)cube;
 
 @end

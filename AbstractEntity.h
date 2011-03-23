@@ -17,6 +17,7 @@ typedef enum {
     EntityState_Idle,
     EntityState_Transporting,
     EntityState_Alive,
+    EntityState_Warping,
 } EntityState;
 
 @interface AbstractEntity : NSObject <NSCoding> {

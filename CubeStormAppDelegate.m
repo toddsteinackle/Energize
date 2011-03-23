@@ -28,6 +28,7 @@ BOOL isGameCenterAvailable() {
 @synthesize window;
 @synthesize viewController;
 @synthesize currentViewController;
+@synthesize glView;
 @synthesize animating;
 @dynamic animationFrameInterval;
 @synthesize gameCenterAvailable;
@@ -64,21 +65,20 @@ BOOL isGameCenterAvailable() {
 #pragma mark -
 #pragma mark Grid Coordinates
 
-- (CGPoint)getGridCoordinates:(int)index {
-    return gridCoordinates[index];
+- (CGPoint)getGridCoordinates:(int)row:(int)col {
+    return gridCoordinates[row][col];
 }
 
 - (void)calcGridCoordinates {
     gridStartingX = gridStartingX * widthScaleFactor;
     gridStartingY = gridStartingY * heightScaleFactor;
-    CGFloat yOut;
-    int k = 0;
+    CGFloat y;
     CGPoint coords;
-    for (int j = 0; j < 7; ++j) {
-        yOut = gridStartingY+(j*80*heightScaleFactor);
-        for (int i = 0; i < 9; ++i) {
-            coords = CGPointMake(gridStartingX+(i*80*widthScaleFactor), yOut);
-            gridCoordinates[k++] = coords;
+    for (int i = 0; i < 7; ++i) {
+        y = gridStartingY-(i*80*heightScaleFactor);
+        for (int j = 0; j < 9; ++j) {
+            coords = CGPointMake(gridStartingX+(j*80*widthScaleFactor), y);
+            gridCoordinates[i][j] = coords;
         }
     }
 }
@@ -218,10 +218,10 @@ BOOL isGameCenterAvailable() {
 
     SHIP_WIDTH = 41;
     SHIP_HEIGHT = 41;
-    SHIP_SPEED_HORIZONTAL = 100;
-    SHIP_SPEED_VERTICAL = 100;
-    SHIP_TURBO_SPEED_HORIZONTAL = 200;
-    SHIP_TURBO_SPEED_VERTICAL = 200;
+    SHIP_SPEED_HORIZONTAL = 125;
+    SHIP_SPEED_VERTICAL = 125;
+    SHIP_TURBO_SPEED_HORIZONTAL = 225;
+    SHIP_TURBO_SPEED_VERTICAL = 225;
     SHIP_STARTING_X_OFFSET = 20;
     SHIP_STARTING_Y_OFFSET = 20;
 
@@ -240,7 +240,7 @@ BOOL isGameCenterAvailable() {
     SHIP_BOTTOM_BOUND = GUARDIAN_BOTTOM_BASE + GUARDIAN_HEIGHT + ship_width_padding;
 
     gridStartingX = 160;
-    gridStartingY = 132;
+    gridStartingY = 612;
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         SCREEN_WIDTH = 1024;

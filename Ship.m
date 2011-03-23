@@ -11,6 +11,7 @@
 #import "SoundManager.h"
 #import "Animation.h"
 #import "CubeStormAppDelegate.h"
+#import "Cube.h"
 
 
 @implementation Ship
@@ -73,12 +74,17 @@
               animationDelay:delay numFrames:frames];
 
     }
+    width = 41;
     animation = teleporting;
     animation.type = kAnimationType_Once;
     state = EntityState_Transporting;
     currentSpeed = 0;
     direction = ship_up;
     isThrusting = FALSE;
+    collisionWidth = appDelegate.widthScaleFactor * width *.95;
+    collisionHeight = appDelegate.heightScaleFactor * height;
+    collisionXOffset = ((appDelegate.widthScaleFactor * width) - collisionWidth) / 2;
+    collisionYOffset = ((appDelegate.heightScaleFactor * height) - collisionHeight) / 2;
     return self;
 }
 
@@ -192,9 +198,12 @@
                         break;
                 }
             }
-
             [self movementWithDelta:aDelta];
-
+            if (appDelegate.glView.cubeCount == 0) {
+                animation = warp;
+                animation.type = kAnimationType_Once;
+                state = EntityState_Warping;
+            }
             break;
 
         default:
@@ -209,6 +218,22 @@
     [animation renderAtPoint:CGPointMake(pixelLocation.x, pixelLocation.y)
                        scale:Scale2fMake(scaleWidth, scaleHeight)
                     rotation:rotationAngle];
+
+}
+
+- (void)checkForCollisionWithCube:(Cube *)cube {
+    if ((pixelLocation.y + collisionYOffset >= cube.collisionBox.y + cube.collisionYOffset + cube.collisionHeight) ||
+        (pixelLocation.x + collisionXOffset >= cube.collisionBox.x + cube.collisionXOffset + cube.collisionWidth) ||
+        (cube.collisionBox.y + cube.collisionYOffset >= pixelLocation.y + collisionYOffset + collisionHeight) ||
+        (cube.collisionBox.x + cube.collisionXOffset >= pixelLocation.x + collisionXOffset + collisionWidth)) {
+        return;
+    }
+    cube.state = EntityState_Idle;
+    appDelegate.glView.cubeCount--;
+#ifdef GAMEPLAY_DEBUG
+    NSLog(@"cubeCount -- %i", appDelegate.glView.cubeCount);
+#endif
+
 }
 
 - (void)checkForCollisionWithEntity:(AbstractEntity *)otherEntity {
