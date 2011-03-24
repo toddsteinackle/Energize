@@ -43,6 +43,9 @@ typedef enum {
     Ship *ship;
     int cubeCount;
 
+    CGFloat drag_min_x;
+    CGFloat drag_min_y;
+
 }
 
 @property (nonatomic, retain) OpenGLViewController *viewController;

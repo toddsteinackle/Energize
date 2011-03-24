@@ -39,6 +39,9 @@
     sceneState = SceneState_TransitionIn;
     lastTimeInLoop = 0;
 
+    drag_min_x = appDelegate.DRAG_MIN_X;
+    drag_min_y = appDelegate.DRAG_MIN_Y;
+
     if ((self = [super initWithFrame:frame])) {
         sharedImageRenderManager = [ImageRenderManager sharedImageRenderManager];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -255,20 +258,18 @@
     CGPoint loc = [aTouch locationInView:self];
     CGPoint prevloc = [aTouch previousLocationInView:self];
 
-    float deltaX = loc.x - prevloc.x;
-    float deltaY = loc.y - prevloc.y;
+    CGFloat deltaX = loc.x - prevloc.x;
+    CGFloat deltaY = loc.y - prevloc.y;
 
-    float abs_dx = fabs(deltaX);
-    float abs_dy = fabs(deltaY);
+    CGFloat abs_dx = fabs(deltaX);
+    CGFloat abs_dy = fabs(deltaY);
 
 #ifdef INPUT_DEBUG
     NSLog(@"loc.x -- %f prevloc.x -- %f deltaX -- %f", loc.x, prevloc.x, deltaX);
     NSLog(@"loc.y -- %f prevloc.y -- %f deltaY -- %f", loc.y, prevloc.y, deltaY);
 #endif
 
-    const float DRAG_MIN = 5.0f;
-
-    if (abs_dx > DRAG_MIN || abs_dy > DRAG_MIN) {
+    if (abs_dx > drag_min_x || abs_dy > drag_min_y) {
         if (deltaX > 0 && abs_dx > abs_dy) {
             ship.direction = ship_right;
             return;
@@ -303,7 +304,7 @@
 
 #pragma mark SceneState_Running
         case SceneState_Running:
-            if (numTaps == 1) {
+            if (numTaps == 2) {
                 if (ship.state != EntityState_Transporting) {
                     ship.isThrusting = !ship.isThrusting;
                     if (ship.state == EntityState_Idle) {

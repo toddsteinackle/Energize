@@ -61,6 +61,8 @@ BOOL isGameCenterAvailable() {
 @synthesize SHIP_STARTING_Y_OFFSET;
 @synthesize widthScaleFactor;
 @synthesize heightScaleFactor;
+@synthesize DRAG_MIN_X;
+@synthesize DRAG_MIN_Y;
 
 #pragma mark -
 #pragma mark Grid Coordinates
@@ -242,6 +244,9 @@ BOOL isGameCenterAvailable() {
     gridStartingX = 160;
     gridStartingY = 612;
 
+    DRAG_MIN_X = 5;
+    DRAG_MIN_Y = 5;
+
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         SCREEN_WIDTH = 1024;
         SCREEN_HEIGHT = 768;
@@ -287,6 +292,8 @@ BOOL isGameCenterAvailable() {
         SHIP_BOTTOM_BOUND = GUARDIAN_BOTTOM_BASE + GUARDIAN_HEIGHT + ship_height_padding;
         SHIP_STARTING_X_OFFSET = SHIP_STARTING_X_OFFSET * widthScaleFactor;
         SHIP_STARTING_Y_OFFSET = SHIP_STARTING_Y_OFFSET * heightScaleFactor;
+        DRAG_MIN_X = DRAG_MIN_X * widthScaleFactor;
+        DRAG_MIN_Y = DRAG_MIN_Y * heightScaleFactor;
     }
 
     if (isGameCenterAvailable()) {

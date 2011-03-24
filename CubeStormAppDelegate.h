@@ -48,6 +48,9 @@
     CGFloat SHIP_STARTING_X_OFFSET;
     CGFloat SHIP_STARTING_Y_OFFSET;
 
+    CGFloat DRAG_MIN_X;
+    CGFloat DRAG_MIN_Y;
+
     float widthScaleFactor;
     float heightScaleFactor;
 
@@ -116,6 +119,9 @@
 
 @property (readonly, nonatomic) float widthScaleFactor;
 @property (readonly, nonatomic) float heightScaleFactor;
+
+@property (readonly, nonatomic) CGFloat DRAG_MIN_X;
+@property (readonly, nonatomic) CGFloat DRAG_MIN_Y;
 
 - (void)startAnimation;
 - (void)stopAnimation;
