@@ -23,8 +23,10 @@
 @class Ship;
 
 typedef enum {
-    SceneState_TransitionIn,
     SceneState_Running,
+    SceneState_GameBegin,
+    SceneState_GuardianTransport,
+    SceneState_LevelPauseAndInit,
 } SceneState;
 
 @interface GLView : GLESGameState {
@@ -42,6 +44,7 @@ typedef enum {
     NSMutableArray *cubes;
     Ship *ship;
     int cubeCount;
+    int currentLevel, numberOfLevels;
 
     CGFloat drag_min_x;
     CGFloat drag_min_y;
@@ -50,8 +53,10 @@ typedef enum {
 
 @property (nonatomic, retain) OpenGLViewController *viewController;
 @property (nonatomic, assign) int cubeCount;
+@property (nonatomic, assign) SceneState sceneState;
+@property (nonatomic, assign) double lastTimeInLoop;
 
 - (void)initGuardians;
-- (void)initLevel;
+- (void)initLevel:(int)level;
 
 @end

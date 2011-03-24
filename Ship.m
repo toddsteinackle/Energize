@@ -206,6 +206,14 @@
             }
             break;
 
+        case EntityState_Warping:
+            if (animation.state == kAnimationState_Stopped) {
+                appDelegate.glView.sceneState = SceneState_LevelPauseAndInit;
+                appDelegate.glView.lastTimeInLoop = 0;
+            }
+            break;
+
+
         default:
             break;
     }
@@ -228,7 +236,7 @@
         (cube.collisionBox.x + cube.collisionXOffset >= pixelLocation.x + collisionXOffset + collisionWidth)) {
         return;
     }
-    cube.state = EntityState_Idle;
+    cube.state = EntityState_Dead;
     appDelegate.glView.cubeCount--;
 #ifdef GAMEPLAY_DEBUG
     NSLog(@"cubeCount -- %i", appDelegate.glView.cubeCount);

@@ -29,6 +29,8 @@
 
 @synthesize viewController;
 @synthesize cubeCount;
+@synthesize sceneState;
+@synthesize lastTimeInLoop;
 
 #pragma mark -
 #pragma mark init
@@ -36,7 +38,7 @@
 
     appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
 
-    sceneState = SceneState_TransitionIn;
+    sceneState = SceneState_GameBegin;
     lastTimeInLoop = 0;
 
     drag_min_x = appDelegate.DRAG_MIN_X;
@@ -52,10 +54,11 @@
 
         guardians = [[NSMutableArray alloc] init];
         cubes = [[NSMutableArray alloc] init];
-        ship = [[Ship alloc] initWithPixelLocation:CGPointMake(0,0)];
+
+        currentLevel = 0;
+        numberOfLevels = 2;
 
         [self initGuardians];
-        [self initLevel];
     }
 
     return self;
@@ -68,10 +71,12 @@
     [super dealloc];
 }
 
-- (void)initLevel {
+- (void)initLevel:(int)level {
+
+    [cubes removeAllObjects];
+    [ship release];
 
     // [row][col]
-//    char levelMap[7][9] = {
 //        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
 //        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
 //        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -79,37 +84,59 @@
 //        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
 //        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
 //        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
-//    };
 
-    char levelMap[7][9] = {
-        { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '},
-        { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
-        { 'c', ' ', 'c', ' ', ' ', ' ', 'c', ' ', 'c'},
-        { 'c', ' ', 'c', ' ', 's', ' ', 'c', ' ', 'c'},
-        { 'c', ' ', 'c', ' ', ' ', ' ', 'c', ' ', 'c'},
-        { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
-        { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '}
+    char levelArray[][7][9] = {
+        {
+            // 0
+            { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '},
+            { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
+            { 'c', ' ', 'c', ' ', ' ', ' ', 'c', ' ', 'c'},
+            { 'c', ' ', 'c', ' ', 's', ' ', 'c', ' ', 'c'},
+            { 'c', ' ', 'c', ' ', ' ', ' ', 'c', ' ', 'c'},
+            { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
+            { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '}
+
+//            { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
+//            { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
+//            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//            { ' ', ' ', ' ', ' ', 's', ' ', ' ', ' ', ' '},
+//            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+//            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+        },
+
+        {
+            // 1
+            { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
+            { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
+            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            { ' ', ' ', ' ', ' ', 's', ' ', ' ', ' ', ' '},
+            { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
+            { ' ', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
+            { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '}
+        },
     };
 
     cubeCount = 0;
-
     for (int i = 0; i < 7; ++i) {
         for (int j = 0; j < 9; ++j) {
 #ifdef GRID_DEBUG
             NSLog(@"initLevel"); int k = 0;
-            NSLog(@"%d: %c", k++, levelMap[i][j]);
+            NSLog(@"%d: %c", k++, levelArray[level][i][j]);
 #endif
-            char c = levelMap[i][j];
+            char c = levelArray[level][i][j];
             Cube *cube;
             switch (c) {
                 case 's':
-                    ship.pixelLocation = CGPointMake([appDelegate getGridCoordinates:i:j].x-appDelegate.SHIP_STARTING_X_OFFSET,
-                                                     [appDelegate getGridCoordinates:i:j].y-appDelegate.SHIP_STARTING_Y_OFFSET);
+                    ship = [[Ship alloc] initWithPixelLocation:CGPointMake([appDelegate getGridCoordinates:i:j].x-appDelegate.SHIP_STARTING_X_OFFSET,
+                                                                           [appDelegate getGridCoordinates:i:j].y-appDelegate.SHIP_STARTING_Y_OFFSET)];
                     break;
 
                 case 'c':
                     cube = [[Cube alloc] initWithPixelLocation:CGPointMake([appDelegate getGridCoordinates:i:j].x,
-                                                                           [appDelegate getGridCoordinates:i:j].y)];
+                                                                           [appDelegate getGridCoordinates:i:j].y)
+                                             andAppearingDelay:0.5+RANDOM_0_TO_1()];
+
                     [cubes addObject:cube];
                     [cube release];
                     ++cubeCount;
@@ -169,14 +196,54 @@
 
     switch (sceneState) {
 
-#pragma mark SceneState_TransitionIn
-        case SceneState_TransitionIn:
+#pragma mark SceneState_GameBegin
+        case SceneState_GameBegin:
 
             [starfield updateWithDelta:aDelta];
             if (CACurrentMediaTime() - lastTimeInLoop < 0.5) {
                 return;
             }
             if (lastTimeInLoop) {
+                sceneState = SceneState_GuardianTransport;
+                lastTimeInLoop = 0;
+            }
+            lastTimeInLoop = CACurrentMediaTime();
+
+            break;
+
+#pragma mark SceneState_GuardianTransport
+        case SceneState_GuardianTransport:
+
+            [starfield updateWithDelta:aDelta];
+            for (Guardian *g in guardians) {
+                [g updateWithDelta:aDelta];
+            }
+            if (CACurrentMediaTime() - lastTimeInLoop < 2.25) {
+                return;
+            }
+            if (lastTimeInLoop) {
+                [self initLevel:currentLevel++];
+                sceneState = SceneState_Running;
+                lastTimeInLoop = 0;
+            }
+            lastTimeInLoop = CACurrentMediaTime();
+            break;
+
+#pragma mark SceneState_LevelPauseAndInit
+        case SceneState_LevelPauseAndInit:
+            [starfield updateWithDelta:aDelta];
+
+            for (Guardian *g in guardians) {
+                [g updateWithDelta:aDelta];
+            }
+            if (CACurrentMediaTime() - lastTimeInLoop < 1.0) {
+                return;
+            }
+            if (lastTimeInLoop) {
+                if (currentLevel == numberOfLevels) {
+                    currentLevel = 0;
+                }
+                [self initLevel:currentLevel++];
                 sceneState = SceneState_Running;
                 lastTimeInLoop = 0;
             }
@@ -215,22 +282,38 @@
 
     switch (sceneState) {
 
-#pragma mark SceneState_TransitionIn
-        case SceneState_TransitionIn:
+#pragma mark SceneState_GameBegin
+        case SceneState_GameBegin:
             [starfield renderParticles];
+            break;
+
+#pragma mark SceneState_GuardianTransport
+        case SceneState_GuardianTransport:
+            [starfield renderParticles];
+            for (Guardian *g in guardians) {
+                [g render];
+            }
+            [sharedImageRenderManager renderImages];
+            break;
+
+#pragma mark SceneState_LevelPauseAndInit
+        case SceneState_LevelPauseAndInit:
+            [starfield renderParticles];
+            for (Guardian *g in guardians) {
+                [g render];
+            }
+            [sharedImageRenderManager renderImages];
             break;
 
 #pragma mark SceneState_Running
         case SceneState_Running:
             [starfield renderParticles];
-
             for (Guardian *g in guardians) {
                 [g render];
             }
             for (Cube *c in cubes) {
                 [c render];
             }
-
             [ship render];
             [sharedImageRenderManager renderImages];
             break;
@@ -248,45 +331,54 @@
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
-    if (ship.state != EntityState_Transporting) {
-        if (ship.state == EntityState_Idle) {
-            ship.state = EntityState_Alive;
-        }
-    }
 
-    UITouch *aTouch = [touches anyObject];
-    CGPoint loc = [aTouch locationInView:self];
-    CGPoint prevloc = [aTouch previousLocationInView:self];
+    switch (sceneState) {
+        case SceneState_Running:
+            if (ship.state != EntityState_Transporting) {
+                if (ship.state == EntityState_Idle) {
+                    ship.state = EntityState_Alive;
+                }
+            }
 
-    CGFloat deltaX = loc.x - prevloc.x;
-    CGFloat deltaY = loc.y - prevloc.y;
+            UITouch *aTouch = [touches anyObject];
+            CGPoint loc = [aTouch locationInView:self];
+            CGPoint prevloc = [aTouch previousLocationInView:self];
 
-    CGFloat abs_dx = fabs(deltaX);
-    CGFloat abs_dy = fabs(deltaY);
+            CGFloat deltaX = loc.x - prevloc.x;
+            CGFloat deltaY = loc.y - prevloc.y;
+
+            CGFloat abs_dx = fabs(deltaX);
+            CGFloat abs_dy = fabs(deltaY);
 
 #ifdef INPUT_DEBUG
-    NSLog(@"loc.x -- %f prevloc.x -- %f deltaX -- %f", loc.x, prevloc.x, deltaX);
-    NSLog(@"loc.y -- %f prevloc.y -- %f deltaY -- %f", loc.y, prevloc.y, deltaY);
+            NSLog(@"loc.x -- %f prevloc.x -- %f deltaX -- %f", loc.x, prevloc.x, deltaX);
+            NSLog(@"loc.y -- %f prevloc.y -- %f deltaY -- %f", loc.y, prevloc.y, deltaY);
 #endif
 
-    if (abs_dx > drag_min_x || abs_dy > drag_min_y) {
-        if (deltaX > 0 && abs_dx > abs_dy) {
-            ship.direction = ship_right;
-            return;
-        }
-        if (deltaX < 0 && abs_dx > abs_dy) {
-            ship.direction = ship_left;
-            return;
-        }
-        if (deltaY < 0 && abs_dy > abs_dx) {
-            ship.direction = ship_up;
-            return;
-        }
-        if (deltaY > 0 && abs_dy > abs_dx) {
-            ship.direction = ship_down;
-            return;
-        }
+            if (abs_dx > drag_min_x || abs_dy > drag_min_y) {
+                if (deltaX > 0 && abs_dx > abs_dy) {
+                    ship.direction = ship_right;
+                    return;
+                }
+                if (deltaX < 0 && abs_dx > abs_dy) {
+                    ship.direction = ship_left;
+                    return;
+                }
+                if (deltaY < 0 && abs_dy > abs_dx) {
+                    ship.direction = ship_up;
+                    return;
+                }
+                if (deltaY > 0 && abs_dy > abs_dx) {
+                    ship.direction = ship_down;
+                    return;
+                }
+            }
+            break;
+
+        default:
+            break;
     }
+
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -298,9 +390,6 @@
 #endif
     NSUInteger numTaps = [touch tapCount];
     switch (sceneState) {
-#pragma mark SceneState_TransitionIn
-        case SceneState_TransitionIn:
-            break;
 
 #pragma mark SceneState_Running
         case SceneState_Running:

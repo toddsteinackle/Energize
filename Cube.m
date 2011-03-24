@@ -18,7 +18,7 @@
 
 @synthesize collisionBox;
 
-- (id)initWithPixelLocation:(CGPoint)aLocation {
+- (id)initWithPixelLocation:(CGPoint)aLocation andAppearingDelay:(float)apDelay {
     self = [super initWithPixelLocation:aLocation];
     if (self != nil) {
         width = 33;
@@ -29,7 +29,7 @@
         animation = [[Animation alloc] init];
         [self setupAnimation:animation spriteSheet:@"cube1.png" animationDelay:delay numFrames:frames];
         animation.type = kAnimationType_Once;
-        state = EntityState_Alive;
+        state = EntityState_Idle;
         collisionWidth = appDelegate.widthScaleFactor * width *.9;
         collisionHeight = appDelegate.heightScaleFactor * height *.9;
         collisionXOffset = ((appDelegate.widthScaleFactor * width) - collisionWidth) / 2;
@@ -37,6 +37,7 @@
 
         collisionBox.x = pixelLocation.x - (appDelegate.widthScaleFactor * width / 2);
         collisionBox.y = pixelLocation.y - (appDelegate.heightScaleFactor * height / 2);
+        appearingDelay = apDelay;
     }
     return self;
 }
@@ -55,7 +56,11 @@
             break;
 
         case EntityState_Idle:
-
+            appearingTimer += aDelta;
+            if (appearingTimer > appearingDelay) {
+                state = EntityState_Alive;
+                appearingTimer = 0;
+            }
             break;
 
 
@@ -79,11 +84,6 @@
                                        scale:Scale2fMake(scaleWidth, scaleHeight)
                                     rotation:rotationAngle];
             break;
-
-        case EntityState_Idle:
-
-            break;
-
 
         default:
             break;

@@ -17,6 +17,7 @@ typedef enum {
     EntityState_Idle,
     EntityState_Transporting,
     EntityState_Alive,
+    EntityState_Dead,
     EntityState_Warping,
 } EntityState;
 

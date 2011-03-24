@@ -12,8 +12,11 @@
 @interface Cube : AbstractEntity {
 
     CGPoint collisionBox;
+    float appearingTimer, appearingDelay;
 }
 
 @property (nonatomic, readonly) CGPoint collisionBox;
+
+- (id)initWithPixelLocation:(CGPoint)aLocation andAppearingDelay:(float)apDelay;
 
 @end
