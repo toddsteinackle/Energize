@@ -165,7 +165,9 @@
     [guardian release];
 
     // top
-    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE, appDelegate.GUARDIAN_TOP_BASE)
+    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE+
+                                                                   appDelegate.GUARDIAN_WIDTH-appDelegate.GUARDIAN_LEFT_BASE,
+                                                                   appDelegate.GUARDIAN_TOP_BASE)
                                            andRotation:180.0f];
     guardian.dx = -appDelegate.GUARDIAN_SPEED_HORIZONTAL;
     guardian.dy = 0;
@@ -174,7 +176,9 @@
     [guardian release];
 
     // left
-    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(appDelegate.GUARDIAN_LEFT_BASE, appDelegate.GUARDIAN_TOP_BASE)
+    guardian = [[Guardian alloc] initWithPixelLocation:CGPointMake(appDelegate.GUARDIAN_LEFT_BASE,
+                                                                   appDelegate.GUARDIAN_TOP_BASE+(41*appDelegate.heightScaleFactor)-
+                                                                   (15*appDelegate.heightScaleFactor))
                                            andRotation:270.0f];
     guardian.dx = 0;
     guardian.dy = appDelegate.GUARDIAN_SPEED_VERTICAL;
