@@ -23,8 +23,8 @@ typedef enum {
     float firingTimer;
     NSMutableArray *fireballs;
     int numberOfFireballs, fireball_counter;
-    bool justFired;
-    int baseFireDelay;
+    bool justFired, launchingTwoFireballs;
+    int baseFireDelay, chanceFor2Fireballs;
     float fireDelay;
 }
 

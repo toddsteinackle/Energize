@@ -25,6 +25,7 @@
         int frames = 8;
         animation = [[Animation alloc] init];
         [self setupAnimation:animation spriteSheet:@"fire.png" animationDelay:delay numFrames:frames];
+        animation.type = kAnimationType_PingPong;
         state = EntityState_Idle;
 
         collisionWidth = appDelegate.widthScaleFactor * width;

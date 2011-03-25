@@ -110,6 +110,7 @@
 
         firingTimer = 0;
         fireball_counter = 0;
+        justFired = launchingTwoFireballs = FALSE;
         fireballs = [[NSMutableArray alloc] init];
         numberOfFireballs = 10;
         for (int i = 0; i < numberOfFireballs; ++i) {
@@ -122,7 +123,8 @@
     switch (appDelegate.glView.currentLevel) {
         case 0:
         case 1:
-            baseFireDelay =  5;
+            baseFireDelay =  20;
+            chanceFor2Fireballs = 2500;
             fireDelay = (arc4random() % baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
             break;
         default:
@@ -151,6 +153,14 @@
 
         case EntityState_Alive:
             [self movementWithDelta:aDelta];
+
+            // the starting and stopping of the animation drives the firing
+            if (animation.currentFrame == 15) {
+                animation.state = kAnimationState_Stopped;
+                animation.currentFrame = 0;
+                launchingTwoFireballs = justFired = FALSE;
+            }
+
             firingTimer += aDelta;
             if (firingTimer > fireDelay) {
                 fireDelay = (arc4random() % baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
@@ -184,16 +194,29 @@
                 animation.state = kAnimationState_Running;
                 firingTimer = 0;
             }
-            if (animation.state == kAnimationState_Running && animation.currentFrame == 14) {
-                if (!justFired) {
-                    [self fire];
-                    justFired = TRUE;
+
+            if (!launchingTwoFireballs) {
+                if (1 == (arc4random() % chanceFor2Fireballs + 1)) {
+                    launchingTwoFireballs = TRUE;
                 }
             }
-            if (animation.currentFrame == 15) {
-                animation.state = kAnimationState_Stopped;
-                animation.currentFrame = 0;
-                justFired = FALSE;
+            if (launchingTwoFireballs) {
+                if (animation.state == kAnimationState_Running && (animation.currentFrame > 7)) {
+                    if (animation.currentFrame == 14) {
+                        justFired = FALSE;
+                    }
+                    if (!justFired) {
+                        [self fire];
+                        justFired = TRUE;
+                    }
+                }
+            } else {
+                if (animation.state == kAnimationState_Running && animation.currentFrame == 14) {
+                    if (!justFired) {
+                        [self fire];
+                        justFired = TRUE;
+                    }
+                }
             }
 
             break;
