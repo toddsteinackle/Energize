@@ -196,6 +196,9 @@
 
 - (void)resetFireballs {
     for (Guardian *g in guardians) {
+        g.firingTimer = 0;
+        g.animation.currentFrame = 15;
+        g.animation.state = kAnimationState_Stopped;
         for (Fireball *f in g.fireballs) {
             f.state = EntityState_Idle;
         }

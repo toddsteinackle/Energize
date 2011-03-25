@@ -29,6 +29,7 @@ typedef enum {
 }
 
 @property (readonly, nonatomic) NSMutableArray *fireballs;
+@property (assign, nonatomic) float firingTimer;
 
 - (id)initWithPixelLocation:(CGPoint)aLocation andRotation:(float)angle;
 - (void)movementWithDelta:(float)aDelta;

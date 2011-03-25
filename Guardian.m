@@ -17,6 +17,7 @@
 @implementation Guardian
 
 @synthesize fireballs;
+@synthesize firingTimer;
 
 - (void)movementWithDelta:(float)aDelta {
     pixelLocation.x += dx * aDelta;
@@ -112,7 +113,7 @@
         fireball_counter = 0;
         justFired = launchingTwoFireballs = FALSE;
         fireballs = [[NSMutableArray alloc] init];
-        numberOfFireballs = 10;
+        numberOfFireballs = 20;
         for (int i = 0; i < numberOfFireballs; ++i) {
             Fireball *f = [[Fireball alloc] initWithPixelLocation:CGPointMake(0, 0)];
             [fireballs addObject:f];
@@ -123,7 +124,7 @@
     switch (appDelegate.glView.currentLevel) {
         case 0:
         case 1:
-            baseFireDelay =  20;
+            baseFireDelay =  15;
             chanceFor2Fireballs = 2500;
             fireDelay = (arc4random() % baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
             break;
@@ -228,6 +229,16 @@
 
 - (void)fire {
     Fireball *f = [fireballs objectAtIndex:fireball_counter];
+    if (f.state == EntityState_Alive) {
+        f = [[Fireball alloc] initWithPixelLocation:CGPointMake(0, 0)];
+        [fireballs addObject:f];
+        [f release];
+#ifdef GAMEPLAY_DEBUG
+        NSLog(@"fireball_counter: %i", fireball_counter);
+        NSLog(@"Attempt to launch fireball while still active from previous launch.");
+        NSLog(@"allocating new fireball, fireballs count now: %i", [fireballs count]);
+#endif
+    }
     f.state = EntityState_Alive;
     switch (zone) {
         case guardian_top:
@@ -257,7 +268,7 @@
         default:
             break;
     }
-    if (++fireball_counter == numberOfFireballs) {
+    if (++fireball_counter == [fireballs count]) {
         fireball_counter = 0;
     }
 }
