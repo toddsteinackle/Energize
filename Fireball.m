@@ -39,19 +39,19 @@
     pixelLocation.x += dx * aDelta;
     pixelLocation.y += dy * aDelta;
 
-    if (dx > 0 && pixelLocation.x > appDelegate.SCREEN_WIDTH) {
+    if (dx > 0 && pixelLocation.x > appDelegate.GUARDIAN_RIGHT_BOUND-appDelegate.widthScaleFactor*width) {
         state = EntityState_Idle;
         return;
     }
-    if (dx < 0 && pixelLocation.x < 0) {
+    if (dx < 0 && pixelLocation.x < appDelegate.GUARDIAN_LEFT_BOUND) {
         state = EntityState_Idle;
         return;
     }
-    if (dy > 0 && pixelLocation.y > appDelegate.SCREEN_HEIGHT) {
+    if (dy > 0 && pixelLocation.y > appDelegate.GUARDIAN_TOP_BOUND-appDelegate.heightScaleFactor*height) {
         state = EntityState_Idle;
         return;
     }
-    if (dy < 0 && pixelLocation.y < 0) {
+    if (dy < 0 && pixelLocation.y < appDelegate.GUARDIAN_BOTTOM_BOUND) {
         state = EntityState_Idle;
         return;
     }
