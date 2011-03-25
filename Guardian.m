@@ -12,6 +12,7 @@
 #import "Animation.h"
 #import "CubeStormAppDelegate.h"
 #import "Fireball.h"
+#import "Global.h"
 
 @implementation Guardian
 
@@ -62,7 +63,7 @@
     if (self != nil) {
         width = 82;
         height = 41;
-        float delay = 0.08f;
+        float delay = 0.04f;
         int frames = 8;
         rotationAngle = angle;
         if (rotationAngle == 0.0f) {
@@ -104,6 +105,9 @@
         animation = teleporting;
         state = EntityState_Transporting;
 
+#pragma mark -
+#pragma mark firing init
+
         firingTimer = 0;
         fireball_counter = 0;
         fireballs = [[NSMutableArray alloc] init];
@@ -114,6 +118,22 @@
             [f release];
         }
     }
+
+    switch (appDelegate.glView.currentLevel) {
+        case 0:
+        case 1:
+            baseFireDelay =  5;
+            fireDelay = (arc4random() % baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
+            break;
+        default:
+            break;
+
+    }
+#ifdef FIRING_DEBUG
+    NSLog(@"firing init");
+    NSLog(@"base: %i", baseFireDelay);
+    NSLog(@"fireDelay: %f", fireDelay);
+#endif
 
     return self;
 }
@@ -131,22 +151,51 @@
 
         case EntityState_Alive:
             [self movementWithDelta:aDelta];
-            if (animation.currentFrame == 15) {
-                animation.state = kAnimationState_Stopped;
-                animation.currentFrame = 0;
-                justFired = FALSE;
-            }
             firingTimer += aDelta;
-            if (firingTimer > 4) {
+            if (firingTimer > fireDelay) {
+                fireDelay = (arc4random() % baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
+#ifdef FIRING_DEBUG
+                switch (zone) {
+                    case guardian_top:
+                        NSLog(@"guardian_top firing");
+                        NSLog(@"base: %i", baseFireDelay);
+                        NSLog(@"fire delay: %f", fireDelay);
+                        break;
+                    case guardian_bottom:
+                        NSLog(@"guardian_bottom firing");
+                        NSLog(@"base: %i", baseFireDelay);
+                        NSLog(@"fire delay: %f", fireDelay);
+                        break;
+                    case guardian_left:
+                        NSLog(@"guardian_left firing");
+                        NSLog(@"base: %i", baseFireDelay);
+                        NSLog(@"fire delay: %f", fireDelay);
+                        break;
+                    case guardian_right:
+                        NSLog(@"guardian_right firing");
+                        NSLog(@"base: %i", baseFireDelay);
+                        NSLog(@"fire delay: %f", fireDelay);
+                        break;
+
+                    default:
+                        break;
+                }
+#endif
                 animation.state = kAnimationState_Running;
                 firingTimer = 0;
             }
-            if (animation.state == kAnimationState_Running && animation.currentFrame == 9) {
+            if (animation.state == kAnimationState_Running && animation.currentFrame == 14) {
                 if (!justFired) {
                     [self fire];
                     justFired = TRUE;
                 }
             }
+            if (animation.currentFrame == 15) {
+                animation.state = kAnimationState_Stopped;
+                animation.currentFrame = 0;
+                justFired = FALSE;
+            }
+
             break;
 
         default:

@@ -31,6 +31,7 @@
 @synthesize cubeCount;
 @synthesize sceneState;
 @synthesize lastTimeInLoop;
+@synthesize currentLevel;
 
 #pragma mark -
 #pragma mark init

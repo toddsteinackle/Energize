@@ -55,6 +55,7 @@ typedef enum {
 @property (nonatomic, assign) int cubeCount;
 @property (nonatomic, assign) SceneState sceneState;
 @property (nonatomic, assign) double lastTimeInLoop;
+@property (nonatomic, readonly) int currentLevel;
 
 - (void)initGuardians;
 - (void)initLevel:(int)level;

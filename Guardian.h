@@ -22,8 +22,10 @@ typedef enum {
     guardianZone zone;
     float firingTimer;
     NSMutableArray *fireballs;
-    int fireball_counter, numberOfFireballs;
+    int numberOfFireballs, fireball_counter;
     bool justFired;
+    int baseFireDelay;
+    float fireDelay;
 }
 
 @property (readonly, nonatomic) NSMutableArray *fireballs;
