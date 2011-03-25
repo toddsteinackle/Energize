@@ -35,6 +35,9 @@
     CGFloat GUARDIAN_SPEED_HORIZONTAL;
     CGFloat GUARDIAN_SPEED_VERTICAL;
 
+    CGFloat FIREBALL_SPEED_HORIZONTAL;
+    CGFloat FIREBALL_SPEED_VERTICAL;
+
     CGFloat SHIP_WIDTH;
     CGFloat SHIP_HEIGHT;
     CGFloat SHIP_SPEED_HORIZONTAL;
@@ -103,6 +106,9 @@
 @property (readonly, nonatomic) CGFloat GUARDIAN_BOTTOM_BOUND;
 @property (readonly, nonatomic) CGFloat GUARDIAN_SPEED_HORIZONTAL;
 @property (readonly, nonatomic) CGFloat GUARDIAN_SPEED_VERTICAL;
+
+@property (readonly, nonatomic) CGFloat FIREBALL_SPEED_HORIZONTAL;
+@property (readonly, nonatomic) CGFloat FIREBALL_SPEED_VERTICAL;
 
 @property (readonly, nonatomic) CGFloat SHIP_WIDTH;
 @property (readonly, nonatomic) CGFloat SHIP_HEIGHT;

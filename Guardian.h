@@ -21,9 +21,15 @@ typedef enum {
     Animation *teleporting;
     guardianZone zone;
     float firingTimer;
+    NSMutableArray *fireballs;
+    int fireball_counter, numberOfFireballs;
+    bool justFired;
 }
+
+@property (readonly, nonatomic) NSMutableArray *fireballs;
 
 - (id)initWithPixelLocation:(CGPoint)aLocation andRotation:(float)angle;
 - (void)movementWithDelta:(float)aDelta;
+- (void)fire;
 
 @end

@@ -63,6 +63,8 @@ BOOL isGameCenterAvailable() {
 @synthesize heightScaleFactor;
 @synthesize DRAG_MIN_X;
 @synthesize DRAG_MIN_Y;
+@synthesize FIREBALL_SPEED_HORIZONTAL;
+@synthesize FIREBALL_SPEED_VERTICAL;
 
 #pragma mark -
 #pragma mark Grid Coordinates
@@ -227,6 +229,9 @@ BOOL isGameCenterAvailable() {
     SHIP_STARTING_X_OFFSET = 20;
     SHIP_STARTING_Y_OFFSET = 20;
 
+    FIREBALL_SPEED_HORIZONTAL = 75;
+    FIREBALL_SPEED_VERTICAL = 75;
+
     CGFloat guardian_width_padding, guardian_height_padding;
     guardian_width_padding = guardian_height_padding = 5;
     GUARDIAN_LEFT_BOUND = GUARDIAN_LEFT_BASE + GUARDIAN_HEIGHT + guardian_width_padding;
@@ -294,6 +299,8 @@ BOOL isGameCenterAvailable() {
         SHIP_STARTING_Y_OFFSET = SHIP_STARTING_Y_OFFSET * heightScaleFactor;
         DRAG_MIN_X = DRAG_MIN_X * widthScaleFactor;
         DRAG_MIN_Y = DRAG_MIN_Y * heightScaleFactor;
+        FIREBALL_SPEED_HORIZONTAL = FIREBALL_SPEED_HORIZONTAL * widthScaleFactor;
+        FIREBALL_SPEED_VERTICAL = FIREBALL_SPEED_VERTICAL * heightScaleFactor;
     }
 
     if (isGameCenterAvailable()) {

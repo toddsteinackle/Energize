@@ -200,6 +200,7 @@
             }
             [self movementWithDelta:aDelta];
             if (appDelegate.glView.cubeCount == 0) {
+                [appDelegate.glView resetFireballs];
                 animation = warp;
                 animation.type = kAnimationType_Once;
                 state = EntityState_Warping;

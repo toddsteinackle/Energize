@@ -13,4 +13,6 @@
 
 }
 
+- (void)movementWithDelta:(float)aDelta;
+
 @end

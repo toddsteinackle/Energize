@@ -191,6 +191,17 @@
 }
 
 #pragma mark -
+#pragma mark game play
+
+- (void)resetFireballs {
+    for (Guardian *g in guardians) {
+        for (Fireball *f in g.fireballs) {
+            f.state = EntityState_Idle;
+        }
+    }
+}
+
+#pragma mark -
 #pragma mark update
 - (void)updateSceneWithDelta:(float)aDelta {
 
@@ -257,6 +268,9 @@
 
             for (Guardian *g in guardians) {
                 [g updateWithDelta:aDelta];
+                for (Fireball *f in g.fireballs) {
+                    [f updateWithDelta:aDelta];
+                }
             }
 
             for (Cube *c in cubes) {
@@ -308,11 +322,14 @@
 #pragma mark SceneState_Running
         case SceneState_Running:
             [starfield renderParticles];
-            for (Guardian *g in guardians) {
-                [g render];
-            }
             for (Cube *c in cubes) {
                 [c render];
+            }
+            for (Guardian *g in guardians) {
+                [g render];
+                for (Fireball *f in g.fireballs) {
+                    [f render];
+                }
             }
             [ship render];
             [sharedImageRenderManager renderImages];

@@ -11,8 +11,11 @@
 #import "SoundManager.h"
 #import "Animation.h"
 #import "CubeStormAppDelegate.h"
+#import "Fireball.h"
 
 @implementation Guardian
+
+@synthesize fireballs;
 
 - (void)movementWithDelta:(float)aDelta {
     pixelLocation.x += dx * aDelta;
@@ -102,7 +105,16 @@
         state = EntityState_Transporting;
 
         firingTimer = 0;
+        fireball_counter = 0;
+        fireballs = [[NSMutableArray alloc] init];
+        numberOfFireballs = 10;
+        for (int i = 0; i < numberOfFireballs; ++i) {
+            Fireball *f = [[Fireball alloc] initWithPixelLocation:CGPointMake(0, 0)];
+            [fireballs addObject:f];
+            [f release];
+        }
     }
+
     return self;
 }
 
@@ -122,16 +134,59 @@
             if (animation.currentFrame == 15) {
                 animation.state = kAnimationState_Stopped;
                 animation.currentFrame = 0;
+                justFired = FALSE;
             }
             firingTimer += aDelta;
             if (firingTimer > 4) {
                 animation.state = kAnimationState_Running;
                 firingTimer = 0;
             }
+            if (animation.state == kAnimationState_Running && animation.currentFrame == 9) {
+                if (!justFired) {
+                    [self fire];
+                    justFired = TRUE;
+                }
+            }
             break;
 
         default:
             break;
+    }
+}
+
+- (void)fire {
+    Fireball *f = [fireballs objectAtIndex:fireball_counter];
+    f.state = EntityState_Alive;
+    switch (zone) {
+        case guardian_top:
+            f.dx = 0;
+            f.dy = -appDelegate.FIREBALL_SPEED_VERTICAL;
+            f.pixelLocation = CGPointMake(pixelLocation.x - (appDelegate.GUARDIAN_WIDTH/2) - (31/2 * appDelegate.widthScaleFactor),
+                                          pixelLocation.y - (appDelegate.GUARDIAN_HEIGHT) - (31/2 * appDelegate.heightScaleFactor));
+            break;
+        case guardian_bottom:
+            f.dx = 0;
+            f.dy = appDelegate.FIREBALL_SPEED_VERTICAL;
+            f.pixelLocation = CGPointMake(pixelLocation.x + (appDelegate.GUARDIAN_WIDTH / 2 - 31/2 * appDelegate.widthScaleFactor),
+                                          pixelLocation.y + (appDelegate.GUARDIAN_HEIGHT - 31 * appDelegate.heightScaleFactor));
+            break;
+        case guardian_left:
+            f.dx = appDelegate.FIREBALL_SPEED_HORIZONTAL;
+            f.dy = 0;
+            f.pixelLocation = CGPointMake(pixelLocation.x + (31/2 * appDelegate.widthScaleFactor),
+                                          pixelLocation.y - (appDelegate.GUARDIAN_WIDTH/2)-(31/2 * appDelegate.heightScaleFactor));
+            break;
+        case guardian_right:
+            f.dx = -appDelegate.FIREBALL_SPEED_HORIZONTAL;
+            f.dy = 0;
+            f.pixelLocation = CGPointMake(pixelLocation.x - (appDelegate.GUARDIAN_HEIGHT + 31/2 * appDelegate.widthScaleFactor),
+                                          pixelLocation.y + (appDelegate.GUARDIAN_WIDTH/2)-(31/2 * appDelegate.heightScaleFactor));
+            break;
+        default:
+            break;
+    }
+    if (++fireball_counter == numberOfFireballs) {
+        fireball_counter = 0;
     }
 }
 
@@ -151,6 +206,7 @@
 - (void)dealloc {
     [firing release];
     [teleporting release];
+    [fireballs release];
     [super dealloc];
 }
 
