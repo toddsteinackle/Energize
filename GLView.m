@@ -131,6 +131,9 @@
                 case 's':
                     ship = [[Ship alloc] initWithPixelLocation:CGPointMake([appDelegate getGridCoordinates:i:j].x-appDelegate.SHIP_STARTING_X_OFFSET,
                                                                            [appDelegate getGridCoordinates:i:j].y-appDelegate.SHIP_STARTING_Y_OFFSET)];
+
+                    startingShipPosition = CGPointMake([appDelegate getGridCoordinates:i:j].x-appDelegate.SHIP_STARTING_X_OFFSET,
+                                                       [appDelegate getGridCoordinates:i:j].y-appDelegate.SHIP_STARTING_Y_OFFSET);
                     break;
 
                 case 'c':
@@ -270,6 +273,31 @@
 
             break;
 
+#pragma mark SceneState_ShipRespawn
+        case SceneState_ShipRespawn:
+            [starfield updateWithDelta:aDelta];
+            for (Guardian *g in guardians) {
+                [g updateWithDelta:aDelta];
+                for (Fireball *f in g.fireballs) {
+                    [f updateWithDelta:aDelta];
+                }
+            }
+            for (Cube *c in cubes) {
+                [c updateWithDelta:aDelta];
+            }
+            if (CACurrentMediaTime() - lastTimeInLoop < 1.0) {
+                return;
+            }
+            if (lastTimeInLoop) {
+                [ship release];
+                ship = [[Ship alloc] initWithPixelLocation:startingShipPosition];
+                sceneState = SceneState_Running;
+                lastTimeInLoop = 0;
+            }
+            lastTimeInLoop = CACurrentMediaTime();
+
+            break;
+
 #pragma mark SceneState_Running
         case SceneState_Running:
             [starfield updateWithDelta:aDelta];
@@ -278,6 +306,9 @@
                 [g updateWithDelta:aDelta];
                 for (Fireball *f in g.fireballs) {
                     [f updateWithDelta:aDelta];
+                    if (f.state == EntityState_Alive) {
+                        [ship checkForCollisionWithEntity:f];
+                    }
                 }
             }
 
@@ -289,6 +320,11 @@
             }
 
             [ship updateWithDelta:aDelta];
+            if (ship.state == EntityState_Dead &&
+                ship.explosion.animation.state == kAnimationState_Stopped) {
+                sceneState = SceneState_ShipRespawn;
+                lastTimeInLoop = 0;
+            }
 
             break;
 
@@ -327,8 +363,11 @@
             [sharedImageRenderManager renderImages];
             break;
 
+
 #pragma mark SceneState_Running
+#pragma mark SceneState_ShipRespawn
         case SceneState_Running:
+        case SceneState_ShipRespawn:
             [starfield renderParticles];
             for (Cube *c in cubes) {
                 [c render];

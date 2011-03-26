@@ -124,8 +124,8 @@
     switch (appDelegate.glView.currentLevel) {
         case 0:
         case 1:
-            baseFireDelay =  15;
-            chanceFor2Fireballs = 2500;
+            baseFireDelay =  5;
+            chanceFor2Fireballs = 2000;
             fireDelay = (arc4random() % baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
             break;
         default:

@@ -16,6 +16,7 @@ typedef enum {
 } shipDirection;
 
 @class Cube;
+@class Explosion;
 
 @interface Ship : AbstractEntity {
 
@@ -33,10 +34,12 @@ typedef enum {
     shipDirection direction;
     bool isThrusting;
     CGFloat currentSpeed;
+    Explosion *explosion;
 }
 
 @property (nonatomic, assign) shipDirection direction;
 @property (nonatomic, assign) bool isThrusting;
+@property (nonatomic, readonly) Explosion *explosion;
 
 - (void)movementWithDelta:(float)aDelta;
 - (void)checkForCollisionWithCube:(Cube *)cube;

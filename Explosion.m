@@ -10,6 +10,7 @@
 #import "GLView.h"
 #import "SoundManager.h"
 #import "Animation.h"
+#import "CubeStormAppDelegate.h"
 
 
 @implementation Explosion
@@ -24,21 +25,33 @@
         int frames = 16;
         animation = [[Animation alloc] init];
         [self setupAnimation:animation spriteSheet:@"explosion.png" animationDelay:delay numFrames:frames];
+        animation.type = kAnimationType_Once;
+        animation.state = kAnimationState_Stopped;
+        state = EntityState_Idle;
     }
     return self;
 }
 
 - (void)updateWithDelta:(GLfloat)aDelta {
     [animation updateWithDelta:aDelta];
+    if (animation.state == kAnimationState_Stopped) {
+        state = EntityState_Idle;
+    }
 }
 
 - (void)render {
 #ifdef COLLISION_DEBUG
     [super render];
 #endif
-    [animation renderAtPoint:CGPointMake(pixelLocation.x, pixelLocation.y)
-                       scale:Scale2fMake(scaleWidth, scaleHeight)
-                    rotation:rotationAngle];
+    switch (state) {
+        case EntityState_Alive:
+            [animation renderAtPoint:CGPointMake(pixelLocation.x, pixelLocation.y)
+                               scale:Scale2fMake(scaleWidth, scaleHeight)
+                            rotation:rotationAngle];
+            break;
+        default:
+            break;
+    }
 }
 
 - (void)checkForCollisionWithEntity:(AbstractEntity *)otherEntity {

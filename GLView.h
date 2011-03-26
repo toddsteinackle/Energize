@@ -27,6 +27,7 @@ typedef enum {
     SceneState_GameBegin,
     SceneState_GuardianTransport,
     SceneState_LevelPauseAndInit,
+    SceneState_ShipRespawn,
 } SceneState;
 
 @interface GLView : GLESGameState {
@@ -48,6 +49,8 @@ typedef enum {
 
     CGFloat drag_min_x;
     CGFloat drag_min_y;
+
+    CGPoint startingShipPosition;
 
 }
 

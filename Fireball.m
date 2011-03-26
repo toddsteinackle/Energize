@@ -28,8 +28,8 @@
         animation.type = kAnimationType_PingPong;
         state = EntityState_Idle;
 
-        collisionWidth = appDelegate.widthScaleFactor * width;
-        collisionHeight = appDelegate.heightScaleFactor * height;
+        collisionWidth = appDelegate.widthScaleFactor * width * .65;
+        collisionHeight = appDelegate.heightScaleFactor * height * .65;
         collisionXOffset = ((appDelegate.widthScaleFactor * width) - collisionWidth) / 2;
         collisionYOffset = ((appDelegate.heightScaleFactor * height) - collisionHeight) / 2;
     }

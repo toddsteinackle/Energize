@@ -12,12 +12,15 @@
 #import "Animation.h"
 #import "CubeStormAppDelegate.h"
 #import "Cube.h"
+#import "Fireball.h"
+#import "Explosion.h"
 
 
 @implementation Ship
 
 @synthesize direction;
 @synthesize isThrusting;
+@synthesize explosion;
 
 - (id)initWithPixelLocation:(CGPoint)aLocation {
     self = [super initWithPixelLocation:aLocation];
@@ -81,10 +84,11 @@
     currentSpeed = 0;
     direction = ship_up;
     isThrusting = FALSE;
-    collisionWidth = appDelegate.widthScaleFactor * width *.95;
-    collisionHeight = appDelegate.heightScaleFactor * height;
+    collisionWidth = appDelegate.widthScaleFactor * width *.9;
+    collisionHeight = appDelegate.heightScaleFactor * height *.9;
     collisionXOffset = ((appDelegate.widthScaleFactor * width) - collisionWidth) / 2;
     collisionYOffset = ((appDelegate.heightScaleFactor * height) - collisionHeight) / 2;
+    explosion = [[Explosion alloc] initWithPixelLocation:CGPointMake(0, 0)];
     return self;
 }
 
@@ -134,6 +138,7 @@
 
 - (void)updateWithDelta:(float)aDelta {
     [animation updateWithDelta:aDelta];
+    [explosion updateWithDelta:aDelta];
 
     switch (state) {
         case EntityState_Transporting:
@@ -224,10 +229,19 @@
 #ifdef COLLISION_DEBUG
     [super render];
 #endif
-    [animation renderAtPoint:CGPointMake(pixelLocation.x, pixelLocation.y)
-                       scale:Scale2fMake(scaleWidth, scaleHeight)
-                    rotation:rotationAngle];
-
+    switch (state) {
+        case EntityState_Transporting:
+        case EntityState_Alive:
+        case EntityState_Warping:
+        case EntityState_Idle:
+            [animation renderAtPoint:CGPointMake(pixelLocation.x, pixelLocation.y)
+                               scale:Scale2fMake(scaleWidth, scaleHeight)
+                            rotation:rotationAngle];
+            break;
+        default:
+            break;
+    }
+    [explosion render];
 }
 
 - (void)checkForCollisionWithCube:(Cube *)cube {
@@ -246,11 +260,42 @@
 }
 
 - (void)checkForCollisionWithEntity:(AbstractEntity *)otherEntity {
+    if ((pixelLocation.y + collisionYOffset >= otherEntity.pixelLocation.y + otherEntity.collisionYOffset + otherEntity.collisionHeight) ||
+        (pixelLocation.x + collisionXOffset >= otherEntity.pixelLocation.x + otherEntity.collisionXOffset + otherEntity.collisionWidth) ||
+        (otherEntity.pixelLocation.y + otherEntity.collisionYOffset >= pixelLocation.y + collisionYOffset + collisionHeight) ||
+        (otherEntity.pixelLocation.x + otherEntity.collisionXOffset >= pixelLocation.x + collisionXOffset + collisionWidth)) {
+        return;
+    }
 
+    if (state == EntityState_Transporting) {
+        return;
+    }
+
+    if ([otherEntity isKindOfClass:[Fireball class]]) {
+#ifdef GAMEPLAY_DEBUG
+        NSLog(@"ship fireball collision");
+#endif
+        otherEntity.state = EntityState_Idle;
+        state = EntityState_Dead;
+        explosion.pixelLocation = CGPointMake(pixelLocation.x, pixelLocation.y);
+        explosion.state = EntityState_Alive;
+        explosion.animation.currentFrame = 0;
+        explosion.animation.state = kAnimationState_Running;
+    }
 }
 
 - (void)dealloc {
-    [animation release];
+    [teleporting release];
+    [up release];
+    [down release];
+    [upThrust release];
+    [downThrust release];
+    [warp release];
+    [right release];
+    [left release];
+    [rightThrust release];
+    [leftThrust release];
+    [explosion release];
     [super dealloc];
 }
 
