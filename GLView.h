@@ -63,6 +63,6 @@ typedef enum {
 
 - (void)initGuardians;
 - (void)initLevel:(int)level;
-- (void)resetFireballs;
+- (void)resetGuardiansAndClearGrid;
 
 @end

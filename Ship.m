@@ -207,7 +207,7 @@
             }
             [self movementWithDelta:aDelta];
             if (appDelegate.glView.cubeCount == 0) {
-                [appDelegate.glView resetFireballs];
+                [appDelegate.glView resetGuardiansAndClearGrid];
                 animation = warp;
                 animation.type = kAnimationType_Once;
                 state = EntityState_Warping;
@@ -220,6 +220,13 @@
                 appDelegate.glView.lastTimeInLoop = 0;
             }
             break;
+
+        case EntityState_Dead:
+            if (appDelegate.glView.cubeCount == 0) {
+                [appDelegate.glView resetGuardiansAndClearGrid];
+            }
+            break;
+
 
 
         default:

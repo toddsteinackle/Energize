@@ -214,7 +214,7 @@
 #pragma mark -
 #pragma mark game play
 
-- (void)resetFireballs {
+- (void)resetGuardiansAndClearGrid {
     for (Guardian *g in guardians) {
         g.firingTimer = 0;
         g.animation.currentFrame = 15;
@@ -347,8 +347,13 @@
             [ship updateWithDelta:aDelta];
             if (ship.state == EntityState_Dead &&
                 ship.explosion.animation.state == kAnimationState_Stopped) {
-                sceneState = SceneState_ShipRespawn;
-                lastTimeInLoop = 0;
+                if (cubeCount == 0) {
+                    sceneState = SceneState_LevelPauseAndInit;
+                    lastTimeInLoop = 0;
+                } else {
+                    sceneState = SceneState_ShipRespawn;
+                    lastTimeInLoop = 0;
+                }
             }
 
             break;
