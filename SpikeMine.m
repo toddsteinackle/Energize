@@ -37,7 +37,6 @@
         collisionBox.y = pixelLocation.y - (appDelegate.heightScaleFactor * height / 2);
 
         appearingDelay = apDelay;
-        NSLog(@"spikemine appear delay: %f", appearingDelay);
         appearingTimer = 0;
     }
     return self;

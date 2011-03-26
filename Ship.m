@@ -90,6 +90,7 @@
     collisionXOffset = ((appDelegate.widthScaleFactor * width) - collisionWidth) / 2;
     collisionYOffset = ((appDelegate.heightScaleFactor * height) - collisionHeight) / 2;
     explosion = [[Explosion alloc] initWithPixelLocation:CGPointMake(0, 0)];
+    exploding = FALSE;
     return self;
 }
 
@@ -264,13 +265,11 @@
 #ifdef GAMEPLAY_DEBUG
         NSLog(@"ship spikeball collision");
 #endif
-        otherEntity.state = EntityState_Dead;
-        state = EntityState_Dead;
-        explosion.pixelLocation = CGPointMake(pixelLocation.x, pixelLocation.y);
-        explosion.state = EntityState_Alive;
-        explosion.animation.currentFrame = 0;
-        explosion.animation.state = kAnimationState_Running;
-        return;
+        if (!exploding) {
+            otherEntity.state = EntityState_Dead;
+            [self explode];
+            return;
+        }
     }
 
 }
@@ -291,13 +290,21 @@
 #ifdef GAMEPLAY_DEBUG
         NSLog(@"ship fireball collision");
 #endif
-        otherEntity.state = EntityState_Idle;
-        state = EntityState_Dead;
-        explosion.pixelLocation = CGPointMake(pixelLocation.x, pixelLocation.y);
-        explosion.state = EntityState_Alive;
-        explosion.animation.currentFrame = 0;
-        explosion.animation.state = kAnimationState_Running;
+        if (!exploding) {
+            otherEntity.state = EntityState_Idle;
+            [self explode];
+            return;
+        }
     }
+}
+
+- (void)explode {
+    state = EntityState_Dead;
+    explosion.pixelLocation = CGPointMake(pixelLocation.x, pixelLocation.y);
+    explosion.state = EntityState_Alive;
+    explosion.animation.currentFrame = 0;
+    explosion.animation.state = kAnimationState_Running;
+    exploding = TRUE;
 }
 
 - (void)dealloc {

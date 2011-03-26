@@ -35,6 +35,7 @@ typedef enum {
     bool isThrusting;
     CGFloat currentSpeed;
     Explosion *explosion;
+    bool exploding;
 }
 
 @property (nonatomic, assign) shipDirection direction;
@@ -43,5 +44,6 @@ typedef enum {
 
 - (void)movementWithDelta:(float)aDelta;
 - (void)checkForCollisionWithEntityRenderedCenter:(AbstractEntity *)otherEntity;
+- (void)explode;
 
 @end
