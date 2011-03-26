@@ -17,6 +17,7 @@ typedef enum {
 
 @class Cube;
 @class Explosion;
+@class Shield;
 
 @interface Ship : AbstractEntity {
 
@@ -36,6 +37,9 @@ typedef enum {
     CGFloat currentSpeed;
     Explosion *explosion;
     bool exploding;
+    float idleTimer, safePeriod;
+    bool justAppeared;
+    Shield *shield;
 }
 
 @property (nonatomic, assign) shipDirection direction;

@@ -15,6 +15,7 @@
 #import "Fireball.h"
 #import "Explosion.h"
 #import "SpikeMine.h"
+#import "Shield.h"
 
 
 @implementation Ship
@@ -91,12 +92,20 @@
     collisionYOffset = ((appDelegate.heightScaleFactor * height) - collisionHeight) / 2;
     explosion = [[Explosion alloc] initWithPixelLocation:CGPointMake(0, 0)];
     exploding = FALSE;
+    justAppeared = TRUE;
+    idleTimer = 0;
+    safePeriod = 0.5;
+    shield = [[Shield alloc] initWithPixelLocation:CGPointMake(0, 0)];
     return self;
 }
 
 - (void)movementWithDelta:(float)aDelta {
     pixelLocation.x += dx * aDelta;
     pixelLocation.y += dy * aDelta;
+
+    if (shield.state == EntityState_Alive) {
+        shield.pixelLocation = CGPointMake(pixelLocation.x, pixelLocation.y);
+    }
 
     switch (direction) {
         case ship_up:
@@ -141,6 +150,7 @@
 - (void)updateWithDelta:(float)aDelta {
     [animation updateWithDelta:aDelta];
     [explosion updateWithDelta:aDelta];
+    [shield updateWithDelta:aDelta];
 
     switch (state) {
         case EntityState_Transporting:
@@ -150,6 +160,11 @@
             break;
 
         case EntityState_Idle:
+            idleTimer += aDelta;
+            if (idleTimer > safePeriod) {
+                justAppeared = FALSE;
+                idleTimer = 0;
+            }
             break;
 
         case EntityState_Alive:
@@ -251,6 +266,7 @@
             break;
     }
     [explosion render];
+    [shield render];
 }
 
 - (void)checkForCollisionWithEntityRenderedCenter:(AbstractEntity *)otherEntity {
@@ -292,6 +308,13 @@
     if (state == EntityState_Transporting) {
         return;
     }
+    if (state == EntityState_Idle && justAppeared) {
+        otherEntity.state = EntityState_Dead;
+        shield.pixelLocation = CGPointMake(pixelLocation.x, pixelLocation.y);
+        shield.state = EntityState_Alive;
+        shield.animation.state = kAnimationState_Running;
+        return;
+    }
 
     if ([otherEntity isKindOfClass:[Fireball class]]) {
 #ifdef GAMEPLAY_DEBUG
@@ -309,7 +332,6 @@
     state = EntityState_Dead;
     explosion.pixelLocation = CGPointMake(pixelLocation.x, pixelLocation.y);
     explosion.state = EntityState_Alive;
-    explosion.animation.currentFrame = 0;
     explosion.animation.state = kAnimationState_Running;
     exploding = TRUE;
 }
@@ -326,6 +348,7 @@
     [rightThrust release];
     [leftThrust release];
     [explosion release];
+    [shield release];
     [super dealloc];
 }
 

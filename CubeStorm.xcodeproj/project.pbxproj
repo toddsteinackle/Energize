@@ -27,6 +27,7 @@
 		5F3D40C312FF436900358CE7 /* SettingsMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D40C112FF436900358CE7 /* SettingsMenuViewController.m */; };
 		5F3D40C412FF436900358CE7 /* SettingsMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3D40C212FF436900358CE7 /* SettingsMenuViewController.xib */; };
 		5F3D410B12FF4B3000358CE7 /* OpenGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D410A12FF4B3000358CE7 /* OpenGLViewController.m */; };
+		5F4C89B3133E89EE00E68C91 /* Shield.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4C89B2133E89EE00E68C91 /* Shield.m */; };
 		5F50DDB913019C77002F29B2 /* PauseMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F50DDB713019C77002F29B2 /* PauseMenuViewController.m */; };
 		5F50DDBA13019C77002F29B2 /* PauseMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F50DDB813019C77002F29B2 /* PauseMenuViewController.xib */; };
 		5F5715001300E07400D31399 /* SettingsMenuViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F5714FF1300E07400D31399 /* SettingsMenuViewController-iPad.xib */; };
@@ -100,6 +101,8 @@
 		5F3D40C212FF436900358CE7 /* SettingsMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsMenuViewController.xib; sourceTree = "<group>"; };
 		5F3D410912FF4B3000358CE7 /* OpenGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = OpenGLViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5F3D410A12FF4B3000358CE7 /* OpenGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = OpenGLViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		5F4C89B1133E89EE00E68C91 /* Shield.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shield.h; sourceTree = "<group>"; };
+		5F4C89B2133E89EE00E68C91 /* Shield.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shield.m; sourceTree = "<group>"; };
 		5F50DDB613019C77002F29B2 /* PauseMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PauseMenuViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5F50DDB713019C77002F29B2 /* PauseMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PauseMenuViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5F50DDB813019C77002F29B2 /* PauseMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PauseMenuViewController.xib; sourceTree = "<group>"; };
@@ -313,6 +316,8 @@
 				5F149F2A1329A07E006378FB /* Fireball.m */,
 				5FEC33F71329D057004A94C7 /* Ship.h */,
 				5FEC33F81329D058004A94C7 /* Ship.m */,
+				5F4C89B1133E89EE00E68C91 /* Shield.h */,
+				5F4C89B2133E89EE00E68C91 /* Shield.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -477,6 +482,7 @@
 				5F149F2813298A1D006378FB /* Guardian.m in Sources */,
 				5F149F2B1329A07F006378FB /* Fireball.m in Sources */,
 				5FEC33F91329D058004A94C7 /* Ship.m in Sources */,
+				5F4C89B3133E89EE00E68C91 /* Shield.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
