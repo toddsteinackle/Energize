@@ -55,6 +55,7 @@
 
         guardians = [[NSMutableArray alloc] init];
         cubes = [[NSMutableArray alloc] init];
+        spikeMines = [[NSMutableArray alloc] init];
 
         currentLevel = 0;
         numberOfLevels = 2;
@@ -68,6 +69,7 @@
 - (void)dealloc {
     [guardians release];
     [cubes release];
+    [spikeMines release];
     [ship release];
     [super dealloc];
 }
@@ -75,6 +77,7 @@
 - (void)initLevel:(int)level {
 
     [cubes removeAllObjects];
+    [spikeMines removeAllObjects];
     [ship release];
 
     // [row][col]
@@ -91,7 +94,7 @@
             // 0
             { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '},
             { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
-            { 'c', ' ', 'c', ' ', ' ', ' ', 'c', ' ', 'c'},
+            { 'c', 'm', 'c', ' ', ' ', ' ', 'c', ' ', 'c'},
             { 'c', ' ', 'c', ' ', 's', ' ', 'c', ' ', 'c'},
             { 'c', ' ', 'c', ' ', ' ', ' ', 'c', ' ', 'c'},
             { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
@@ -108,11 +111,11 @@
 
         {
             // 1
-            { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
-            { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
-            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-            { ' ', ' ', ' ', ' ', 's', ' ', ' ', ' ', ' '},
-            { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
+            { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
+            { 'c', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
+            { 'c', ' ', ' ', ' ', 'm', 'c', 'c', 'c', ' '},
+            { 'c', 'm', ' ', ' ', 's', ' ', ' ', ' ', ' '},
+            { ' ', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
             { ' ', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
             { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '}
         },
@@ -127,6 +130,7 @@
 #endif
             char c = levelArray[level][i][j];
             Cube *cube;
+            SpikeMine *spike;
             switch (c) {
                 case 's':
                     ship = [[Ship alloc] initWithPixelLocation:CGPointMake([appDelegate getGridCoordinates:i:j].x-appDelegate.SHIP_STARTING_X_OFFSET,
@@ -145,6 +149,15 @@
                     [cube release];
                     ++cubeCount;
                     break;
+
+                case 'm':
+                    spike = [[SpikeMine alloc] initWithPixelLocation:CGPointMake([appDelegate getGridCoordinates:i:j].x,
+                                                                                 [appDelegate getGridCoordinates:i:j].y)
+                                                   andAppearingDelay:0.75+RANDOM_0_TO_1()];
+                    [spikeMines addObject:spike];
+                    [spike release];
+                    break;
+
 
                 default:
                     break;
@@ -209,6 +222,9 @@
         for (Fireball *f in g.fireballs) {
             f.state = EntityState_Idle;
         }
+    }
+    for (SpikeMine *s in spikeMines) {
+        s.state = EntityState_Dead;
     }
 }
 
@@ -285,6 +301,9 @@
             for (Cube *c in cubes) {
                 [c updateWithDelta:aDelta];
             }
+            for (SpikeMine *s in spikeMines) {
+                [s updateWithDelta:aDelta];
+            }
             if (CACurrentMediaTime() - lastTimeInLoop < 1.0) {
                 return;
             }
@@ -315,7 +334,13 @@
             for (Cube *c in cubes) {
                 [c updateWithDelta:aDelta];
                 if (c.state == EntityState_Alive) {
-                    [ship checkForCollisionWithCube:c];
+                    [ship checkForCollisionWithEntityRenderedCenter:c];
+                }
+            }
+            for (SpikeMine *s in spikeMines) {
+                [s updateWithDelta:aDelta];
+                if (s.state == EntityState_Alive) {
+                    [ship checkForCollisionWithEntityRenderedCenter:s];
                 }
             }
 
@@ -369,14 +394,17 @@
         case SceneState_Running:
         case SceneState_ShipRespawn:
             [starfield renderParticles];
-            for (Cube *c in cubes) {
-                [c render];
-            }
             for (Guardian *g in guardians) {
                 [g render];
                 for (Fireball *f in g.fireballs) {
                     [f render];
                 }
+            }
+            for (Cube *c in cubes) {
+                [c render];
+            }
+            for (SpikeMine *s in spikeMines) {
+                [s render];
             }
             [ship render];
             [sharedImageRenderManager renderImages];

@@ -43,6 +43,7 @@ typedef enum {
 
     NSMutableArray *guardians;
     NSMutableArray *cubes;
+    NSMutableArray *spikeMines;
     Ship *ship;
     int cubeCount;
     int currentLevel, numberOfLevels;

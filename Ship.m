@@ -14,6 +14,7 @@
 #import "Cube.h"
 #import "Fireball.h"
 #import "Explosion.h"
+#import "SpikeMine.h"
 
 
 @implementation Ship
@@ -244,18 +245,33 @@
     [explosion render];
 }
 
-- (void)checkForCollisionWithCube:(Cube *)cube {
-    if ((pixelLocation.y + collisionYOffset >= cube.collisionBox.y + cube.collisionYOffset + cube.collisionHeight) ||
-        (pixelLocation.x + collisionXOffset >= cube.collisionBox.x + cube.collisionXOffset + cube.collisionWidth) ||
-        (cube.collisionBox.y + cube.collisionYOffset >= pixelLocation.y + collisionYOffset + collisionHeight) ||
-        (cube.collisionBox.x + cube.collisionXOffset >= pixelLocation.x + collisionXOffset + collisionWidth)) {
+- (void)checkForCollisionWithEntityRenderedCenter:(AbstractEntity *)otherEntity {
+    if ((pixelLocation.y + collisionYOffset >= otherEntity.collisionBox.y + otherEntity.collisionYOffset + otherEntity.collisionHeight) ||
+        (pixelLocation.x + collisionXOffset >= otherEntity.collisionBox.x + otherEntity.collisionXOffset + otherEntity.collisionWidth) ||
+        (otherEntity.collisionBox.y + otherEntity.collisionYOffset >= pixelLocation.y + collisionYOffset + collisionHeight) ||
+        (otherEntity.collisionBox.x + otherEntity.collisionXOffset >= pixelLocation.x + collisionXOffset + collisionWidth)) {
         return;
     }
-    cube.state = EntityState_Dead;
-    appDelegate.glView.cubeCount--;
+    if ([otherEntity isKindOfClass:[Cube class]]) {
+        otherEntity.state = EntityState_Dead;
+        appDelegate.glView.cubeCount--;
 #ifdef GAMEPLAY_DEBUG
-    NSLog(@"cubeCount -- %i", appDelegate.glView.cubeCount);
+        NSLog(@"cubeCount -- %i", appDelegate.glView.cubeCount);
 #endif
+        return;
+    }
+    if ([otherEntity isKindOfClass:[SpikeMine class]]) {
+#ifdef GAMEPLAY_DEBUG
+        NSLog(@"ship spikeball collision");
+#endif
+        otherEntity.state = EntityState_Dead;
+        state = EntityState_Dead;
+        explosion.pixelLocation = CGPointMake(pixelLocation.x, pixelLocation.y);
+        explosion.state = EntityState_Alive;
+        explosion.animation.currentFrame = 0;
+        explosion.animation.state = kAnimationState_Running;
+        return;
+    }
 
 }
 

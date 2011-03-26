@@ -32,6 +32,7 @@
 @synthesize middleX;
 @synthesize middleY;
 @synthesize animation;
+@synthesize collisionBox;
 
 - (void)dealloc {
     [super dealloc];
@@ -53,6 +54,8 @@
     }
     return self;
 }
+
+- (id)initWithPixelLocation:(CGPoint)aLocation andAppearingDelay:(float)apDelay { return self; }
 
 - (void)setupAnimation:(Animation*)anim
            spriteSheet:(NSString*)aSpriteSheet

@@ -42,6 +42,6 @@ typedef enum {
 @property (nonatomic, readonly) Explosion *explosion;
 
 - (void)movementWithDelta:(float)aDelta;
-- (void)checkForCollisionWithCube:(Cube *)cube;
+- (void)checkForCollisionWithEntityRenderedCenter:(AbstractEntity *)otherEntity;
 
 @end

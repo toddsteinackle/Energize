@@ -16,7 +16,6 @@
 
 @implementation Cube
 
-@synthesize collisionBox;
 
 - (id)initWithPixelLocation:(CGPoint)aLocation andAppearingDelay:(float)apDelay {
     self = [super initWithPixelLocation:aLocation];
@@ -38,6 +37,7 @@
         collisionBox.x = pixelLocation.x - (appDelegate.widthScaleFactor * width / 2);
         collisionBox.y = pixelLocation.y - (appDelegate.heightScaleFactor * height / 2);
         appearingDelay = apDelay;
+        appearingTimer = 0;
     }
     return self;
 }

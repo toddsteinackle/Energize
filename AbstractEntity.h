@@ -38,9 +38,11 @@ typedef enum {
     CGFloat height, width;
     CGFloat middleX;
     CGFloat middleY;
+    CGPoint collisionBox;
 
     float scaleWidth, scaleHeight;
     float rotationAngle;
+    float appearingTimer, appearingDelay;
 }
 
 @property (nonatomic, readonly) Image *image;
@@ -59,9 +61,11 @@ typedef enum {
 @property (nonatomic, assign) CGFloat middleX;
 @property (nonatomic, assign) CGFloat middleY;
 @property (nonatomic, readonly) Animation *animation;
+@property (nonatomic, readonly) CGPoint collisionBox;
 
 
 - (id)initWithPixelLocation:(CGPoint)aLocation;
+- (id)initWithPixelLocation:(CGPoint)aLocation andAppearingDelay:(float)apDelay;
 - (void)updateWithDelta:(float)aDelta;
 - (void)render;
 - (void)checkForCollisionWithEntity:(AbstractEntity*)otherEntity;
