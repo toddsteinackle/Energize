@@ -23,9 +23,11 @@ typedef enum {
     float firingTimer;
     NSMutableArray *fireballs;
     int numberOfFireballs, fireball_counter;
-    bool justFired, launchingTwoFireballs;
-    int baseFireDelay, chanceFor2Fireballs;
+    bool justFired, launchingMultipleFireballs;
+    int baseFireDelay;
+    int chanceForTwoFireballs, chanceForThreeFireballs, chanceForFourFireballs;
     float fireDelay;
+    int shotCounter;
 }
 
 @property (readonly, nonatomic) NSMutableArray *fireballs;

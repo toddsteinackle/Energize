@@ -64,7 +64,7 @@
     if (self != nil) {
         width = 82;
         height = 41;
-        float delay = 0.04f;
+        float delay = 0.01;
         int frames = 8;
         rotationAngle = angle;
         if (rotationAngle == 0.0f) {
@@ -109,9 +109,10 @@
 #pragma mark -
 #pragma mark firing init
 
+        shotCounter = 0;
         firingTimer = 0;
         fireball_counter = 0;
-        justFired = launchingTwoFireballs = FALSE;
+        justFired = launchingMultipleFireballs = FALSE;
         fireballs = [[NSMutableArray alloc] init];
         numberOfFireballs = 20;
         for (int i = 0; i < numberOfFireballs; ++i) {
@@ -124,8 +125,10 @@
     switch (appDelegate.glView.currentLevel) {
         case 0:
         case 1:
-            baseFireDelay =  5;
-            chanceFor2Fireballs = 2000;
+            baseFireDelay = 7;
+            chanceForTwoFireballs = 5;
+            chanceForThreeFireballs = 8;
+            chanceForFourFireballs = 10;
             fireDelay = (arc4random() % baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
             break;
         default:
@@ -155,68 +158,80 @@
         case EntityState_Alive:
             [self movementWithDelta:aDelta];
 
+#ifdef FIRING_DEBUG
+            if (shotCounter != 0 && animation.state == kAnimationState_Stopped) {
+                NSLog(@"Guardian firing in inconsistent state.");
+            }
+#endif
             // the starting and stopping of the animation drives the firing
             if (animation.currentFrame == 15) {
                 animation.state = kAnimationState_Stopped;
                 animation.currentFrame = 0;
-                launchingTwoFireballs = justFired = FALSE;
+                justFired = FALSE;
+                if (shotCounter != 0) {
+                    animation.state = kAnimationState_Running;
+                    firingTimer = 0;
+                }
             }
 
             firingTimer += aDelta;
             if (firingTimer > fireDelay) {
-                fireDelay = (arc4random() % baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
+
+                shotCounter = 1;
+                animation.state = kAnimationState_Running;
+                if (1 == (arc4random() % chanceForTwoFireballs + 1)) {
+                    shotCounter = 2;
+                }
+                if (1 == (arc4random() % chanceForThreeFireballs + 1)) {
+                    shotCounter = 3;
+                }
+                if (1 == (arc4random() % chanceForFourFireballs + 1)) {
+                    shotCounter = 4;
+                }
+
 #ifdef FIRING_DEBUG
                 switch (zone) {
                     case guardian_top:
                         NSLog(@"guardian_top firing");
                         NSLog(@"base: %i", baseFireDelay);
                         NSLog(@"fire delay: %f", fireDelay);
-                        break;
+                        NSLog(@"firingTimer: %f", firingTimer);
+                        NSLog(@"shotCounter: %i", shotCounter);
                     case guardian_bottom:
                         NSLog(@"guardian_bottom firing");
                         NSLog(@"base: %i", baseFireDelay);
                         NSLog(@"fire delay: %f", fireDelay);
+                        NSLog(@"firingTimer: %f", firingTimer);
+                        NSLog(@"shotCounter: %i", shotCounter);
                         break;
                     case guardian_left:
                         NSLog(@"guardian_left firing");
                         NSLog(@"base: %i", baseFireDelay);
                         NSLog(@"fire delay: %f", fireDelay);
+                        NSLog(@"firingTimer: %f", firingTimer);
+                        NSLog(@"shotCounter: %i", shotCounter);
                         break;
                     case guardian_right:
                         NSLog(@"guardian_right firing");
                         NSLog(@"base: %i", baseFireDelay);
                         NSLog(@"fire delay: %f", fireDelay);
+                        NSLog(@"firingTimer: %f", firingTimer);
+                        NSLog(@"shotCounter: %i", shotCounter);
                         break;
 
                     default:
                         break;
                 }
 #endif
-                animation.state = kAnimationState_Running;
                 firingTimer = 0;
+                fireDelay = (arc4random() % baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
             }
 
-            if (!launchingTwoFireballs) {
-                if (1 == (arc4random() % chanceFor2Fireballs + 1)) {
-                    launchingTwoFireballs = TRUE;
-                }
-            }
-            if (launchingTwoFireballs) {
-                if (animation.state == kAnimationState_Running && (animation.currentFrame > 7)) {
-                    if (animation.currentFrame == 14) {
-                        justFired = FALSE;
-                    }
-                    if (!justFired) {
-                        [self fire];
-                        justFired = TRUE;
-                    }
-                }
-            } else {
-                if (animation.state == kAnimationState_Running && animation.currentFrame == 14) {
-                    if (!justFired) {
-                        [self fire];
-                        justFired = TRUE;
-                    }
+            if (animation.state == kAnimationState_Running && animation.currentFrame == 13) {
+                if (!justFired) {
+                    [self fire];
+                    --shotCounter;
+                    justFired = TRUE;
                 }
             }
 
