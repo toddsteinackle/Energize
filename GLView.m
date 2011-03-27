@@ -434,6 +434,7 @@
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
 
     switch (sceneState) {
+#pragma mark SceneState_Running
         case SceneState_Running:
             if (ship.state != EntityState_Transporting) {
                 if (ship.state == EntityState_Idle) {
@@ -494,12 +495,9 @@
 
 #pragma mark SceneState_Running
         case SceneState_Running:
-            if (numTaps == 2) {
-                if (ship.state != EntityState_Transporting) {
+            if (numTaps == 1) {
+                if (ship.state == EntityState_Alive) {
                     ship.isThrusting = !ship.isThrusting;
-                    if (ship.state == EntityState_Idle) {
-                        ship.state = EntityState_Alive;
-                    }
                 }
             }
 
