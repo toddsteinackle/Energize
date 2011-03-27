@@ -18,6 +18,7 @@
 
 @synthesize fireballs;
 @synthesize firingTimer;
+@synthesize canFire;
 
 - (void)movementWithDelta:(float)aDelta {
     pixelLocation.x += dx * aDelta;
@@ -109,6 +110,7 @@
 #pragma mark -
 #pragma mark firing init
 
+        canFire = TRUE;
         shotCounter = 0;
         firingTimer = 0;
         fireball_counter = 0;
@@ -168,14 +170,14 @@
                 animation.state = kAnimationState_Stopped;
                 animation.currentFrame = 0;
                 justFired = FALSE;
-                if (shotCounter != 0) {
+                if (shotCounter != 0 && canFire) {
                     animation.state = kAnimationState_Running;
                     firingTimer = 0;
                 }
             }
 
             firingTimer += aDelta;
-            if (firingTimer > fireDelay) {
+            if ((firingTimer > fireDelay) && canFire) {
 
                 shotCounter = 1;
                 animation.state = kAnimationState_Running;

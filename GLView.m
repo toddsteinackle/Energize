@@ -217,6 +217,7 @@
 - (void)resetGuardiansAndClearGrid {
     for (Guardian *g in guardians) {
         g.firingTimer = 0;
+        g.canFire = FALSE;
         g.animation.currentFrame = 15;
         g.animation.state = kAnimationState_Stopped;
         for (Fireball *f in g.fireballs) {
@@ -282,6 +283,9 @@
                     currentLevel = 0;
                 }
                 [self initLevel:currentLevel++];
+                for (Guardian *g in guardians) {
+                    g.canFire = TRUE;
+                }
                 sceneState = SceneState_Running;
                 lastTimeInLoop = 0;
             }
