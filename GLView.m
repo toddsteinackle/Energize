@@ -399,17 +399,17 @@
         case SceneState_Running:
         case SceneState_ShipRespawn:
             [starfield renderParticles];
-            for (Guardian *g in guardians) {
-                [g render];
-                for (Fireball *f in g.fireballs) {
-                    [f render];
-                }
-            }
             for (Cube *c in cubes) {
                 [c render];
             }
             for (SpikeMine *s in spikeMines) {
                 [s render];
+            }
+            for (Guardian *g in guardians) {
+                [g render];
+                for (Fireball *f in g.fireballs) {
+                    [f render];
+                }
             }
             [ship render];
             [sharedImageRenderManager renderImages];
