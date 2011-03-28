@@ -31,7 +31,7 @@
 @synthesize cubeCount;
 @synthesize sceneState;
 @synthesize lastTimeInLoop;
-@synthesize currentLevel;
+@synthesize currentGrid;
 
 #pragma mark -
 #pragma mark init
@@ -57,8 +57,8 @@
         cubes = [[NSMutableArray alloc] init];
         spikeMines = [[NSMutableArray alloc] init];
 
-        currentLevel = 0;
-        numberOfLevels = 2;
+        currentGrid = 0;
+        numberOfGrids = 2;
 
         [self initGuardians];
     }
@@ -74,7 +74,12 @@
     [super dealloc];
 }
 
-- (void)initLevel:(int)level {
+- (void)initGame {
+
+    skillLevel = SkillLevel_Normal;
+}
+
+- (void)initGrid:(int)grid {
 
     [cubes removeAllObjects];
     [spikeMines removeAllObjects];
@@ -89,7 +94,7 @@
 //        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
 //        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
 
-    char levelArray[][7][9] = {
+    char gridArray[][7][9] = {
         {
             // 0
             { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '},
@@ -125,10 +130,10 @@
     for (int i = 0; i < 7; ++i) {
         for (int j = 0; j < 9; ++j) {
 #ifdef GRID_DEBUG
-            NSLog(@"initLevel"); int k = 0;
-            NSLog(@"%d: %c", k++, levelArray[level][i][j]);
+            NSLog(@"initGrid"); int k = 0;
+            NSLog(@"%d: %c", k++, gridArray[grid][i][j]);
 #endif
-            char c = levelArray[level][i][j];
+            char c = gridArray[grid][i][j];
             Cube *cube;
             SpikeMine *spike;
             switch (c) {
@@ -167,6 +172,40 @@
 #ifdef GAMEPLAY_DEBUG
     NSLog(@"starting cubeCount -- %i", cubeCount);
 #endif
+
+#pragma mark skill levels
+    switch (skillLevel) {
+        case SkillLevel_Easy:
+
+            break;
+
+        case SkillLevel_Normal:
+            switch (currentGrid) {
+                case 0:
+                case 1:
+                    for (Guardian *g in guardians) {
+                        g.baseFireDelay = 7;
+                        g.chanceForTwoFireballs = 5;
+                        g.chanceForThreeFireballs = 8;
+                        g.chanceForFourFireballs = 10;
+                        g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
+                    }
+
+                    break;
+
+                default:
+                    break;
+            }
+
+            break;
+
+        case SkillLevel_Hard:
+
+            break;
+
+        default:
+            break;
+    }
 }
 
 - (void)initGuardians {
@@ -243,6 +282,7 @@
                 return;
             }
             if (lastTimeInLoop) {
+                [self initGame];
                 sceneState = SceneState_GuardianTransport;
                 lastTimeInLoop = 0;
             }
@@ -261,7 +301,7 @@
                 return;
             }
             if (lastTimeInLoop) {
-                [self initLevel:currentLevel++];
+                [self initGrid:currentGrid++];
                 sceneState = SceneState_Running;
                 lastTimeInLoop = 0;
             }
@@ -279,10 +319,10 @@
                 return;
             }
             if (lastTimeInLoop) {
-                if (currentLevel == numberOfLevels) {
-                    currentLevel = 0;
+                if (currentGrid == numberOfGrids) {
+                    currentGrid = 0;
                 }
-                [self initLevel:currentLevel++];
+                [self initGrid:currentGrid++];
                 for (Guardian *g in guardians) {
                     g.canFire = TRUE;
                 }

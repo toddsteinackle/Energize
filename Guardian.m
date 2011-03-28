@@ -19,6 +19,11 @@
 @synthesize fireballs;
 @synthesize firingTimer;
 @synthesize canFire;
+@synthesize baseFireDelay;
+@synthesize chanceForTwoFireballs;
+@synthesize chanceForThreeFireballs;
+@synthesize chanceForFourFireballs;
+@synthesize fireDelay;
 
 - (void)movementWithDelta:(float)aDelta {
     pixelLocation.x += dx * aDelta;
@@ -113,6 +118,7 @@
         canFire = TRUE;
         shotCounter = 0;
         firingTimer = 0;
+        fireDelay = 1;
         fireball_counter = 0;
         justFired = launchingMultipleFireballs = FALSE;
         fireballs = [[NSMutableArray alloc] init];
@@ -124,19 +130,6 @@
         }
     }
 
-    switch (appDelegate.glView.currentLevel) {
-        case 0:
-        case 1:
-            baseFireDelay = 7;
-            chanceForTwoFireballs = 5;
-            chanceForThreeFireballs = 8;
-            chanceForFourFireballs = 10;
-            fireDelay = (arc4random() % baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
-            break;
-        default:
-            break;
-
-    }
 #ifdef FIRING_DEBUG
     NSLog(@"firing init");
     NSLog(@"base: %i", baseFireDelay);

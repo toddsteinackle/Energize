@@ -30,6 +30,12 @@ typedef enum {
     SceneState_ShipRespawn,
 } SceneState;
 
+typedef enum {
+    SkillLevel_Easy,
+    SkillLevel_Normal,
+    SkillLevel_Hard,
+} SkillLevel;
+
 @interface GLView : GLESGameState {
 
     CubeStormAppDelegate *appDelegate;
@@ -46,12 +52,13 @@ typedef enum {
     NSMutableArray *spikeMines;
     Ship *ship;
     int cubeCount;
-    int currentLevel, numberOfLevels;
+    int currentGrid, numberOfGrids;
 
     CGFloat drag_min_x;
     CGFloat drag_min_y;
 
     CGPoint startingShipPosition;
+    SkillLevel skillLevel;
 
 }
 
@@ -59,10 +66,11 @@ typedef enum {
 @property (nonatomic, assign) int cubeCount;
 @property (nonatomic, assign) SceneState sceneState;
 @property (nonatomic, assign) double lastTimeInLoop;
-@property (nonatomic, readonly) int currentLevel;
+@property (nonatomic, readonly) int currentGrid;
 
+- (void)initGame;
 - (void)initGuardians;
-- (void)initLevel:(int)level;
+- (void)initGrid:(int)grid;
 - (void)resetGuardiansAndClearGrid;
 
 @end
