@@ -60,6 +60,10 @@ typedef enum {
     CGPoint startingShipPosition;
     SkillLevel skillLevel;
 
+    BitmapFont *statusFont;
+    int score;
+    int currentCubeValue;
+
 }
 
 @property (nonatomic, retain) OpenGLViewController *viewController;
@@ -67,10 +71,13 @@ typedef enum {
 @property (nonatomic, assign) SceneState sceneState;
 @property (nonatomic, assign) double lastTimeInLoop;
 @property (nonatomic, readonly) int currentGrid;
+@property (nonatomic, assign) int score;
 
 - (void)initGame;
 - (void)initGuardians;
 - (void)initGrid:(int)grid;
 - (void)resetGuardiansAndClearGrid;
+- (void)updateScore;
+- (void)updateStatus;
 
 @end

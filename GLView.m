@@ -32,6 +32,7 @@
 @synthesize sceneState;
 @synthesize lastTimeInLoop;
 @synthesize currentGrid;
+@synthesize score;
 
 #pragma mark -
 #pragma mark init
@@ -58,9 +59,23 @@
         spikeMines = [[NSMutableArray alloc] init];
 
         currentGrid = 0;
-        numberOfGrids = 2;
+        numberOfGrids = 3;
 
         [self initGuardians];
+
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            statusFont = [[BitmapFont alloc] initWithFontImageNamed:@"status.png"
+                                                        controlFile:@"status"
+                                                              scale:Scale2fMake(1.0f, 1.0f)
+                                                             filter:GL_LINEAR];
+        } else {
+            statusFont = [[BitmapFont alloc] initWithFontImageNamed:@"status-iphone.png"
+                                                        controlFile:@"status-iphone"
+                                                              scale:Scale2fMake(1.0f, 1.0f)
+                                                             filter:GL_LINEAR];
+        }
+
+
     }
 
     return self;
@@ -76,6 +91,8 @@
 
 - (void)initGame {
 
+    score = 0;
+    currentCubeValue = 50;
     skillLevel = SkillLevel_Normal;
 }
 
@@ -105,13 +122,6 @@
             { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
             { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '}
 
-//            { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
-//            { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
-//            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//            { ' ', ' ', ' ', ' ', 's', ' ', ' ', ' ', ' '},
-//            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
         },
 
         {
@@ -123,6 +133,16 @@
             { ' ', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
             { ' ', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
             { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '}
+        },
+
+        {
+            { ' ', ' ', 'c', 'c', 'c', 'c', 'c', ' ', ' '},
+            { ' ', ' ', 'c', 'c', 'c', 'c', 'c', ' ', ' '},
+            { ' ', ' ', 'c', ' ', ' ', ' ', 'c', ' ', ' '},
+            { ' ', ' ', 's', ' ', 'm', ' ', 'c', ' ', ' '},
+            { ' ', ' ', ' ', ' ', ' ', ' ', 'c', ' ', ' '},
+            { ' ', ' ', 'c', 'c', 'c', 'c', 'c', ' ', ' '},
+            { ' ', ' ', 'c', 'c', 'c', 'c', 'c', ' ', ' '}
         },
     };
 
@@ -266,6 +286,10 @@
     for (SpikeMine *s in spikeMines) {
         s.state = EntityState_Dead;
     }
+}
+
+- (void)updateScore {
+    score += currentCubeValue;
 }
 
 #pragma mark -
@@ -431,6 +455,7 @@
 #pragma mark SceneState_LevelPauseAndInit
         case SceneState_LevelPauseAndInit:
             [starfield renderParticles];
+            [self updateStatus];
             for (Guardian *g in guardians) {
                 [g render];
             }
@@ -443,6 +468,7 @@
         case SceneState_Running:
         case SceneState_ShipRespawn:
             [starfield renderParticles];
+            [self updateStatus];
             for (Cube *c in cubes) {
                 [c render];
             }
@@ -463,6 +489,16 @@
             break;
     }
 
+}
+
+- (void)updateStatus {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [statusFont renderStringAt:CGPointMake(appDelegate.GUARDIAN_LEFT_BASE+appDelegate.GUARDIAN_WIDTH, appDelegate.GUARDIAN_TOP_BASE)
+                              text:[NSString stringWithFormat:@"Grid: %i    Score: %i", currentGrid, score]];
+    } else {
+        [statusFont renderStringAt:CGPointMake(appDelegate.GUARDIAN_LEFT_BASE+appDelegate.GUARDIAN_WIDTH, appDelegate.GUARDIAN_TOP_BASE-2)
+                              text:[NSString stringWithFormat:@"Grid: %i    Score: %i", currentGrid, score]];
+    }
 }
 
 #pragma mark -

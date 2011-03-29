@@ -53,6 +53,10 @@
 		5F5AA19B12F66211006A2A2C /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F5AA19A12F66211006A2A2C /* libz.dylib */; };
 		5F5AA1A312F66251006A2A2C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F5AA1A212F66251006A2A2C /* AVFoundation.framework */; };
 		5F5AA1AB12F6627C006A2A2C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F5AA1AA12F6627C006A2A2C /* AudioToolbox.framework */; };
+		5F5D2C1F13418378009D98E6 /* status.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 5F5D2C1D13418378009D98E6 /* status.fnt */; };
+		5F5D2C2013418378009D98E6 /* status.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F5D2C1E13418378009D98E6 /* status.png */; };
+		5F5D2C35134187E8009D98E6 /* status-iphone.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 5F5D2C33134187E8009D98E6 /* status-iphone.fnt */; };
+		5F5D2C36134187E8009D98E6 /* status-iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F5D2C34134187E8009D98E6 /* status-iphone.png */; };
 		5F5E29EF131DEEAE00ED7D66 /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F5E29EE131DEEAE00ED7D66 /* GLView.m */; };
 		5F73F2761301F83A0017A10A /* PauseMenuViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F73F2751301F83A0017A10A /* PauseMenuViewController-iPad.xib */; };
 		5FA4F44B13295F3D00179DC4 /* Asteroid.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FA4F44A13295F3D00179DC4 /* Asteroid.m */; };
@@ -149,6 +153,10 @@
 		5F5AA19A12F66211006A2A2C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		5F5AA1A212F66251006A2A2C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5F5AA1AA12F6627C006A2A2C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		5F5D2C1D13418378009D98E6 /* status.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = status.fnt; sourceTree = "<group>"; };
+		5F5D2C1E13418378009D98E6 /* status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status.png; sourceTree = "<group>"; };
+		5F5D2C33134187E8009D98E6 /* status-iphone.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "status-iphone.fnt"; sourceTree = "<group>"; };
+		5F5D2C34134187E8009D98E6 /* status-iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-iphone.png"; sourceTree = "<group>"; };
 		5F5E29ED131DEEAE00ED7D66 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
 		5F5E29EE131DEEAE00ED7D66 /* GLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLView.m; sourceTree = "<group>"; };
 		5F73F2751301F83A0017A10A /* PauseMenuViewController-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "PauseMenuViewController-iPad.xib"; sourceTree = "<group>"; };
@@ -291,6 +299,10 @@
 		5FA644911329451A008FE442 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				5F5D2C33134187E8009D98E6 /* status-iphone.fnt */,
+				5F5D2C34134187E8009D98E6 /* status-iphone.png */,
+				5F5D2C1D13418378009D98E6 /* status.fnt */,
+				5F5D2C1E13418378009D98E6 /* status.png */,
 				5FA64492132945F7008FE442 /* pss.plist */,
 				5FA64493132945F7008FE442 /* pss.png */,
 				5F0B6DA513353DC400ED5190 /* starfield-iphone.pex */,
@@ -439,6 +451,10 @@
 				5FA64494132945F7008FE442 /* pss.plist in Resources */,
 				5FA64495132945F7008FE442 /* pss.png in Resources */,
 				5F0B6DA613353DC500ED5190 /* starfield-iphone.pex in Resources */,
+				5F5D2C1F13418378009D98E6 /* status.fnt in Resources */,
+				5F5D2C2013418378009D98E6 /* status.png in Resources */,
+				5F5D2C35134187E8009D98E6 /* status-iphone.fnt in Resources */,
+				5F5D2C36134187E8009D98E6 /* status-iphone.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

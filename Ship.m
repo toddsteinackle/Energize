@@ -279,6 +279,7 @@
     if ([otherEntity isKindOfClass:[Cube class]]) {
         otherEntity.state = EntityState_Dead;
         appDelegate.glView.cubeCount--;
+        [appDelegate.glView updateScore];
 #ifdef GAMEPLAY_DEBUG
         NSLog(@"cubeCount -- %i", appDelegate.glView.cubeCount);
 #endif
