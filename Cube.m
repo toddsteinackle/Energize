@@ -23,10 +23,14 @@
         width = 33;
         height = 33;
 
-        float delay = 0.06f;
+        float delay = 0.07f;
         int frames = 12;
         animation = [[Animation alloc] init];
-        [self setupAnimation:animation spriteSheet:@"cube1.png" animationDelay:delay numFrames:frames];
+        if (1 == (arc4random() % 2 + 1)) {
+            [self setupAnimation:animation spriteSheet:@"cube_purple.png" animationDelay:delay numFrames:frames];
+        } else {
+            [self setupAnimation:animation spriteSheet:@"cube_purple_reverse.png" animationDelay:delay numFrames:frames];
+        }
         animation.type = kAnimationType_Once;
         state = EntityState_Idle;
         collisionWidth = appDelegate.widthScaleFactor * width *.9;
