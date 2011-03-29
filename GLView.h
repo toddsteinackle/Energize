@@ -61,8 +61,10 @@ typedef enum {
     SkillLevel skillLevel;
 
     BitmapFont *statusFont;
+    Image *statusShip;
     int score;
     int currentCubeValue;
+    int playerLives;
 
 }
 
@@ -72,6 +74,7 @@ typedef enum {
 @property (nonatomic, assign) double lastTimeInLoop;
 @property (nonatomic, readonly) int currentGrid;
 @property (nonatomic, assign) int score;
+@property (nonatomic, assign) int playerLives;
 
 - (void)initGame;
 - (void)initGuardians;

@@ -289,6 +289,8 @@
 #ifdef GAMEPLAY_DEBUG
         NSLog(@"ship spikeball collision");
 #endif
+        state = EntityState_Dead;
+        appDelegate.glView.playerLives--;
         if (!exploding) {
             otherEntity.state = EntityState_Dead;
             [self explode];
@@ -321,6 +323,8 @@
 #ifdef GAMEPLAY_DEBUG
         NSLog(@"ship fireball collision");
 #endif
+        state = EntityState_Dead;
+        appDelegate.glView.playerLives--;
         if (!exploding) {
             otherEntity.state = EntityState_Idle;
             [self explode];
@@ -330,7 +334,6 @@
 }
 
 - (void)explode {
-    state = EntityState_Dead;
     explosion.pixelLocation = CGPointMake(pixelLocation.x, pixelLocation.y);
     explosion.state = EntityState_Alive;
     explosion.animation.state = kAnimationState_Running;

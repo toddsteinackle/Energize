@@ -19,6 +19,7 @@
 		5F149F2513298616006378FB /* Explosion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F2413298616006378FB /* Explosion.m */; };
 		5F149F2813298A1D006378FB /* Guardian.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F2713298A1C006378FB /* Guardian.m */; };
 		5F149F2B1329A07F006378FB /* Fireball.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F2A1329A07E006378FB /* Fireball.m */; };
+		5F1D543013428AC700965620 /* ship-up.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F1D542F13428AC700965620 /* ship-up.png */; };
 		5F3D40AC12FF416C00358CE7 /* CubeStormAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D40A212FF416C00358CE7 /* CubeStormAppDelegate.m */; };
 		5F3D40AD12FF416C00358CE7 /* CubeStormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D40A412FF416C00358CE7 /* CubeStormViewController.m */; };
 		5F3D40AE12FF416C00358CE7 /* GLESGameState.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D40A612FF416C00358CE7 /* GLESGameState.m */; };
@@ -91,6 +92,7 @@
 		5F149F2713298A1C006378FB /* Guardian.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Guardian.m; sourceTree = "<group>"; };
 		5F149F291329A07E006378FB /* Fireball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fireball.h; sourceTree = "<group>"; };
 		5F149F2A1329A07E006378FB /* Fireball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fireball.m; sourceTree = "<group>"; };
+		5F1D542F13428AC700965620 /* ship-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ship-up.png"; sourceTree = "<group>"; };
 		5F3D40A112FF416C00358CE7 /* CubeStormAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CubeStormAppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5F3D40A212FF416C00358CE7 /* CubeStormAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CubeStormAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5F3D40A312FF416C00358CE7 /* CubeStormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CubeStormViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -303,6 +305,7 @@
 				5F5D2C34134187E8009D98E6 /* status-iphone.png */,
 				5F5D2C1D13418378009D98E6 /* status.fnt */,
 				5F5D2C1E13418378009D98E6 /* status.png */,
+				5F1D542F13428AC700965620 /* ship-up.png */,
 				5FA64492132945F7008FE442 /* pss.plist */,
 				5FA64493132945F7008FE442 /* pss.png */,
 				5F0B6DA513353DC400ED5190 /* starfield-iphone.pex */,
@@ -455,6 +458,7 @@
 				5F5D2C2013418378009D98E6 /* status.png in Resources */,
 				5F5D2C35134187E8009D98E6 /* status-iphone.fnt in Resources */,
 				5F5D2C36134187E8009D98E6 /* status-iphone.png in Resources */,
+				5F1D543013428AC700965620 /* ship-up.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

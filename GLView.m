@@ -33,6 +33,7 @@
 @synthesize lastTimeInLoop;
 @synthesize currentGrid;
 @synthesize score;
+@synthesize playerLives;
 
 #pragma mark -
 #pragma mark init
@@ -74,7 +75,7 @@
                                                               scale:Scale2fMake(1.0f, 1.0f)
                                                              filter:GL_LINEAR];
         }
-
+        statusShip = [[Image alloc] initWithImageNamed:@"ship-up.png" filter:GL_LINEAR];
 
     }
 
@@ -94,6 +95,7 @@
     score = 0;
     currentCubeValue = 50;
     skillLevel = SkillLevel_Normal;
+    playerLives = 4;
 }
 
 - (void)initGrid:(int)grid {
@@ -393,7 +395,7 @@
                 [g updateWithDelta:aDelta];
                 for (Fireball *f in g.fireballs) {
                     [f updateWithDelta:aDelta];
-                    if (f.state == EntityState_Alive) {
+                    if (f.state == EntityState_Alive && ship.state != EntityState_Dead) {
                         [ship checkForCollisionWithEntity:f];
                     }
                 }
@@ -401,13 +403,13 @@
 
             for (Cube *c in cubes) {
                 [c updateWithDelta:aDelta];
-                if (c.state == EntityState_Alive) {
+                if (c.state == EntityState_Alive && ship.state != EntityState_Dead) {
                     [ship checkForCollisionWithEntityRenderedCenter:c];
                 }
             }
             for (SpikeMine *s in spikeMines) {
                 [s updateWithDelta:aDelta];
-                if (s.state == EntityState_Alive) {
+                if (s.state == EntityState_Alive && ship.state != EntityState_Dead) {
                     [ship checkForCollisionWithEntityRenderedCenter:s];
                 }
             }
@@ -492,6 +494,32 @@
 }
 
 - (void)updateStatus {
+    if (playerLives > 8) {
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            [statusFont renderStringAt:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE-appDelegate.SHIP_WIDTH*2-3, appDelegate.GUARDIAN_TOP_BASE)
+                                  text:[NSString stringWithFormat:@"%i", playerLives]];
+            [statusShip renderAtPoint:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE-(appDelegate.SHIP_WIDTH+appDelegate.widthScaleFactor*3),
+                                                  appDelegate.GUARDIAN_TOP_BASE-appDelegate.heightScaleFactor*5)
+                                scale:Scale2fMake(appDelegate.widthScaleFactor, appDelegate.heightScaleFactor)
+                             rotation:0];
+        } else {
+            [statusFont renderStringAt:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE-appDelegate.SHIP_WIDTH*2-5, appDelegate.GUARDIAN_TOP_BASE-2)
+                                  text:[NSString stringWithFormat:@"%i", playerLives]];
+            [statusShip renderAtPoint:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE-(appDelegate.SHIP_WIDTH+appDelegate.widthScaleFactor*3),
+                                                  appDelegate.GUARDIAN_TOP_BASE-appDelegate.heightScaleFactor*7)
+                                scale:Scale2fMake(appDelegate.widthScaleFactor, appDelegate.heightScaleFactor)
+                             rotation:0];
+        }
+    }
+    else {
+        for (int i = 1; i < playerLives; ++i) {
+            [statusShip renderAtPoint:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE-(i*appDelegate.SHIP_WIDTH+appDelegate.widthScaleFactor*3),
+                                                  appDelegate.GUARDIAN_TOP_BASE-appDelegate.heightScaleFactor*7)
+                                scale:Scale2fMake(appDelegate.widthScaleFactor, appDelegate.heightScaleFactor)
+                             rotation:0];
+        }
+    }
+
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [statusFont renderStringAt:CGPointMake(appDelegate.GUARDIAN_LEFT_BASE+appDelegate.GUARDIAN_WIDTH, appDelegate.GUARDIAN_TOP_BASE)
                               text:[NSString stringWithFormat:@"Grid: %i    Score: %i", currentGrid, score]];
