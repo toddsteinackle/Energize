@@ -28,6 +28,7 @@ typedef enum {
     SceneState_GuardianTransport,
     SceneState_LevelPauseAndInit,
     SceneState_ShipRespawn,
+    SceneState_GameOver,
 } SceneState;
 
 typedef enum {
@@ -65,6 +66,7 @@ typedef enum {
     int score;
     int currentCubeValue;
     int playerLives;
+    bool gameContinuing;
 
 }
 
@@ -82,5 +84,6 @@ typedef enum {
 - (void)resetGuardiansAndClearGrid;
 - (void)updateScore;
 - (void)updateStatus;
+- (void)handleSingleTap:(NSDictionary *)touches;
 
 @end

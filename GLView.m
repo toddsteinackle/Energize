@@ -76,6 +76,7 @@
                                                              filter:GL_LINEAR];
         }
         statusShip = [[Image alloc] initWithImageNamed:@"ship-up.png" filter:GL_LINEAR];
+        gameContinuing = FALSE;
 
     }
 
@@ -349,6 +350,9 @@
                     currentGrid = 0;
                 }
                 [self initGrid:currentGrid++];
+                if (gameContinuing) {
+                    gameContinuing = FALSE;
+                }
                 for (Guardian *g in guardians) {
                     g.canFire = TRUE;
                 }
@@ -417,6 +421,11 @@
             [ship updateWithDelta:aDelta];
             if (ship.state == EntityState_Dead &&
                 ship.explosion.animation.state == kAnimationState_Stopped) {
+                if (playerLives == 0) {
+                    sceneState = SceneState_GameOver;
+                    lastTimeInLoop = 0;
+                    return;
+                }
                 if (cubeCount == 0) {
                     sceneState = SceneState_LevelPauseAndInit;
                     lastTimeInLoop = 0;
@@ -427,6 +436,24 @@
             }
 
             break;
+
+#pragma mark SceneState_GameOver
+        case SceneState_GameOver:
+            [starfield updateWithDelta:aDelta];
+            for (Guardian *g in guardians) {
+                [g updateWithDelta:aDelta];
+                for (Fireball *f in g.fireballs) {
+                    [f updateWithDelta:aDelta];
+                }
+            }
+            for (Cube *c in cubes) {
+                [c updateWithDelta:aDelta];
+            }
+            for (SpikeMine *s in spikeMines) {
+                [s updateWithDelta:aDelta];
+            }
+            break;
+
 
         default:
             break;
@@ -464,11 +491,12 @@
             [sharedImageRenderManager renderImages];
             break;
 
-
 #pragma mark SceneState_Running
 #pragma mark SceneState_ShipRespawn
+#pragma mark SceneState_GameOver
         case SceneState_Running:
         case SceneState_ShipRespawn:
+        case SceneState_GameOver:
             [starfield renderParticles];
             [self updateStatus];
             for (Cube *c in cubes) {
@@ -520,12 +548,19 @@
         }
     }
 
+    int gridNumberDisplayed;
+    if (gameContinuing) {
+        gridNumberDisplayed = currentGrid + 1;
+    } else {
+        gridNumberDisplayed = currentGrid;
+    }
+
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [statusFont renderStringAt:CGPointMake(appDelegate.GUARDIAN_LEFT_BASE+appDelegate.GUARDIAN_WIDTH, appDelegate.GUARDIAN_TOP_BASE)
-                              text:[NSString stringWithFormat:@"Grid: %i    Score: %i", currentGrid, score]];
+                              text:[NSString stringWithFormat:@"Grid: %i    Score: %i", gridNumberDisplayed, score]];
     } else {
         [statusFont renderStringAt:CGPointMake(appDelegate.GUARDIAN_LEFT_BASE+appDelegate.GUARDIAN_WIDTH, appDelegate.GUARDIAN_TOP_BASE-2)
-                              text:[NSString stringWithFormat:@"Grid: %i    Score: %i", currentGrid, score]];
+                              text:[NSString stringWithFormat:@"Grid: %i    Score: %i", gridNumberDisplayed, score]];
     }
 }
 
@@ -604,8 +639,15 @@
                     ship.isThrusting = !ship.isThrusting;
                 }
             }
+            break;
 
-            if( numTaps > 2 ) {
+#pragma mark SceneState_GameOver
+        case SceneState_GameOver:
+            if (numTaps == 1) {
+                NSDictionary *touchLoc = [NSDictionary dictionaryWithObject:[NSValue valueWithCGPoint:[touch locationInView:self]]
+                                                                     forKey:@"location"];
+                [self performSelector:@selector(handleSingleTap:) withObject:touchLoc afterDelay:0.3];
+            } else if (numTaps == 2) {
                 [self.viewController showPauseView];
             }
             break;
@@ -614,6 +656,14 @@
             break;
     }
 
+}
+
+- (void)handleSingleTap:(NSDictionary *)touches {
+    [self resetGuardiansAndClearGrid];
+    --currentGrid;
+    gameContinuing = TRUE;
+    [self initGame];
+    sceneState = SceneState_LevelPauseAndInit;
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
