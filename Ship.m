@@ -96,6 +96,7 @@
     idleTimer = 0;
     safePeriod = 0.5;
     shield = [[Shield alloc] initWithPixelLocation:CGPointMake(0, 0)];
+    colliding = FALSE;
     return self;
 }
 
@@ -274,16 +275,30 @@
         (pixelLocation.x + collisionXOffset >= otherEntity.collisionBox.x + otherEntity.collisionXOffset + otherEntity.collisionWidth) ||
         (otherEntity.collisionBox.y + otherEntity.collisionYOffset >= pixelLocation.y + collisionYOffset + collisionHeight) ||
         (otherEntity.collisionBox.x + otherEntity.collisionXOffset >= pixelLocation.x + collisionXOffset + collisionWidth)) {
+        if (otherEntity.pixelLocation.x == cubeLocation.x && otherEntity.pixelLocation.y == cubeLocation.y) {
+            colliding = FALSE;
+        }
         return;
     }
     if ([otherEntity isKindOfClass:[Cube class]]) {
-        otherEntity.state = EntityState_Dead;
-        appDelegate.glView.cubeCount--;
-        [appDelegate.glView updateScore];
+        Cube *c = (Cube*)otherEntity;
+        if (c.isDoubleCube) {
+            c.isDoubleCube = FALSE;
+            [c changeAnimation];
+            [appDelegate.glView updateScore];
+            colliding = TRUE;
+            cubeLocation = c.pixelLocation;
+            return;
+        }
+        if (!colliding) {
+            otherEntity.state = EntityState_Dead;
+            appDelegate.glView.cubeCount--;
+            [appDelegate.glView updateScore];
 #ifdef GAMEPLAY_DEBUG
-        NSLog(@"cubeCount -- %i", appDelegate.glView.cubeCount);
+            NSLog(@"cubeCount -- %i", appDelegate.glView.cubeCount);
 #endif
-        return;
+            return;
+        }
     }
     if ([otherEntity isKindOfClass:[SpikeMine class]]) {
 #ifdef GAMEPLAY_DEBUG

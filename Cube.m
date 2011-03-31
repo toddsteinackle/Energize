@@ -16,8 +16,9 @@
 
 @implementation Cube
 
+@synthesize isDoubleCube;
 
-- (id)initWithPixelLocation:(CGPoint)aLocation andAppearingDelay:(float)apDelay {
+- (id)initWithPixelLocation:(CGPoint)aLocation andAppearingDelay:(float)apDelay isDoubleCube:(BOOL)DoubleCube {
     self = [super initWithPixelLocation:aLocation];
     if (self != nil) {
         width = 33;
@@ -25,11 +26,19 @@
 
         float delay = 0.07f;
         int frames = 12;
-        animation = [[Animation alloc] init];
+        singleCube = [[Animation alloc] init];
+        doubleCube = [[Animation alloc] init];
         if (1 == (arc4random() % 2 + 1)) {
-            [self setupAnimation:animation spriteSheet:@"cube_purple.png" animationDelay:delay numFrames:frames];
+            [self setupAnimation:singleCube spriteSheet:@"cube_purple.png" animationDelay:delay numFrames:frames];
+            [self setupAnimation:doubleCube spriteSheet:@"cube_red.png" animationDelay:delay numFrames:frames];
         } else {
-            [self setupAnimation:animation spriteSheet:@"cube_purple_reverse.png" animationDelay:delay numFrames:frames];
+            [self setupAnimation:singleCube spriteSheet:@"cube_purple_reverse.png" animationDelay:delay numFrames:frames];
+            [self setupAnimation:doubleCube spriteSheet:@"cube_red_reverse.png" animationDelay:delay numFrames:frames];
+        }
+        if (DoubleCube) {
+            animation = doubleCube;
+        } else {
+            animation = singleCube;
         }
         animation.type = kAnimationType_Once;
         state = EntityState_Idle;
@@ -42,8 +51,16 @@
         collisionBox.y = pixelLocation.y - (appDelegate.heightScaleFactor * height / 2);
         appearingDelay = apDelay;
         appearingTimer = 0;
+        isDoubleCube = DoubleCube;
     }
     return self;
+}
+
+- (void)changeAnimation {
+    singleCube.currentFrame = doubleCube.currentFrame;
+    singleCube.state = EntityState_Alive;
+    animation = singleCube;
+    animation.state = kAnimationState_Running;
 }
 
 - (void)updateWithDelta:(GLfloat)aDelta {
@@ -99,7 +116,8 @@
 }
 
 - (void)dealloc {
-    [animation release];
+    [singleCube release];
+    [doubleCube release];
     [super dealloc];
 }
 

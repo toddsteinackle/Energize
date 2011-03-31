@@ -11,6 +11,14 @@
 
 @interface Cube : AbstractEntity {
 
+    Animation *singleCube;
+    Animation *doubleCube;
+    bool isDoubleCube;
 }
+
+@property (assign, nonatomic) bool isDoubleCube;
+
+- (id)initWithPixelLocation:(CGPoint)aLocation andAppearingDelay:(float)apDelay isDoubleCube:(BOOL)isDoubleCube;
+- (void)changeAnimation;
 
 @end

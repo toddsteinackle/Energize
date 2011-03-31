@@ -128,7 +128,7 @@
             { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '},
             { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
             { 'c', 'm', 'c', ' ', ' ', ' ', 'c', ' ', 'c'},
-            { 'c', ' ', 'c', ' ', 's', ' ', 'c', ' ', 'c'},
+            { 'c', ' ', 'd', ' ', 's', ' ', 'd', ' ', 'c'},
             { 'c', ' ', 'c', ' ', ' ', ' ', 'c', ' ', 'c'},
             { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
             { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '}
@@ -138,8 +138,8 @@
         {
             // 1
             { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
-            { 'c', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
-            { 'c', ' ', ' ', ' ', 'm', 'c', 'c', 'c', ' '},
+            { 'c', 'd', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
+            { 'c', 'd', ' ', ' ', 'm', 'c', 'c', 'c', ' '},
             { 'c', 'm', ' ', ' ', 's', ' ', ' ', ' ', ' '},
             { ' ', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
             { ' ', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
@@ -149,11 +149,11 @@
         {
             { ' ', ' ', 'c', 'c', 'c', 'c', 'c', ' ', ' '},
             { ' ', ' ', 'c', 'c', 'c', 'c', 'c', ' ', ' '},
-            { ' ', ' ', 'c', ' ', ' ', ' ', 'c', ' ', ' '},
-            { ' ', ' ', 's', ' ', 'm', ' ', 'c', ' ', ' '},
-            { ' ', ' ', ' ', ' ', ' ', ' ', 'c', ' ', ' '},
-            { ' ', ' ', 'c', 'c', 'c', 'c', 'c', ' ', ' '},
-            { ' ', ' ', 'c', 'c', 'c', 'c', 'c', ' ', ' '}
+            { ' ', ' ', 'c', 'd', 'd', 'd', 'c', 'd', ' '},
+            { ' ', ' ', 's', ' ', 'm', ' ', 'c', 'd', ' '},
+            { ' ', 'd', ' ', ' ', ' ', ' ', 'c', 'd', ' '},
+            { ' ', 'd', 'c', 'c', 'c', 'c', 'c', ' ', ' '},
+            { ' ', 'd', 'c', 'c', 'c', 'c', 'c', ' ', ' '}
         },
     };
 
@@ -179,12 +179,25 @@
                 case 'c':
                     cube = [[Cube alloc] initWithPixelLocation:CGPointMake([appDelegate getGridCoordinates:i:j].x,
                                                                            [appDelegate getGridCoordinates:i:j].y)
-                                             andAppearingDelay:0.5+RANDOM_0_TO_1()];
+                                             andAppearingDelay:0.5+RANDOM_0_TO_1()
+                                                  isDoubleCube:FALSE];
 
                     [cubes addObject:cube];
                     [cube release];
                     ++cubeCount;
                     break;
+
+                case 'd':
+                    cube = [[Cube alloc] initWithPixelLocation:CGPointMake([appDelegate getGridCoordinates:i:j].x,
+                                                                           [appDelegate getGridCoordinates:i:j].y)
+                                             andAppearingDelay:0.5+RANDOM_0_TO_1()
+                                                  isDoubleCube:TRUE];
+
+                    [cubes addObject:cube];
+                    [cube release];
+                    ++cubeCount;
+                    break;
+
 
                 case 'm':
                     spike = [[SpikeMine alloc] initWithPixelLocation:CGPointMake([appDelegate getGridCoordinates:i:j].x,
@@ -532,7 +545,7 @@
                 [c render];
             }
             for (SpikeMine *s in spikeMines) {
-            [s render];
+                [s render];
             }
             for (Guardian *g in guardians) {
                 [g render];

@@ -40,6 +40,8 @@ typedef enum {
     float idleTimer, safePeriod;
     bool justAppeared;
     Shield *shield;
+    bool colliding;
+    CGPoint cubeLocation;
 }
 
 @property (nonatomic, assign) shipDirection direction;
