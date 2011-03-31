@@ -62,6 +62,7 @@ typedef enum {
     SkillLevel skillLevel;
 
     BitmapFont *statusFont;
+    BitmapFont *largeMessageFont;
     Image *statusShip;
     int score;
     int currentCubeValue;

@@ -62,18 +62,26 @@
         currentGrid = 0;
         numberOfGrids = 3;
 
-        [self initGuardians];
 
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             statusFont = [[BitmapFont alloc] initWithFontImageNamed:@"status.png"
                                                         controlFile:@"status"
                                                               scale:Scale2fMake(1.0f, 1.0f)
                                                              filter:GL_LINEAR];
+
+            largeMessageFont = [[BitmapFont alloc] initWithFontImageNamed:@"largeMessageFont.png"
+                                                              controlFile:@"largeMessageFont"
+                                                                    scale:Scale2fMake(1.0f, 1.0f) filter:GL_LINEAR];
+
         } else {
             statusFont = [[BitmapFont alloc] initWithFontImageNamed:@"status-iphone.png"
                                                         controlFile:@"status-iphone"
                                                               scale:Scale2fMake(1.0f, 1.0f)
                                                              filter:GL_LINEAR];
+
+            largeMessageFont = [[BitmapFont alloc] initWithFontImageNamed:@"status.png"
+                                                              controlFile:@"status"
+                                                                    scale:Scale2fMake(1.0f, 1.0f) filter:GL_LINEAR];
         }
         statusShip = [[Image alloc] initWithImageNamed:@"ship-up.png" filter:GL_LINEAR];
         gameContinuing = FALSE;
@@ -206,6 +214,7 @@
             switch (currentGrid) {
                 case 0:
                 case 1:
+                case 2:
                     for (Guardian *g in guardians) {
                         g.baseFireDelay = 7;
                         g.chanceForTwoFireballs = 5;
@@ -309,6 +318,8 @@
                 return;
             }
             if (lastTimeInLoop) {
+                [guardians removeAllObjects];
+                [self initGuardians];
                 [self initGame];
                 sceneState = SceneState_GuardianTransport;
                 lastTimeInLoop = 0;
@@ -493,10 +504,8 @@
 
 #pragma mark SceneState_Running
 #pragma mark SceneState_ShipRespawn
-#pragma mark SceneState_GameOver
         case SceneState_Running:
         case SceneState_ShipRespawn:
-        case SceneState_GameOver:
             [starfield renderParticles];
             [self updateStatus];
             for (Cube *c in cubes) {
@@ -514,6 +523,38 @@
             [ship render];
             [sharedImageRenderManager renderImages];
             break;
+
+#pragma mark SceneState_GameOver
+        case SceneState_GameOver:
+            [starfield renderParticles];
+            [self updateStatus];
+            for (Cube *c in cubes) {
+                [c render];
+            }
+            for (SpikeMine *s in spikeMines) {
+            [s render];
+            }
+            for (Guardian *g in guardians) {
+                [g render];
+                for (Fireball *f in g.fireballs) {
+                    [f render];
+                }
+            }
+            [sharedImageRenderManager renderImages];
+
+
+            [largeMessageFont renderStringJustifiedInFrame:CGRectMake(0, appDelegate.SCREEN_HEIGHT/2, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2)
+                                                 justification:BitmapFontJustification_MiddleCentered text:@"Game Over"];
+
+            [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
+                                             justification:BitmapFontJustification_TopCentered text:@"Tap to play again, starting at current grid."];
+
+            [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
+                                             justification:BitmapFontJustification_MiddleCentered text:@"Double Tap to return to main menu."];
+
+            [sharedImageRenderManager renderImages];
+            break;
+
 
         default:
             break;
@@ -568,6 +609,17 @@
 #pragma mark handle input
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 
+    UITouch *aTouch = [touches anyObject];
+    switch (sceneState) {
+        case SceneState_GameOver:
+            if (aTouch.tapCount == 2) {
+                [NSObject cancelPreviousPerformRequestsWithTarget:self];
+            }
+            break;
+
+        default:
+            break;
+    }
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -648,7 +700,9 @@
                                                                      forKey:@"location"];
                 [self performSelector:@selector(handleSingleTap:) withObject:touchLoc afterDelay:0.3];
             } else if (numTaps == 2) {
-                [self.viewController showPauseView];
+                sceneState = SceneState_GameBegin;
+                currentGrid = 0;
+                [self.viewController quitGame];
             }
             break;
 

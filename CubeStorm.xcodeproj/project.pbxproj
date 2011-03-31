@@ -60,6 +60,8 @@
 		5F5D2C36134187E8009D98E6 /* status-iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F5D2C34134187E8009D98E6 /* status-iphone.png */; };
 		5F5E29EF131DEEAE00ED7D66 /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F5E29EE131DEEAE00ED7D66 /* GLView.m */; };
 		5F73F2761301F83A0017A10A /* PauseMenuViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F73F2751301F83A0017A10A /* PauseMenuViewController-iPad.xib */; };
+		5F9B0F271343E1FA00AE10D3 /* largeMessageFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 5F9B0F251343E1FA00AE10D3 /* largeMessageFont.fnt */; };
+		5F9B0F281343E1FA00AE10D3 /* largeMessageFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F9B0F261343E1FA00AE10D3 /* largeMessageFont.png */; };
 		5FA4F44B13295F3D00179DC4 /* Asteroid.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FA4F44A13295F3D00179DC4 /* Asteroid.m */; };
 		5FA64494132945F7008FE442 /* pss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FA64492132945F7008FE442 /* pss.plist */; };
 		5FA64495132945F7008FE442 /* pss.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FA64493132945F7008FE442 /* pss.png */; };
@@ -162,6 +164,8 @@
 		5F5E29ED131DEEAE00ED7D66 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
 		5F5E29EE131DEEAE00ED7D66 /* GLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLView.m; sourceTree = "<group>"; };
 		5F73F2751301F83A0017A10A /* PauseMenuViewController-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "PauseMenuViewController-iPad.xib"; sourceTree = "<group>"; };
+		5F9B0F251343E1FA00AE10D3 /* largeMessageFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = largeMessageFont.fnt; sourceTree = "<group>"; };
+		5F9B0F261343E1FA00AE10D3 /* largeMessageFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = largeMessageFont.png; sourceTree = "<group>"; };
 		5FA4F44913295F3D00179DC4 /* Asteroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Asteroid.h; sourceTree = "<group>"; };
 		5FA4F44A13295F3D00179DC4 /* Asteroid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Asteroid.m; sourceTree = "<group>"; };
 		5FA64492132945F7008FE442 /* pss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pss.plist; sourceTree = "<group>"; };
@@ -301,6 +305,8 @@
 		5FA644911329451A008FE442 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				5F9B0F251343E1FA00AE10D3 /* largeMessageFont.fnt */,
+				5F9B0F261343E1FA00AE10D3 /* largeMessageFont.png */,
 				5F5D2C33134187E8009D98E6 /* status-iphone.fnt */,
 				5F5D2C34134187E8009D98E6 /* status-iphone.png */,
 				5F5D2C1D13418378009D98E6 /* status.fnt */,
@@ -459,6 +465,8 @@
 				5F5D2C35134187E8009D98E6 /* status-iphone.fnt in Resources */,
 				5F5D2C36134187E8009D98E6 /* status-iphone.png in Resources */,
 				5F1D543013428AC700965620 /* ship-up.png in Resources */,
+				5F9B0F271343E1FA00AE10D3 /* largeMessageFont.fnt in Resources */,
+				5F9B0F281343E1FA00AE10D3 /* largeMessageFont.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
