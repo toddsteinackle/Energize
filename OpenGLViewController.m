@@ -50,8 +50,12 @@
 
 - (void)quitGame {
     if (appDelegate.ios4orGreater) {
+        appDelegate.glView.sceneState = SceneState_GameBegin;
+        appDelegate.glView.currentGrid = 0;
         [appDelegate.viewController dismissGLView];
     } else {
+        appDelegate.glView.sceneState = SceneState_GameBegin;
+        appDelegate.glView.currentGrid = 0;
         [self dismissModalViewControllerAnimated:NO];
         [appDelegate stopAnimation];
         [self dismissModalViewControllerAnimated:NO];

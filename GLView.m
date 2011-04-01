@@ -790,8 +790,6 @@
                                                                      forKey:@"location"];
                 [self performSelector:@selector(handleSingleTap:) withObject:touchLoc afterDelay:0.3];
             } else if (numTaps == 2) {
-                sceneState = SceneState_GameBegin;
-                currentGrid = 0;
                 [self.viewController quitGame];
             }
             break;

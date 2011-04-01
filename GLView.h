@@ -81,7 +81,7 @@ typedef enum {
 @property (nonatomic, assign) int cubeCount;
 @property (nonatomic, assign) SceneState sceneState;
 @property (nonatomic, assign) double lastTimeInLoop;
-@property (nonatomic, readonly) int currentGrid;
+@property (nonatomic, assign) int currentGrid;
 @property (nonatomic, assign) int score;
 @property (nonatomic, assign) int playerLives;
 @property (nonatomic, assign) bool trackingTime;
