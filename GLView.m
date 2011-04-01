@@ -85,9 +85,14 @@
                                                               controlFile:@"status"
                                                                     scale:Scale2fMake(1.0f, 1.0f) filter:GL_LINEAR];
         }
-        statusShip = [[Image alloc] initWithImageNamed:@"ship-up.png" filter:GL_LINEAR];
-        timerBar = [[Image alloc] initWithImageNamed:@"timer_bar.png" filter:GL_LINEAR];
-        pauseButton = [[Image alloc] initWithImageNamed:@"pause_button.png" filter:GL_LINEAR];
+
+        PackedSpriteSheet *pss = [PackedSpriteSheet packedSpriteSheetForImageNamed:@"pss.png"
+                                                                       controlFile:@"pss"
+                                                                       imageFilter:GL_LINEAR];
+        statusShip = [pss imageForKey:@"ship-up.png"];
+        timerBar = [pss imageForKey:@"timer_bar.png"];
+        pauseButton = [pss imageForKey:@"pause_button.png"];
+
         gameContinuing = FALSE;
         timeToInitTimerDisplay = 1.4;
 
@@ -392,7 +397,7 @@
             for (Guardian *g in guardians) {
                 [g updateWithDelta:aDelta];
             }
-            if (CACurrentMediaTime() - lastTimeInLoop < 2.45) {
+            if (CACurrentMediaTime() - lastTimeInLoop < 2.25) {
                 return;
             }
             if (lastTimeInLoop) {

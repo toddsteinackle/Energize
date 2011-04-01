@@ -93,7 +93,7 @@
         firing.type = kAnimationType_Repeating;
         firing.state = kAnimationState_Stopped;
 
-        delay = 0.06f;
+        delay = 0.05f;
         teleporting = [[Animation alloc] init];
         [self setupAnimation:teleporting
                  spriteSheet:@"baddie-teleport-1.png"
