@@ -87,6 +87,7 @@
         }
         statusShip = [[Image alloc] initWithImageNamed:@"ship-up.png" filter:GL_LINEAR];
         timerBar = [[Image alloc] initWithImageNamed:@"timer_bar.png" filter:GL_LINEAR];
+        pauseButton = [[Image alloc] initWithImageNamed:@"pause_button.png" filter:GL_LINEAR];
         gameContinuing = FALSE;
         timeToInitTimerDisplay = 1.4;
 
@@ -391,7 +392,7 @@
             for (Guardian *g in guardians) {
                 [g updateWithDelta:aDelta];
             }
-            if (CACurrentMediaTime() - lastTimeInLoop < 2.25) {
+            if (CACurrentMediaTime() - lastTimeInLoop < 2.45) {
                 return;
             }
             if (lastTimeInLoop) {
@@ -650,6 +651,10 @@
         }
     }
 
+    [pauseButton renderAtPoint:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE, appDelegate.GUARDIAN_TOP_BOUND)
+                         scale:Scale2fMake(appDelegate.widthScaleFactor, appDelegate.heightScaleFactor)
+                      rotation:0];
+
     int gridNumberDisplayed;
     if (gameContinuing) {
         gridNumberDisplayed = currentGrid + 1;
@@ -753,11 +758,20 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 
     UITouch* touch = [touches anyObject];
-#ifdef INPUT_DEBUG
     CGPoint loc = [touch locationInView:self];
+#ifdef INPUT_DEBUG
     NSLog(@"x -- %f y -- %f", loc.x, loc.y);
 #endif
     NSUInteger numTaps = [touch tapCount];
+
+    if (sceneState != SceneState_GameBegin && sceneState != SceneState_GuardianTransport) {
+        if (CGRectContainsPoint(CGRectMake(appDelegate.GUARDIAN_RIGHT_BASE, 0,
+                                           79*appDelegate.widthScaleFactor, 76*appDelegate.heightScaleFactor), loc)) {
+            [self.viewController showPauseView];
+            return;
+        }
+    }
+
     switch (sceneState) {
 
 #pragma mark SceneState_Running
@@ -785,6 +799,7 @@
         default:
             break;
     }
+
 
 }
 

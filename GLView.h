@@ -65,6 +65,7 @@ typedef enum {
     BitmapFont *largeMessageFont;
     Image *statusShip;
     Image *timerBar;
+    Image *pauseButton;
     int score, timerBonusScore;
     int currentCubeValue;
     int playerLives;

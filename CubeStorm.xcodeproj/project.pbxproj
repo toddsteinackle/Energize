@@ -73,6 +73,7 @@
 		5FE99C0E12FDD48300F60AA4 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE99C0D12FDD48300F60AA4 /* GameKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5FEC33F91329D058004A94C7 /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FEC33F81329D058004A94C7 /* Ship.m */; };
 		5FF2A626131F347B0081BAA4 /* starfield.pex in Resources */ = {isa = PBXBuildFile; fileRef = 5FF2A625131F347B0081BAA4 /* starfield.pex */; };
+		5FFA4DA71346627F009DD95B /* pause_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FFA4DA61346627F009DD95B /* pause_button.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -182,6 +183,7 @@
 		5FEC33F71329D057004A94C7 /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
 		5FEC33F81329D058004A94C7 /* Ship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ship.m; sourceTree = "<group>"; };
 		5FF2A625131F347B0081BAA4 /* starfield.pex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = starfield.pex; sourceTree = "<group>"; };
+		5FFA4DA61346627F009DD95B /* pause_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_button.png; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CubeStorm-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CubeStorm-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -307,6 +309,7 @@
 		5FA644911329451A008FE442 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				5FFA4DA61346627F009DD95B /* pause_button.png */,
 				5F7756E71345601E00A60E80 /* timer_bar.png */,
 				5F9B0F251343E1FA00AE10D3 /* largeMessageFont.fnt */,
 				5F9B0F261343E1FA00AE10D3 /* largeMessageFont.png */,
@@ -471,6 +474,7 @@
 				5F9B0F271343E1FA00AE10D3 /* largeMessageFont.fnt in Resources */,
 				5F9B0F281343E1FA00AE10D3 /* largeMessageFont.png in Resources */,
 				5F7756E81345601E00A60E80 /* timer_bar.png in Resources */,
+				5FFA4DA71346627F009DD95B /* pause_button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
