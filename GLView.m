@@ -34,6 +34,8 @@
 @synthesize currentGrid;
 @synthesize score;
 @synthesize playerLives;
+@synthesize trackingTime;
+@synthesize beatTimer;
 
 #pragma mark -
 #pragma mark init
@@ -84,7 +86,9 @@
                                                                     scale:Scale2fMake(1.0f, 1.0f) filter:GL_LINEAR];
         }
         statusShip = [[Image alloc] initWithImageNamed:@"ship-up.png" filter:GL_LINEAR];
+        timerBar = [[Image alloc] initWithImageNamed:@"timer_bar.png" filter:GL_LINEAR];
         gameContinuing = FALSE;
+        timeToInitTimerDisplay = 1.4;
 
     }
 
@@ -112,6 +116,13 @@
     [cubes removeAllObjects];
     [spikeMines removeAllObjects];
     [ship release];
+    trackingTime = FALSE;
+    beatTimer = FALSE;
+    initingTimer = TRUE;
+    initingTimerTracker = 0;
+    timerBonus = FALSE;
+    timerBonusScore = 0;
+    levelPauseAndInitWait = 1.0;
 
     // [row][col]
 //        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -224,7 +235,7 @@
             break;
 
         case SkillLevel_Normal:
-            switch (currentGrid) {
+            switch (grid) {
                 case 0:
                 case 1:
                 case 2:
@@ -235,6 +246,8 @@
                         g.chanceForFourFireballs = 10;
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
+
+                    timer = timeToCompleteGrid = 30;
 
                     break;
 
@@ -317,6 +330,39 @@
     score += currentCubeValue;
 }
 
+- (void)updateTimerWithDelta:(float)aDelta {
+#ifdef TIMER_DEBUG
+    NSLog(@"beatTimer: %i", beatTimer);
+#endif
+    if (trackingTime) {
+        timer -= aDelta;
+#ifdef TIMER_DEBUG
+        NSLog(@"timer: %f", timer);
+#endif
+        if (timer < 0) {
+#ifdef TIMER_DEBUG
+            NSLog(@"Times up.");
+#endif
+            timer = 0;
+            trackingTime = FALSE;
+        }
+        return;
+    }
+    if (initingTimer) {
+        initingTimerTracker += aDelta;
+        if (initingTimerTracker > timeToInitTimerDisplay) {
+            initingTimer = FALSE;
+            initingTimerTracker = 0;
+        }
+    }
+}
+
+- (void)calculateTimerBonus {
+    timerBonusScore = 1000 * timer;
+    timerBonus = TRUE;
+    levelPauseAndInitWait = 1.5;
+}
+
 #pragma mark -
 #pragma mark update
 - (void)updateSceneWithDelta:(float)aDelta {
@@ -325,7 +371,6 @@
 
 #pragma mark SceneState_GameBegin
         case SceneState_GameBegin:
-
             [starfield updateWithDelta:aDelta];
             if (CACurrentMediaTime() - lastTimeInLoop < 0.5) {
                 return;
@@ -338,12 +383,10 @@
                 lastTimeInLoop = 0;
             }
             lastTimeInLoop = CACurrentMediaTime();
-
             break;
 
 #pragma mark SceneState_GuardianTransport
         case SceneState_GuardianTransport:
-
             [starfield updateWithDelta:aDelta];
             for (Guardian *g in guardians) {
                 [g updateWithDelta:aDelta];
@@ -362,7 +405,6 @@
 #pragma mark SceneState_LevelPauseAndInit
         case SceneState_LevelPauseAndInit:
             [starfield updateWithDelta:aDelta];
-
             for (Guardian *g in guardians) {
                 [g updateWithDelta:aDelta];
             }
@@ -370,6 +412,8 @@
                 return;
             }
             if (lastTimeInLoop) {
+                score += timerBonusScore;
+                timerBonusScore = 0;
                 if (currentGrid == numberOfGrids) {
                     currentGrid = 0;
                 }
@@ -384,11 +428,11 @@
                 lastTimeInLoop = 0;
             }
             lastTimeInLoop = CACurrentMediaTime();
-
             break;
 
 #pragma mark SceneState_ShipRespawn
         case SceneState_ShipRespawn:
+            [self updateTimerWithDelta:aDelta];
             [starfield updateWithDelta:aDelta];
             for (Guardian *g in guardians) {
                 [g updateWithDelta:aDelta];
@@ -412,13 +456,12 @@
                 lastTimeInLoop = 0;
             }
             lastTimeInLoop = CACurrentMediaTime();
-
             break;
 
 #pragma mark SceneState_Running
         case SceneState_Running:
+            [self updateTimerWithDelta:aDelta];
             [starfield updateWithDelta:aDelta];
-
             for (Guardian *g in guardians) {
                 [g updateWithDelta:aDelta];
                 for (Fireball *f in g.fireballs) {
@@ -458,7 +501,6 @@
                     lastTimeInLoop = 0;
                 }
             }
-
             break;
 
 #pragma mark SceneState_GameOver
@@ -513,6 +555,12 @@
                 [g render];
             }
             [sharedImageRenderManager renderImages];
+            if (timerBonus) {
+                [statusFont renderStringJustifiedInFrame:CGRectMake(0, appDelegate.SCREEN_HEIGHT/2, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2)
+                                           justification:BitmapFontJustification_MiddleCentered
+                                                    text:[NSString stringWithFormat:@"Timer Bonus: %i",timerBonusScore]];
+                [sharedImageRenderManager renderImages];
+            }
             break;
 
 #pragma mark SceneState_Running
@@ -615,6 +663,21 @@
     } else {
         [statusFont renderStringAt:CGPointMake(appDelegate.GUARDIAN_LEFT_BASE+appDelegate.GUARDIAN_WIDTH, appDelegate.GUARDIAN_TOP_BASE-2)
                               text:[NSString stringWithFormat:@"Grid: %i    Score: %i", gridNumberDisplayed, score]];
+    }
+
+    if (sceneState != SceneState_GameOver) {
+        if (initingTimer) {
+            [timerBar renderAtPoint:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE+12*appDelegate.widthScaleFactor,
+                                                appDelegate.GUARDIAN_BOTTOM_BOUND+8*appDelegate.heightScaleFactor)
+                              scale:Scale2fMake(appDelegate.widthScaleFactor, (initingTimerTracker/timeToInitTimerDisplay)*appDelegate.heightScaleFactor)
+                           rotation:0];
+        } else {
+            [timerBar renderAtPoint:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE+12*appDelegate.widthScaleFactor,
+                                                appDelegate.GUARDIAN_BOTTOM_BOUND+8*appDelegate.heightScaleFactor)
+                              scale:Scale2fMake(appDelegate.widthScaleFactor, (timer/timeToCompleteGrid)*appDelegate.heightScaleFactor)
+                           rotation:0];
+        }
+
     }
 }
 
@@ -731,6 +794,7 @@
     gameContinuing = TRUE;
     [self initGame];
     sceneState = SceneState_LevelPauseAndInit;
+    initingTimer = TRUE;
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {

@@ -31,7 +31,7 @@
         height = 41;
 
         teleporting = [[Animation alloc] init];
-        float delay = 0.1f;
+        float delay = 0.08f;
         int frames = 24;
         [self setupAnimation:teleporting
                  spriteSheet:@"ship-teleport.png"
@@ -157,6 +157,9 @@
         case EntityState_Transporting:
             if (animation.state == kAnimationState_Stopped) {
                 state = EntityState_Idle;
+                if (appDelegate.glView.sceneState == SceneState_Running) {
+                    appDelegate.glView.trackingTime = TRUE;
+                }
             }
             break;
 
@@ -223,6 +226,11 @@
             }
             [self movementWithDelta:aDelta];
             if (appDelegate.glView.cubeCount == 0) {
+                if (appDelegate.glView.trackingTime) {
+                    appDelegate.glView.beatTimer = TRUE;
+                    appDelegate.glView.trackingTime = FALSE;
+                    [appDelegate.glView calculateTimerBonus];
+                }
                 [appDelegate.glView resetGuardiansAndClearGrid];
                 animation = warp;
                 animation.type = kAnimationType_Once;
@@ -239,6 +247,11 @@
 
         case EntityState_Dead:
             if (appDelegate.glView.cubeCount == 0) {
+                if (appDelegate.glView.trackingTime) {
+                    appDelegate.glView.beatTimer = TRUE;
+                    appDelegate.glView.trackingTime = FALSE;
+                    [appDelegate.glView calculateTimerBonus];
+                }
                 [appDelegate.glView resetGuardiansAndClearGrid];
             }
             break;
@@ -266,8 +279,8 @@
         default:
             break;
     }
-    [explosion render];
     [shield render];
+    [explosion render];
 }
 
 - (void)checkForCollisionWithEntityRenderedCenter:(AbstractEntity *)otherEntity {

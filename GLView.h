@@ -64,10 +64,15 @@ typedef enum {
     BitmapFont *statusFont;
     BitmapFont *largeMessageFont;
     Image *statusShip;
-    int score;
+    Image *timerBar;
+    int score, timerBonusScore;
     int currentCubeValue;
     int playerLives;
     bool gameContinuing;
+    bool trackingTime, beatTimer, initingTimer, timerBonus;
+
+    CGFloat timer, timeToCompleteGrid, initingTimerTracker, timeToInitTimerDisplay;
+    CGFloat levelPauseAndInitWait;
 
 }
 
@@ -78,6 +83,8 @@ typedef enum {
 @property (nonatomic, readonly) int currentGrid;
 @property (nonatomic, assign) int score;
 @property (nonatomic, assign) int playerLives;
+@property (nonatomic, assign) bool trackingTime;
+@property (nonatomic, assign) bool beatTimer;
 
 - (void)initGame;
 - (void)initGuardians;
@@ -86,5 +93,7 @@ typedef enum {
 - (void)updateScore;
 - (void)updateStatus;
 - (void)handleSingleTap:(NSDictionary *)touches;
+- (void)updateTimerWithDelta:(float)aDelta;
+- (void)calculateTimerBonus;
 
 @end
