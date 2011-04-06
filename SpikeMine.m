@@ -11,6 +11,7 @@
 #import "SoundManager.h"
 #import "Animation.h"
 #import "CubeStormAppDelegate.h"
+#import "Primitives.h"
 
 
 @implementation SpikeMine
@@ -71,7 +72,11 @@
 
 - (void)render {
 #ifdef COLLISION_DEBUG
-    [super render];
+    // Debug code that allows us to draw bounding boxes for the entity
+    // Draw the collision bounds in green
+    glColor4f(0, 1, 0, 1);
+    drawRect(CGRectMake(collisionBox.x + collisionXOffset, collisionBox.y + collisionYOffset,
+                        collisionWidth, collisionHeight));
 #endif
     switch (state) {
         case EntityState_Alive:

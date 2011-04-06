@@ -70,6 +70,7 @@
 		5FE99BC012FDCBB800F60AA4 /* MainMenuView-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE99BBE12FDCBB800F60AA4 /* MainMenuView-iPad.xib */; };
 		5FE99C0E12FDD48300F60AA4 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE99C0D12FDD48300F60AA4 /* GameKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		5FEC33F91329D058004A94C7 /* Ship.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FEC33F81329D058004A94C7 /* Ship.m */; };
+		5FF2A381134BE41B00EFBB98 /* TraversingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2A380134BE41B00EFBB98 /* TraversingEntity.m */; };
 		5FF2A626131F347B0081BAA4 /* starfield.pex in Resources */ = {isa = PBXBuildFile; fileRef = 5FF2A625131F347B0081BAA4 /* starfield.pex */; };
 /* End PBXBuildFile section */
 
@@ -177,6 +178,8 @@
 		5FE99C0D12FDD48300F60AA4 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		5FEC33F71329D057004A94C7 /* Ship.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ship.h; sourceTree = "<group>"; };
 		5FEC33F81329D058004A94C7 /* Ship.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ship.m; sourceTree = "<group>"; };
+		5FF2A37F134BE41B00EFBB98 /* TraversingEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TraversingEntity.h; sourceTree = "<group>"; };
+		5FF2A380134BE41B00EFBB98 /* TraversingEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TraversingEntity.m; sourceTree = "<group>"; };
 		5FF2A625131F347B0081BAA4 /* starfield.pex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = starfield.pex; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CubeStorm-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CubeStorm-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -336,6 +339,8 @@
 				5FEC33F81329D058004A94C7 /* Ship.m */,
 				5F4C89B1133E89EE00E68C91 /* Shield.h */,
 				5F4C89B2133E89EE00E68C91 /* Shield.m */,
+				5FF2A37F134BE41B00EFBB98 /* TraversingEntity.h */,
+				5FF2A380134BE41B00EFBB98 /* TraversingEntity.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -507,6 +512,7 @@
 				5F149F2B1329A07F006378FB /* Fireball.m in Sources */,
 				5FEC33F91329D058004A94C7 /* Ship.m in Sources */,
 				5F4C89B3133E89EE00E68C91 /* Shield.m in Sources */,
+				5FF2A381134BE41B00EFBB98 /* TraversingEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

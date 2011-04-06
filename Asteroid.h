@@ -6,10 +6,10 @@
 //  Copyright 2011 The No Quarter Arcade. All rights reserved.
 //
 
-#import "AbstractEntity.h"
+#import "TraversingEntity.h"
 
 
-@interface Asteroid : AbstractEntity {
+@interface Asteroid : TraversingEntity {
 
 }
 

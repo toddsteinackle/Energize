@@ -60,6 +60,7 @@
         guardians = [[NSMutableArray alloc] init];
         cubes = [[NSMutableArray alloc] init];
         spikeMines = [[NSMutableArray alloc] init];
+        asteroids = [[NSMutableArray alloc] init];
 
         currentGrid = 0;
         numberOfGrids = 3;
@@ -105,6 +106,7 @@
     [guardians release];
     [cubes release];
     [spikeMines release];
+    [asteroids release];
     [ship release];
     [super dealloc];
 }
@@ -121,6 +123,7 @@
 
     [cubes removeAllObjects];
     [spikeMines removeAllObjects];
+    [asteroids removeAllObjects];
     [ship release];
     trackingTime = FALSE;
     beatTimer = FALSE;
@@ -254,6 +257,9 @@
                     }
 
                     timer = timeToCompleteGrid = 30;
+                    Asteroid *asteroid = [[Asteroid alloc] initWithPixelLocation:CGPointMake(0, 0)];
+                    [asteroids addObject:asteroid];
+                    [asteroid release];
 
                     break;
 
@@ -329,6 +335,19 @@
     }
     for (SpikeMine *s in spikeMines) {
         s.state = EntityState_Dead;
+    }
+    for (Asteroid *a in asteroids) {
+        a.state = EntityState_Dead;
+    }
+}
+
+- (void)launchAsteroid {
+    Asteroid *a = [asteroids objectAtIndex:0];
+    if (a.state == EntityState_Idle) {
+        [asteroids removeAllObjects];
+        Asteroid *asteroid = [[Asteroid alloc] initWithPixelLocation:CGPointMake(0, 0)];
+        [asteroids addObject:asteroid];
+        [asteroid release];
     }
 }
 
@@ -452,6 +471,9 @@
             for (SpikeMine *s in spikeMines) {
                 [s updateWithDelta:aDelta];
             }
+            for (Asteroid *a in asteroids) {
+                [a updateWithDelta:aDelta];
+            }
             if (CACurrentMediaTime() - lastTimeInLoop < 1.0) {
                 return;
             }
@@ -467,6 +489,7 @@
 #pragma mark SceneState_Running
         case SceneState_Running:
             [self updateTimerWithDelta:aDelta];
+            [self launchAsteroid];
             [starfield updateWithDelta:aDelta];
             for (Guardian *g in guardians) {
                 [g updateWithDelta:aDelta];
@@ -488,6 +511,12 @@
                 [s updateWithDelta:aDelta];
                 if (s.state == EntityState_Alive && ship.state != EntityState_Dead) {
                     [ship checkForCollisionWithEntityRenderedCenter:s];
+                }
+            }
+            for (Asteroid *a in asteroids) {
+                [a updateWithDelta:aDelta];
+                if (a.state == EntityState_Alive && ship.state != EntityState_Dead) {
+                    [ship checkForCollisionWithEntity:a];
                 }
             }
 
@@ -523,6 +552,9 @@
             }
             for (SpikeMine *s in spikeMines) {
                 [s updateWithDelta:aDelta];
+            }
+            for (Asteroid *a in asteroids) {
+                [a updateWithDelta:aDelta];
             }
             break;
 
@@ -574,13 +606,16 @@
         case SceneState_Running:
         case SceneState_ShipRespawn:
             [starfield renderParticles];
-            [self updateStatus];
             for (Cube *c in cubes) {
                 [c render];
             }
             for (SpikeMine *s in spikeMines) {
                 [s render];
             }
+            for (Asteroid *a in asteroids) {
+                [a render];
+            }
+            [self updateStatus];
             for (Guardian *g in guardians) {
                 [g render];
                 for (Fireball *f in g.fireballs) {
@@ -594,13 +629,16 @@
 #pragma mark SceneState_GameOver
         case SceneState_GameOver:
             [starfield renderParticles];
-            [self updateStatus];
             for (Cube *c in cubes) {
                 [c render];
             }
             for (SpikeMine *s in spikeMines) {
                 [s render];
             }
+            for (Asteroid *a in asteroids) {
+                [a render];
+            }
+            [self updateStatus];
             for (Guardian *g in guardians) {
                 [g render];
                 for (Fireball *f in g.fireballs) {

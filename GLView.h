@@ -51,6 +51,7 @@ typedef enum {
     NSMutableArray *guardians;
     NSMutableArray *cubes;
     NSMutableArray *spikeMines;
+    NSMutableArray *asteroids;
     Ship *ship;
     int cubeCount;
     int currentGrid, numberOfGrids;
@@ -96,5 +97,6 @@ typedef enum {
 - (void)handleSingleTap:(NSDictionary *)touches;
 - (void)updateTimerWithDelta:(float)aDelta;
 - (void)calculateTimerBonus;
+- (void)launchAsteroid;
 
 @end

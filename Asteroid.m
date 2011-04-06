@@ -10,44 +10,27 @@
 #import "GLView.h"
 #import "SoundManager.h"
 #import "Animation.h"
+#import "CubeStormAppDelegate.h"
 
 
 @implementation Asteroid
 
 - (id)initWithPixelLocation:(CGPoint)aLocation {
+    width = 41;
+    height = 41;
     self = [super initWithPixelLocation:aLocation];
     if (self != nil) {
-        width = 41;
-        height = 41;
-
         float delay = 0.08f;
-        int frames = 24;
+        frames = 24;
         animation = [[Animation alloc] init];
         [self setupAnimation:animation spriteSheet:@"asteroid.png" animationDelay:delay numFrames:frames];
+
+        collisionWidth = appDelegate.widthScaleFactor * width *.8;
+        collisionHeight = appDelegate.heightScaleFactor * height *.8;
+        collisionXOffset = ((appDelegate.widthScaleFactor * width) - collisionWidth) / 2;
+        collisionYOffset = ((appDelegate.heightScaleFactor * height) - collisionHeight) / 2;
     }
     return self;
-}
-
-- (void)updateWithDelta:(GLfloat)aDelta {
-    [animation updateWithDelta:aDelta];
-}
-
-- (void)render {
-#ifdef COLLISION_DEBUG
-    [super render];
-#endif
-    [animation renderAtPoint:CGPointMake(pixelLocation.x, pixelLocation.y)
-                       scale:Scale2fMake(scaleWidth, scaleHeight)
-                    rotation:rotationAngle];
-}
-
-- (void)checkForCollisionWithEntity:(AbstractEntity *)otherEntity {
-
-}
-
-- (void)dealloc {
-    [animation release];
-    [super dealloc];
 }
 
 @end

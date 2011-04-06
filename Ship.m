@@ -16,6 +16,7 @@
 #import "Explosion.h"
 #import "SpikeMine.h"
 #import "Shield.h"
+#import "Asteroid.h"
 
 
 @implementation Ship
@@ -347,9 +348,10 @@
         return;
     }
 
-    if ([otherEntity isKindOfClass:[Fireball class]]) {
+    if ([otherEntity isKindOfClass:[Fireball class]] ||
+        [otherEntity isKindOfClass:[Asteroid class]]) {
 #ifdef GAMEPLAY_DEBUG
-        NSLog(@"ship fireball collision");
+        NSLog(@"ship fireball or asteroid collision");
 #endif
         state = EntityState_Dead;
         appDelegate.glView.playerLives--;
