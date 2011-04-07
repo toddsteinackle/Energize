@@ -132,7 +132,7 @@
     timerBonus = FALSE;
     timerBonusScore = 0;
     levelPauseAndInitWait = 1.0;
-    lastAsteroidLaunch = CACurrentMediaTime();
+    asteroidTimer = 0;
 
     // [row][col]
 //        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -348,19 +348,19 @@
     }
 }
 
-- (void)launchAsteroid {
-    if (CACurrentMediaTime() - lastAsteroidLaunch < asteroidLaunchDelay) {
-        return;
-    }
-    lastAsteroidLaunch = CACurrentMediaTime();
-    if (1 == (arc4random() % asteroidLaunchOdds + 1)) {
-        for (Asteroid *a in asteroids) {
-            if (a.state == EntityState_Idle) {
-                [a initLaunchLocationWithSpeed:60];
-                a.state = EntityState_Alive;
-                return;
+- (void)launchAsteroidWithDelta:(float)aDelta; {
+    asteroidTimer += aDelta;
+    if (asteroidTimer > asteroidLaunchDelay) {
+        if (1 == (arc4random() % asteroidLaunchOdds + 1)) {
+            for (Asteroid *a in asteroids) {
+                if (a.state == EntityState_Idle) {
+                    [a initLaunchLocationWithSpeed:60];
+                    a.state = EntityState_Alive;
+                    return;
+                }
             }
         }
+        asteroidTimer = 0;
     }
 }
 
@@ -502,7 +502,7 @@
 #pragma mark SceneState_Running
         case SceneState_Running:
             [self updateTimerWithDelta:aDelta];
-            [self launchAsteroid];
+            [self launchAsteroidWithDelta:aDelta];
             [starfield updateWithDelta:aDelta];
             for (Guardian *g in guardians) {
                 [g updateWithDelta:aDelta];
@@ -553,7 +553,7 @@
 
 #pragma mark SceneState_GameOver
         case SceneState_GameOver:
-            [self launchAsteroid];
+            [self launchAsteroidWithDelta:aDelta];
             [starfield updateWithDelta:aDelta];
             for (Guardian *g in guardians) {
                 [g updateWithDelta:aDelta];

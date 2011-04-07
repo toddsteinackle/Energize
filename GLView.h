@@ -77,7 +77,7 @@ typedef enum {
     CGFloat timer, timeToCompleteGrid, initingTimerTracker, timeToInitTimerDisplay;
     CGFloat levelPauseAndInitWait;
 
-    double asteroidLaunchDelay, lastAsteroidLaunch;
+    double asteroidLaunchDelay, asteroidTimer;
 
 }
 
@@ -100,6 +100,6 @@ typedef enum {
 - (void)handleSingleTap:(NSDictionary *)touches;
 - (void)updateTimerWithDelta:(float)aDelta;
 - (void)calculateTimerBonus;
-- (void)launchAsteroid;
+- (void)launchAsteroidWithDelta:(float)aDelta;;
 
 @end
