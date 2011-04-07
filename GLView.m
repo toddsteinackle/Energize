@@ -132,6 +132,7 @@
     timerBonus = FALSE;
     timerBonusScore = 0;
     levelPauseAndInitWait = 1.0;
+    lastAsteroidLaunch = CACurrentMediaTime();
 
     // [row][col]
 //        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -257,9 +258,15 @@
                     }
 
                     timer = timeToCompleteGrid = 30;
-                    Asteroid *asteroid = [[Asteroid alloc] initWithPixelLocation:CGPointMake(0, 0)];
-                    [asteroids addObject:asteroid];
-                    [asteroid release];
+
+                    asteroidLaunchDelay = 1.0;
+                    asteroidLaunchOdds = 10;
+                    maxAsteroids = 2;
+                    for (int i = 0; i < maxAsteroids; ++i) {
+                        Asteroid *asteroid = [[Asteroid alloc] initLaunchLocationWithSpeed:60];
+                        [asteroids addObject:asteroid];
+                        [asteroid release];
+                    }
 
                     break;
 
@@ -342,12 +349,18 @@
 }
 
 - (void)launchAsteroid {
-    Asteroid *a = [asteroids objectAtIndex:0];
-    if (a.state == EntityState_Idle) {
-        [asteroids removeAllObjects];
-        Asteroid *asteroid = [[Asteroid alloc] initWithPixelLocation:CGPointMake(0, 0)];
-        [asteroids addObject:asteroid];
-        [asteroid release];
+    if (CACurrentMediaTime() - lastAsteroidLaunch < asteroidLaunchDelay) {
+        return;
+    }
+    lastAsteroidLaunch = CACurrentMediaTime();
+    if (1 == (arc4random() % asteroidLaunchOdds + 1)) {
+        for (Asteroid *a in asteroids) {
+            if (a.state == EntityState_Idle) {
+                [a initLaunchLocationWithSpeed:60];
+                a.state = EntityState_Alive;
+                return;
+            }
+        }
     }
 }
 
@@ -540,6 +553,7 @@
 
 #pragma mark SceneState_GameOver
         case SceneState_GameOver:
+            [self launchAsteroid];
             [starfield updateWithDelta:aDelta];
             for (Guardian *g in guardians) {
                 [g updateWithDelta:aDelta];

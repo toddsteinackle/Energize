@@ -15,10 +15,10 @@
 
 @implementation Asteroid
 
-- (id)initWithPixelLocation:(CGPoint)aLocation {
+- (id)initLaunchLocationWithSpeed:(CGFloat)speed {
     width = 41;
     height = 41;
-    self = [super initWithPixelLocation:aLocation];
+    self = [super initLaunchLocationWithSpeed:speed];
     if (self != nil) {
         float delay = 0.08f;
         frames = 24;

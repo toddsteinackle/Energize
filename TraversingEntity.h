@@ -12,7 +12,11 @@ typedef enum {
     te_top,
     te_bottom,
     te_right,
-    te_left
+    te_left,
+    te_top_left,
+    te_top_right,
+    te_bottom_left,
+    te_bottom_right
 } launchLocation;
 
 @interface TraversingEntity : AbstractEntity {
@@ -22,5 +26,6 @@ typedef enum {
 }
 
 - (void)movementWithDelta:(float)aDelta;
+- (id)initLaunchLocationWithSpeed:(CGFloat)speed;
 
 @end

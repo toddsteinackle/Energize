@@ -70,11 +70,14 @@ typedef enum {
     int score, timerBonusScore;
     int currentCubeValue;
     int playerLives;
+    int maxAsteroids, asteroidLaunchOdds;
     bool gameContinuing;
     bool trackingTime, beatTimer, initingTimer, timerBonus;
 
     CGFloat timer, timeToCompleteGrid, initingTimerTracker, timeToInitTimerDisplay;
     CGFloat levelPauseAndInitWait;
+
+    double asteroidLaunchDelay, lastAsteroidLaunch;
 
 }
 

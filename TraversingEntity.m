@@ -15,12 +15,12 @@
 
 @implementation TraversingEntity
 
-- (id)initWithPixelLocation:(CGPoint)aLocation {
-    self = [super initWithPixelLocation:aLocation];
+- (id)initLaunchLocationWithSpeed:(CGFloat)speed {
+    self = [super initWithPixelLocation:CGPointMake(0, 0)];
     if (self != nil) {
         int drift = 40;
-        GLfloat speed = 60;
-        switch (arc4random() % 4 + 1) {
+        int diagonalDrift = 20;
+        switch (arc4random() % 8 + 1) {
             case 1:
                 launch_location = te_top;
                 pixelLocation.x = appDelegate.SCREEN_WIDTH / 2;
@@ -61,12 +61,44 @@
                 }
                 dx = speed * appDelegate.widthScaleFactor;
                 break;
+            case 5:
+                launch_location = te_top_left;
+                pixelLocation.x = 0 - width * appDelegate.widthScaleFactor;
+                pixelLocation.y = appDelegate.SCREEN_HEIGHT;
+                dy = ((arc4random() % drift + 1) + diagonalDrift) * appDelegate.heightScaleFactor;
+                dy = -dy;
+                dx = speed * appDelegate.widthScaleFactor;
+                break;
+            case 6:
+                launch_location = te_top_right;
+                pixelLocation.x = appDelegate.SCREEN_WIDTH;
+                pixelLocation.y = appDelegate.SCREEN_HEIGHT + height * appDelegate.heightScaleFactor;
+                dy = ((arc4random() % drift + 1) + diagonalDrift) * appDelegate.heightScaleFactor;
+                dy = -dy;
+                dx = speed * appDelegate.widthScaleFactor;
+                dx = -dx;
+                break;
+            case 7:
+                launch_location = te_bottom_right;
+                pixelLocation.x = appDelegate.SCREEN_WIDTH;
+                pixelLocation.y = 0 - height * appDelegate.heightScaleFactor;
+                dy = ((arc4random() % drift + 1) + diagonalDrift) * appDelegate.heightScaleFactor;
+                dx = speed * appDelegate.widthScaleFactor;
+                dx = -dx;
+                break;
+            case 8:
+                launch_location = te_bottom_left;
+                pixelLocation.x = 0 - width * appDelegate.widthScaleFactor;
+                pixelLocation.y = 0 - height * appDelegate.heightScaleFactor;
+                dy = ((arc4random() % drift + 1) + diagonalDrift) * appDelegate.heightScaleFactor;
+                dx = speed * appDelegate.widthScaleFactor;
+                break;
 
             default:
                 break;
         }
 
-        state = EntityState_Alive;
+        state = EntityState_Idle;
     }
     return self;
 }
@@ -93,6 +125,26 @@
             break;
         case te_left:
             if (pixelLocation.x > appDelegate.SCREEN_WIDTH || pixelLocation.y > appDelegate.SCREEN_HEIGHT || pixelLocation.y < 0) {
+                state = EntityState_Idle;
+            }
+            break;
+        case te_top_left:
+            if (pixelLocation.y < 0 || pixelLocation.x > appDelegate.SCREEN_WIDTH) {
+                state = EntityState_Idle;
+            }
+            break;
+        case te_top_right:
+            if (pixelLocation.x < 0 || pixelLocation.y < 0) {
+                state = EntityState_Idle;
+            }
+            break;
+        case te_bottom_right:
+            if (pixelLocation.y > appDelegate.SCREEN_HEIGHT || pixelLocation.x < 0) {
+                state = EntityState_Idle;
+            }
+            break;
+        case te_bottom_left:
+            if (pixelLocation.y > appDelegate.SCREEN_HEIGHT || pixelLocation.x > appDelegate.SCREEN_WIDTH) {
                 state = EntityState_Idle;
             }
             break;
