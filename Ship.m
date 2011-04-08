@@ -17,6 +17,7 @@
 #import "SpikeMine.h"
 #import "Shield.h"
 #import "Asteroid.h"
+#import "PowerUpFireballs.h"
 
 
 @implementation Ship
@@ -360,6 +361,11 @@
             [self explode];
             return;
         }
+    }
+
+    if ([otherEntity isKindOfClass:[PowerUpFireballs class]]) {
+        otherEntity.state = EntityState_Idle;
+        [appDelegate.glView powerUpFireballs];
     }
 }
 

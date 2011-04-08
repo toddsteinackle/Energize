@@ -52,6 +52,7 @@ typedef enum {
     NSMutableArray *cubes;
     NSMutableArray *spikeMines;
     NSMutableArray *asteroids;
+    NSMutableArray *powerUps;
     Ship *ship;
     int cubeCount;
     int currentGrid, numberOfGrids;
@@ -71,6 +72,7 @@ typedef enum {
     int currentCubeValue;
     int playerLives;
     int maxAsteroids, asteroidLaunchOdds;
+    int powerUpLaunchOdds;
     bool gameContinuing;
     bool trackingTime, beatTimer, initingTimer, timerBonus;
 
@@ -78,6 +80,7 @@ typedef enum {
     CGFloat levelPauseAndInitWait;
 
     double asteroidLaunchDelay, asteroidTimer;
+    double powerUpLaunchDelay, powerUpTimer;
 
 }
 
@@ -100,6 +103,8 @@ typedef enum {
 - (void)handleSingleTap:(NSDictionary *)touches;
 - (void)updateTimerWithDelta:(float)aDelta;
 - (void)calculateTimerBonus;
-- (void)launchAsteroidWithDelta:(float)aDelta;;
+- (void)launchAsteroidWithDelta:(float)aDelta;
+- (void)launchPowerUpWithDelta:(float)aDelta;
+- (void)powerUpFireballs;
 
 @end

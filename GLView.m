@@ -24,6 +24,7 @@
 #import "Guardian.h"
 #import "Fireball.h"
 #import "Ship.h"
+#import "PowerUpFireballs.h"
 
 @implementation GLView
 
@@ -61,6 +62,7 @@
         cubes = [[NSMutableArray alloc] init];
         spikeMines = [[NSMutableArray alloc] init];
         asteroids = [[NSMutableArray alloc] init];
+        powerUps = [[NSMutableArray alloc] init];
 
         currentGrid = 0;
         numberOfGrids = 3;
@@ -107,6 +109,7 @@
     [cubes release];
     [spikeMines release];
     [asteroids release];
+    [powerUps release];
     [ship release];
     [super dealloc];
 }
@@ -124,6 +127,7 @@
     [cubes removeAllObjects];
     [spikeMines removeAllObjects];
     [asteroids removeAllObjects];
+    [powerUps removeAllObjects];
     [ship release];
     trackingTime = FALSE;
     beatTimer = FALSE;
@@ -132,7 +136,7 @@
     timerBonus = FALSE;
     timerBonusScore = 0;
     levelPauseAndInitWait = 1.0;
-    asteroidTimer = 0;
+    asteroidTimer = powerUpTimer = 0;
 
     // [row][col]
 //        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -268,6 +272,11 @@
                         [asteroid release];
                     }
 
+                    powerUpLaunchDelay = 0.5;
+                    PowerUpFireballs *p = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:50];
+                    [powerUps addObject:p];
+                    [p release];
+
                     break;
 
                 default:
@@ -346,6 +355,17 @@
     for (Asteroid *a in asteroids) {
         a.state = EntityState_Dead;
     }
+    for (TraversingEntity *p in powerUps) {
+        p.state = EntityState_Dead;
+    }
+}
+
+- (void)powerUpFireballs {
+    for (Guardian *g in guardians) {
+        for (Fireball *f in g.fireballs) {
+            f.state = EntityState_Idle;
+        }
+    }
 }
 
 - (void)launchAsteroidWithDelta:(float)aDelta; {
@@ -361,6 +381,20 @@
             }
         }
         asteroidTimer = 0;
+    }
+}
+
+- (void)launchPowerUpWithDelta:(float)aDelta {
+    powerUpTimer += aDelta;
+    if (powerUpTimer > powerUpLaunchDelay) {
+        for (TraversingEntity *p in powerUps) {
+            if (p.state == EntityState_Idle) {
+                [p initLaunchLocationWithSpeed:50];
+                p.state = EntityState_Alive;
+                return;
+            }
+        }
+        powerUpTimer = 0;
     }
 }
 
@@ -487,6 +521,9 @@
             for (Asteroid *a in asteroids) {
                 [a updateWithDelta:aDelta];
             }
+            for (TraversingEntity *p in powerUps) {
+                [p updateWithDelta:aDelta];
+            }
             if (CACurrentMediaTime() - lastTimeInLoop < 1.0) {
                 return;
             }
@@ -503,6 +540,7 @@
         case SceneState_Running:
             [self updateTimerWithDelta:aDelta];
             [self launchAsteroidWithDelta:aDelta];
+            [self launchPowerUpWithDelta:aDelta];
             [starfield updateWithDelta:aDelta];
             for (Guardian *g in guardians) {
                 [g updateWithDelta:aDelta];
@@ -532,6 +570,12 @@
                     [ship checkForCollisionWithEntity:a];
                 }
             }
+            for (TraversingEntity *p in powerUps) {
+                [p updateWithDelta:aDelta];
+                if (p.state == EntityState_Alive && ship.state != EntityState_Dead) {
+                    [ship checkForCollisionWithEntity:p];
+                }
+            }
 
             [ship updateWithDelta:aDelta];
             if (ship.state == EntityState_Dead &&
@@ -554,6 +598,7 @@
 #pragma mark SceneState_GameOver
         case SceneState_GameOver:
             [self launchAsteroidWithDelta:aDelta];
+            [self launchPowerUpWithDelta:aDelta];
             [starfield updateWithDelta:aDelta];
             for (Guardian *g in guardians) {
                 [g updateWithDelta:aDelta];
@@ -569,6 +614,9 @@
             }
             for (Asteroid *a in asteroids) {
                 [a updateWithDelta:aDelta];
+            }
+            for (TraversingEntity *p in powerUps) {
+                [p updateWithDelta:aDelta];
             }
             break;
 
@@ -629,6 +677,9 @@
             for (Asteroid *a in asteroids) {
                 [a render];
             }
+            for (TraversingEntity *p in powerUps) {
+                [p render];
+            }
             [self updateStatus];
             for (Guardian *g in guardians) {
                 [g render];
@@ -651,6 +702,9 @@
             }
             for (Asteroid *a in asteroids) {
                 [a render];
+            }
+            for (TraversingEntity *p in powerUps) {
+                [p render];
             }
             [self updateStatus];
             for (Guardian *g in guardians) {
