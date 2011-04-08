@@ -26,6 +26,7 @@
 #import "Ship.h"
 #import "PowerUpFireballs.h"
 #import "PowerUpShields.h"
+#import "PowerUpTimer.h"
 
 @implementation GLView
 
@@ -138,6 +139,7 @@
     timerBonusScore = 0;
     levelPauseAndInitWait = 1.0;
     asteroidTimer = powerUpTimer = 0;
+    powerUpTimerReInit = FALSE;
 
     // [row][col]
 //        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -274,7 +276,7 @@
                     }
 
                     powerUpLaunchDelay = 0.5;
-                    PowerUpShields *p = [[PowerUpShields alloc] initLaunchLocationWithSpeed:50];
+                    PowerUpTimer *p = [[PowerUpTimer alloc] initLaunchLocationWithSpeed:50];
                     [powerUps addObject:p];
                     [p release];
 
@@ -426,8 +428,19 @@
         if (initingTimerTracker > timeToInitTimerDisplay) {
             initingTimer = FALSE;
             initingTimerTracker = 0;
+            if (powerUpTimerReInit) {
+                trackingTime = TRUE;
+                powerUpTimerReInit = FALSE;
+            }
         }
     }
+}
+
+- (void)powerUpTimer {
+    trackingTime = FALSE;
+    initingTimer = TRUE;
+    powerUpTimerReInit = TRUE;
+    timer = timeToCompleteGrid;
 }
 
 - (void)calculateTimerBonus {

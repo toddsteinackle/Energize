@@ -74,6 +74,7 @@
 		5FF2A381134BE41B00EFBB98 /* TraversingEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF2A380134BE41B00EFBB98 /* TraversingEntity.m */; };
 		5FF2A626131F347B0081BAA4 /* starfield.pex in Resources */ = {isa = PBXBuildFile; fileRef = 5FF2A625131F347B0081BAA4 /* starfield.pex */; };
 		5FF91782134F49F6005315BB /* PowerUpShields.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF91781134F49F6005315BB /* PowerUpShields.m */; };
+		5FF917E3134F79A5005315BB /* PowerUpTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FF917E2134F79A5005315BB /* PowerUpTimer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -187,6 +188,8 @@
 		5FF2A625131F347B0081BAA4 /* starfield.pex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = starfield.pex; sourceTree = "<group>"; };
 		5FF91780134F49F6005315BB /* PowerUpShields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerUpShields.h; sourceTree = "<group>"; };
 		5FF91781134F49F6005315BB /* PowerUpShields.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerUpShields.m; sourceTree = "<group>"; };
+		5FF917E1134F79A5005315BB /* PowerUpTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerUpTimer.h; sourceTree = "<group>"; };
+		5FF917E2134F79A5005315BB /* PowerUpTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerUpTimer.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CubeStorm-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CubeStorm-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -329,6 +332,8 @@
 		5FA6449613294700008FE442 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
+				5FF917E1134F79A5005315BB /* PowerUpTimer.h */,
+				5FF917E2134F79A5005315BB /* PowerUpTimer.m */,
 				5FF91780134F49F6005315BB /* PowerUpShields.h */,
 				5FF91781134F49F6005315BB /* PowerUpShields.m */,
 				5F291F23134E86730024A66D /* PowerUpFireballs.h */,
@@ -525,6 +530,7 @@
 				5FF2A381134BE41B00EFBB98 /* TraversingEntity.m in Sources */,
 				5F291F25134E86730024A66D /* PowerUpFireballs.m in Sources */,
 				5FF91782134F49F6005315BB /* PowerUpShields.m in Sources */,
+				5FF917E3134F79A5005315BB /* PowerUpTimer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

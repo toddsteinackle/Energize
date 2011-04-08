@@ -74,7 +74,7 @@ typedef enum {
     int maxAsteroids, asteroidLaunchOdds;
     int powerUpLaunchOdds;
     bool gameContinuing;
-    bool trackingTime, beatTimer, initingTimer, timerBonus;
+    bool trackingTime, beatTimer, initingTimer, timerBonus, powerUpTimerReInit;
 
     CGFloat timer, timeToCompleteGrid, initingTimerTracker, timeToInitTimerDisplay;
     CGFloat levelPauseAndInitWait;
@@ -106,5 +106,6 @@ typedef enum {
 - (void)launchAsteroidWithDelta:(float)aDelta;
 - (void)launchPowerUpWithDelta:(float)aDelta;
 - (void)powerUpFireballs;
+- (void)powerUpTimer;
 
 @end

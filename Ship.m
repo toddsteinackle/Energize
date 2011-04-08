@@ -19,6 +19,7 @@
 #import "Asteroid.h"
 #import "PowerUpFireballs.h"
 #import "PowerUpShields.h"
+#import "PowerUpTimer.h"
 
 
 @implementation Ship
@@ -234,8 +235,8 @@
                 if (appDelegate.glView.trackingTime) {
                     appDelegate.glView.beatTimer = TRUE;
                     appDelegate.glView.trackingTime = FALSE;
-                    [appDelegate.glView calculateTimerBonus];
                 }
+                [appDelegate.glView calculateTimerBonus];
                 [appDelegate.glView resetGuardiansAndClearGrid];
                 animation = warp;
                 animation.type = kAnimationType_Once;
@@ -256,8 +257,8 @@
                 if (appDelegate.glView.trackingTime) {
                     appDelegate.glView.beatTimer = TRUE;
                     appDelegate.glView.trackingTime = FALSE;
-                    [appDelegate.glView calculateTimerBonus];
                 }
+                [appDelegate.glView calculateTimerBonus];
                 [appDelegate.glView resetGuardiansAndClearGrid];
             }
             break;
@@ -398,6 +399,11 @@
         shield.animation.currentFrame = -1;
         shield.animation.state = kAnimationState_Running;
         isShielded = TRUE;
+        return;
+    }
+    if ([otherEntity isKindOfClass:[PowerUpTimer class]]) {
+        otherEntity.state = EntityState_Idle;
+        [appDelegate.glView powerUpTimer];
         return;
     }
 }
