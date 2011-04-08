@@ -72,12 +72,13 @@ typedef enum {
     int currentCubeValue;
     int playerLives;
     int maxAsteroids, asteroidLaunchOdds;
-    int powerUpLaunchOdds;
+    int powerUpTimerLaunchOdds, powerUpFireballsLaunchOdds, powerUpShieldsLaunchOdds;
     bool gameContinuing;
     bool trackingTime, beatTimer, initingTimer, timerBonus, powerUpTimerReInit;
 
     CGFloat timer, timeToCompleteGrid, initingTimerTracker, timeToInitTimerDisplay;
     CGFloat levelPauseAndInitWait;
+    CGFloat asteroidSpeed, powerUpSpeed;
 
     double asteroidLaunchDelay, asteroidTimer;
     double powerUpLaunchDelay, powerUpTimer;

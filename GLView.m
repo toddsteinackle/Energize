@@ -266,19 +266,30 @@
 
                     timer = timeToCompleteGrid = 30;
 
-                    asteroidLaunchDelay = 1.0;
+                    asteroidLaunchDelay = 2.0;
                     asteroidLaunchOdds = 10;
                     maxAsteroids = 2;
+                    asteroidSpeed = 60;
                     for (int i = 0; i < maxAsteroids; ++i) {
-                        Asteroid *asteroid = [[Asteroid alloc] initLaunchLocationWithSpeed:60];
+                        Asteroid *asteroid = [[Asteroid alloc] initLaunchLocationWithSpeed:asteroidSpeed];
                         [asteroids addObject:asteroid];
                         [asteroid release];
                     }
 
-                    powerUpLaunchDelay = 0.5;
-                    PowerUpTimer *p = [[PowerUpTimer alloc] initLaunchLocationWithSpeed:50];
-                    [powerUps addObject:p];
-                    [p release];
+                    powerUpLaunchDelay = 2.0;
+                    powerUpSpeed = 50;
+                    powerUpTimerLaunchOdds = 50;
+                    powerUpShieldsLaunchOdds = 15;
+                    powerUpFireballsLaunchOdds = 10;
+                    PowerUpFireballs *f = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:f];
+                    [f release];
+                    PowerUpShields *s = [[PowerUpShields alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:s];
+                    [s release];
+                    PowerUpTimer *t = [[PowerUpTimer alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:t];
+                    [t release];
 
                     break;
 
@@ -377,7 +388,7 @@
         if (1 == (arc4random() % asteroidLaunchOdds + 1)) {
             for (Asteroid *a in asteroids) {
                 if (a.state == EntityState_Idle) {
-                    [a initLaunchLocationWithSpeed:60];
+                    [a initLaunchLocationWithSpeed:asteroidSpeed];
                     a.state = EntityState_Alive;
                     return;
                 }
@@ -388,16 +399,31 @@
 }
 
 - (void)launchPowerUpWithDelta:(float)aDelta {
+    TraversingEntity *p;
     powerUpTimer += aDelta;
     if (powerUpTimer > powerUpLaunchDelay) {
-        for (TraversingEntity *p in powerUps) {
+        powerUpTimer = 0;
+        if (1 == (arc4random() % powerUpFireballsLaunchOdds + 1)) {
+            p = [powerUps objectAtIndex:0];
             if (p.state == EntityState_Idle) {
-                [p initLaunchLocationWithSpeed:50];
+                [p initLaunchLocationWithSpeed:powerUpSpeed];
                 p.state = EntityState_Alive;
-                return;
             }
         }
-        powerUpTimer = 0;
+        if (1 == (arc4random() % powerUpShieldsLaunchOdds + 1)) {
+            p = [powerUps objectAtIndex:1];
+            if (p.state == EntityState_Idle) {
+                [p initLaunchLocationWithSpeed:powerUpSpeed];
+                p.state = EntityState_Alive;
+            }
+        }
+        if (1 == (arc4random() % powerUpTimerLaunchOdds + 1)) {
+            p = [powerUps objectAtIndex:2];
+            if (p.state == EntityState_Idle) {
+                [p initLaunchLocationWithSpeed:powerUpSpeed];
+                p.state = EntityState_Alive;
+            }
+        }
     }
 }
 
@@ -445,8 +471,10 @@
 
 - (void)calculateTimerBonus {
     timerBonusScore = 1000 * timer;
-    timerBonus = TRUE;
-    levelPauseAndInitWait = 1.5;
+    if (timerBonusScore > 0) {
+        timerBonus = TRUE;
+        levelPauseAndInitWait = 1.5;
+    }
 }
 
 #pragma mark -
