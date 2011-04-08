@@ -33,7 +33,7 @@ typedef enum {
     Animation *leftThrust;
 
     shipDirection direction;
-    bool isThrusting;
+    bool isThrusting, isShielded;
     CGFloat currentSpeed;
     Explosion *explosion;
     bool exploding;
@@ -46,6 +46,7 @@ typedef enum {
 
 @property (nonatomic, assign) shipDirection direction;
 @property (nonatomic, assign) bool isThrusting;
+@property (nonatomic, assign) bool isShielded;
 @property (nonatomic, readonly) Explosion *explosion;
 
 - (void)movementWithDelta:(float)aDelta;

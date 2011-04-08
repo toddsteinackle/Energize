@@ -25,6 +25,7 @@
 #import "Fireball.h"
 #import "Ship.h"
 #import "PowerUpFireballs.h"
+#import "PowerUpShields.h"
 
 @implementation GLView
 
@@ -273,7 +274,7 @@
                     }
 
                     powerUpLaunchDelay = 0.5;
-                    PowerUpFireballs *p = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:50];
+                    PowerUpShields *p = [[PowerUpShields alloc] initLaunchLocationWithSpeed:50];
                     [powerUps addObject:p];
                     [p release];
 

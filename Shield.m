@@ -10,18 +10,21 @@
 #import "GLView.h"
 #import "SoundManager.h"
 #import "Animation.h"
+#import "Ship.h"
 
 
 @implementation Shield
 
-- (id)initWithPixelLocation:(CGPoint)aLocation {
+@synthesize duration;
+
+- (id)initWithPixelLocation:(CGPoint)aLocation containingShip:(Ship *)shipId {
     self = [super initWithPixelLocation:aLocation];
     if (self != nil) {
         width = 41;
         height = 41;
 
         animation = [[Animation alloc] init];
-        float delay = 0.3;
+        float delay = .5;
         int frames = 4;
         [self setupAnimation:animation
                  spriteSheet:@"bonus-shield.png"
@@ -29,6 +32,8 @@
         animation.type = kAnimationType_Once;
         animation.state = kAnimationState_Stopped;
         state = EntityState_Idle;
+        ship = shipId;
+        duration = 0;
     }
     return self;
 }
@@ -37,8 +42,13 @@
     switch (state) {
         case EntityState_Alive:
             [animation updateWithDelta:aDelta];
+            duration -= aDelta;
+            if (duration > 0) {
+                animation.currentFrame = 0;
+            }
             if (animation.state == kAnimationState_Stopped) {
                 state = EntityState_Idle;
+                ship.isShielded = FALSE;
             }
             break;
         default:

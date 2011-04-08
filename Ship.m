@@ -18,12 +18,14 @@
 #import "Shield.h"
 #import "Asteroid.h"
 #import "PowerUpFireballs.h"
+#import "PowerUpShields.h"
 
 
 @implementation Ship
 
 @synthesize direction;
 @synthesize isThrusting;
+@synthesize isShielded;
 @synthesize explosion;
 
 - (id)initWithPixelLocation:(CGPoint)aLocation {
@@ -88,6 +90,7 @@
     currentSpeed = 0;
     direction = ship_up;
     isThrusting = TRUE;
+    isShielded = FALSE;
     collisionWidth = appDelegate.widthScaleFactor * width *.9;
     collisionHeight = appDelegate.heightScaleFactor * height *.9;
     collisionXOffset = ((appDelegate.widthScaleFactor * width) - collisionWidth) / 2;
@@ -97,7 +100,7 @@
     justAppeared = TRUE;
     idleTimer = 0;
     safePeriod = 0.5;
-    shield = [[Shield alloc] initWithPixelLocation:CGPointMake(0, 0)];
+    shield = [[Shield alloc] initWithPixelLocation:CGPointMake(0, 0) containingShip:self];
     colliding = FALSE;
     return self;
 }
@@ -237,6 +240,7 @@
                 animation = warp;
                 animation.type = kAnimationType_Once;
                 state = EntityState_Warping;
+                shield.state = EntityState_Idle;
             }
             break;
 
@@ -320,6 +324,7 @@
         NSLog(@"ship spikeball collision");
 #endif
         state = EntityState_Dead;
+        shield.state = EntityState_Idle;
         appDelegate.glView.playerLives--;
         if (!exploding) {
             otherEntity.state = EntityState_Dead;
@@ -338,6 +343,14 @@
         return;
     }
 
+    if (isShielded) {
+        if ([otherEntity isKindOfClass:[Fireball class]] ||
+            [otherEntity isKindOfClass:[Asteroid class]]) {
+            otherEntity.state = EntityState_Dead;
+        }
+        return;
+    }
+
     if (state == EntityState_Transporting) {
         return;
     }
@@ -345,7 +358,11 @@
         otherEntity.state = EntityState_Dead;
         shield.pixelLocation = CGPointMake(pixelLocation.x, pixelLocation.y);
         shield.state = EntityState_Alive;
+        shield.duration = .5;
+        shield.animation.state = kAnimationState_Stopped;
+        shield.animation.currentFrame = -1;
         shield.animation.state = kAnimationState_Running;
+        isShielded = TRUE;
         return;
     }
 
@@ -355,6 +372,7 @@
         NSLog(@"ship fireball or asteroid collision");
 #endif
         state = EntityState_Dead;
+        shield.state = EntityState_Idle;
         appDelegate.glView.playerLives--;
         if (!exploding) {
             otherEntity.state = EntityState_Idle;
@@ -366,6 +384,21 @@
     if ([otherEntity isKindOfClass:[PowerUpFireballs class]]) {
         otherEntity.state = EntityState_Idle;
         [appDelegate.glView powerUpFireballs];
+        return;
+    }
+    if ([otherEntity isKindOfClass:[PowerUpShields class]]) {
+#ifdef GAMEPLAY_DEBUG
+        NSLog(@"PowerUpShields collision");
+#endif
+        otherEntity.state = EntityState_Idle;
+        shield.pixelLocation = CGPointMake(pixelLocation.x, pixelLocation.y);
+        shield.state = EntityState_Alive;
+        shield.duration = 4.0;
+        shield.animation.state = kAnimationState_Stopped;
+        shield.animation.currentFrame = -1;
+        shield.animation.state = kAnimationState_Running;
+        isShielded = TRUE;
+        return;
     }
 }
 
