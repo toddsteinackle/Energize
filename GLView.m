@@ -417,11 +417,13 @@
                 p.state = EntityState_Alive;
             }
         }
-        if (1 == (arc4random() % powerUpTimerLaunchOdds + 1)) {
-            p = [powerUps objectAtIndex:2];
-            if (p.state == EntityState_Idle) {
-                [p initLaunchLocationWithSpeed:powerUpSpeed];
-                p.state = EntityState_Alive;
+        if (trackingTime) {
+            if (1 == (arc4random() % powerUpTimerLaunchOdds + 1)) {
+                p = [powerUps objectAtIndex:2];
+                if (p.state == EntityState_Idle) {
+                    [p initLaunchLocationWithSpeed:powerUpSpeed];
+                    p.state = EntityState_Alive;
+                }
             }
         }
     }
