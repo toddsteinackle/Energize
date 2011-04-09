@@ -29,6 +29,7 @@ typedef enum {
     SceneState_LevelPauseAndInit,
     SceneState_ShipRespawn,
     SceneState_GameOver,
+    SceneState_AllGridsCompleted,
 } SceneState;
 
 typedef enum {

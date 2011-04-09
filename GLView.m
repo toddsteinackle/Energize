@@ -531,7 +531,8 @@
                 score += timerBonusScore;
                 timerBonusScore = 0;
                 if (currentGrid == numberOfGrids) {
-                    currentGrid = 0;
+                    sceneState = SceneState_AllGridsCompleted;
+                    return;
                 }
                 [self initGrid:currentGrid++];
                 if (gameContinuing) {
@@ -640,7 +641,9 @@
             break;
 
 #pragma mark SceneState_GameOver
+#pragma mark SceneState_AllGridsCompleted
         case SceneState_GameOver:
+        case SceneState_AllGridsCompleted:
             [self launchAsteroidWithDelta:aDelta];
             [self launchPowerUpWithDelta:aDelta];
             [starfield updateWithDelta:aDelta];
@@ -772,6 +775,42 @@
             [sharedImageRenderManager renderImages];
             break;
 
+#pragma mark SceneState_AllGridsCompleted
+        case SceneState_AllGridsCompleted:
+            [starfield renderParticles];
+            for (Cube *c in cubes) {
+                [c render];
+            }
+            for (SpikeMine *s in spikeMines) {
+                [s render];
+            }
+            for (Asteroid *a in asteroids) {
+                [a render];
+            }
+            for (TraversingEntity *p in powerUps) {
+                [p render];
+            }
+            [self updateStatus];
+            for (Guardian *g in guardians) {
+                [g render];
+                for (Fireball *f in g.fireballs) {
+                    [f render];
+                }
+            }
+            [sharedImageRenderManager renderImages];
+
+
+            [largeMessageFont renderStringJustifiedInFrame:CGRectMake(0, appDelegate.SCREEN_HEIGHT/2, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2)
+                                             justification:BitmapFontJustification_MiddleCentered text:@"Game Over"];
+
+            [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
+                                       justification:BitmapFontJustification_TopCentered text:@"Congratulations! All grids completed."];
+
+            [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
+                                       justification:BitmapFontJustification_MiddleCentered text:@"Double Tap to return to main menu."];
+
+            [sharedImageRenderManager renderImages];
+            break;
 
         default:
             break;
@@ -825,7 +864,7 @@
                               text:[NSString stringWithFormat:@"Grid: %i    Score: %i", gridNumberDisplayed, score]];
     }
 
-    if (sceneState != SceneState_GameOver) {
+    if (sceneState != SceneState_GameOver && sceneState != SceneState_AllGridsCompleted) {
         if (initingTimer) {
             [timerBar renderAtPoint:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE+12*appDelegate.widthScaleFactor,
                                                 appDelegate.GUARDIAN_BOTTOM_BOUND+8*appDelegate.heightScaleFactor)
@@ -945,6 +984,13 @@
                                                                      forKey:@"location"];
                 [self performSelector:@selector(handleSingleTap:) withObject:touchLoc afterDelay:0.3];
             } else if (numTaps == 2) {
+                [self.viewController quitGame];
+            }
+            break;
+
+#pragma mark SceneState_AllGridsCompleted
+        case SceneState_AllGridsCompleted:
+            if (numTaps == 2) {
                 [self.viewController quitGame];
             }
             break;
