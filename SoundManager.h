@@ -65,6 +65,7 @@
 @property (nonatomic, assign) BOOL usePlaylist;
 @property (nonatomic, assign) BOOL loopLastPlaylistTrack;
 @property (nonatomic, assign) float musicVolume;
+@property (nonatomic, assign) BOOL loopPlaylist;
 
 // Returns as instance of the SoundManager class.  If an instance has already been created
 // then this instance is returned, otherwise a new instance is created and returned.

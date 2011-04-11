@@ -47,6 +47,7 @@ SYNTHESIZE_SINGLETON_FOR_CLASS(SoundManager);
 @synthesize usePlaylist;
 @synthesize loopLastPlaylistTrack;
 @synthesize musicVolume;
+@synthesize loopPlaylist;
 
 #pragma mark -
 #pragma mark Dealloc and Init and Shutdown

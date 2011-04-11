@@ -19,6 +19,7 @@
 @class ParticleEmitter;
 @class CubeStormAppDelegate;
 @class OpenGLViewController;
+@class SoundManager;
 
 @class Ship;
 
@@ -47,6 +48,7 @@ typedef enum {
     double lastTimeInLoop;
 
     ImageRenderManager *sharedImageRenderManager;
+    SoundManager *sharedSoundManager;
     ParticleEmitter *starfield;
 
     NSMutableArray *guardians;
@@ -78,7 +80,6 @@ typedef enum {
     bool trackingTime, beatTimer, initingTimer, timerBonus, powerUpTimerReInit;
 
     CGFloat timer, timeToCompleteGrid, initingTimerTracker, timeToInitTimerDisplay;
-    CGFloat levelPauseAndInitWait;
     CGFloat asteroidSpeed, powerUpSpeed;
 
     double asteroidLaunchDelay, asteroidTimer;

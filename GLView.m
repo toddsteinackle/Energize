@@ -10,6 +10,7 @@
 #import "CubeStormAppDelegate.h"
 #import "Image.h"
 #import "ImageRenderManager.h"
+#import "SoundManager.h"
 #import "Animation.h"
 #import "BitmapFont.h"
 #import "SpriteSheet.h"
@@ -44,16 +45,19 @@
 #pragma mark init
 -(GLView*)initWithFrame:(CGRect)frame {
 
-    appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
-
-    sceneState = SceneState_GameBegin;
-    lastTimeInLoop = 0;
-
-    drag_min_x = appDelegate.DRAG_MIN_X;
-    drag_min_y = appDelegate.DRAG_MIN_Y;
-
     if ((self = [super initWithFrame:frame])) {
+
+        appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
+
+        sceneState = SceneState_GameBegin;
+        lastTimeInLoop = 0;
+
+        drag_min_x = appDelegate.DRAG_MIN_X;
+        drag_min_y = appDelegate.DRAG_MIN_Y;
+
         sharedImageRenderManager = [ImageRenderManager sharedImageRenderManager];
+        sharedSoundManager = [SoundManager sharedSoundManager];
+
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             starfield = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"starfield.pex"];
         } else {
@@ -101,6 +105,23 @@
         gameContinuing = FALSE;
         timeToInitTimerDisplay = 1.4;
 
+#pragma mark init sounds
+        [sharedSoundManager loadSoundWithKey:@"cube" soundFile:@"Movement1b.caf"];
+        [sharedSoundManager loadSoundWithKey:@"explosion" soundFile:@"explosion.caf"];
+        [sharedSoundManager loadSoundWithKey:@"Impact6b" soundFile:@"Impact6b.caf"];
+        [sharedSoundManager loadSoundWithKey:@"guardian_fire" soundFile:@"Boing2.caf"];
+        [sharedSoundManager loadSoundWithKey:@"shield_enabled" soundFile:@"ForceField1bLp.caf"];
+        [sharedSoundManager loadSoundWithKey:@"fireballs_powerup" soundFile:@"PowerUp2.caf"];
+        [sharedSoundManager loadSoundWithKey:@"timer_powerup" soundFile:@"Flourish1b.caf"];
+        [sharedSoundManager loadSoundWithKey:@"grid_over" soundFile:@"Win5.caf"];
+        [sharedSoundManager loadSoundWithKey:@"game_over" soundFile:@"Negative2.caf"];
+        [sharedSoundManager loadSoundWithKey:@"all_grids_completed" soundFile:@"LevelUp1.caf"];
+
+        [sharedSoundManager loadMusicWithKey:@"ActionStage05.m4a" musicFile:@"ActionStage05.m4a"];
+        [sharedSoundManager addToPlaylistNamed:@"background_music" track:@"ActionStage05.m4a"];
+        [sharedSoundManager loadMusicWithKey:@"BossFight01.m4a" musicFile:@"BossFight01.m4a"];
+        [sharedSoundManager addToPlaylistNamed:@"background_music" track:@"BossFight01.m4a"];
+
     }
 
     return self;
@@ -113,6 +134,19 @@
     [asteroids release];
     [powerUps release];
     [ship release];
+
+#pragma mark remove sounds
+    [sharedSoundManager removeSoundWithKey:@"cube"];
+    [sharedSoundManager removeSoundWithKey:@"explosion"];
+    [sharedSoundManager removeSoundWithKey:@"Impact6b"];
+    [sharedSoundManager removeSoundWithKey:@"guardian_fire"];
+    [sharedSoundManager removeSoundWithKey:@"shield_enabled"];
+    [sharedSoundManager removeSoundWithKey:@"fireballs_powerup"];
+    [sharedSoundManager removeSoundWithKey:@"timer_powerup"];
+    [sharedSoundManager removeSoundWithKey:@"grid_over"];
+    [sharedSoundManager removeSoundWithKey:@"game_over"];
+    [sharedSoundManager removeSoundWithKey:@"all_grids_completed"];
+
     [super dealloc];
 }
 
@@ -137,7 +171,6 @@
     initingTimerTracker = 0;
     timerBonus = FALSE;
     timerBonusScore = 0;
-    levelPauseAndInitWait = 1.0;
     asteroidTimer = powerUpTimer = 0;
     powerUpTimerReInit = FALSE;
 
@@ -475,7 +508,6 @@
     timerBonusScore = 1000 * timer;
     if (timerBonusScore > 0) {
         timerBonus = TRUE;
-        levelPauseAndInitWait = 1.5;
     }
 }
 
@@ -497,6 +529,8 @@
                 [self initGame];
                 sceneState = SceneState_GuardianTransport;
                 lastTimeInLoop = 0;
+                sharedSoundManager.loopPlaylist = TRUE;
+                [sharedSoundManager startPlaylistNamed:@"background_music"];
             }
             lastTimeInLoop = CACurrentMediaTime();
             break;
@@ -524,7 +558,7 @@
             for (Guardian *g in guardians) {
                 [g updateWithDelta:aDelta];
             }
-            if (CACurrentMediaTime() - lastTimeInLoop < 1.0) {
+            if (CACurrentMediaTime() - lastTimeInLoop < 1.5) {
                 return;
             }
             if (lastTimeInLoop) {
@@ -532,11 +566,14 @@
                 timerBonusScore = 0;
                 if (currentGrid == numberOfGrids) {
                     sceneState = SceneState_AllGridsCompleted;
+                    [sharedSoundManager stopMusic];
+                    [sharedSoundManager playSoundWithKey:@"all_grids_completed"];
                     return;
                 }
                 [self initGrid:currentGrid++];
                 if (gameContinuing) {
                     gameContinuing = FALSE;
+                    [sharedSoundManager resumeMusic];
                 }
                 for (Guardian *g in guardians) {
                     g.canFire = TRUE;
@@ -627,6 +664,8 @@
                 ship.explosion.animation.state == kAnimationState_Stopped) {
                 if (playerLives == 0) {
                     sceneState = SceneState_GameOver;
+                    [sharedSoundManager pauseMusic];
+                    [sharedSoundManager playSoundWithKey:@"game_over"];
                     lastTimeInLoop = 0;
                     return;
                 }

@@ -227,6 +227,11 @@
                     [self fire];
                     --shotCounter;
                     justFired = TRUE;
+                    [sharedSoundManager playSoundWithKey:@"guardian_fire"
+                                                    gain:.6
+                                                   pitch:1.0
+                                                location:CGPointMake(0, 0)
+                                              shouldLoop:NO];
                 }
             }
 

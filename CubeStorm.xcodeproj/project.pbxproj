@@ -19,6 +19,7 @@
 		5F149F2513298616006378FB /* Explosion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F2413298616006378FB /* Explosion.m */; };
 		5F149F2813298A1D006378FB /* Guardian.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F2713298A1C006378FB /* Guardian.m */; };
 		5F149F2B1329A07F006378FB /* Fireball.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F2A1329A07E006378FB /* Fireball.m */; };
+		5F217D0913521DC900067C25 /* Movement1b.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5F217D0813521DC900067C25 /* Movement1b.caf */; };
 		5F291F25134E86730024A66D /* PowerUpFireballs.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F291F24134E86730024A66D /* PowerUpFireballs.m */; };
 		5F3D40AC12FF416C00358CE7 /* CubeStormAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D40A212FF416C00358CE7 /* CubeStormAppDelegate.m */; };
 		5F3D40AD12FF416C00358CE7 /* CubeStormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D40A412FF416C00358CE7 /* CubeStormViewController.m */; };
@@ -67,6 +68,17 @@
 		5FA64495132945F7008FE442 /* pss.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FA64493132945F7008FE442 /* pss.png */; };
 		5FA853671303538000B91098 /* AbstractEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FA853661303538000B91098 /* AbstractEntity.m */; };
 		5FA85374130356D000B91098 /* Primitives.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FA85373130356D000B91098 /* Primitives.m */; };
+		5FB6A1C8135242BB00AC68B8 /* Boing2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5FB6A1C7135242BB00AC68B8 /* Boing2.caf */; };
+		5FB6A1EC135261B100AC68B8 /* ForceField1bLp.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5FB6A1EB135261B100AC68B8 /* ForceField1bLp.caf */; };
+		5FB6A1FB1352668500AC68B8 /* Win5.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5FB6A1F91352668500AC68B8 /* Win5.caf */; };
+		5FB6A2101352699200AC68B8 /* PowerUp2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5FB6A20F1352699200AC68B8 /* PowerUp2.caf */; };
+		5FB6A23413526DED00AC68B8 /* Flourish1b.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5FB6A23313526DED00AC68B8 /* Flourish1b.caf */; };
+		5FB6A23A1352703200AC68B8 /* LevelUp1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5FB6A2381352703200AC68B8 /* LevelUp1.caf */; };
+		5FB6A23B1352703200AC68B8 /* Negative2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5FB6A2391352703200AC68B8 /* Negative2.caf */; };
+		5FB6A24213527FB200AC68B8 /* ActionStage05.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5FB6A24013527FB200AC68B8 /* ActionStage05.m4a */; };
+		5FB6A24313527FB200AC68B8 /* BossFight01.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5FB6A24113527FB200AC68B8 /* BossFight01.m4a */; };
+		5FCDD5EF1352286B00361F07 /* explosion.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5FCDD5EE1352286B00361F07 /* explosion.caf */; };
+		5FCDD5F3135229C000361F07 /* Impact6b.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5FCDD5F2135229C000361F07 /* Impact6b.caf */; };
 		5FE99BAA12FDC9DF00F60AA4 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE99BA912FDC9DF00F60AA4 /* MainWindow-iPad.xib */; };
 		5FE99BC012FDCBB800F60AA4 /* MainMenuView-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE99BBE12FDCBB800F60AA4 /* MainMenuView-iPad.xib */; };
 		5FE99C0E12FDD48300F60AA4 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5FE99C0D12FDD48300F60AA4 /* GameKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -97,6 +109,7 @@
 		5F149F2713298A1C006378FB /* Guardian.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Guardian.m; sourceTree = "<group>"; };
 		5F149F291329A07E006378FB /* Fireball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fireball.h; sourceTree = "<group>"; };
 		5F149F2A1329A07E006378FB /* Fireball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fireball.m; sourceTree = "<group>"; };
+		5F217D0813521DC900067C25 /* Movement1b.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Movement1b.caf; sourceTree = "<group>"; };
 		5F291F23134E86730024A66D /* PowerUpFireballs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerUpFireballs.h; sourceTree = "<group>"; };
 		5F291F24134E86730024A66D /* PowerUpFireballs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerUpFireballs.m; sourceTree = "<group>"; };
 		5F3D40A112FF416C00358CE7 /* CubeStormAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CubeStormAppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -178,6 +191,17 @@
 		5FA85372130356D000B91098 /* Primitives.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Primitives.h; sourceTree = "<group>"; };
 		5FA85373130356D000B91098 /* Primitives.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Primitives.m; sourceTree = "<group>"; };
 		5FAD5138131DE00300149DFB /* AbstractEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AbstractEntity.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		5FB6A1C7135242BB00AC68B8 /* Boing2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Boing2.caf; sourceTree = "<group>"; };
+		5FB6A1EB135261B100AC68B8 /* ForceField1bLp.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ForceField1bLp.caf; sourceTree = "<group>"; };
+		5FB6A1F91352668500AC68B8 /* Win5.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Win5.caf; sourceTree = "<group>"; };
+		5FB6A20F1352699200AC68B8 /* PowerUp2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = PowerUp2.caf; sourceTree = "<group>"; };
+		5FB6A23313526DED00AC68B8 /* Flourish1b.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Flourish1b.caf; sourceTree = "<group>"; };
+		5FB6A2381352703200AC68B8 /* LevelUp1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LevelUp1.caf; sourceTree = "<group>"; };
+		5FB6A2391352703200AC68B8 /* Negative2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Negative2.caf; sourceTree = "<group>"; };
+		5FB6A24013527FB200AC68B8 /* ActionStage05.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = ActionStage05.m4a; sourceTree = "<group>"; };
+		5FB6A24113527FB200AC68B8 /* BossFight01.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = BossFight01.m4a; sourceTree = "<group>"; };
+		5FCDD5EE1352286B00361F07 /* explosion.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion.caf; sourceTree = "<group>"; };
+		5FCDD5F2135229C000361F07 /* Impact6b.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact6b.caf; sourceTree = "<group>"; };
 		5FE99BA912FDC9DF00F60AA4 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		5FE99BBE12FDCBB800F60AA4 /* MainMenuView-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "MainMenuView-iPad.xib"; sourceTree = "<group>"; };
 		5FE99C0D12FDD48300F60AA4 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -290,6 +314,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5F217D0713521DA800067C25 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				5FB6A24013527FB200AC68B8 /* ActionStage05.m4a */,
+				5FB6A24113527FB200AC68B8 /* BossFight01.m4a */,
+				5FB6A2381352703200AC68B8 /* LevelUp1.caf */,
+				5FB6A2391352703200AC68B8 /* Negative2.caf */,
+				5FB6A23313526DED00AC68B8 /* Flourish1b.caf */,
+				5FB6A20F1352699200AC68B8 /* PowerUp2.caf */,
+				5FB6A1F91352668500AC68B8 /* Win5.caf */,
+				5FB6A1EB135261B100AC68B8 /* ForceField1bLp.caf */,
+				5FB6A1C7135242BB00AC68B8 /* Boing2.caf */,
+				5FCDD5F2135229C000361F07 /* Impact6b.caf */,
+				5FCDD5EE1352286B00361F07 /* explosion.caf */,
+				5F217D0813521DC900067C25 /* Movement1b.caf */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
 		5F3D40B212FF41E100358CE7 /* GLES */ = {
 			isa = PBXGroup;
 			children = (
@@ -315,6 +358,7 @@
 		5FA644911329451A008FE442 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				5F217D0713521DA800067C25 /* Sounds */,
 				5F9B0F251343E1FA00AE10D3 /* largeMessageFont.fnt */,
 				5F9B0F261343E1FA00AE10D3 /* largeMessageFont.png */,
 				5F5D2C33134187E8009D98E6 /* status-iphone.fnt */,
@@ -483,6 +527,18 @@
 				5F5D2C36134187E8009D98E6 /* status-iphone.png in Resources */,
 				5F9B0F271343E1FA00AE10D3 /* largeMessageFont.fnt in Resources */,
 				5F9B0F281343E1FA00AE10D3 /* largeMessageFont.png in Resources */,
+				5F217D0913521DC900067C25 /* Movement1b.caf in Resources */,
+				5FCDD5EF1352286B00361F07 /* explosion.caf in Resources */,
+				5FCDD5F3135229C000361F07 /* Impact6b.caf in Resources */,
+				5FB6A1C8135242BB00AC68B8 /* Boing2.caf in Resources */,
+				5FB6A1EC135261B100AC68B8 /* ForceField1bLp.caf in Resources */,
+				5FB6A1FB1352668500AC68B8 /* Win5.caf in Resources */,
+				5FB6A2101352699200AC68B8 /* PowerUp2.caf in Resources */,
+				5FB6A23413526DED00AC68B8 /* Flourish1b.caf in Resources */,
+				5FB6A23A1352703200AC68B8 /* LevelUp1.caf in Resources */,
+				5FB6A23B1352703200AC68B8 /* Negative2.caf in Resources */,
+				5FB6A24213527FB200AC68B8 /* ActionStage05.m4a in Resources */,
+				5FB6A24313527FB200AC68B8 /* BossFight01.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

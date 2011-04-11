@@ -49,6 +49,7 @@
             if (animation.state == kAnimationState_Stopped) {
                 state = EntityState_Idle;
                 ship.isShielded = FALSE;
+                [sharedSoundManager stopSoundWithKey:@"shield_enabled"];
             }
             break;
         default:

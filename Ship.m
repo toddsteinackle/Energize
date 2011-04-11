@@ -242,6 +242,12 @@
                 animation.type = kAnimationType_Once;
                 state = EntityState_Warping;
                 shield.state = EntityState_Idle;
+                [sharedSoundManager stopSoundWithKey:@"shield_enabled"];
+                [sharedSoundManager playSoundWithKey:@"grid_over"
+                                                gain:1.0
+                                               pitch:1.0
+                                            location:CGPointMake(0, 0)
+                                          shouldLoop:NO];
             }
             break;
 
@@ -303,6 +309,7 @@
     if ([otherEntity isKindOfClass:[Cube class]]) {
         Cube *c = (Cube*)otherEntity;
         if (c.isDoubleCube) {
+            [sharedSoundManager playSoundWithKey:@"cube" gain:.6 pitch:1.0 location:CGPointMake(0, 0) shouldLoop:NO];
             c.isDoubleCube = FALSE;
             [c changeAnimation];
             [appDelegate.glView updateScore];
@@ -311,6 +318,7 @@
             return;
         }
         if (!colliding) {
+            [sharedSoundManager playSoundWithKey:@"cube" gain:.6 pitch:1.0 location:CGPointMake(0, 0) shouldLoop:NO];
             otherEntity.state = EntityState_Dead;
             appDelegate.glView.cubeCount--;
             [appDelegate.glView updateScore];
@@ -364,6 +372,11 @@
         shield.animation.currentFrame = -1;
         shield.animation.state = kAnimationState_Running;
         isShielded = TRUE;
+        [sharedSoundManager playSoundWithKey:@"shield_enabled"
+                                        gain:1.0
+                                       pitch:1.0
+                                    location:CGPointMake(0, 0)
+                                  shouldLoop:TRUE];
         return;
     }
 
@@ -383,6 +396,11 @@
     }
 
     if ([otherEntity isKindOfClass:[PowerUpFireballs class]]) {
+        [sharedSoundManager playSoundWithKey:@"fireballs_powerup"
+                                        gain:1.0
+                                       pitch:1.0
+                                    location:CGPointMake(0, 0)
+                                  shouldLoop:NO];
         otherEntity.state = EntityState_Idle;
         [appDelegate.glView powerUpFireballs];
         return;
@@ -399,9 +417,19 @@
         shield.animation.currentFrame = -1;
         shield.animation.state = kAnimationState_Running;
         isShielded = TRUE;
+        [sharedSoundManager playSoundWithKey:@"shield_enabled"
+                                        gain:1.0
+                                       pitch:1.0
+                                    location:CGPointMake(0, 0)
+                                  shouldLoop:TRUE];
         return;
     }
     if ([otherEntity isKindOfClass:[PowerUpTimer class]]) {
+        [sharedSoundManager playSoundWithKey:@"timer_powerup"
+                                        gain:1.0
+                                       pitch:1.0
+                                    location:CGPointMake(0, 0)
+                                  shouldLoop:NO];
         otherEntity.state = EntityState_Idle;
         [appDelegate.glView powerUpTimer];
         return;
@@ -409,10 +437,12 @@
 }
 
 - (void)explode {
+    [sharedSoundManager playSoundWithKey:@"explosion"];
     explosion.pixelLocation = CGPointMake(pixelLocation.x, pixelLocation.y);
     explosion.state = EntityState_Alive;
     explosion.animation.state = kAnimationState_Running;
     exploding = TRUE;
+    [sharedSoundManager playSoundWithKey:@"Impact6b"];
 }
 
 - (void)dealloc {
