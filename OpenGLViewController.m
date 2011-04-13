@@ -11,6 +11,7 @@
 #import "CubeStormViewController.h"
 #import "CubeStormAppDelegate.h"
 #import "GLView.h"
+#import "SoundManager.h"
 
 
 @implementation OpenGLViewController
@@ -20,6 +21,7 @@
     if (self) {
         // Custom initialization.
         appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
+        sharedSoundManager = [SoundManager sharedSoundManager];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             pauseMenu = [[PauseMenuViewController alloc] initWithNibName:@"PauseMenuViewController-iPad" bundle:[NSBundle mainBundle]];
         } else {
@@ -39,6 +41,7 @@
     [self presentModalViewController:pauseMenu animated:YES];
     appDelegate.currentViewController = pauseMenu;
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+    [sharedSoundManager pauseMusic];
 }
 
 - (void)dismissPauseView {
@@ -46,6 +49,7 @@
     appDelegate.currentViewController = self;
     [appDelegate startAnimation];
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    [sharedSoundManager resumeMusic];
 }
 
 - (void)quitGame {
@@ -61,6 +65,7 @@
         [self dismissModalViewControllerAnimated:NO];
         appDelegate.currentViewController = appDelegate.viewController;
     }
+    [sharedSoundManager stopMusic];
 }
 
 /*

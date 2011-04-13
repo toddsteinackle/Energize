@@ -77,7 +77,7 @@ typedef enum {
     int maxAsteroids, asteroidLaunchOdds;
     int powerUpTimerLaunchOdds, powerUpFireballsLaunchOdds, powerUpShieldsLaunchOdds;
     bool gameContinuing;
-    bool trackingTime, beatTimer, initingTimer, timerBonus, powerUpTimerReInit;
+    bool trackingTime, beatTimer, initingTimer, timerBonus, powerUpTimerReInit, playInitTimerSound;
 
     CGFloat timer, timeToCompleteGrid, initingTimerTracker, timeToInitTimerDisplay;
     CGFloat asteroidSpeed, powerUpSpeed;
@@ -96,6 +96,7 @@ typedef enum {
 @property (nonatomic, assign) int playerLives;
 @property (nonatomic, assign) bool trackingTime;
 @property (nonatomic, assign) bool beatTimer;
+@property (nonatomic, assign) bool playInitTimerSound;
 
 - (void)initGame;
 - (void)initGuardians;

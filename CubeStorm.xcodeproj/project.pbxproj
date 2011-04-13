@@ -76,7 +76,6 @@
 		5FB6A23A1352703200AC68B8 /* LevelUp1.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5FB6A2381352703200AC68B8 /* LevelUp1.caf */; };
 		5FB6A23B1352703200AC68B8 /* Negative2.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5FB6A2391352703200AC68B8 /* Negative2.caf */; };
 		5FB6A24213527FB200AC68B8 /* ActionStage05.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5FB6A24013527FB200AC68B8 /* ActionStage05.m4a */; };
-		5FB6A24313527FB200AC68B8 /* BossFight01.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5FB6A24113527FB200AC68B8 /* BossFight01.m4a */; };
 		5FCDD5EF1352286B00361F07 /* explosion.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5FCDD5EE1352286B00361F07 /* explosion.caf */; };
 		5FCDD5F3135229C000361F07 /* Impact6b.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5FCDD5F2135229C000361F07 /* Impact6b.caf */; };
 		5FE99BAA12FDC9DF00F60AA4 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FE99BA912FDC9DF00F60AA4 /* MainWindow-iPad.xib */; };
@@ -199,7 +198,6 @@
 		5FB6A2381352703200AC68B8 /* LevelUp1.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LevelUp1.caf; sourceTree = "<group>"; };
 		5FB6A2391352703200AC68B8 /* Negative2.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Negative2.caf; sourceTree = "<group>"; };
 		5FB6A24013527FB200AC68B8 /* ActionStage05.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = ActionStage05.m4a; sourceTree = "<group>"; };
-		5FB6A24113527FB200AC68B8 /* BossFight01.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = BossFight01.m4a; sourceTree = "<group>"; };
 		5FCDD5EE1352286B00361F07 /* explosion.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = explosion.caf; sourceTree = "<group>"; };
 		5FCDD5F2135229C000361F07 /* Impact6b.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Impact6b.caf; sourceTree = "<group>"; };
 		5FE99BA912FDC9DF00F60AA4 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "Resources-iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
@@ -318,7 +316,6 @@
 			isa = PBXGroup;
 			children = (
 				5FB6A24013527FB200AC68B8 /* ActionStage05.m4a */,
-				5FB6A24113527FB200AC68B8 /* BossFight01.m4a */,
 				5FB6A2381352703200AC68B8 /* LevelUp1.caf */,
 				5FB6A2391352703200AC68B8 /* Negative2.caf */,
 				5FB6A23313526DED00AC68B8 /* Flourish1b.caf */,
@@ -538,7 +535,6 @@
 				5FB6A23A1352703200AC68B8 /* LevelUp1.caf in Resources */,
 				5FB6A23B1352703200AC68B8 /* Negative2.caf in Resources */,
 				5FB6A24213527FB200AC68B8 /* ActionStage05.m4a in Resources */,
-				5FB6A24313527FB200AC68B8 /* BossFight01.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

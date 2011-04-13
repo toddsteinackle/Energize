@@ -11,11 +11,13 @@
 @class GLView;
 @class PauseMenuViewController;
 @class CubeStormAppDelegate;
+@class SoundManager;
 
 @interface OpenGLViewController : UIViewController {
     GLView *glView;
     PauseMenuViewController *pauseMenu;
     CubeStormAppDelegate *appDelegate;
+    SoundManager *sharedSoundManager;
 }
 
 - (void)showPauseView;

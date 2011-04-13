@@ -40,6 +40,7 @@
 @synthesize playerLives;
 @synthesize trackingTime;
 @synthesize beatTimer;
+@synthesize playInitTimerSound;
 
 #pragma mark -
 #pragma mark init
@@ -71,7 +72,7 @@
         powerUps = [[NSMutableArray alloc] init];
 
         currentGrid = 0;
-        numberOfGrids = 3;
+        numberOfGrids = 40;
 
 
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -116,12 +117,7 @@
         [sharedSoundManager loadSoundWithKey:@"grid_over" soundFile:@"Win5.caf"];
         [sharedSoundManager loadSoundWithKey:@"game_over" soundFile:@"Negative2.caf"];
         [sharedSoundManager loadSoundWithKey:@"all_grids_completed" soundFile:@"LevelUp1.caf"];
-
-        [sharedSoundManager loadMusicWithKey:@"ActionStage05.m4a" musicFile:@"ActionStage05.m4a"];
-        [sharedSoundManager addToPlaylistNamed:@"background_music" track:@"ActionStage05.m4a"];
-        [sharedSoundManager loadMusicWithKey:@"BossFight01.m4a" musicFile:@"BossFight01.m4a"];
-        [sharedSoundManager addToPlaylistNamed:@"background_music" track:@"BossFight01.m4a"];
-
+        [sharedSoundManager loadMusicWithKey:@"background_music" musicFile:@"ActionStage05.m4a"];
     }
 
     return self;
@@ -146,6 +142,7 @@
     [sharedSoundManager removeSoundWithKey:@"grid_over"];
     [sharedSoundManager removeSoundWithKey:@"game_over"];
     [sharedSoundManager removeSoundWithKey:@"all_grids_completed"];
+    [sharedSoundManager removeMusicWithKey:@"background_music"];
 
     [super dealloc];
 }
@@ -168,45 +165,224 @@
     trackingTime = FALSE;
     beatTimer = FALSE;
     initingTimer = TRUE;
+    playInitTimerSound = TRUE;
     initingTimerTracker = 0;
     timerBonus = FALSE;
     timerBonusScore = 0;
     asteroidTimer = powerUpTimer = 0;
     powerUpTimerReInit = FALSE;
 
-    // [row][col]
-//        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
-//        { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+// [row][col]
+// { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+// { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+// { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+// { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+// { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+// { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+// { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
 
     char gridArray[][7][9] = {
+
+        // 1
         {
-            // 0
-            { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '},
+            { ' ', ' ', 'c', 'c', 'c', 'c', 'c', ' ', ' '},
+            { ' ', 'c', ' ', 'c', 'c', 'c', ' ', 'c', ' '},
+            { ' ', 'c', ' ', ' ', ' ', ' ', ' ', 'c', ' '},
+            { ' ', 'c', ' ', ' ', 's', ' ', 'm', 'c', ' '},
+            { ' ', 'c', ' ', ' ', ' ', ' ', ' ', 'c', ' '},
+            { ' ', 'c', ' ', 'd', 'd', 'd', ' ', 'c', ' '},
+            { ' ', ' ', 'c', 'c', 'c', 'c', 'c', ' ', ' '}
+        },
+
+        // 2
+        {
+            { ' ', ' ', ' ', 'c', 'd', 'c', ' ', ' ', ' '},
             { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
-            { 'c', 'm', 'c', ' ', ' ', ' ', 'c', ' ', 'c'},
-            { 'c', ' ', 'd', ' ', 's', ' ', 'd', ' ', 'c'},
             { 'c', ' ', 'c', ' ', ' ', ' ', 'c', ' ', 'c'},
+            { 'd', ' ', 'c', ' ', 's', ' ', 'c', ' ', 'd'},
+            { 'c', 'm', 'c', ' ', ' ', ' ', 'c', ' ', 'c'},
             { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
-            { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '}
+            { ' ', ' ', ' ', 'c', 'd', 'c', ' ', ' ', ' '}
 
         },
 
+        // 3
         {
-            // 1
+            { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
+            { ' ', ' ', ' ', 'c', 'c', 'c', 'm', ' ', ' '},
+            { ' ', ' ', 'd', 'c', 'c', 'c', 'c', ' ', ' '},
+            { 'c', 'c', 'd', ' ', 's', ' ', 'c', 'c', 'd'},
+            { ' ', ' ', 'd', 'c', 'c', 'c', 'c', ' ', ' '},
+            { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '},
+            { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '}
+        },
+
+        // 4
+        {
+            { 'c', 'c', 'c', ' ', 'c', 'd', 'd', ' ', ' '},
+            { ' ', 'c', 'c', 'c', ' ', 'd', ' ', ' ', ' '},
+            { ' ', ' ', 'c', 'c', 'c', 'd', ' ', ' ', ' '},
+            { ' ', ' ', ' ', 's', ' ', ' ', ' ', ' ', ' '},
+            { ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' ', ' '},
+            { ' ', ' ', 'm', 'c', 'c', 'c', ' ', ' ', ' '},
+            { ' ', ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' '}
+        },
+
+        // 5
+        {
             { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
             { 'c', 'd', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
             { 'c', 'd', ' ', ' ', 'm', 'c', 'c', 'c', ' '},
             { 'c', 'm', ' ', ' ', 's', ' ', ' ', ' ', ' '},
-            { ' ', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
-            { ' ', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
+            { ' ', 'c', 'c', 'c', 'd', 'c', 'c', 'c', ' '},
+            { ' ', 'c', 'c', 'c', 'd', 'c', 'c', 'c', ' '},
             { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '}
         },
 
+        // 6
+        {
+            { 'd', 'c', 'c', ' ', ' ', ' ', 'c', 'c', 'd'},
+            { ' ', 'c', 'c', ' ', ' ', ' ', 'c', 'c', ' '},
+            { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '},
+            { ' ', ' ', ' ', 'c', 'c', 's', ' ', ' ', ' '},
+            { ' ', 'c', 'c', ' ', ' ', ' ', 'c', 'c', ' '},
+            { ' ', 'c', 'c', ' ', 'm', ' ', 'c', 'c', ' '},
+            { ' ', 'd', ' ', ' ', ' ', ' ', ' ', ' ', 'd'}
+        },
+
+        // 7
+        {
+            { ' ', 'd', 'd', 'd', 'c', ' ', ' ', ' ', ' '},
+            { ' ', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
+            { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '},
+            { ' ', ' ', ' ', 'c', 'm', 'c', 's', ' ', ' '},
+            { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '},
+            { ' ', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
+            { ' ', ' ', ' ', ' ', 'd', ' ', ' ', ' ', ' '}
+        },
+
+        // 8
+        {
+            { ' ', ' ', 'c', 'c', 'c', 'c', 'm', ' ', ' '},
+            { ' ', 'c', 'c', ' ', ' ', 'c', 'c', ' ', ' '},
+            { ' ', ' ', ' ', ' ', 'c', 'c', ' ', ' ', ' '},
+            { ' ', ' ', ' ', 'c', 'c', ' ', ' ', ' ', ' '},
+            { ' ', ' ', 'c', 'c', ' ', ' ', 's', ' ', ' '},
+            { ' ', ' ', 'm', 'd', 'd', 'd', ' ', ' ', ' '},
+            { ' ', ' ', 'd', 'd', 'd', ' ', ' ', ' ', ' '}
+        },
+
+        // 9
+        {
+            { 'd', 'c', 'd', 'c', ' ', ' ', ' ', ' ', ' '},
+            { 'c', 'c', 'c', 'c', ' ', 's', ' ', ' ', ' '},
+            { ' ', 'c', 'c', ' ', 'c', 'c', ' ', ' ', ' '},
+            { ' ', 'c', 'c', 'c', 'c', 'c', 'c', 'm', ' '},
+            { ' ', ' ', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
+            { ' ', ' ', 'c', 'c', ' ', 'd', 'd', ' ', ' '},
+            { ' ', 'c', ' ', 'c', ' ', 'c', 'c', ' ', ' '}
+        },
+
+        // 10
+        {
+            { ' ', 'c', 'c', 'c', 'c', ' ', ' ', ' ', ' '},
+            { 'c', ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' '},
+            { 'c', ' ', 'd', 'd', ' ', 'c', ' ', ' ', ' '},
+            { 'c', ' ', 'd', 'd', ' ', 'c', 's', ' ', ' '},
+            { 'c', ' ', 'c', 'c', 'c', 'c', ' ', ' ', ' '},
+            { 'c', ' ', ' ', ' ', ' ', ' ', 'c', ' ', ' '},
+            { ' ', 'c', 'c', 'c', 'm', 'c', 'c', 'd', 'd'}
+        },
+
+        // 11
+        {
+            { ' ', ' ', ' ', 'm', 'c', 'c', ' ', ' ', ' '},
+            { ' ', 'c', ' ', 'c', 'c', 'c', 'c', ' ', ' '},
+            { 'c', 'c', 'c', 'c', ' ', 'd', 'd', 'd', 's'},
+            { ' ', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
+            { ' ', 'c', ' ', 'c', 'c', 'c', 'c', ' ', ' '},
+            { ' ', ' ', ' ', ' ', 'c', 'c', ' ', ' ', ' '},
+            { ' ', ' ', ' ', ' ', 'd', 'd', ' ', ' ', ' '}
+        },
+
+        // 12
+        {
+            { ' ', ' ', ' ', 'c', 'c', 'c', 'c', ' ', ' '},
+            { ' ', ' ', 'c', 'c', ' ', 'c', 'c', 'd', 'd'},
+            { ' ', 's', ' ', 'c', 'c', 'd', 'd', ' ', ' '},
+            { ' ', ' ', 'c', 'c', ' ', 'c', 'c', ' ', ' '},
+            { ' ', 'c', 'c', ' ', ' ', ' ', 'c', 'c', ' '},
+            { ' ', 'c', 'c', 'c', 'm', 'c', 'c', 'c', ' '},
+            { ' ', ' ', 'c', 'c', 'd', 'c', 'c', ' ', ' '}
+        },
+
+        // 13
+        {
+            { ' ', ' ', 'c', 'c', ' ', 'c', 'c', ' ', ' '},
+            { ' ', 'c', 'c', ' ', 'd', ' ', 'c', 'c', ' '},
+            { ' ', 'c', ' ', 'd', 'd', 'd', ' ', 'c', ' '},
+            { 'm', 'c', 'c', ' ', 'd', ' ', 'c', 'c', ' '},
+            { 'c', ' ', 'c', 'c', 'c', 'c', 'c', ' ', 'c'},
+            { 'c', ' ', ' ', ' ', 's', ' ', ' ', ' ', 'c'},
+            { ' ', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '}
+        },
+
+        // 14
+        {
+            { 'c', 'd', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            { 'c', 'c', 'c', 'c', 'd', 'm', ' ', ' ', ' '},
+            { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'd'},
+            { ' ', ' ', ' ', ' ', 's', ' ', ' ', ' ', ' '},
+            { 'd', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
+            { ' ', ' ', ' ', ' ', 'd', 'c', 'c', 'c', 'c'},
+            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'd', 'c'}
+        },
+
+        // 15
+        {
+            { ' ', ' ', ' ', ' ', 'c', 'c', ' ', ' ', ' '},
+            { ' ', 'd', 'd', 's', ' ', 'c', 'c', ' ', ' '},
+            { ' ', 'd', 'd', ' ', ' ', ' ', 'c', 'c', ' '},
+            { ' ', 'm', 'c', 'c', ' ', ' ', 'c', 'c', ' '},
+            { ' ', 'd', 'd', ' ', ' ', ' ', 'c', 'c', ' '},
+            { ' ', 'd', 'd', ' ', ' ', 'c', 'c', ' ', ' '},
+            { ' ', ' ', ' ', ' ', 'c', 'c', ' ', ' ', ' '}
+        },
+
+        // 16
+        {
+            { ' ', 'c', 'c', ' ', ' ', ' ', ' ', ' ', ' '},
+            { ' ', ' ', ' ', 'c', 'd', 'd', 'd', ' ', ' '},
+            { ' ', 'c', 'c', 'c', 'c', ' ', ' ', 'd', 'd'},
+            { 'c', ' ', ' ', ' ', 'c', 'd', 'd', 'd', 'c'},
+            { 'c', 's', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
+            { 'm', 'c', 'c', 'c', 'c', 'd', 'd', 'd', 'd'},
+            { ' ', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '}
+        },
+
+        // 17
+        {
+            { ' ', ' ', 'c', 'c', 'c', 'c', 'c', 'm', 'c'},
+            { ' ', 'd', ' ', ' ', ' ', ' ', ' ', ' ', 'c'},
+            { ' ', 'd', 'c', 'c', 'c', ' ', ' ', 'd', ' '},
+            { ' ', 'c', ' ', 's', ' ', 'd', 'd', 'd', ' '},
+            { ' ', 'c', 'c', 'c', 'c', ' ', 'c', ' ', ' '},
+            { 'c', ' ', ' ', ' ', ' ', ' ', 'c', ' ', ' '},
+            { 'c', 'm', 'd', 'd', 'd', 'd', 'd', ' ', ' '}
+        },
+
+        // 18
+        {
+            { ' ', ' ', ' ', ' ', 'd', 'd', ' ', ' ', ' '},
+            { ' ', ' ', ' ', 'c', 'c', 'c', 'c', 'c', ' '},
+            { ' ', ' ', 'c', ' ', 'd', 'd', ' ', ' ', ' '},
+            { ' ', ' ', ' ', 'c', 'c', 'c', 'c', ' ', ' '},
+            { 's', ' ', ' ', 'm', 'd', 'd', ' ', ' ', ' '},
+            { ' ', 'c', 'c', 'c', 'c', 'c', ' ', ' ', ' '},
+            { ' ', ' ', ' ', ' ', 'd', 'd', ' ', ' ', ' '}
+        },
+
+        // 19
         {
             { ' ', ' ', 'c', 'c', 'c', 'c', 'c', ' ', ' '},
             { ' ', ' ', 'c', 'c', 'c', 'c', 'c', ' ', ' '},
@@ -215,6 +391,237 @@
             { ' ', 'd', ' ', ' ', ' ', ' ', 'c', 'd', ' '},
             { ' ', 'd', 'c', 'c', 'c', 'c', 'c', ' ', ' '},
             { ' ', 'd', 'c', 'c', 'c', 'c', 'c', ' ', ' '}
+        },
+
+        // 20
+        {
+            { ' ', ' ', ' ', ' ', ' ', 'c', 'c', 'c', ' '},
+            { ' ', ' ', ' ', 's', 'c', 'c', 'c', ' ', ' '},
+            { ' ', ' ', ' ', 'c', 'c', 'c', 'm', ' ', ' '},
+            { ' ', ' ', 'c', 'c', 'c', ' ', ' ', 'd', ' '},
+            { ' ', 'c', 'c', 'c', ' ', ' ', 'd', 'd', 'd'},
+            { 'c', 'c', 'c', ' ', ' ', ' ', 'm', 'd', ' '},
+            { 'c', 'c', ' ', ' ', ' ', ' ', ' ', 'd', ' '}
+        },
+
+        // 21
+        {
+            { ' ', 'c', 'c', ' ', ' ', ' ', 'c', 'c', ' '},
+            { ' ', 'c', ' ', 'c', 'd', 'c', ' ', 'c', ' '},
+            { ' ', ' ', ' ', ' ', 'd', ' ', ' ', ' ', ' '},
+            { 'd', 'd', 'd', ' ', 's', ' ', 'd', 'd', 'd'},
+            { ' ', ' ', ' ', ' ', 'd', ' ', ' ', ' ', ' '},
+            { 'c', 'c', 'c', ' ', 'd', ' ', 'c', 'c', 'c'},
+            { ' ', 'c', 'm', 'c', ' ', 'c', 'm', 'c', ' '}
+        },
+
+        // 22
+        {
+            { ' ', ' ', 'd', 'd', 'c', 'd', 'd', ' ', ' '},
+            { ' ', ' ', ' ', 'c', 's', 'c', ' ', ' ', ' '},
+            { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '},
+            { ' ', 'd', 'c', 'c', 'c', 'c', 'c', 'd', ' '},
+            { ' ', ' ', 'c', 'c', 'c', 'c', 'c', 'm', ' '},
+            { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '},
+            { ' ', ' ', ' ', ' ', 'd', ' ', ' ', ' ', ' '}
+        },
+
+        // 23
+        {
+            { 'c', 'c', ' ', ' ', ' ', ' ', ' ', 'd', 'd'},
+            { ' ', 'c', 'c', 'c', ' ', 'd', 'd', 'd', ' '},
+            { ' ', 'd', 'd', 'd', 'm', ' ', ' ', ' ', ' '},
+            { ' ', ' ', 'c', 'c', 'c', 'c', ' ', ' ', ' '},
+            { ' ', ' ', ' ', 'd', 'd', 'd', 'd', ' ', ' '},
+            { 'c', 'c', 'c', 'c', 's', 'c', 'c', 'c', 'c'},
+            { ' ', ' ', ' ', ' ', 'd', ' ', ' ', ' ', ' '}
+        },
+
+        // 24
+        {
+            { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '},
+            { ' ', ' ', 'c', 'c', 'm', 'c', 'c', ' ', ' '},
+            { ' ', 'c', 'c', ' ', ' ', ' ', 'c', 'c', ' '},
+            { ' ', 'c', 'c', ' ', 'd', ' ', 'c', 'c', ' '},
+            { ' ', ' ', 'c', 'c', ' ', 'c', 'c', ' ', 's'},
+            { 'd', ' ', ' ', 'c', ' ', 'c', ' ', ' ', 'd'},
+            { ' ', 'd', 'd', 'd', 'm', 'd', 'd', 'd', ' '}
+        },
+
+        // 25
+        {
+            { ' ', ' ', ' ', ' ', 'd', ' ', ' ', ' ', ' '},
+            { ' ', ' ', ' ', ' ', 'd', ' ', ' ', ' ', ' '},
+            { ' ', ' ', ' ', 'd', 'c', 'd', ' ', ' ', ' '},
+            { ' ', ' ', 'd', 'c', 'm', 'c', 'd', ' ', ' '},
+            { ' ', 'd', 'c', ' ', ' ', ' ', 'c', 'd', ' '},
+            { 'd', 'c', 'c', 'c', 's', 'c', 'c', 'c', 'd'},
+            { 'c', 'c', 'c', 'c', 'm', 'c', 'c', 'c', 'c'}
+        },
+
+        // 26
+        {
+            { ' ', 'c', 'c', 'c', ' ', 'c', 'c', 'c', ' '},
+            { 'c', 'd', 'd', ' ', ' ', ' ', 'd', 'd', 'c'},
+            { 'c', 'd', ' ', ' ', ' ', ' ', ' ', 'd', 'c'},
+            { ' ', 'm', ' ', ' ', 's', ' ', ' ', 'm', ' '},
+            { 'c', 'd', ' ', ' ', ' ', ' ', ' ', 'd', 'c'},
+            { 'c', 'd', 'd', ' ', ' ', ' ', 'd', 'd', 'c'},
+            { ' ', 'c', 'c', 'c', ' ', 'c', 'c', 'c', ' '}
+        },
+
+        // 27
+        {
+            { 'c', 'c', 'c', ' ', 'c', ' ', 'd', 'd', 'd'},
+            { 'c', 'm', 'c', ' ', ' ', ' ', 'd', 'm', 'd'},
+            { 'c', 'c', 'c', ' ', ' ', ' ', 'd', 'd', 'd'},
+            { ' ', ' ', ' ', ' ', 's', ' ', ' ', ' ', ' '},
+            { 'd', 'd', 'd', ' ', ' ', ' ', 'c', 'c', 'c'},
+            { 'd', 'm', 'd', ' ', ' ', ' ', 'c', 'm', 'c'},
+            { 'd', 'd', 'd', ' ', 'c', ' ', 'c', 'c', 'c'}
+        },
+
+        // 28
+        {
+            { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
+            { ' ', 'd', 'c', ' ', ' ', ' ', ' ', 'd', 'c'},
+            { ' ', 'd', 'c', ' ', 's', ' ', ' ', 'd', 'c'},
+            { ' ', 'd', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
+            { ' ', 'd', 'c', ' ', ' ', ' ', ' ', ' ', ' '},
+            { 'm', 'd', 'c', 'm', ' ', ' ', ' ', ' ', ' '},
+            { 'c', 'c', 'c', 'c', ' ', ' ', ' ', ' ', ' '}
+        },
+
+        // 29
+        {
+            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'c', ' '},
+            { ' ', ' ', ' ', ' ', ' ', 'c', 'c', 'c', ' '},
+            { ' ', ' ', ' ', ' ', 'c', 'c', 'c', 'c', ' '},
+            { 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 's'},
+            { 'c', 'c', 'c', ' ', 'm', 'd', 'd', 'd', ' '},
+            { ' ', 'c', 'c', ' ', ' ', ' ', ' ', ' ', ' '},
+            { ' ', 'c', ' ', ' ', ' ', ' ', ' ', ' ', ' '}
+        },
+
+        // 30
+        {
+            { 'c', 'c', ' ', ' ', 'd', 'd', 'd', 'd', 'd'},
+            { 'c', 'c', 'c', ' ', 'm', 'd', 'd', 'd', ' '},
+            { ' ', 'c', 'c', 'c', 'd', ' ', ' ', 'd', ' '},
+            { ' ', ' ', 'c', 'd', 's', ' ', 'd', 'm', ' '},
+            { ' ', ' ', 'd', ' ', ' ', 'd', 'c', 'c', ' '},
+            { ' ', 'd', ' ', ' ', 'd', 'c', 'c', 'c', 'c'},
+            { ' ', 'd', 'd', 'd', ' ', ' ', ' ', 'c', ' '}
+        },
+
+        // 31
+        {
+            { 'd', ' ', ' ', ' ', 'c', ' ', ' ', ' ', ' '},
+            { 'd', ' ', ' ', 'c', 'c', 'c', 'm', ' ', ' '},
+            { 'd', ' ', 'c', 'c', 'c', 'c', 'c', ' ', ' '},
+            { 'm', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
+            { 'd', 's', ' ', ' ', 'd', ' ', ' ', ' ', ' '},
+            { 'd', ' ', 'd', 'd', 'd', 'd', 'd', ' ', ' '},
+            { 'd', ' ', ' ', 'm', 'd', ' ', ' ', ' ', ' '}
+        },
+
+        // 32
+        {
+            { 's', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
+            { 'c', 'c', 'd', ' ', ' ', ' ', 'd', 'c', 'c'},
+            { 'c', 'c', 'd', ' ', ' ', ' ', 'd', 'c', 'c'},
+            { ' ', 'c', 'c', 'c', 'c', 'c', 'c', 'c', ' '},
+            { ' ', ' ', 'm', 'c', 'c', 'c', 'm', ' ', ' '},
+            { ' ', 'd', 'd', 'd', 'd', 'd', 'd', ' ', ' '},
+            { ' ', ' ', ' ', 'c', 'c', 'c', ' ', ' ', ' '}
+        },
+
+        // 33
+        {
+            { 'c', 'c', 'c', ' ', ' ', ' ', ' ', ' ', ' '},
+            { 'c', 'c', 'c', ' ', 's', ' ', 'd', 'd', ' '},
+            { 'c', 'c', 'c', ' ', ' ', 'd', 'd', 'd', 'd'},
+            { ' ', ' ', ' ', ' ', ' ', 'd', 'd', 'd', 'd'},
+            { ' ', 'm', 'c', ' ', ' ', 'm', 'd', 'd', ' '},
+            { ' ', 'c', 'c', 'c', ' ', ' ', ' ', ' ', ' '},
+            { 'c', 'c', 'c', 'c', 'c', ' ', ' ', ' ', ' '}
+        },
+
+        // 34
+        {
+            { 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', ' '},
+            { ' ', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd'},
+            { ' ', ' ', ' ', ' ', ' ', ' ', 'm', 'd', 'd'},
+            { ' ', 'c', ' ', 's', ' ', ' ', 'd', 'd', 'd'},
+            { 'c', 'c', 'c', 'c', ' ', ' ', ' ', 'd', 'd'},
+            { 'm', 'c', 'c', 'c', ' ', ' ', ' ', ' ', 'd'},
+            { ' ', ' ', ' ', 'c', 'c', 'c', 'c', ' ', ' '}
+        },
+
+        // 35
+        {
+            { 'c', 'c', ' ', ' ', ' ', ' ', ' ', 'c', 'c'},
+            { ' ', 'c', ' ', ' ', 'd', ' ', ' ', 'c', 'm'},
+            { ' ', 'c', ' ', 'd', 'd', 'd', 's', 'c', ' '},
+            { 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd'},
+            { ' ', ' ', 'm', 'd', 'd', 'd', ' ', ' ', ' '},
+            { 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd'},
+            { ' ', ' ', 'c', 'c', 'd', 'c', 'c', ' ', ' '}
+        },
+
+        // 36
+        {
+            { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'},
+            { 'c', 'd', ' ', ' ', ' ', ' ', ' ', 'd', 'c'},
+            { 'c', ' ', 'd', 'c', 'c', 'c', 'd', ' ', 'c'},
+            { 'c', ' ', ' ', 'm', 's', 'm', ' ', ' ', 'c'},
+            { 'c', ' ', 'd', 'c', 'c', 'c', 'd', ' ', 'c'},
+            { 'c', 'd', ' ', 'd', 'd', 'd', ' ', 'd', 'c'},
+            { 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'c'}
+        },
+
+        // 37
+        {
+            { 'c', 'd', 'c', 'd', 'c', 'd', 'c', 'd', 'c'},
+            { 'm', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            { 'd', 'd', 'd', ' ', 'c', 'd', ' ', ' ', ' '},
+            { 's', 'c', 'd', 'c', 'd', 'c', 'd', 'c', 'd'},
+            { 'd', 'd', 'd', ' ', 'c', 'd', ' ', ' ', ' '},
+            { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
+            { 'd', 'c', 'd', 'c', 'd', 'c', 'd', 'c', 'd'}
+        },
+
+        // 38
+        {
+            { ' ', 'm', 'd', 'd', 'd', 'd', 'm', ' ', ' '},
+            { 'm', 'd', 'd', 'd', 'd', 'c', 'c', ' ', ' '},
+            { 'd', 'd', 'd', 'd', 'c', 'c', 'c', 'c', ' '},
+            { 'd', 'd', 'd', 'd', 'd', 'c', 'c', ' ', ' '},
+            { 'd', 'd', 'd', 'd', 'd', 'd', 'd', ' ', ' '},
+            { ' ', 'd', 'd', 'd', 'd', 'd', 's', ' ', ' '},
+            { ' ', ' ', 'd', 'd', 'd', 'd', ' ', ' ', ' '}
+        },
+
+        // 39
+        {
+            { ' ', 'd', 'd', 'd', 'd', 'd', 'd', 'd', ' '},
+            { ' ', 'd', 'c', 'c', 'c', 'c', 'c', 'd', ' '},
+            { ' ', 'd', 'm', 'd', 'd', 'd', ' ', 'd', ' '},
+            { ' ', 'd', 'c', 'd', 's', 'd', 'c', 'd', ' '},
+            { ' ', 'd', ' ', 'd', 'd', 'd', 'm', 'd', ' '},
+            { ' ', 'd', 'c', 'c', 'c', 'c', 'c', 'd', ' '},
+            { ' ', 'd', 'd', 'd', 'd', 'd', 'd', 'd', ' '}
+        },
+
+        // 40
+        {
+            { 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd'},
+            { 'd', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'd'},
+            { 'd', ' ', 's', ' ', ' ', ' ', ' ', ' ', 'm'},
+            { 'd', ' ', ' ', 'c', 'd', 'd', 'c', ' ', 'd'},
+            { 'd', ' ', ' ', ' ', ' ', 'm', ' ', ' ', 'd'},
+            { 'd', 'c', 'c', 'c', 'c', 'c', 'c', 'c', 'd'},
+            { 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'd'}
         },
     };
 
@@ -279,20 +686,122 @@
 #endif
 
 #pragma mark skill levels
+    PowerUpFireballs *f;
+    PowerUpShields *s;
+    PowerUpTimer *t;
     switch (skillLevel) {
         case SkillLevel_Easy:
-
-            break;
-
-        case SkillLevel_Normal:
             switch (grid) {
                 case 0:
                 case 1:
                 case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                    for (Guardian *g in guardians) {
+                        g.baseFireDelay = 9;
+                        g.chanceForTwoFireballs = 6;
+                        g.chanceForThreeFireballs = 10;
+                        g.chanceForFourFireballs = 15;
+                        g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
+                    }
+
+                    timer = timeToCompleteGrid = 25;
+
+                    asteroidLaunchDelay = 3.0;
+                    asteroidLaunchOdds = 12;
+                    maxAsteroids = 2;
+                    asteroidSpeed = 60;
+                    for (int i = 0; i < maxAsteroids; ++i) {
+                        Asteroid *asteroid = [[Asteroid alloc] initLaunchLocationWithSpeed:asteroidSpeed];
+                        [asteroids addObject:asteroid];
+                        [asteroid release];
+                    }
+
+                    powerUpLaunchDelay = 3.0;
+                    powerUpSpeed = 50;
+                    powerUpTimerLaunchOdds = 60;
+                    powerUpShieldsLaunchOdds = 15;
+                    powerUpFireballsLaunchOdds = 10;
+                    f = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:f];
+                    [f release];
+                    s = [[PowerUpShields alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:s];
+                    [s release];
+                    t = [[PowerUpTimer alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:t];
+                    [t release];
+
+                    break;
+
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+
+                    for (Guardian *g in guardians) {
+                        g.baseFireDelay = 8;
+                        g.chanceForTwoFireballs = 5;
+                        g.chanceForThreeFireballs = 9;
+                        g.chanceForFourFireballs = 12;
+                        g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
+                    }
+
+                    timer = timeToCompleteGrid = 30;
+
+                    asteroidLaunchDelay = 2.5;
+                    asteroidLaunchOdds = 10;
+                    maxAsteroids = 3;
+                    asteroidSpeed = 60;
+                    for (int i = 0; i < maxAsteroids; ++i) {
+                        Asteroid *asteroid = [[Asteroid alloc] initLaunchLocationWithSpeed:asteroidSpeed];
+                        [asteroids addObject:asteroid];
+                        [asteroid release];
+                    }
+
+                    powerUpLaunchDelay = 2.5;
+                    powerUpSpeed = 50;
+                    powerUpTimerLaunchOdds = 50;
+                    powerUpShieldsLaunchOdds = 12;
+                    powerUpFireballsLaunchOdds = 8;
+                    f = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:f];
+                    [f release];
+                    s = [[PowerUpShields alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:s];
+                    [s release];
+                    t = [[PowerUpTimer alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:t];
+                    [t release];
+
+                    break;
+
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 26:
+                case 27:
+                case 28:
+                case 29:
+
                     for (Guardian *g in guardians) {
                         g.baseFireDelay = 7;
-                        g.chanceForTwoFireballs = 5;
-                        g.chanceForThreeFireballs = 8;
+                        g.chanceForTwoFireballs = 4;
+                        g.chanceForThreeFireballs = 7;
                         g.chanceForFourFireballs = 10;
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
@@ -300,8 +809,8 @@
                     timer = timeToCompleteGrid = 30;
 
                     asteroidLaunchDelay = 2.0;
-                    asteroidLaunchOdds = 10;
-                    maxAsteroids = 2;
+                    asteroidLaunchOdds = 8;
+                    maxAsteroids = 3;
                     asteroidSpeed = 60;
                     for (int i = 0; i < maxAsteroids; ++i) {
                         Asteroid *asteroid = [[Asteroid alloc] initLaunchLocationWithSpeed:asteroidSpeed];
@@ -312,21 +821,268 @@
                     powerUpLaunchDelay = 2.0;
                     powerUpSpeed = 50;
                     powerUpTimerLaunchOdds = 50;
-                    powerUpShieldsLaunchOdds = 15;
-                    powerUpFireballsLaunchOdds = 10;
-                    PowerUpFireballs *f = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    powerUpShieldsLaunchOdds = 11;
+                    powerUpFireballsLaunchOdds = 7;
+                    f = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:powerUpSpeed];
                     [powerUps addObject:f];
                     [f release];
-                    PowerUpShields *s = [[PowerUpShields alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    s = [[PowerUpShields alloc] initLaunchLocationWithSpeed:powerUpSpeed];
                     [powerUps addObject:s];
                     [s release];
-                    PowerUpTimer *t = [[PowerUpTimer alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    t = [[PowerUpTimer alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:t];
+                    [t release];
+
+                    break;
+
+                case 30:
+                case 31:
+                case 32:
+                case 33:
+                case 34:
+                case 35:
+                case 36:
+                case 37:
+                case 38:
+                case 39:
+
+                    for (Guardian *g in guardians) {
+                        g.baseFireDelay = 6;
+                        g.chanceForTwoFireballs = 4;
+                        g.chanceForThreeFireballs = 5;
+                        g.chanceForFourFireballs = 6;
+                        g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
+                    }
+
+                    timer = timeToCompleteGrid = 30;
+
+                    asteroidLaunchDelay = 2.0;
+                    asteroidLaunchOdds = 10;
+                    maxAsteroids = 4;
+                    asteroidSpeed = 60;
+                    for (int i = 0; i < maxAsteroids; ++i) {
+                        Asteroid *asteroid = [[Asteroid alloc] initLaunchLocationWithSpeed:asteroidSpeed];
+                        [asteroids addObject:asteroid];
+                        [asteroid release];
+                    }
+
+                    powerUpLaunchDelay = 2.0;
+                    powerUpSpeed = 50;
+                    powerUpTimerLaunchOdds = 40;
+                    powerUpShieldsLaunchOdds = 10;
+                    powerUpFireballsLaunchOdds = 5;
+                    f = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:f];
+                    [f release];
+                    s = [[PowerUpShields alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:s];
+                    [s release];
+                    t = [[PowerUpTimer alloc] initLaunchLocationWithSpeed:powerUpSpeed];
                     [powerUps addObject:t];
                     [t release];
 
                     break;
 
                 default:
+                    break;
+            }
+
+            break;
+
+        case SkillLevel_Normal:
+            switch (grid) {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                    for (Guardian *g in guardians) {
+                        g.baseFireDelay = 7;
+                        g.chanceForTwoFireballs = 4;
+                        g.chanceForThreeFireballs = 8;
+                        g.chanceForFourFireballs = 12;
+                        g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
+                    }
+
+                    timer = timeToCompleteGrid = 25;
+
+                    asteroidLaunchDelay = 3.0;
+                    asteroidLaunchOdds = 8;
+                    maxAsteroids = 3;
+                    asteroidSpeed = 60;
+                    for (int i = 0; i < maxAsteroids; ++i) {
+                        Asteroid *asteroid = [[Asteroid alloc] initLaunchLocationWithSpeed:asteroidSpeed];
+                        [asteroids addObject:asteroid];
+                        [asteroid release];
+                    }
+
+                    powerUpLaunchDelay = 2.5;
+                    powerUpSpeed = 50;
+                    powerUpTimerLaunchOdds = 40;
+                    powerUpShieldsLaunchOdds = 10;
+                    powerUpFireballsLaunchOdds = 5;
+                    f = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:f];
+                    [f release];
+                    s = [[PowerUpShields alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:s];
+                    [s release];
+                    t = [[PowerUpTimer alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:t];
+                    [t release];
+
+                    break;
+
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+
+                    for (Guardian *g in guardians) {
+                        g.baseFireDelay = 6;
+                        g.chanceForTwoFireballs = 4;
+                        g.chanceForThreeFireballs = 7;
+                        g.chanceForFourFireballs = 10;
+                        g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
+                    }
+
+                    timer = timeToCompleteGrid = 30;
+
+                    asteroidLaunchDelay = 2.5;
+                    asteroidLaunchOdds = 7;
+                    maxAsteroids = 3;
+                    asteroidSpeed = 60;
+                    for (int i = 0; i < maxAsteroids; ++i) {
+                        Asteroid *asteroid = [[Asteroid alloc] initLaunchLocationWithSpeed:asteroidSpeed];
+                        [asteroids addObject:asteroid];
+                        [asteroid release];
+                    }
+
+                    powerUpLaunchDelay = 2.5;
+                    powerUpSpeed = 50;
+                    powerUpTimerLaunchOdds = 30;
+                    powerUpShieldsLaunchOdds = 8;
+                    powerUpFireballsLaunchOdds = 4;
+                    f = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:f];
+                    [f release];
+                    s = [[PowerUpShields alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:s];
+                    [s release];
+                    t = [[PowerUpTimer alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:t];
+                    [t release];
+
+                    break;
+
+                case 20:
+                case 21:
+                case 22:
+                case 23:
+                case 24:
+                case 25:
+                case 26:
+                case 27:
+                case 28:
+                case 29:
+
+                    for (Guardian *g in guardians) {
+                        g.baseFireDelay = 5;
+                        g.chanceForTwoFireballs = 3;
+                        g.chanceForThreeFireballs = 5;
+                        g.chanceForFourFireballs = 8;
+                        g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
+                    }
+
+                    timer = timeToCompleteGrid = 30;
+
+                    asteroidLaunchDelay = 2.0;
+                    asteroidLaunchOdds = 5;
+                    maxAsteroids = 4;
+                    asteroidSpeed = 60;
+                    for (int i = 0; i < maxAsteroids; ++i) {
+                        Asteroid *asteroid = [[Asteroid alloc] initLaunchLocationWithSpeed:asteroidSpeed];
+                        [asteroids addObject:asteroid];
+                        [asteroid release];
+                    }
+
+                    powerUpLaunchDelay = 2.0;
+                    powerUpSpeed = 50;
+                    powerUpTimerLaunchOdds = 20;
+                    powerUpShieldsLaunchOdds = 6;
+                    powerUpFireballsLaunchOdds = 3;
+                    f = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:f];
+                    [f release];
+                    s = [[PowerUpShields alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:s];
+                    [s release];
+                    t = [[PowerUpTimer alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:t];
+                    [t release];
+
+                    break;
+
+                case 30:
+                case 31:
+                case 32:
+                case 33:
+                case 34:
+                case 35:
+                case 36:
+                case 37:
+                case 38:
+                case 39:
+
+                    for (Guardian *g in guardians) {
+                        g.baseFireDelay = 4;
+                        g.chanceForTwoFireballs = 2;
+                        g.chanceForThreeFireballs = 4;
+                        g.chanceForFourFireballs = 5;
+                        g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
+                    }
+
+                    timer = timeToCompleteGrid = 35;
+
+                    asteroidLaunchDelay = 2.0;
+                    asteroidLaunchOdds = 4;
+                    maxAsteroids = 4;
+                    asteroidSpeed = 60;
+                    for (int i = 0; i < maxAsteroids; ++i) {
+                        Asteroid *asteroid = [[Asteroid alloc] initLaunchLocationWithSpeed:asteroidSpeed];
+                        [asteroids addObject:asteroid];
+                        [asteroid release];
+                    }
+
+                    powerUpLaunchDelay = 2.0;
+                    powerUpSpeed = 50;
+                    powerUpTimerLaunchOdds = 15;
+                    powerUpShieldsLaunchOdds = 4;
+                    powerUpFireballsLaunchOdds = 2;
+                    f = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:f];
+                    [f release];
+                    s = [[PowerUpShields alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:s];
+                    [s release];
+                    t = [[PowerUpTimer alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:t];
+                    [t release];
+
+                    break;
+
+                    default:
                     break;
             }
 
@@ -485,6 +1241,14 @@
         return;
     }
     if (initingTimer) {
+        if (playInitTimerSound) {
+            [sharedSoundManager playSoundWithKey:@"timer_powerup"
+                                            gain:1.0
+                                           pitch:1.0
+                                        location:CGPointMake(0, 0)
+                                      shouldLoop:NO];
+            playInitTimerSound = FALSE;
+        }
         initingTimerTracker += aDelta;
         if (initingTimerTracker > timeToInitTimerDisplay) {
             initingTimer = FALSE;
@@ -530,7 +1294,7 @@
                 sceneState = SceneState_GuardianTransport;
                 lastTimeInLoop = 0;
                 sharedSoundManager.loopPlaylist = TRUE;
-                [sharedSoundManager startPlaylistNamed:@"background_music"];
+                [sharedSoundManager playMusicWithKey:@"background_music" timesToRepeat:-1];
             }
             lastTimeInLoop = CACurrentMediaTime();
             break;
@@ -566,20 +1330,22 @@
                 timerBonusScore = 0;
                 if (currentGrid == numberOfGrids) {
                     sceneState = SceneState_AllGridsCompleted;
-                    [sharedSoundManager stopMusic];
+                    [sharedSoundManager pauseMusic];
                     [sharedSoundManager playSoundWithKey:@"all_grids_completed"];
+                    [sharedSoundManager fadeMusicVolumeFrom:0.0 toVolume:1.0 duration:5.0 stop:NO];
+                    [sharedSoundManager resumeMusic];
                     return;
                 }
                 [self initGrid:currentGrid++];
                 if (gameContinuing) {
                     gameContinuing = FALSE;
-                    [sharedSoundManager resumeMusic];
                 }
                 for (Guardian *g in guardians) {
                     g.canFire = TRUE;
                 }
                 sceneState = SceneState_Running;
                 lastTimeInLoop = 0;
+                [sharedSoundManager resumeMusic];
             }
             lastTimeInLoop = CACurrentMediaTime();
             break;
@@ -666,6 +1432,8 @@
                     sceneState = SceneState_GameOver;
                     [sharedSoundManager pauseMusic];
                     [sharedSoundManager playSoundWithKey:@"game_over"];
+                    [sharedSoundManager fadeMusicVolumeFrom:0.0 toVolume:1.0 duration:5.0 stop:NO];
+                    [sharedSoundManager resumeMusic];
                     lastTimeInLoop = 0;
                     return;
                 }
@@ -803,13 +1571,16 @@
 
 
             [largeMessageFont renderStringJustifiedInFrame:CGRectMake(0, appDelegate.SCREEN_HEIGHT/2, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2)
-                                                 justification:BitmapFontJustification_MiddleCentered text:@"Game Over"];
+                                             justification:BitmapFontJustification_MiddleCentered
+                                                      text:@"Game Over"];
 
             [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
-                                             justification:BitmapFontJustification_TopCentered text:@"Tap to play again, starting at current grid."];
+                                       justification:BitmapFontJustification_TopCentered
+                                                text:@"Tap to play again, starting at current grid."];
 
             [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
-                                             justification:BitmapFontJustification_MiddleCentered text:@"Double Tap to return to main menu."];
+                                       justification:BitmapFontJustification_MiddleCentered
+                                                text:@"Double Tap to return to main menu."];
 
             [sharedImageRenderManager renderImages];
             break;
@@ -840,13 +1611,16 @@
 
 
             [largeMessageFont renderStringJustifiedInFrame:CGRectMake(0, appDelegate.SCREEN_HEIGHT/2, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2)
-                                             justification:BitmapFontJustification_MiddleCentered text:@"Game Over"];
+                                             justification:BitmapFontJustification_MiddleCentered
+                                                      text:@"Game Over"];
 
             [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
-                                       justification:BitmapFontJustification_TopCentered text:@"Congratulations! All grids completed."];
+                                       justification:BitmapFontJustification_TopCentered
+                                                text:@"Congratulations! All grids completed."];
 
             [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
-                                       justification:BitmapFontJustification_MiddleCentered text:@"Double Tap to return to main menu."];
+                                       justification:BitmapFontJustification_MiddleCentered
+                                                text:@"Double Tap to return to main menu."];
 
             [sharedImageRenderManager renderImages];
             break;

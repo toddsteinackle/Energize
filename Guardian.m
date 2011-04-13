@@ -228,7 +228,7 @@
                     --shotCounter;
                     justFired = TRUE;
                     [sharedSoundManager playSoundWithKey:@"guardian_fire"
-                                                    gain:.6
+                                                    gain:.9
                                                    pitch:1.0
                                                 location:CGPointMake(0, 0)
                                               shouldLoop:NO];

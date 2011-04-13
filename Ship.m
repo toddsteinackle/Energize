@@ -243,11 +243,13 @@
                 state = EntityState_Warping;
                 shield.state = EntityState_Idle;
                 [sharedSoundManager stopSoundWithKey:@"shield_enabled"];
+                [sharedSoundManager pauseMusic];
                 [sharedSoundManager playSoundWithKey:@"grid_over"
                                                 gain:1.0
                                                pitch:1.0
                                             location:CGPointMake(0, 0)
                                           shouldLoop:NO];
+
             }
             break;
 
@@ -425,11 +427,7 @@
         return;
     }
     if ([otherEntity isKindOfClass:[PowerUpTimer class]]) {
-        [sharedSoundManager playSoundWithKey:@"timer_powerup"
-                                        gain:1.0
-                                       pitch:1.0
-                                    location:CGPointMake(0, 0)
-                                  shouldLoop:NO];
+        appDelegate.glView.playInitTimerSound = TRUE;
         otherEntity.state = EntityState_Idle;
         [appDelegate.glView powerUpTimer];
         return;
