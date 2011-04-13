@@ -369,7 +369,7 @@
         otherEntity.state = EntityState_Dead;
         shield.pixelLocation = CGPointMake(pixelLocation.x, pixelLocation.y);
         shield.state = EntityState_Alive;
-        shield.duration = .5;
+        shield.duration = 1.0;
         shield.animation.state = kAnimationState_Stopped;
         shield.animation.currentFrame = -1;
         shield.animation.state = kAnimationState_Running;

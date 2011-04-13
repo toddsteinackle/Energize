@@ -249,8 +249,8 @@ BOOL isGameCenterAvailable() {
     gridStartingX = 160;
     gridStartingY = 612;
 
-    DRAG_MIN_X = 7;
-    DRAG_MIN_Y = 7;
+    DRAG_MIN_X = 8;
+    DRAG_MIN_Y = 8;
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         SCREEN_WIDTH = 1024;
@@ -297,8 +297,8 @@ BOOL isGameCenterAvailable() {
         SHIP_BOTTOM_BOUND = GUARDIAN_BOTTOM_BASE + GUARDIAN_HEIGHT + ship_height_padding;
         SHIP_STARTING_X_OFFSET = SHIP_STARTING_X_OFFSET * widthScaleFactor;
         SHIP_STARTING_Y_OFFSET = SHIP_STARTING_Y_OFFSET * heightScaleFactor;
-        DRAG_MIN_X = DRAG_MIN_X * widthScaleFactor;
-        DRAG_MIN_Y = DRAG_MIN_Y * heightScaleFactor;
+//        DRAG_MIN_X = DRAG_MIN_X * widthScaleFactor;
+//        DRAG_MIN_Y = DRAG_MIN_Y * heightScaleFactor;
         FIREBALL_SPEED_HORIZONTAL = FIREBALL_SPEED_HORIZONTAL * widthScaleFactor;
         FIREBALL_SPEED_VERTICAL = FIREBALL_SPEED_VERTICAL * heightScaleFactor;
     }

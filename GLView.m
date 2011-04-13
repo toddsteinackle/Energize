@@ -104,7 +104,7 @@
         pauseButton = [pss imageForKey:@"pause_button.png"];
 
         gameContinuing = FALSE;
-        timeToInitTimerDisplay = 1.4;
+        timeToInitTimerDisplay = 1.6;
 
 #pragma mark init sounds
         [sharedSoundManager loadSoundWithKey:@"cube" soundFile:@"Movement3.caf"];
@@ -693,6 +693,8 @@
     PowerUpShields *s;
     PowerUpTimer *t;
     switch (skillLevel) {
+
+#pragma mark SkillLevel_Easy
         case SkillLevel_Easy:
             switch (grid) {
                 case 0:
@@ -892,6 +894,7 @@
 
             break;
 
+#pragma mark SkillLevel_Normal
         case SkillLevel_Normal:
             switch (grid) {
                 case 0:
@@ -905,17 +908,17 @@
                 case 8:
                 case 9:
                     for (Guardian *g in guardians) {
-                        g.baseFireDelay = 7;
+                        g.baseFireDelay = 6;
                         g.chanceForTwoFireballs = 4;
-                        g.chanceForThreeFireballs = 8;
-                        g.chanceForFourFireballs = 12;
+                        g.chanceForThreeFireballs = 7;
+                        g.chanceForFourFireballs = 11;
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
 
                     timer = timeToCompleteGrid = 25;
 
                     asteroidLaunchDelay = 3.0;
-                    asteroidLaunchOdds = 8;
+                    asteroidLaunchOdds = 7;
                     maxAsteroids = 3;
                     asteroidSpeed = 60;
                     for (int i = 0; i < maxAsteroids; ++i) {
@@ -926,9 +929,9 @@
 
                     powerUpLaunchDelay = 2.5;
                     powerUpSpeed = 50;
-                    powerUpTimerLaunchOdds = 40;
+                    powerUpTimerLaunchOdds = 20;
                     powerUpShieldsLaunchOdds = 10;
-                    powerUpFireballsLaunchOdds = 5;
+                    powerUpFireballsLaunchOdds = 4;
                     f = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:powerUpSpeed];
                     [powerUps addObject:f];
                     [f release];
@@ -955,15 +958,15 @@
                     for (Guardian *g in guardians) {
                         g.baseFireDelay = 6;
                         g.chanceForTwoFireballs = 4;
-                        g.chanceForThreeFireballs = 7;
-                        g.chanceForFourFireballs = 10;
+                        g.chanceForThreeFireballs = 6;
+                        g.chanceForFourFireballs = 9;
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
 
                     timer = timeToCompleteGrid = 30;
 
                     asteroidLaunchDelay = 2.5;
-                    asteroidLaunchOdds = 7;
+                    asteroidLaunchOdds = 6;
                     maxAsteroids = 3;
                     asteroidSpeed = 60;
                     for (int i = 0; i < maxAsteroids; ++i) {
@@ -974,9 +977,9 @@
 
                     powerUpLaunchDelay = 2.5;
                     powerUpSpeed = 50;
-                    powerUpTimerLaunchOdds = 30;
+                    powerUpTimerLaunchOdds = 15;
                     powerUpShieldsLaunchOdds = 8;
-                    powerUpFireballsLaunchOdds = 4;
+                    powerUpFireballsLaunchOdds = 3;
                     f = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:powerUpSpeed];
                     [powerUps addObject:f];
                     [f release];
@@ -1022,7 +1025,7 @@
 
                     powerUpLaunchDelay = 2.0;
                     powerUpSpeed = 50;
-                    powerUpTimerLaunchOdds = 20;
+                    powerUpTimerLaunchOdds = 10;
                     powerUpShieldsLaunchOdds = 6;
                     powerUpFireballsLaunchOdds = 3;
                     f = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:powerUpSpeed];
@@ -1070,7 +1073,7 @@
 
                     powerUpLaunchDelay = 2.0;
                     powerUpSpeed = 50;
-                    powerUpTimerLaunchOdds = 15;
+                    powerUpTimerLaunchOdds = 5;
                     powerUpShieldsLaunchOdds = 4;
                     powerUpFireballsLaunchOdds = 2;
                     f = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:powerUpSpeed];
@@ -1091,6 +1094,7 @@
 
             break;
 
+#pragma mark SkillLevel_Hard
         case SkillLevel_Hard:
 
             break;
@@ -1797,7 +1801,7 @@
 
 #pragma mark SceneState_Running
         case SceneState_Running:
-            if (numTaps == 1) {
+            if (numTaps == 2) {
                 if (ship.state == EntityState_Alive) {
                     ship.isThrusting = !ship.isThrusting;
                 }
