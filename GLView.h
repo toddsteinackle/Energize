@@ -72,6 +72,7 @@ typedef enum {
     Image *timerBar;
     Image *pauseButton;
     int score, timerBonusScore;
+    int nextFreeShip, freeShipValue;
     int currentCubeValue;
     int playerLives;
     int maxAsteroids, asteroidLaunchOdds;
@@ -111,5 +112,6 @@ typedef enum {
 - (void)launchPowerUpWithDelta:(float)aDelta;
 - (void)powerUpFireballs;
 - (void)powerUpTimer;
+- (void)freeShipCheck;
 
 @end

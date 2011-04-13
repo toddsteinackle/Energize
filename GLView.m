@@ -107,7 +107,7 @@
         timeToInitTimerDisplay = 1.4;
 
 #pragma mark init sounds
-        [sharedSoundManager loadSoundWithKey:@"cube" soundFile:@"Movement1b.caf"];
+        [sharedSoundManager loadSoundWithKey:@"cube" soundFile:@"Movement3.caf"];
         [sharedSoundManager loadSoundWithKey:@"explosion" soundFile:@"explosion.caf"];
         [sharedSoundManager loadSoundWithKey:@"Impact6b" soundFile:@"Impact6b.caf"];
         [sharedSoundManager loadSoundWithKey:@"guardian_fire" soundFile:@"Boing2.caf"];
@@ -117,6 +117,7 @@
         [sharedSoundManager loadSoundWithKey:@"grid_over" soundFile:@"Win5.caf"];
         [sharedSoundManager loadSoundWithKey:@"game_over" soundFile:@"Negative2.caf"];
         [sharedSoundManager loadSoundWithKey:@"all_grids_completed" soundFile:@"LevelUp1.caf"];
+        [sharedSoundManager loadSoundWithKey:@"free_ship" soundFile:@"Flourish5.caf"];
         [sharedSoundManager loadMusicWithKey:@"background_music" musicFile:@"ActionStage05.m4a"];
     }
 
@@ -142,6 +143,7 @@
     [sharedSoundManager removeSoundWithKey:@"grid_over"];
     [sharedSoundManager removeSoundWithKey:@"game_over"];
     [sharedSoundManager removeSoundWithKey:@"all_grids_completed"];
+    [sharedSoundManager removeSoundWithKey:@"free_ship"];
     [sharedSoundManager removeMusicWithKey:@"background_music"];
 
     [super dealloc];
@@ -150,7 +152,8 @@
 - (void)initGame {
 
     score = 0;
-    currentCubeValue = 50;
+    nextFreeShip = freeShipValue = 50000;
+    currentCubeValue = 100;
     skillLevel = SkillLevel_Normal;
     playerLives = 4;
 }
@@ -1220,6 +1223,16 @@
 
 - (void)updateScore {
     score += currentCubeValue;
+    [self freeShipCheck];
+}
+
+- (void)freeShipCheck {
+    if (score >= nextFreeShip) {
+        [sharedSoundManager playSoundWithKey:@"free_ship"];
+        [sharedSoundManager fadeMusicVolumeFrom:0.0 toVolume:1.0 duration:5.0 stop:NO];
+        ++playerLives;
+        nextFreeShip += freeShipValue;
+    }
 }
 
 - (void)updateTimerWithDelta:(float)aDelta {
@@ -1327,6 +1340,7 @@
             }
             if (lastTimeInLoop) {
                 score += timerBonusScore;
+                [self freeShipCheck];
                 timerBonusScore = 0;
                 if (currentGrid == numberOfGrids) {
                     sceneState = SceneState_AllGridsCompleted;

@@ -13,6 +13,7 @@
 		288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765A40DF7441C002DB57D /* CoreGraphics.framework */; };
 		2899E5220DE3E06400AC0155 /* CubeStormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2899E5210DE3E06400AC0155 /* CubeStormViewController.xib */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
+		5F02F35F135658CE0037AA26 /* Movement3.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5F02F35E135658CE0037AA26 /* Movement3.caf */; };
 		5F0B6DA613353DC500ED5190 /* starfield-iphone.pex in Resources */ = {isa = PBXBuildFile; fileRef = 5F0B6DA513353DC400ED5190 /* starfield-iphone.pex */; };
 		5F149F1F13298034006378FB /* Cube.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F1E13298034006378FB /* Cube.m */; };
 		5F149F221329833E006378FB /* SpikeMine.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F211329833E006378FB /* SpikeMine.m */; };
@@ -21,6 +22,7 @@
 		5F149F2B1329A07F006378FB /* Fireball.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F2A1329A07E006378FB /* Fireball.m */; };
 		5F217D0913521DC900067C25 /* Movement1b.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5F217D0813521DC900067C25 /* Movement1b.caf */; };
 		5F291F25134E86730024A66D /* PowerUpFireballs.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F291F24134E86730024A66D /* PowerUpFireballs.m */; };
+		5F3D3BB313553D980040370A /* Flourish5.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5F3D3BB213553D980040370A /* Flourish5.caf */; };
 		5F3D40AC12FF416C00358CE7 /* CubeStormAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D40A212FF416C00358CE7 /* CubeStormAppDelegate.m */; };
 		5F3D40AD12FF416C00358CE7 /* CubeStormViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D40A412FF416C00358CE7 /* CubeStormViewController.m */; };
 		5F3D40AE12FF416C00358CE7 /* GLESGameState.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D40A612FF416C00358CE7 /* GLESGameState.m */; };
@@ -97,6 +99,7 @@
 		28AD733E0D9D9553002E5188 /* MainWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = main.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		32CA4F630368D1EE00C91783 /* CubeStorm_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CubeStorm_Prefix.pch; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		5F02F35E135658CE0037AA26 /* Movement3.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Movement3.caf; sourceTree = "<group>"; };
 		5F0B6DA513353DC400ED5190 /* starfield-iphone.pex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "starfield-iphone.pex"; sourceTree = "<group>"; };
 		5F149F1D13298034006378FB /* Cube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cube.h; sourceTree = "<group>"; };
 		5F149F1E13298034006378FB /* Cube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cube.m; sourceTree = "<group>"; };
@@ -111,6 +114,7 @@
 		5F217D0813521DC900067C25 /* Movement1b.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Movement1b.caf; sourceTree = "<group>"; };
 		5F291F23134E86730024A66D /* PowerUpFireballs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerUpFireballs.h; sourceTree = "<group>"; };
 		5F291F24134E86730024A66D /* PowerUpFireballs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerUpFireballs.m; sourceTree = "<group>"; };
+		5F3D3BB213553D980040370A /* Flourish5.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Flourish5.caf; sourceTree = "<group>"; };
 		5F3D40A112FF416C00358CE7 /* CubeStormAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CubeStormAppDelegate.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5F3D40A212FF416C00358CE7 /* CubeStormAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CubeStormAppDelegate.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5F3D40A312FF416C00358CE7 /* CubeStormViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = CubeStormViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -315,6 +319,8 @@
 		5F217D0713521DA800067C25 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				5F02F35E135658CE0037AA26 /* Movement3.caf */,
+				5F3D3BB213553D980040370A /* Flourish5.caf */,
 				5FB6A24013527FB200AC68B8 /* ActionStage05.m4a */,
 				5FB6A2381352703200AC68B8 /* LevelUp1.caf */,
 				5FB6A2391352703200AC68B8 /* Negative2.caf */,
@@ -535,6 +541,8 @@
 				5FB6A23A1352703200AC68B8 /* LevelUp1.caf in Resources */,
 				5FB6A23B1352703200AC68B8 /* Negative2.caf in Resources */,
 				5FB6A24213527FB200AC68B8 /* ActionStage05.m4a in Resources */,
+				5F3D3BB313553D980040370A /* Flourish5.caf in Resources */,
+				5F02F35F135658CE0037AA26 /* Movement3.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
