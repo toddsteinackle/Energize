@@ -20,7 +20,6 @@
 		5F149F2513298616006378FB /* Explosion.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F2413298616006378FB /* Explosion.m */; };
 		5F149F2813298A1D006378FB /* Guardian.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F2713298A1C006378FB /* Guardian.m */; };
 		5F149F2B1329A07F006378FB /* Fireball.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F149F2A1329A07E006378FB /* Fireball.m */; };
-		5F217D0913521DC900067C25 /* Movement1b.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5F217D0813521DC900067C25 /* Movement1b.caf */; };
 		5F291F25134E86730024A66D /* PowerUpFireballs.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F291F24134E86730024A66D /* PowerUpFireballs.m */; };
 		5F3D3BB313553D980040370A /* Flourish5.caf in Resources */ = {isa = PBXBuildFile; fileRef = 5F3D3BB213553D980040370A /* Flourish5.caf */; };
 		5F3D40AC12FF416C00358CE7 /* CubeStormAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D40A212FF416C00358CE7 /* CubeStormAppDelegate.m */; };
@@ -111,7 +110,6 @@
 		5F149F2713298A1C006378FB /* Guardian.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Guardian.m; sourceTree = "<group>"; };
 		5F149F291329A07E006378FB /* Fireball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fireball.h; sourceTree = "<group>"; };
 		5F149F2A1329A07E006378FB /* Fireball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Fireball.m; sourceTree = "<group>"; };
-		5F217D0813521DC900067C25 /* Movement1b.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Movement1b.caf; sourceTree = "<group>"; };
 		5F291F23134E86730024A66D /* PowerUpFireballs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerUpFireballs.h; sourceTree = "<group>"; };
 		5F291F24134E86730024A66D /* PowerUpFireballs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerUpFireballs.m; sourceTree = "<group>"; };
 		5F3D3BB213553D980040370A /* Flourish5.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Flourish5.caf; sourceTree = "<group>"; };
@@ -331,7 +329,6 @@
 				5FB6A1C7135242BB00AC68B8 /* Boing2.caf */,
 				5FCDD5F2135229C000361F07 /* Impact6b.caf */,
 				5FCDD5EE1352286B00361F07 /* explosion.caf */,
-				5F217D0813521DC900067C25 /* Movement1b.caf */,
 			);
 			name = Sounds;
 			sourceTree = "<group>";
@@ -530,7 +527,6 @@
 				5F5D2C36134187E8009D98E6 /* status-iphone.png in Resources */,
 				5F9B0F271343E1FA00AE10D3 /* largeMessageFont.fnt in Resources */,
 				5F9B0F281343E1FA00AE10D3 /* largeMessageFont.png in Resources */,
-				5F217D0913521DC900067C25 /* Movement1b.caf in Resources */,
 				5FCDD5EF1352286B00361F07 /* explosion.caf in Resources */,
 				5FCDD5F3135229C000361F07 /* Impact6b.caf in Resources */,
 				5FB6A1C8135242BB00AC68B8 /* Boing2.caf in Resources */,

@@ -156,6 +156,7 @@
     currentCubeValue = 100;
     skillLevel = SkillLevel_Normal;
     playerLives = 4;
+    timer = 0;
 }
 
 - (void)initGrid:(int)grid {
@@ -915,7 +916,7 @@
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
 
-                    timer = timeToCompleteGrid = 25;
+                    timer = timeToCompleteGrid = 30;
 
                     asteroidLaunchDelay = 3.0;
                     asteroidLaunchOdds = 7;

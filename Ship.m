@@ -365,38 +365,6 @@
     if (state == EntityState_Transporting) {
         return;
     }
-    if (state == EntityState_Idle && justAppeared) {
-        otherEntity.state = EntityState_Dead;
-        shield.pixelLocation = CGPointMake(pixelLocation.x, pixelLocation.y);
-        shield.state = EntityState_Alive;
-        shield.duration = 1.0;
-        shield.animation.state = kAnimationState_Stopped;
-        shield.animation.currentFrame = -1;
-        shield.animation.state = kAnimationState_Running;
-        isShielded = TRUE;
-        [sharedSoundManager playSoundWithKey:@"shield_enabled"
-                                        gain:1.0
-                                       pitch:1.0
-                                    location:CGPointMake(0, 0)
-                                  shouldLoop:TRUE];
-        return;
-    }
-
-    if ([otherEntity isKindOfClass:[Fireball class]] ||
-        [otherEntity isKindOfClass:[Asteroid class]]) {
-#ifdef GAMEPLAY_DEBUG
-        NSLog(@"ship fireball or asteroid collision");
-#endif
-        state = EntityState_Dead;
-        shield.state = EntityState_Idle;
-        appDelegate.glView.playerLives--;
-        if (!exploding) {
-            otherEntity.state = EntityState_Idle;
-            [self explode];
-            return;
-        }
-    }
-
     if ([otherEntity isKindOfClass:[PowerUpFireballs class]]) {
         [sharedSoundManager playSoundWithKey:@"fireballs_powerup"
                                         gain:1.0
@@ -432,6 +400,38 @@
         [appDelegate.glView powerUpTimer];
         return;
     }
+    if (state == EntityState_Idle && justAppeared) {
+        otherEntity.state = EntityState_Dead;
+        shield.pixelLocation = CGPointMake(pixelLocation.x, pixelLocation.y);
+        shield.state = EntityState_Alive;
+        shield.duration = 1.0;
+        shield.animation.state = kAnimationState_Stopped;
+        shield.animation.currentFrame = -1;
+        shield.animation.state = kAnimationState_Running;
+        isShielded = TRUE;
+        [sharedSoundManager playSoundWithKey:@"shield_enabled"
+                                        gain:1.0
+                                       pitch:1.0
+                                    location:CGPointMake(0, 0)
+                                  shouldLoop:TRUE];
+        return;
+    }
+
+    if ([otherEntity isKindOfClass:[Fireball class]] ||
+        [otherEntity isKindOfClass:[Asteroid class]]) {
+#ifdef GAMEPLAY_DEBUG
+        NSLog(@"ship fireball or asteroid collision");
+#endif
+        state = EntityState_Dead;
+        shield.state = EntityState_Idle;
+        appDelegate.glView.playerLives--;
+        if (!exploding) {
+            otherEntity.state = EntityState_Idle;
+            [self explode];
+            return;
+        }
+    }
+
 }
 
 - (void)explode {
