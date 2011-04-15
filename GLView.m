@@ -85,17 +85,32 @@
 
             largeMessageFont = [[BitmapFont alloc] initWithFontImageNamed:@"largeMessageFont.png"
                                                               controlFile:@"largeMessageFont"
-                                                                    scale:Scale2fMake(1.0f, 1.0f) filter:GL_LINEAR];
+                                                                    scale:Scale2fMake(1.0f, 1.0f)
+                                                                   filter:GL_LINEAR];
 
         } else {
-            statusFont = [[BitmapFont alloc] initWithFontImageNamed:@"status-iphone.png"
-                                                        controlFile:@"status-iphone"
-                                                              scale:Scale2fMake(1.0f, 1.0f)
-                                                             filter:GL_LINEAR];
 
-            largeMessageFont = [[BitmapFont alloc] initWithFontImageNamed:@"status.png"
-                                                              controlFile:@"status"
-                                                                    scale:Scale2fMake(1.0f, 1.0f) filter:GL_LINEAR];
+            if (appDelegate.retinaDisplay) {
+                statusFont = [[BitmapFont alloc] initWithFontImageNamed:@"status-retina.png"
+                                                            controlFile:@"status-retina"
+                                                                  scale:Scale2fMake(1.0f, 1.0f)
+                                                                 filter:GL_LINEAR];
+
+                largeMessageFont = [[BitmapFont alloc] initWithFontImageNamed:@"largeMessageFont.png"
+                                                                  controlFile:@"largeMessageFont"
+                                                                        scale:Scale2fMake(1.0f, 1.0f)
+                                                                       filter:GL_LINEAR];
+            } else {
+                statusFont = [[BitmapFont alloc] initWithFontImageNamed:@"status-iphone.png"
+                                                            controlFile:@"status-iphone"
+                                                                  scale:Scale2fMake(1.0f, 1.0f)
+                                                                 filter:GL_LINEAR];
+
+                largeMessageFont = [[BitmapFont alloc] initWithFontImageNamed:@"status.png"
+                                                                  controlFile:@"status"
+                                                                        scale:Scale2fMake(1.0f, 1.0f)
+                                                                       filter:GL_LINEAR];
+            }
         }
 
         PackedSpriteSheet *pss = [PackedSpriteSheet packedSpriteSheetForImageNamed:@"pss.png"

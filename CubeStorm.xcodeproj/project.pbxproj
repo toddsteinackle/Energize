@@ -31,6 +31,8 @@
 		5F3D40C412FF436900358CE7 /* SettingsMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3D40C212FF436900358CE7 /* SettingsMenuViewController.xib */; };
 		5F3D410B12FF4B3000358CE7 /* OpenGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D410A12FF4B3000358CE7 /* OpenGLViewController.m */; };
 		5F3EEE5A1357C79A0021A318 /* starfield-retina.pex in Resources */ = {isa = PBXBuildFile; fileRef = 5F3EEE591357C79A0021A318 /* starfield-retina.pex */; };
+		5F3EEEC31357E37B0021A318 /* status-retina.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 5F3EEEC11357E37B0021A318 /* status-retina.fnt */; };
+		5F3EEEC41357E37B0021A318 /* status-retina.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F3EEEC21357E37B0021A318 /* status-retina.png */; };
 		5F4C89B3133E89EE00E68C91 /* Shield.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4C89B2133E89EE00E68C91 /* Shield.m */; };
 		5F50DDB913019C77002F29B2 /* PauseMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F50DDB713019C77002F29B2 /* PauseMenuViewController.m */; };
 		5F50DDBA13019C77002F29B2 /* PauseMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F50DDB813019C77002F29B2 /* PauseMenuViewController.xib */; };
@@ -129,6 +131,8 @@
 		5F3D410912FF4B3000358CE7 /* OpenGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = OpenGLViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5F3D410A12FF4B3000358CE7 /* OpenGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = OpenGLViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		5F3EEE591357C79A0021A318 /* starfield-retina.pex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "starfield-retina.pex"; sourceTree = "<group>"; };
+		5F3EEEC11357E37B0021A318 /* status-retina.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "status-retina.fnt"; sourceTree = "<group>"; };
+		5F3EEEC21357E37B0021A318 /* status-retina.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "status-retina.png"; sourceTree = "<group>"; };
 		5F4C89B1133E89EE00E68C91 /* Shield.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shield.h; sourceTree = "<group>"; };
 		5F4C89B2133E89EE00E68C91 /* Shield.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shield.m; sourceTree = "<group>"; };
 		5F50DDB613019C77002F29B2 /* PauseMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PauseMenuViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -360,6 +364,8 @@
 		5FA644911329451A008FE442 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				5F3EEEC11357E37B0021A318 /* status-retina.fnt */,
+				5F3EEEC21357E37B0021A318 /* status-retina.png */,
 				5F217D0713521DA800067C25 /* Sounds */,
 				5F9B0F251343E1FA00AE10D3 /* largeMessageFont.fnt */,
 				5F9B0F261343E1FA00AE10D3 /* largeMessageFont.png */,
@@ -543,6 +549,8 @@
 				5F3D3BB313553D980040370A /* Flourish5.caf in Resources */,
 				5F02F35F135658CE0037AA26 /* Movement3.caf in Resources */,
 				5F3EEE5A1357C79A0021A318 /* starfield-retina.pex in Resources */,
+				5F3EEEC31357E37B0021A318 /* status-retina.fnt in Resources */,
+				5F3EEEC41357E37B0021A318 /* status-retina.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
