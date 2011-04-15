@@ -9,14 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "ESRenderer.h"
 
+@class CubeStormAppDelegate;
+
 @interface GLESGameState : UIView {
+
+    CubeStormAppDelegate *appDelegate;
 
 @private
     id <ESRenderer> renderer;
 
 }
 
-- (id)initWithFrame:(CGRect)frame;
 - (id)initWithFrame:(CGRect)frame;
 - (void)renderScene;
 - (void)updateSceneWithDelta:(float)aDelta;

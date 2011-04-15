@@ -48,8 +48,6 @@
 
     if ((self = [super initWithFrame:frame])) {
 
-        appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
-
         sceneState = SceneState_GameBegin;
         lastTimeInLoop = 0;
 
@@ -62,7 +60,11 @@
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             starfield = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"starfield.pex"];
         } else {
-            starfield = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"starfield-iphone.pex"];
+            if (appDelegate.retinaDisplay) {
+                starfield = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"starfield-retina.pex"];
+            } else {
+                starfield = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"starfield-iphone.pex"];
+            }
         }
 
         guardians = [[NSMutableArray alloc] init];
@@ -1791,6 +1793,9 @@
     NSUInteger numTaps = [touch tapCount];
 
     if (sceneState != SceneState_GameBegin && sceneState != SceneState_GuardianTransport) {
+        if (appDelegate.retinaDisplay) {
+            loc.x *= 2; loc.y *= 2;
+        }
         if (CGRectContainsPoint(CGRectMake(appDelegate.GUARDIAN_RIGHT_BASE, 0,
                                            79*appDelegate.widthScaleFactor, 76*appDelegate.heightScaleFactor), loc)) {
             [self.viewController showPauseView];

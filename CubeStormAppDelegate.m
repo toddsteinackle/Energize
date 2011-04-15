@@ -33,6 +33,7 @@ BOOL isGameCenterAvailable() {
 @dynamic animationFrameInterval;
 @synthesize gameCenterAvailable;
 @synthesize ios4orGreater;
+@synthesize retinaDisplay;
 @synthesize SCREEN_HEIGHT;
 @synthesize SCREEN_WIDTH;
 @synthesize GUARDIAN_WIDTH;
@@ -252,20 +253,43 @@ BOOL isGameCenterAvailable() {
     DRAG_MIN_X = 8;
     DRAG_MIN_Y = 8;
 
+    // check for retina display
+    // You can't detect screen resolutions in pre 3.2 devices, but they are all 320x480
+    NSString *reqSysVer = @"3.2";
+    NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+    BOOL osVersionSupported = ([currSysVer compare:reqSysVer
+                                           options:NSNumericSearch] != NSOrderedAscending);
+    if (osVersionSupported) {
+        UIScreen* mainscr = [UIScreen mainScreen];
+        int w = mainscr.currentMode.size.width;
+        int h = mainscr.currentMode.size.height;
+        if (w == 640 && h == 960) {
+            retinaDisplay = TRUE;
+        } else {
+            retinaDisplay = FALSE;
+        }
+    }
+
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         SCREEN_WIDTH = 1024;
         SCREEN_HEIGHT = 768;
-
-        widthScaleFactor = 1.0f;
-        heightScaleFactor = 1.0f;
+        widthScaleFactor = 1.0;
+        heightScaleFactor = 1.0;
         [self calcGridCoordinates];
 
     } else {
-        SCREEN_WIDTH = 480;
-        SCREEN_HEIGHT = 320;
 
-        widthScaleFactor = 0.46875f;
-        heightScaleFactor = 0.416666667f;
+        if (retinaDisplay) {
+            SCREEN_WIDTH = 960;
+            SCREEN_HEIGHT = 640;
+            widthScaleFactor = 0.9375;
+            heightScaleFactor = 0.83333333333333333333;
+        } else {
+            SCREEN_WIDTH = 480;
+            SCREEN_HEIGHT = 320;
+            widthScaleFactor = 0.46875;
+            heightScaleFactor = 0.416666667;
+        }
         [self calcGridCoordinates];
 
         GUARDIAN_WIDTH = GUARDIAN_WIDTH * widthScaleFactor;
@@ -321,8 +345,8 @@ BOOL isGameCenterAvailable() {
 
     // A system version of 3.1 or greater is required to use CADisplayLink. The NSTimer
     // class is used as fallback when it isn't available.
-    NSString *reqSysVer = @"3.1";
-    NSString *currSysVer = [[UIDevice currentDevice] systemVersion];
+    reqSysVer = @"3.1";
+    currSysVer = [[UIDevice currentDevice] systemVersion];
     if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending)
         displayLinkSupported = TRUE;
     reqSysVer = @"4.0";

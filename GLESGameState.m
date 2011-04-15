@@ -8,6 +8,7 @@
 
 #import "GLESGameState.h"
 #import "ES1Renderer.h"
+#import "CubeStormAppDelegate.h"
 
 
 @implementation GLESGameState
@@ -28,10 +29,16 @@
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
+        appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
         // Initialization code
         self.userInteractionEnabled = true;
         // Get the layer
         CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
+
+        if (appDelegate.retinaDisplay) {
+            self.contentScaleFactor = 2.0;
+            eaglLayer.contentsScale = 2.0;
+        }
 
         eaglLayer.opaque = TRUE;
         eaglLayer.drawableProperties = [NSDictionary dictionaryWithObjectsAndKeys:

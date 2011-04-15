@@ -17,7 +17,6 @@
 @class Animation;
 @class BitmapFont;
 @class ParticleEmitter;
-@class CubeStormAppDelegate;
 @class OpenGLViewController;
 @class SoundManager;
 
@@ -41,7 +40,6 @@ typedef enum {
 
 @interface GLView : GLESGameState {
 
-    CubeStormAppDelegate *appDelegate;
     OpenGLViewController *viewController;
 
     SceneState sceneState;

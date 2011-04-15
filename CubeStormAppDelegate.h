@@ -18,6 +18,7 @@
     GLView *glView;
     BOOL gameCenterAvailable;
     BOOL ios4orGreater;
+    BOOL retinaDisplay;
 
     CGFloat SCREEN_HEIGHT;
     CGFloat SCREEN_WIDTH;
@@ -90,6 +91,7 @@
 @property (nonatomic) NSInteger animationFrameInterval;
 @property (readonly, nonatomic) BOOL gameCenterAvailable;
 @property (readonly, nonatomic) BOOL ios4orGreater;
+@property (readonly, nonatomic) BOOL retinaDisplay;
 
 @property (readonly, nonatomic) CGFloat SCREEN_HEIGHT;
 @property (readonly, nonatomic) CGFloat SCREEN_WIDTH;

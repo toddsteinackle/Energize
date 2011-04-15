@@ -30,6 +30,7 @@
 		5F3D40C312FF436900358CE7 /* SettingsMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D40C112FF436900358CE7 /* SettingsMenuViewController.m */; };
 		5F3D40C412FF436900358CE7 /* SettingsMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F3D40C212FF436900358CE7 /* SettingsMenuViewController.xib */; };
 		5F3D410B12FF4B3000358CE7 /* OpenGLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F3D410A12FF4B3000358CE7 /* OpenGLViewController.m */; };
+		5F3EEE5A1357C79A0021A318 /* starfield-retina.pex in Resources */ = {isa = PBXBuildFile; fileRef = 5F3EEE591357C79A0021A318 /* starfield-retina.pex */; };
 		5F4C89B3133E89EE00E68C91 /* Shield.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F4C89B2133E89EE00E68C91 /* Shield.m */; };
 		5F50DDB913019C77002F29B2 /* PauseMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F50DDB713019C77002F29B2 /* PauseMenuViewController.m */; };
 		5F50DDBA13019C77002F29B2 /* PauseMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F50DDB813019C77002F29B2 /* PauseMenuViewController.xib */; };
@@ -127,6 +128,7 @@
 		5F3D40C212FF436900358CE7 /* SettingsMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsMenuViewController.xib; sourceTree = "<group>"; };
 		5F3D410912FF4B3000358CE7 /* OpenGLViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = OpenGLViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		5F3D410A12FF4B3000358CE7 /* OpenGLViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = OpenGLViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		5F3EEE591357C79A0021A318 /* starfield-retina.pex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "starfield-retina.pex"; sourceTree = "<group>"; };
 		5F4C89B1133E89EE00E68C91 /* Shield.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shield.h; sourceTree = "<group>"; };
 		5F4C89B2133E89EE00E68C91 /* Shield.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Shield.m; sourceTree = "<group>"; };
 		5F50DDB613019C77002F29B2 /* PauseMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = PauseMenuViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
@@ -368,6 +370,7 @@
 				5FA64492132945F7008FE442 /* pss.plist */,
 				5FA64493132945F7008FE442 /* pss.png */,
 				5F0B6DA513353DC400ED5190 /* starfield-iphone.pex */,
+				5F3EEE591357C79A0021A318 /* starfield-retina.pex */,
 				5FF2A625131F347B0081BAA4 /* starfield.pex */,
 			);
 			name = Data;
@@ -539,6 +542,7 @@
 				5FB6A24213527FB200AC68B8 /* ActionStage05.m4a in Resources */,
 				5F3D3BB313553D980040370A /* Flourish5.caf in Resources */,
 				5F02F35F135658CE0037AA26 /* Movement3.caf in Resources */,
+				5F3EEE5A1357C79A0021A318 /* starfield-retina.pex in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
