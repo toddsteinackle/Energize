@@ -352,6 +352,9 @@ BOOL isGameCenterAvailable() {
     reqSysVer = @"4.0";
     if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedAscending)
         ios4orGreater = TRUE;
+    reqSysVer = @"4.2.1";
+    if ([currSysVer compare:reqSysVer options:NSNumericSearch] != NSOrderedDescending)
+        animationFrameInterval = 2;
 
     currentViewController = viewController;
 
