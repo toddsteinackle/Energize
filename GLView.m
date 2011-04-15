@@ -1330,6 +1330,7 @@
                 lastTimeInLoop = 0;
                 sharedSoundManager.loopPlaylist = TRUE;
                 [sharedSoundManager playMusicWithKey:@"background_music" timesToRepeat:-1];
+                return;
             }
             lastTimeInLoop = CACurrentMediaTime();
             break;
@@ -1347,6 +1348,7 @@
                 [self initGrid:currentGrid++];
                 sceneState = SceneState_Running;
                 lastTimeInLoop = 0;
+                return;
             }
             lastTimeInLoop = CACurrentMediaTime();
             break;
@@ -1382,6 +1384,7 @@
                 sceneState = SceneState_Running;
                 lastTimeInLoop = 0;
                 [sharedSoundManager resumeMusic];
+                return;
             }
             lastTimeInLoop = CACurrentMediaTime();
             break;
@@ -1416,6 +1419,7 @@
                 ship = [[Ship alloc] initWithPixelLocation:startingShipPosition];
                 sceneState = SceneState_Running;
                 lastTimeInLoop = 0;
+                return;
             }
             lastTimeInLoop = CACurrentMediaTime();
             break;

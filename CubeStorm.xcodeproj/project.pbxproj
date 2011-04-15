@@ -364,9 +364,9 @@
 		5FA644911329451A008FE442 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				5F217D0713521DA800067C25 /* Sounds */,
 				5F3EEEC11357E37B0021A318 /* status-retina.fnt */,
 				5F3EEEC21357E37B0021A318 /* status-retina.png */,
-				5F217D0713521DA800067C25 /* Sounds */,
 				5F9B0F251343E1FA00AE10D3 /* largeMessageFont.fnt */,
 				5F9B0F261343E1FA00AE10D3 /* largeMessageFont.png */,
 				5F5D2C33134187E8009D98E6 /* status-iphone.fnt */,
