@@ -1328,7 +1328,6 @@
                 [self initGame];
                 sceneState = SceneState_GuardianTransport;
                 lastTimeInLoop = 0;
-                sharedSoundManager.loopPlaylist = TRUE;
                 [sharedSoundManager playMusicWithKey:@"background_music" timesToRepeat:-1];
                 return;
             }
