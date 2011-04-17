@@ -116,5 +116,7 @@ typedef enum {
 - (void)powerUpFireballs;
 - (void)powerUpTimer;
 - (void)freeShipCheck;
+- (void)loadSounds;
+- (void)removeSounds;
 
 @end

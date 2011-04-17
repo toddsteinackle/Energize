@@ -11,6 +11,7 @@
 #import "SettingsMenuViewController.h"
 #import "OpenGLViewController.h"
 #import "MainMenuView.h"
+#import "GLView.h"
 
 @implementation CubeStormViewController
 
@@ -38,6 +39,7 @@
 }
 
 - (void)showGLView {
+    [appDelegate.glView loadSounds];
     appDelegate.currentViewController = glViewController;
     [appDelegate startAnimation];
     [self presentModalViewController:glViewController animated:YES];

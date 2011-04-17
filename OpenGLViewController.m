@@ -66,6 +66,7 @@
         appDelegate.currentViewController = appDelegate.viewController;
     }
     [sharedSoundManager stopMusic];
+    [appDelegate.glView removeSounds];
 }
 
 /*
