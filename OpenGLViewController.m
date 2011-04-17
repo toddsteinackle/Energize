@@ -1,6 +1,6 @@
 //
 //  OpenGLViewController.m
-//  CubeStorm
+//  Energize
 //
 //  Created by Todd Steinackle on 3/1/11.
 //  Copyright 2011 The No Quarter Arcade. All rights reserved.
@@ -8,8 +8,8 @@
 
 #import "OpenGLViewController.h"
 #import "PauseMenuViewController.h"
-#import "CubeStormViewController.h"
-#import "CubeStormAppDelegate.h"
+#import "EnergizeViewController.h"
+#import "EnergizeAppDelegate.h"
 #import "GLView.h"
 #import "SoundManager.h"
 
@@ -20,7 +20,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization.
-        appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
+        appDelegate = (EnergizeAppDelegate *)[[UIApplication sharedApplication] delegate];
         sharedSoundManager = [SoundManager sharedSoundManager];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             pauseMenu = [[PauseMenuViewController alloc] initWithNibName:@"PauseMenuViewController-iPad" bundle:[NSBundle mainBundle]];

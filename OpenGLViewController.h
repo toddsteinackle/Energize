@@ -1,6 +1,6 @@
 //
 //  OpenGLViewController.h
-//  CubeStorm
+//  Energize
 //
 //  Created by Todd Steinackle on 3/1/11.
 //  Copyright 2011 The No Quarter Arcade. All rights reserved.
@@ -10,13 +10,13 @@
 
 @class GLView;
 @class PauseMenuViewController;
-@class CubeStormAppDelegate;
+@class EnergizeAppDelegate;
 @class SoundManager;
 
 @interface OpenGLViewController : UIViewController {
     GLView *glView;
     PauseMenuViewController *pauseMenu;
-    CubeStormAppDelegate *appDelegate;
+    EnergizeAppDelegate *appDelegate;
     SoundManager *sharedSoundManager;
 }
 

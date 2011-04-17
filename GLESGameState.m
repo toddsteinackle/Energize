@@ -1,6 +1,6 @@
 //
 //  GLESGameState.m
-//  CubeStorm
+//  Energize
 //
 //  Created by Todd Steinackle on 3/1/11.
 //  Copyright 2011 The No Quarter Arcade. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "GLESGameState.h"
 #import "ES1Renderer.h"
-#import "CubeStormAppDelegate.h"
+#import "EnergizeAppDelegate.h"
 
 
 @implementation GLESGameState
@@ -29,7 +29,7 @@
 
 - (id)initWithFrame:(CGRect)frame {
     if ((self = [super initWithFrame:frame])) {
-        appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
+        appDelegate = (EnergizeAppDelegate *)[[UIApplication sharedApplication] delegate];
         // Initialization code
         self.userInteractionEnabled = true;
         // Get the layer

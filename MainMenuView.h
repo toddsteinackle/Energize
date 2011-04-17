@@ -3,11 +3,11 @@
 
 #import <Foundation/Foundation.h>
 
-@class CubeStormAppDelegate;
+@class EnergizeAppDelegate;
 
 @interface MainMenuView : UIView {
     IBOutlet UIView *subview;
-    CubeStormAppDelegate *appDelegate;
+    EnergizeAppDelegate *appDelegate;
     IBOutlet UIButton *newGameButton;
     IBOutlet UIButton *startAtGridButton;
     IBOutlet UIButton *playSettingsButton;

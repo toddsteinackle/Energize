@@ -1,20 +1,20 @@
 //
-//  CubeStormViewController.m
-//  CubeStorm
+//  EnergizeViewController.m
+//  Energize
 //
 //  Created by Todd Steinackle on 3/1/11.
 //  Copyright 2011 The No Quarter Arcade. All rights reserved.
 //
 
-#import "CubeStormViewController.h"
-#import "CubeStormAppDelegate.h"
+#import "EnergizeViewController.h"
+#import "EnergizeAppDelegate.h"
 #import "SettingsMenuViewController.h"
 #import "PlayOptionsMenuViewController.h"
 #import "OpenGLViewController.h"
 #import "MainMenuView.h"
 #import "GLView.h"
 
-@implementation CubeStormViewController
+@implementation EnergizeViewController
 
 - (void)showLeaderboard {
     leaderboardController = [[GKLeaderboardViewController alloc] init];
@@ -80,7 +80,7 @@
 }
 
 - (void)customInit {
-    appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
+    appDelegate = (EnergizeAppDelegate *)[[UIApplication sharedApplication] delegate];
     glViewController = [[OpenGLViewController alloc] initWithNibName:nil bundle:nil];
     mainMenu = [[MainMenuView alloc] initWithFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT)];
     self.view = mainMenu;

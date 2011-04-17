@@ -1,6 +1,6 @@
 //
-//  CubeStormAppDelegate.m
-//  CubeStorm
+//  EnergizeAppDelegate.m
+//  Energize
 //
 //  Created by Todd Steinackle on 3/1/11.
 //  Copyright 2011 The No Quarter Arcade. All rights reserved.
@@ -8,8 +8,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import <GameKit/GameKit.h>
-#import "CubeStormAppDelegate.h"
-#import "CubeStormViewController.h"
+#import "EnergizeAppDelegate.h"
+#import "EnergizeViewController.h"
 #import "GLESGameState.h"
 #import "SoundManager.h"
 #import "GLView.h"
@@ -25,7 +25,7 @@ BOOL isGameCenterAvailable() {
     return (gcClass && osVersionSupported);
 }
 
-@implementation CubeStormAppDelegate
+@implementation EnergizeAppDelegate
 
 @synthesize window;
 @synthesize viewController;

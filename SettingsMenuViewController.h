@@ -1,6 +1,6 @@
 //
 //  SettingsMenuViewController.h
-//  CubeStorm
+//  Energize
 //
 //  Created by Todd Steinackle on 3/1/11.
 //  Copyright 2011 The No Quarter Arcade. All rights reserved.
@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class CubeStormAppDelegate;
+@class EnergizeAppDelegate;
 @class SoundManager;
 
 
 @interface SettingsMenuViewController : UIViewController {
-    CubeStormAppDelegate *appDelegate;
+    EnergizeAppDelegate *appDelegate;
     SoundManager *sharedSoundManager;
     IBOutlet UISlider *musicVolume;
     IBOutlet UISlider *fxVolume;

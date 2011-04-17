@@ -2,7 +2,7 @@
 //  ES1Renderer.m
 
 #import "ES1Renderer.h"
-#import "CubeStormAppDelegate.h"
+#import "EnergizeAppDelegate.h"
 
 // Private interface
 @interface ES1Renderer (Private)
@@ -61,7 +61,7 @@
 
         // As we are initializing this view then the OpenGL elements have not been initialized
         openGLInitialized = NO;
-        appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
+        appDelegate = (EnergizeAppDelegate *)[[UIApplication sharedApplication] delegate];
 
     }
 

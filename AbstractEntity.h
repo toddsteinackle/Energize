@@ -1,6 +1,6 @@
 //
 //  AbstractEntity.h
-//  CubeStorm
+//  Energize
 //
 //  Created by Todd Steinackle on 3/1/11.
 //  Copyright 2011 The No Quarter Arcade. All rights reserved.
@@ -11,7 +11,7 @@
 @class Animation;
 @class ParticleEmitter;
 @class SoundManager;
-@class CubeStormAppDelegate;
+@class EnergizeAppDelegate;
 
 typedef enum {
     EntityState_Idle,
@@ -23,7 +23,7 @@ typedef enum {
 
 @interface AbstractEntity : NSObject <NSCoding> {
 
-    CubeStormAppDelegate *appDelegate;
+    EnergizeAppDelegate *appDelegate;
     SoundManager *sharedSoundManager;
     Image *image;
     SpriteSheet *spriteSheet;

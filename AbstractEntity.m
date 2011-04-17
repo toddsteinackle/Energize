@@ -1,6 +1,6 @@
 //
 //  AbstractEntity.m
-//  CubeStorm
+//  Energize
 //
 //  Created by Todd Steinackle on 3/1/11.
 //  Copyright 2011 The No Quarter Arcade. All rights reserved.
@@ -12,7 +12,7 @@
 #import "SpriteSheet.h"
 #import "Animation.h"
 #import "PackedSpriteSheet.h"
-#import "CubeStormAppDelegate.h"
+#import "EnergizeAppDelegate.h"
 
 @implementation AbstractEntity
 
@@ -45,7 +45,7 @@
     self = [super init];
     if (self != nil) {
         sharedSoundManager = [SoundManager sharedSoundManager];
-        appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
+        appDelegate = (EnergizeAppDelegate *)[[UIApplication sharedApplication] delegate];
         pixelLocation.x = aLocation.x;
         pixelLocation.y = aLocation.y;
         scaleWidth = appDelegate.widthScaleFactor;

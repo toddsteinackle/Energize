@@ -1,13 +1,13 @@
 //
 //  SettingsMenuViewController.m
-//  CubeStorm
+//  Energize
 //
 //  Created by Todd Steinackle on 3/1/11.
 //  Copyright 2011 The No Quarter Arcade. All rights reserved.
 //
 
 #import "SettingsMenuViewController.h"
-#import "CubeStormAppDelegate.h"
+#import "EnergizeAppDelegate.h"
 #import "SoundManager.h"
 #import "GLView.h"
 
@@ -72,7 +72,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization.
-        appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
+        appDelegate = (EnergizeAppDelegate *)[[UIApplication sharedApplication] delegate];
         sharedSoundManager = [SoundManager sharedSoundManager];
     }
     return self;

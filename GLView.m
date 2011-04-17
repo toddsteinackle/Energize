@@ -1,13 +1,13 @@
 //
 //  GLView.m
-//  CubeStorm
+//  Energize
 //
 //  Created by Todd Steinackle on 3/1/11.
 //  Copyright 2011 The No Quarter Arcade. All rights reserved.
 //
 
 #import "GLView.h"
-#import "CubeStormAppDelegate.h"
+#import "EnergizeAppDelegate.h"
 #import "Image.h"
 #import "ImageRenderManager.h"
 #import "SoundManager.h"
@@ -16,7 +16,7 @@
 #import "SpriteSheet.h"
 #import "PackedSpriteSheet.h"
 #import "ParticleEmitter.h"
-#import "CubeStormViewController.h"
+#import "EnergizeViewController.h"
 #import "OpenGLViewController.h"
 #import "Asteroid.h"
 #import "Cube.h"

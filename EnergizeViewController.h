@@ -1,6 +1,6 @@
 //
-//  CubeStormViewController.h
-//  CubeStorm
+//  EnergizeViewController.h
+//  Energize
 //
 //  Created by Todd Steinackle on 3/1/11.
 //  Copyright 2011 The No Quarter Arcade. All rights reserved.
@@ -10,16 +10,16 @@
 #import <GameKit/GameKit.h>
 
 @class SettingsMenuViewController;
-@class CubeStormAppDelegate;
+@class EnergizeAppDelegate;
 @class OpenGLViewController;
 @class MainMenuView;
 @class PlayOptionsMenuViewController;
 
-@interface CubeStormViewController : UIViewController <GKLeaderboardViewControllerDelegate> {
+@interface EnergizeViewController : UIViewController <GKLeaderboardViewControllerDelegate> {
     GKLeaderboardViewController *leaderboardController;
     SettingsMenuViewController *settingsMenu;
     PlayOptionsMenuViewController *playOptionsMenu;
-    CubeStormAppDelegate *appDelegate;
+    EnergizeAppDelegate *appDelegate;
     OpenGLViewController *glViewController;
     MainMenuView *mainMenu;
 }

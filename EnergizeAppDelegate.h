@@ -1,6 +1,6 @@
 //
-//  CubeStormAppDelegate.h
-//  CubeStorm
+//  EnergizeAppDelegate.h
+//  Energize
 //
 //  Created by Todd Steinackle on 3/1/11.
 //  Copyright 2011 The No Quarter Arcade. All rights reserved.
@@ -8,13 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class CubeStormViewController;
+@class EnergizeViewController;
 @class GLView;
 @class SoundManager;
 
-@interface CubeStormAppDelegate : NSObject <UIApplicationDelegate> {
+@interface EnergizeAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
-    CubeStormViewController *viewController;
+    EnergizeViewController *viewController;
     UIViewController *currentViewController;
     GLView *glView;
     SoundManager *sharedSoundManager;
@@ -90,7 +90,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
-@property (nonatomic, retain) IBOutlet CubeStormViewController *viewController;
+@property (nonatomic, retain) IBOutlet EnergizeViewController *viewController;
 @property (nonatomic, retain) IBOutlet UIViewController *currentViewController;
 @property (nonatomic, retain) GLView *glView;
 @property (readonly, nonatomic, getter=isAnimating) BOOL animating;

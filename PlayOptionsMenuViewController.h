@@ -1,6 +1,6 @@
 //
 //  PlayOptionsMenuViewController.h
-//  CubeStorm
+//  Energize
 //
 //  Created by Todd Steinackle on 4/17/11.
 //  Copyright 2011 The No Quarter Arcade. All rights reserved.
@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class CubeStormAppDelegate;
+@class EnergizeAppDelegate;
 @class SoundManager;
 
 
 @interface PlayOptionsMenuViewController : UIViewController {
-    CubeStormAppDelegate *appDelegate;
+    EnergizeAppDelegate *appDelegate;
     SoundManager *sharedSoundManager;
     IBOutlet UISegmentedControl *skillLevelOption;
     IBOutlet UISegmentedControl *randomGridOption;

@@ -2,8 +2,8 @@
 //  MainMenuView.m
 
 #import "MainMenuView.h"
-#import "CubeStormAppDelegate.h"
-#import "CubeStormViewController.h"
+#import "EnergizeAppDelegate.h"
+#import "EnergizeViewController.h"
 
 @implementation MainMenuView
 
@@ -20,7 +20,7 @@
         //add subview as... a subview.
         //this will let everything from the nib file show up on screen.
         [self addSubview:subview];
-        appDelegate = (CubeStormAppDelegate *)[[UIApplication sharedApplication] delegate];
+        appDelegate = (EnergizeAppDelegate *)[[UIApplication sharedApplication] delegate];
         if (!appDelegate.gameCenterAvailable) {
             leaderboardButton.hidden = TRUE;
             achievementButton.hidden = TRUE;
