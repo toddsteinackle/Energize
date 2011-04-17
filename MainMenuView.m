@@ -189,4 +189,8 @@
     [appDelegate.viewController showLeaderboard];
 }
 
+- (IBAction)presentPlayOptions {
+    [appDelegate.viewController showPlayOptionsMenu];
+}
+
 @end

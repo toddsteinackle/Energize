@@ -115,6 +115,9 @@
 		5F73F2761301F83A0017A10A /* PauseMenuViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F73F2751301F83A0017A10A /* PauseMenuViewController-iPad.xib */; };
 		5F9B0F271343E1FA00AE10D3 /* largeMessageFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 5F9B0F251343E1FA00AE10D3 /* largeMessageFont.fnt */; };
 		5F9B0F281343E1FA00AE10D3 /* largeMessageFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F9B0F261343E1FA00AE10D3 /* largeMessageFont.png */; };
+		5FA464ED135B616600DAC108 /* PlayOptionsMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FA464EC135B616600DAC108 /* PlayOptionsMenuViewController.m */; };
+		5FA464F9135B630100DAC108 /* PlayOptionsMenuViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FA464F8135B630100DAC108 /* PlayOptionsMenuViewController-iPad.xib */; };
+		5FA464FB135B631700DAC108 /* PlayOptionsMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FA464FA135B631700DAC108 /* PlayOptionsMenuViewController.xib */; };
 		5FA4F44B13295F3D00179DC4 /* Asteroid.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FA4F44A13295F3D00179DC4 /* Asteroid.m */; };
 		5FA64494132945F7008FE442 /* pss.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5FA64492132945F7008FE442 /* pss.plist */; };
 		5FA64495132945F7008FE442 /* pss.png in Resources */ = {isa = PBXBuildFile; fileRef = 5FA64493132945F7008FE442 /* pss.png */; };
@@ -322,6 +325,10 @@
 		5F73F2751301F83A0017A10A /* PauseMenuViewController-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "PauseMenuViewController-iPad.xib"; sourceTree = "<group>"; };
 		5F9B0F251343E1FA00AE10D3 /* largeMessageFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = largeMessageFont.fnt; sourceTree = "<group>"; };
 		5F9B0F261343E1FA00AE10D3 /* largeMessageFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = largeMessageFont.png; sourceTree = "<group>"; };
+		5FA464EB135B616600DAC108 /* PlayOptionsMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayOptionsMenuViewController.h; sourceTree = "<group>"; };
+		5FA464EC135B616600DAC108 /* PlayOptionsMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayOptionsMenuViewController.m; sourceTree = "<group>"; };
+		5FA464F8135B630100DAC108 /* PlayOptionsMenuViewController-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "PlayOptionsMenuViewController-iPad.xib"; sourceTree = "<group>"; };
+		5FA464FA135B631700DAC108 /* PlayOptionsMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayOptionsMenuViewController.xib; sourceTree = "<group>"; };
 		5FA4F44913295F3D00179DC4 /* Asteroid.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Asteroid.h; sourceTree = "<group>"; };
 		5FA4F44A13295F3D00179DC4 /* Asteroid.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Asteroid.m; sourceTree = "<group>"; };
 		5FA64492132945F7008FE442 /* pss.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = pss.plist; sourceTree = "<group>"; };
@@ -466,6 +473,7 @@
 				5F3D40A912FF416C00358CE7 /* MainMenuView.xib */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* CubeStorm-Info.plist */,
+				5FA464FA135B631700DAC108 /* PlayOptionsMenuViewController.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -519,6 +527,8 @@
 		5F3D40B712FF423700358CE7 /* Menus */ = {
 			isa = PBXGroup;
 			children = (
+				5FA464EB135B616600DAC108 /* PlayOptionsMenuViewController.h */,
+				5FA464EC135B616600DAC108 /* PlayOptionsMenuViewController.m */,
 				5F3D40A712FF416C00358CE7 /* MainMenuView.h */,
 				5F3D40A812FF416C00358CE7 /* MainMenuView.m */,
 				5F3D40C012FF436900358CE7 /* SettingsMenuViewController.h */,
@@ -740,6 +750,7 @@
 				5F5714FF1300E07400D31399 /* SettingsMenuViewController-iPad.xib */,
 				5FE99BBE12FDCBB800F60AA4 /* MainMenuView-iPad.xib */,
 				5FE99BA912FDC9DF00F60AA4 /* MainWindow-iPad.xib */,
+				5FA464F8135B630100DAC108 /* PlayOptionsMenuViewController-iPad.xib */,
 			);
 			name = "Resources-iPad";
 			sourceTree = "<group>";
@@ -911,6 +922,8 @@
 				5F08A3ED1359E4B400B4F4E9 /* iPhoneRed0014@2x.png in Resources */,
 				5F08A3EE1359E4B400B4F4E9 /* iPhoneRed0015@2x.png in Resources */,
 				5F08A3EF1359E4B400B4F4E9 /* iPhoneRed0016@2x.png in Resources */,
+				5FA464F9135B630100DAC108 /* PlayOptionsMenuViewController-iPad.xib in Resources */,
+				5FA464FB135B631700DAC108 /* PlayOptionsMenuViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -959,6 +972,7 @@
 				5F291F25134E86730024A66D /* PowerUpFireballs.m in Sources */,
 				5FF91782134F49F6005315BB /* PowerUpShields.m in Sources */,
 				5FF917E3134F79A5005315BB /* PowerUpTimer.m in Sources */,
+				5FA464ED135B616600DAC108 /* PlayOptionsMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

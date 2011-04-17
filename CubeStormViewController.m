@@ -9,6 +9,7 @@
 #import "CubeStormViewController.h"
 #import "CubeStormAppDelegate.h"
 #import "SettingsMenuViewController.h"
+#import "PlayOptionsMenuViewController.h"
 #import "OpenGLViewController.h"
 #import "MainMenuView.h"
 #import "GLView.h"
@@ -36,6 +37,16 @@
     }
     [self presentModalViewController:settingsMenu animated:YES];
     appDelegate.currentViewController = settingsMenu;
+}
+
+- (void)showPlayOptionsMenu {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        playOptionsMenu = [[PlayOptionsMenuViewController alloc] initWithNibName:@"PlayOptionsMenuViewController-iPad" bundle:[NSBundle mainBundle]];
+    } else {
+        playOptionsMenu = [[PlayOptionsMenuViewController alloc] initWithNibName:@"PlayOptionsMenuViewController" bundle:[NSBundle mainBundle]];
+    }
+    [self presentModalViewController:playOptionsMenu animated:YES];
+    appDelegate.currentViewController = playOptionsMenu;
 }
 
 - (void)showGLView {

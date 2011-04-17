@@ -34,6 +34,7 @@
 @synthesize viewController;
 @synthesize cubeCount;
 @synthesize sceneState;
+@synthesize skillLevel;
 @synthesize lastTimeInLoop;
 @synthesize currentGrid;
 @synthesize score;
@@ -44,6 +45,7 @@
 @synthesize shipThrustingDefault;
 @synthesize tapsNeededToToggleThrust;
 @synthesize drag_min;
+@synthesize randomGridPlayOption;
 
 #pragma mark -
 #pragma mark init
@@ -174,7 +176,6 @@
     score = 0;
     nextFreeShip = freeShipValue = 50000;
     currentCubeValue = 100;
-    skillLevel = SkillLevel_Normal;
     playerLives = 4;
     timer = 0;
 }

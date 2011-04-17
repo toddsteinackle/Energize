@@ -26,5 +26,6 @@
 - (IBAction)presentGLView;
 - (IBAction)presentControlSettings;
 - (IBAction)presentLeaderboard;
+- (IBAction)presentPlayOptions;
 
 @end

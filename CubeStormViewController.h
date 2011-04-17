@@ -13,10 +13,12 @@
 @class CubeStormAppDelegate;
 @class OpenGLViewController;
 @class MainMenuView;
+@class PlayOptionsMenuViewController;
 
 @interface CubeStormViewController : UIViewController <GKLeaderboardViewControllerDelegate> {
     GKLeaderboardViewController *leaderboardController;
     SettingsMenuViewController *settingsMenu;
+    PlayOptionsMenuViewController *playOptionsMenu;
     CubeStormAppDelegate *appDelegate;
     OpenGLViewController *glViewController;
     MainMenuView *mainMenu;
@@ -28,6 +30,7 @@
 - (void)showGLView;
 - (void)dismissGLView;
 - (void)customInit;
+- (void)showPlayOptionsMenu;
 
 @end
 

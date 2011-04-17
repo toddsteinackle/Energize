@@ -77,6 +77,7 @@ typedef enum {
     bool gameContinuing;
     bool trackingTime, beatTimer, initingTimer, timerBonus, powerUpTimerReInit, playInitTimerSound;
     bool shipThrustingDefault;
+    bool randomGridPlayOption;
 
     CGFloat timer, timeToCompleteGrid, initingTimerTracker, timeToInitTimerDisplay;
     CGFloat asteroidSpeed, powerUpSpeed;
@@ -91,6 +92,7 @@ typedef enum {
 @property (nonatomic, retain) OpenGLViewController *viewController;
 @property (nonatomic, assign) int cubeCount;
 @property (nonatomic, assign) SceneState sceneState;
+@property (nonatomic, assign) SkillLevel skillLevel;
 @property (nonatomic, assign) double lastTimeInLoop;
 @property (nonatomic, assign) int currentGrid;
 @property (nonatomic, assign) int score;
@@ -101,6 +103,7 @@ typedef enum {
 @property (nonatomic, assign) bool shipThrustingDefault;
 @property (nonatomic, assign) int tapsNeededToToggleThrust;
 @property (nonatomic, assign) CGFloat drag_min;
+@property (nonatomic, assign) bool randomGridPlayOption;
 
 - (void)initGame;
 - (void)initGuardians;

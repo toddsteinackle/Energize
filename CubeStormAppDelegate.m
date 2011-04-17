@@ -513,6 +513,8 @@ BOOL isGameCenterAvailable() {
         [settings setObject:[NSNumber numberWithBool:TRUE] forKey:@"defaultShipThrust"];
         [settings setObject:[NSNumber numberWithInt:1] forKey:@"tapsToToggle"];
         [settings setObject:[NSNumber numberWithDouble:self.DRAG_MIN] forKey:@"minDragDistance"];
+        [settings setObject:[NSNumber numberWithInt:1] forKey:@"skillLevel"];
+        [settings setObject:[NSNumber numberWithBool:FALSE] forKey:@"randomGridPlayOption"];
     }
 
     // Get the prefs from the pref file
@@ -521,7 +523,8 @@ BOOL isGameCenterAvailable() {
     self.glView.shipThrustingDefault = [[settings valueForKey:@"defaultShipThrust"] boolValue];
     self.glView.tapsNeededToToggleThrust = [[settings valueForKey:@"tapsToToggle"] intValue] + 1;
     self.glView.drag_min = [[settings valueForKey:@"minDragDistance"] doubleValue];
-
+    self.glView.skillLevel = [[settings valueForKey:@"skillLevel"] intValue];
+    self.glView.randomGridPlayOption = [[settings valueForKey:@"randomGridPlayOption"] boolValue];
 }
 
 - (void)saveSettings {
@@ -531,15 +534,20 @@ BOOL isGameCenterAvailable() {
     NSNumber *shipThrust = [NSNumber numberWithBool:self.glView.shipThrustingDefault];
     NSNumber *tapsToToggle = [NSNumber numberWithInt:self.glView.tapsNeededToToggleThrust-1];
     NSNumber *minDragDistance = [NSNumber numberWithDouble:self.glView.drag_min];
+    NSNumber *skillLevel = [NSNumber numberWithInt:self.glView.skillLevel];
+    NSNumber *randomGridPlayOption = [NSNumber numberWithBool:self.glView.randomGridPlayOption];
     [settings setObject:mv forKey:@"musicVolume"];
     [settings setObject:fv forKey:@"fxVolume"];
     [settings setObject:shipThrust forKey:@"defaultShipThrust"];
     [settings setObject:tapsToToggle forKey:@"tapsToToggle"];
     [settings setObject:minDragDistance forKey:@"minDragDistance"];
+    [settings setObject:skillLevel forKey:@"skillLevel"];
+    [settings setObject:randomGridPlayOption forKey:@"randomGridPlayOption"];
     [settings writeToFile:settingsFilePath atomically:YES];
 #ifdef GAMEENGINE_DEBUG
-    NSLog(@"INFO - App Delegate: Saving musicVolume=%f, fxVolume=%f, defaultShipThrust=%i, tapsToToggle=%i, minDragDistance=%f",
-          [mv floatValue], [fv floatValue], [shipThrust boolValue], [tapsToToggle intValue], [minDragDistance doubleValue]);
+    NSLog(@"INFO - App Delegate: Saving musicVolume=%f, fxVolume=%f, defaultShipThrust=%i, tapsToToggle=%i, minDragDistance=%f, skillLevel=%i, randomGridPlayOption=%i",
+          [mv floatValue], [fv floatValue], [shipThrust boolValue], [tapsToToggle intValue],
+          [minDragDistance doubleValue], [skillLevel intValue], [randomGridPlayOption boolValue]);
 #endif
 }
 
