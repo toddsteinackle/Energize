@@ -90,8 +90,8 @@
     state = EntityState_Transporting;
     currentSpeed = 0;
     direction = ship_up;
-    isThrusting = TRUE;
     isShielded = FALSE;
+    isThrusting = appDelegate.glView.shipThrustingDefault;
     collisionWidth = appDelegate.widthScaleFactor * width *.9;
     collisionHeight = appDelegate.heightScaleFactor * height *.9;
     collisionXOffset = ((appDelegate.widthScaleFactor * width) - collisionWidth) / 2;

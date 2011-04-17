@@ -10,12 +10,14 @@
 
 @class CubeStormViewController;
 @class GLView;
+@class SoundManager;
 
 @interface CubeStormAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
     CubeStormViewController *viewController;
     UIViewController *currentViewController;
     GLView *glView;
+    SoundManager *sharedSoundManager;
     BOOL gameCenterAvailable;
     BOOL ios4orGreater;
     BOOL retinaDisplay;
@@ -52,8 +54,9 @@
     CGFloat SHIP_STARTING_X_OFFSET;
     CGFloat SHIP_STARTING_Y_OFFSET;
 
-    CGFloat DRAG_MIN_X;
-    CGFloat DRAG_MIN_Y;
+    CGFloat SHORT_DRAG_MIN;
+    CGFloat DRAG_MIN;
+    CGFloat LONG_DRAG_MIN;
 
     float widthScaleFactor;
     float heightScaleFactor;
@@ -62,6 +65,9 @@
     CGFloat gridStartingY;
 
     CGPoint gridCoordinates[7][9];
+
+    NSMutableDictionary *settings;
+    NSString *settingsFilePath;
 
 
 #ifdef FRAME_COUNTER
@@ -128,8 +134,9 @@
 @property (readonly, nonatomic) float widthScaleFactor;
 @property (readonly, nonatomic) float heightScaleFactor;
 
-@property (readonly, nonatomic) CGFloat DRAG_MIN_X;
-@property (readonly, nonatomic) CGFloat DRAG_MIN_Y;
+@property (readonly, nonatomic) CGFloat DRAG_MIN;
+@property (readonly, nonatomic) CGFloat SHORT_DRAG_MIN;
+@property (readonly, nonatomic) CGFloat LONG_DRAG_MIN;
 
 - (void)startAnimation;
 - (void)stopAnimation;
@@ -140,6 +147,9 @@
 - (void)authenticationChanged;
 - (CGPoint)getGridCoordinates:(int)row:(int)col;
 - (void)calcGridCoordinates;
+- (void)loadSettings;
+- (void)saveSettings;
+- (void)initSettingsFilePath;
 
 @end
 

@@ -58,8 +58,7 @@ typedef enum {
     int cubeCount;
     int currentGrid, numberOfGrids;
 
-    CGFloat drag_min_x;
-    CGFloat drag_min_y;
+    CGFloat drag_min;
 
     CGPoint startingShipPosition;
     SkillLevel skillLevel;
@@ -77,12 +76,15 @@ typedef enum {
     int powerUpTimerLaunchOdds, powerUpFireballsLaunchOdds, powerUpShieldsLaunchOdds;
     bool gameContinuing;
     bool trackingTime, beatTimer, initingTimer, timerBonus, powerUpTimerReInit, playInitTimerSound;
+    bool shipThrustingDefault;
 
     CGFloat timer, timeToCompleteGrid, initingTimerTracker, timeToInitTimerDisplay;
     CGFloat asteroidSpeed, powerUpSpeed;
 
     double asteroidLaunchDelay, asteroidTimer;
     double powerUpLaunchDelay, powerUpTimer;
+
+    int tapsNeededToToggleThrust;
 
 }
 
@@ -96,6 +98,9 @@ typedef enum {
 @property (nonatomic, assign) bool trackingTime;
 @property (nonatomic, assign) bool beatTimer;
 @property (nonatomic, assign) bool playInitTimerSound;
+@property (nonatomic, assign) bool shipThrustingDefault;
+@property (nonatomic, assign) int tapsNeededToToggleThrust;
+@property (nonatomic, assign) CGFloat drag_min;
 
 - (void)initGame;
 - (void)initGuardians;

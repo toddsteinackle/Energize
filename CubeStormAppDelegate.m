@@ -11,6 +11,8 @@
 #import "CubeStormAppDelegate.h"
 #import "CubeStormViewController.h"
 #import "GLESGameState.h"
+#import "SoundManager.h"
+#import "GLView.h"
 
 BOOL isGameCenterAvailable() {
     // Check for presence of GKLocalPlayer API.
@@ -62,8 +64,9 @@ BOOL isGameCenterAvailable() {
 @synthesize SHIP_STARTING_Y_OFFSET;
 @synthesize widthScaleFactor;
 @synthesize heightScaleFactor;
-@synthesize DRAG_MIN_X;
-@synthesize DRAG_MIN_Y;
+@synthesize DRAG_MIN;
+@synthesize SHORT_DRAG_MIN;
+@synthesize LONG_DRAG_MIN;
 @synthesize FIREBALL_SPEED_HORIZONTAL;
 @synthesize FIREBALL_SPEED_VERTICAL;
 
@@ -250,8 +253,9 @@ BOOL isGameCenterAvailable() {
     gridStartingX = 160;
     gridStartingY = 612;
 
-    DRAG_MIN_X = 8;
-    DRAG_MIN_Y = 8;
+    SHORT_DRAG_MIN = 5;
+    DRAG_MIN = 10;
+    LONG_DRAG_MIN = 15;
 
     // check for retina display
     // You can't detect screen resolutions in pre 3.2 devices, but they are all 320x480
@@ -331,7 +335,9 @@ BOOL isGameCenterAvailable() {
         gameCenterAvailable = TRUE;
     }
 
+    sharedSoundManager = [SoundManager sharedSoundManager];
     [viewController customInit];
+    [self loadSettings];
 
     //now set our view as visible
     [window addSubview:viewController.view];
@@ -478,6 +484,72 @@ BOOL isGameCenterAvailable() {
         // Insert code here to clean up any outstanding Game Center-related classes.
     }
 
+}
+
+#pragma mark -
+#pragma mark Settings
+
+- (void)loadSettings {
+#ifdef GAMEENGINE_DEBUG
+    NSLog(@"INFO - App Delegate: Loading settings.");
+#endif
+    // If the prefs file has not been initialised then init the prefs file
+    if(settingsFilePath == nil)
+        [self initSettingsFilePath];
+
+    // If the prefs file cannot be found then create it with default values
+    if([[NSFileManager defaultManager] fileExistsAtPath:settingsFilePath]) {
+#ifdef GAMEENGINE_DEBUG
+        NSLog(@"INFO - App Delegate: Found settings file");
+#endif
+        settings = [[NSMutableDictionary alloc] initWithContentsOfFile:settingsFilePath];
+    } else {
+#ifdef GAMEENGINE_DEBUG
+        NSLog(@"INFO - App Delegate: No settings file, creating defaults");
+#endif
+        settings = [[NSMutableDictionary alloc] init];
+        [settings setObject:[NSString stringWithFormat:@"%f", 0.5f] forKey:@"musicVolume"];
+        [settings setObject:[NSString stringWithFormat:@"%f", 0.75f] forKey:@"fxVolume"];
+        [settings setObject:[NSNumber numberWithBool:TRUE] forKey:@"defaultShipThrust"];
+        [settings setObject:[NSNumber numberWithInt:1] forKey:@"tapsToToggle"];
+        [settings setObject:[NSNumber numberWithDouble:self.DRAG_MIN] forKey:@"minDragDistance"];
+    }
+
+    // Get the prefs from the pref file
+    [sharedSoundManager setMusicVolume:[(NSString *)[settings valueForKey:@"musicVolume"] floatValue]];
+    [sharedSoundManager setFxVolume:[(NSString *)[settings valueForKey:@"fxVolume"] floatValue]];
+    self.glView.shipThrustingDefault = [[settings valueForKey:@"defaultShipThrust"] boolValue];
+    self.glView.tapsNeededToToggleThrust = [[settings valueForKey:@"tapsToToggle"] intValue] + 1;
+    self.glView.drag_min = [[settings valueForKey:@"minDragDistance"] doubleValue];
+
+}
+
+- (void)saveSettings {
+    // Save the current settings to the apps prefs file
+    NSNumber *mv = [NSNumber numberWithFloat:sharedSoundManager.musicVolume];
+    NSNumber *fv = [NSNumber numberWithFloat:sharedSoundManager.fxVolume];
+    NSNumber *shipThrust = [NSNumber numberWithBool:self.glView.shipThrustingDefault];
+    NSNumber *tapsToToggle = [NSNumber numberWithInt:self.glView.tapsNeededToToggleThrust-1];
+    NSNumber *minDragDistance = [NSNumber numberWithDouble:self.glView.drag_min];
+    [settings setObject:mv forKey:@"musicVolume"];
+    [settings setObject:fv forKey:@"fxVolume"];
+    [settings setObject:shipThrust forKey:@"defaultShipThrust"];
+    [settings setObject:tapsToToggle forKey:@"tapsToToggle"];
+    [settings setObject:minDragDistance forKey:@"minDragDistance"];
+    [settings writeToFile:settingsFilePath atomically:YES];
+#ifdef GAMEENGINE_DEBUG
+    NSLog(@"INFO - App Delegate: Saving musicVolume=%f, fxVolume=%f, defaultShipThrust=%i, tapsToToggle=%i, minDragDistance=%f",
+          [mv floatValue], [fv floatValue], [shipThrust boolValue], [tapsToToggle intValue], [minDragDistance doubleValue]);
+#endif
+}
+
+- (void)initSettingsFilePath {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                         NSUserDomainMask,
+                                                         YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    settingsFilePath = [documentsDirectory stringByAppendingPathComponent:@"energize.plist"];
+    [settingsFilePath retain];
 }
 
 #pragma mark -

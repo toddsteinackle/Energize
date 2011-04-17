@@ -41,6 +41,9 @@
 @synthesize trackingTime;
 @synthesize beatTimer;
 @synthesize playInitTimerSound;
+@synthesize shipThrustingDefault;
+@synthesize tapsNeededToToggleThrust;
+@synthesize drag_min;
 
 #pragma mark -
 #pragma mark init
@@ -50,9 +53,6 @@
 
         sceneState = SceneState_GameBegin;
         lastTimeInLoop = 0;
-
-        drag_min_x = appDelegate.DRAG_MIN_X;
-        drag_min_y = appDelegate.DRAG_MIN_Y;
 
         sharedImageRenderManager = [ImageRenderManager sharedImageRenderManager];
         sharedSoundManager = [SoundManager sharedSoundManager];
@@ -1251,7 +1251,7 @@
 - (void)freeShipCheck {
     if (score >= nextFreeShip) {
         [sharedSoundManager playSoundWithKey:@"free_ship"];
-        [sharedSoundManager fadeMusicVolumeFrom:0.0 toVolume:1.0 duration:5.0 stop:NO];
+        [sharedSoundManager fadeMusicVolumeFrom:0.0 toVolume:sharedSoundManager.musicVolume duration:5.0 stop:NO];
         ++playerLives;
         nextFreeShip += freeShipValue;
     }
@@ -1369,7 +1369,7 @@
                     sceneState = SceneState_AllGridsCompleted;
                     [sharedSoundManager pauseMusic];
                     [sharedSoundManager playSoundWithKey:@"all_grids_completed"];
-                    [sharedSoundManager fadeMusicVolumeFrom:0.0 toVolume:1.0 duration:5.0 stop:NO];
+                    [sharedSoundManager fadeMusicVolumeFrom:0.0 toVolume:sharedSoundManager.musicVolume duration:5.0 stop:NO];
                     [sharedSoundManager resumeMusic];
                     return;
                 }
@@ -1471,7 +1471,7 @@
                     sceneState = SceneState_GameOver;
                     [sharedSoundManager pauseMusic];
                     [sharedSoundManager playSoundWithKey:@"game_over"];
-                    [sharedSoundManager fadeMusicVolumeFrom:0.0 toVolume:1.0 duration:5.0 stop:NO];
+                    [sharedSoundManager fadeMusicVolumeFrom:0.0 toVolume:sharedSoundManager.musicVolume duration:5.0 stop:NO];
                     [sharedSoundManager resumeMusic];
                     lastTimeInLoop = 0;
                     return;
@@ -1775,7 +1775,7 @@
             NSLog(@"loc.y -- %f prevloc.y -- %f deltaY -- %f", loc.y, prevloc.y, deltaY);
 #endif
 
-            if (abs_dx > drag_min_x || abs_dy > drag_min_y) {
+            if (abs_dx > drag_min || abs_dy > drag_min) {
                 if (deltaX > 0 && abs_dx > abs_dy) {
                     ship.direction = ship_right;
                     return;
@@ -1825,7 +1825,7 @@
 
 #pragma mark SceneState_Running
         case SceneState_Running:
-            if (numTaps == 2) {
+            if (numTaps == tapsNeededToToggleThrust) {
                 if (ship.state == EntityState_Alive) {
                     ship.isThrusting = !ship.isThrusting;
                 }
