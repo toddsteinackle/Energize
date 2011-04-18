@@ -564,6 +564,7 @@ BOOL isGameCenterAvailable() {
 
 - (void)resetLastGridPlayed {
     [settings setObject:[NSNumber numberWithInt:1] forKey:@"lastGridPlayed"];
+    [settings writeToFile:settingsFilePath atomically:YES];
 }
 
 - (void)initSettingsFilePath {

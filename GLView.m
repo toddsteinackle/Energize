@@ -1429,6 +1429,7 @@
                     if (currentGrid == numberOfGrids) {
                         sceneState = SceneState_AllGridsCompleted;
                         [appDelegate resetLastGridPlayed];
+                        lastGridPlayed = 1;
                         [sharedSoundManager pauseMusic];
                         [sharedSoundManager playSoundWithKey:@"all_grids_completed"];
                         [sharedSoundManager fadeMusicVolumeFrom:0.0 toVolume:sharedSoundManager.musicVolume duration:5.0 stop:NO];
