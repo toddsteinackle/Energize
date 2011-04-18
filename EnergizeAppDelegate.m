@@ -255,8 +255,8 @@ BOOL isGameCenterAvailable() {
     gridStartingY = 612;
 
     SHORT_DRAG_MIN = 5;
-    DRAG_MIN = 10;
-    LONG_DRAG_MIN = 15;
+    DRAG_MIN = 8;
+    LONG_DRAG_MIN = 12;
 
     // check for retina display
     // You can't detect screen resolutions in pre 3.2 devices, but they are all 320x480
