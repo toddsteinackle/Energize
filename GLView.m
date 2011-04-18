@@ -1728,9 +1728,13 @@
                                              justification:BitmapFontJustification_MiddleCentered
                                                       text:@"Game Over"];
 
+            [statusFont renderStringJustifiedInFrame:CGRectMake(0, appDelegate.SCREEN_HEIGHT/2, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2)
+                                             justification:BitmapFontJustification_BottomCentered
+                                                      text:@"Congratulations! All grids completed."];
+
             [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
                                        justification:BitmapFontJustification_TopCentered
-                                                text:@"Congratulations! All grids completed. Tap to continue at grid 1."];
+                                                text:@"Tap to continue this game at grid 1."];
 
             [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
                                        justification:BitmapFontJustification_MiddleCentered
