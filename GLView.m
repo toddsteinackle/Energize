@@ -1127,7 +1127,41 @@
 
                     break;
 
-                    default:
+                default:
+                    for (Guardian *g in guardians) {
+                        g.baseFireDelay = 3;
+                        g.chanceForTwoFireballs = 2;
+                        g.chanceForThreeFireballs = 3;
+                        g.chanceForFourFireballs = 4;
+                        g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
+                    }
+
+                    timer = timeToCompleteGrid = 35;
+
+                    asteroidLaunchDelay = 2.0;
+                    asteroidLaunchOdds = 3;
+                    maxAsteroids = 4;
+                    asteroidSpeed = 60;
+                    for (int i = 0; i < maxAsteroids; ++i) {
+                        Asteroid *asteroid = [[Asteroid alloc] initLaunchLocationWithSpeed:asteroidSpeed];
+                        [asteroids addObject:asteroid];
+                        [asteroid release];
+                    }
+
+                    powerUpLaunchDelay = 2.0;
+                    powerUpSpeed = 50;
+                    powerUpTimerLaunchOdds = 4;
+                    powerUpShieldsLaunchOdds = 3;
+                    powerUpFireballsLaunchOdds = 2;
+                    f = [[PowerUpFireballs alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:f];
+                    [f release];
+                    s = [[PowerUpShields alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:s];
+                    [s release];
+                    t = [[PowerUpTimer alloc] initLaunchLocationWithSpeed:powerUpSpeed];
+                    [powerUps addObject:t];
+                    [t release];
                     break;
             }
 
@@ -1391,14 +1425,16 @@
                 score += timerBonusScore;
                 [self freeShipCheck];
                 timerBonusScore = 0;
-                if (currentGrid == numberOfGrids) {
-                    sceneState = SceneState_AllGridsCompleted;
-                    [appDelegate resetLastGridPlayed];
-                    [sharedSoundManager pauseMusic];
-                    [sharedSoundManager playSoundWithKey:@"all_grids_completed"];
-                    [sharedSoundManager fadeMusicVolumeFrom:0.0 toVolume:sharedSoundManager.musicVolume duration:5.0 stop:NO];
-                    [sharedSoundManager resumeMusic];
-                    return;
+                if (!randomGridPlayOption) {
+                    if (currentGrid == numberOfGrids) {
+                        sceneState = SceneState_AllGridsCompleted;
+                        [appDelegate resetLastGridPlayed];
+                        [sharedSoundManager pauseMusic];
+                        [sharedSoundManager playSoundWithKey:@"all_grids_completed"];
+                        [sharedSoundManager fadeMusicVolumeFrom:0.0 toVolume:sharedSoundManager.musicVolume duration:5.0 stop:NO];
+                        [sharedSoundManager resumeMusic];
+                        return;
+                    }
                 }
                 if (randomGridPlayOption) {
                     [self initGrid:arc4random() % numberOfGrids];
@@ -1693,7 +1729,7 @@
 
             [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
                                        justification:BitmapFontJustification_TopCentered
-                                                text:@"Congratulations! All grids completed."];
+                                                text:@"Congratulations! All grids completed. Tap to continue at grid 1."];
 
             [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
                                        justification:BitmapFontJustification_MiddleCentered
@@ -1871,7 +1907,9 @@
             break;
 
 #pragma mark SceneState_GameOver
+#pragma mark SceneState_AllGridsCompleted
         case SceneState_GameOver:
+        case SceneState_AllGridsCompleted:
             if (numTaps == 1) {
                 NSDictionary *touchLoc = [NSDictionary dictionaryWithObject:[NSValue valueWithCGPoint:[touch locationInView:self]]
                                                                      forKey:@"location"];
@@ -1881,33 +1919,37 @@
             }
             break;
 
-#pragma mark SceneState_AllGridsCompleted
-        case SceneState_AllGridsCompleted:
-            if (numTaps == 2) {
-                [self.viewController quitGame];
-            }
-            break;
-
         default:
             break;
     }
-
-
 }
 
 - (void)handleSingleTap:(NSDictionary *)touches {
     [self resetGuardiansAndClearGrid];
-    if (randomGridPlayOption) {
-        currentGrid = 0;
-        gameContinuing = FALSE;
-        sceneState = SceneState_GameBegin;
-        [sharedSoundManager stopMusic];
-    } else {
-        --currentGrid;
-        gameContinuing = TRUE;
-        [self initGame];
-        sceneState = SceneState_LevelPauseAndInit;
-        initingTimer = TRUE;
+    switch (sceneState) {
+        case SceneState_GameOver:
+            if (randomGridPlayOption) {
+                currentGrid = 0;
+                gameContinuing = FALSE;
+                sceneState = SceneState_GameBegin;
+                [sharedSoundManager stopMusic];
+            } else {
+                --currentGrid;
+                gameContinuing = TRUE;
+                [self initGame];
+                sceneState = SceneState_LevelPauseAndInit;
+                initingTimer = TRUE;
+            }
+            break;
+        case SceneState_AllGridsCompleted:
+            currentGrid = 0;
+            gameContinuing = TRUE;
+            sceneState = SceneState_LevelPauseAndInit;
+            initingTimer = TRUE;
+            break;
+
+        default:
+            break;
     }
 }
 
