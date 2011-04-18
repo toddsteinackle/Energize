@@ -514,6 +514,15 @@
 					</object>
 					<int key="connectionID">57</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">startGameAtGrid</string>
+						<reference key="source" ref="169896580"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">58</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -750,7 +759,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">57</int>
+			<int key="maxID">58</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -766,9 +775,11 @@
 							<string>presentGLView</string>
 							<string>presentLeaderboard</string>
 							<string>presentPlayOptions</string>
+							<string>startGameAtGrid</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -783,6 +794,7 @@
 							<string>presentGLView</string>
 							<string>presentLeaderboard</string>
 							<string>presentPlayOptions</string>
+							<string>startGameAtGrid</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -800,6 +812,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">presentPlayOptions</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">startGameAtGrid</string>
 								<string key="candidateClassName">id</string>
 							</object>
 						</object>

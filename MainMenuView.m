@@ -4,8 +4,11 @@
 #import "MainMenuView.h"
 #import "EnergizeAppDelegate.h"
 #import "EnergizeViewController.h"
+#import "GLView.h"
 
 @implementation MainMenuView
+
+@synthesize startAtGridButton;
 
 - (MainMenuView*)initWithFrame:(CGRect)frame {
     if((self = [super initWithFrame:frame])) {
@@ -181,6 +184,10 @@
     [appDelegate.viewController showGLView];
 }
 
+- (IBAction)startGameAtGrid {
+    appDelegate.glView.currentGrid = appDelegate.savedLastGridPlayed - 1;
+    [appDelegate.viewController showGLView];
+}
 - (IBAction)presentControlSettings {
     [appDelegate.viewController showSettingsMenu];
 }

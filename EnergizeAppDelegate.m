@@ -69,6 +69,7 @@ BOOL isGameCenterAvailable() {
 @synthesize LONG_DRAG_MIN;
 @synthesize FIREBALL_SPEED_HORIZONTAL;
 @synthesize FIREBALL_SPEED_VERTICAL;
+@synthesize savedLastGridPlayed;
 
 #pragma mark -
 #pragma mark Grid Coordinates
@@ -406,6 +407,7 @@ BOOL isGameCenterAvailable() {
      If your application supports background execution, called instead of
      applicationWillTerminate: when the user quits.
      */
+    [self saveSettings];
 }
 
 
@@ -414,6 +416,7 @@ BOOL isGameCenterAvailable() {
      Called as part of  transition from the background to the inactive state:
      here you can undo many of the changes made on entering the background.
      */
+    [self loadSettings];
 }
 
 
@@ -436,6 +439,7 @@ BOOL isGameCenterAvailable() {
      See also applicationDidEnterBackground:.
      */
     [self stopAnimation];
+    [self saveSettings];
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
 }
 
@@ -515,6 +519,7 @@ BOOL isGameCenterAvailable() {
         [settings setObject:[NSNumber numberWithDouble:self.DRAG_MIN] forKey:@"minDragDistance"];
         [settings setObject:[NSNumber numberWithInt:1] forKey:@"skillLevel"];
         [settings setObject:[NSNumber numberWithBool:FALSE] forKey:@"randomGridPlayOption"];
+        [settings setObject:[NSNumber numberWithInt:1] forKey:@"lastGridPlayed"];
     }
 
     // Get the prefs from the pref file
@@ -525,6 +530,7 @@ BOOL isGameCenterAvailable() {
     self.glView.drag_min = [[settings valueForKey:@"minDragDistance"] doubleValue];
     self.glView.skillLevel = [[settings valueForKey:@"skillLevel"] intValue];
     self.glView.randomGridPlayOption = [[settings valueForKey:@"randomGridPlayOption"] boolValue];
+    savedLastGridPlayed = [[settings valueForKey:@"lastGridPlayed"] intValue];
 }
 
 - (void)saveSettings {
@@ -536,6 +542,7 @@ BOOL isGameCenterAvailable() {
     NSNumber *minDragDistance = [NSNumber numberWithDouble:self.glView.drag_min];
     NSNumber *skillLevel = [NSNumber numberWithInt:self.glView.skillLevel];
     NSNumber *randomGridPlayOption = [NSNumber numberWithBool:self.glView.randomGridPlayOption];
+    NSNumber *lastGridPlayed = [NSNumber numberWithInt:self.glView.lastGridPlayed];
     [settings setObject:mv forKey:@"musicVolume"];
     [settings setObject:fv forKey:@"fxVolume"];
     [settings setObject:shipThrust forKey:@"defaultShipThrust"];
@@ -543,12 +550,20 @@ BOOL isGameCenterAvailable() {
     [settings setObject:minDragDistance forKey:@"minDragDistance"];
     [settings setObject:skillLevel forKey:@"skillLevel"];
     [settings setObject:randomGridPlayOption forKey:@"randomGridPlayOption"];
+    if ([[settings valueForKey:@"lastGridPlayed"] intValue] < self.glView.lastGridPlayed) {
+        [settings setObject:lastGridPlayed forKey:@"lastGridPlayed"];
+    }
     [settings writeToFile:settingsFilePath atomically:YES];
 #ifdef GAMEENGINE_DEBUG
-    NSLog(@"INFO - App Delegate: Saving musicVolume=%f, fxVolume=%f, defaultShipThrust=%i, tapsToToggle=%i, minDragDistance=%f, skillLevel=%i, randomGridPlayOption=%i",
-          [mv floatValue], [fv floatValue], [shipThrust boolValue], [tapsToToggle intValue],
-          [minDragDistance doubleValue], [skillLevel intValue], [randomGridPlayOption boolValue]);
+    NSLog(@"INFO - App Delegate: Saving musicVolume=%f, fxVolume=%f, defaultShipThrust=%i, tapsToToggle=%i",
+          [mv floatValue], [fv floatValue], [shipThrust boolValue], [tapsToToggle intValue]);
+    NSLog(@"minDragDistance=%f, skillLevel=%i, randomGridPlayOption=%i, lastGridPlayed=%i",
+          [minDragDistance doubleValue], [skillLevel intValue], [randomGridPlayOption boolValue], savedLastGridPlayed);
 #endif
+}
+
+- (void)resetLastGridPlayed {
+    [settings setObject:[NSNumber numberWithInt:1] forKey:@"lastGridPlayed"];
 }
 
 - (void)initSettingsFilePath {

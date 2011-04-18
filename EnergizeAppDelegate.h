@@ -68,6 +68,7 @@
 
     NSMutableDictionary *settings;
     NSString *settingsFilePath;
+    int savedLastGridPlayed;
 
 
 #ifdef FRAME_COUNTER
@@ -138,6 +139,8 @@
 @property (readonly, nonatomic) CGFloat SHORT_DRAG_MIN;
 @property (readonly, nonatomic) CGFloat LONG_DRAG_MIN;
 
+@property (readonly, nonatomic) int savedLastGridPlayed;
+
 - (void)startAnimation;
 - (void)stopAnimation;
 - (void)gameLoop;
@@ -150,6 +153,7 @@
 - (void)loadSettings;
 - (void)saveSettings;
 - (void)initSettingsFilePath;
+- (void)resetLastGridPlayed;
 
 @end
 

@@ -91,6 +91,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view = mainMenu;
+
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [appDelegate loadSettings];
+    [mainMenu.startAtGridButton setTitle:[NSString stringWithFormat:@"Start at Grid: %i", appDelegate.savedLastGridPlayed]
+                                forState:UIControlStateNormal];
 }
 
 

@@ -22,10 +22,12 @@
     IBOutlet UIImageView *redCube2;
 }
 
+@property (nonatomic, retain) UIButton *startAtGridButton;
 
 - (IBAction)presentGLView;
 - (IBAction)presentControlSettings;
 - (IBAction)presentLeaderboard;
 - (IBAction)presentPlayOptions;
+- (IBAction)startGameAtGrid;
 
 @end
