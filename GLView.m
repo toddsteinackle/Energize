@@ -47,6 +47,7 @@
 @synthesize drag_min;
 @synthesize randomGridPlayOption;
 @synthesize lastGridPlayed;
+@synthesize gridDifficulty;
 
 #pragma mark -
 #pragma mark init
@@ -77,6 +78,7 @@
         powerUps = [[NSMutableArray alloc] init];
 
         currentGrid = 0;
+        gridDifficulty = 0;
         numberOfGrids = 40;
 
 
@@ -183,6 +185,9 @@
 
 - (void)initGrid:(int)grid {
 
+#ifdef RANDOMGRID_DEBUG
+    NSLog(@"random grid: %i", grid);
+#endif
     [cubes removeAllObjects];
     [spikeMines removeAllObjects];
     [asteroids removeAllObjects];
@@ -197,7 +202,11 @@
     timerBonusScore = 0;
     asteroidTimer = powerUpTimer = 0;
     powerUpTimerReInit = FALSE;
-    lastGridPlayed = grid + 1;
+    if (randomGridPlayOption) {
+        lastGridPlayed = 0;
+    } else {
+        lastGridPlayed = grid + 1;
+    }
 
 // [row][col]
 // { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '},
@@ -711,6 +720,9 @@
 #ifdef GAMEPLAY_DEBUG
     NSLog(@"starting cubeCount -- %i", cubeCount);
 #endif
+#ifdef RANDOMGRID_DEBUG
+    NSLog(@"starting cubeCount -- %i", cubeCount);
+#endif
 
 #pragma mark skill levels
     PowerUpFireballs *f;
@@ -720,7 +732,7 @@
 
 #pragma mark SkillLevel_Easy
         case SkillLevel_Easy:
-            switch (grid) {
+            switch (gridDifficulty++) {
                 case 0:
                 case 1:
                 case 2:
@@ -920,7 +932,10 @@
 
 #pragma mark SkillLevel_Normal
         case SkillLevel_Normal:
-            switch (grid) {
+#ifdef RANDOMGRID_DEBUG
+            NSLog(@"gridDifficulty: %i", gridDifficulty);
+#endif
+            switch (gridDifficulty++) {
                 case 0:
                 case 1:
                 case 2:
@@ -1350,7 +1365,12 @@
                 return;
             }
             if (lastTimeInLoop) {
-                [self initGrid:currentGrid++];
+                if (randomGridPlayOption) {
+                    [self initGrid:arc4random() % numberOfGrids];
+                    ++currentGrid;
+                } else {
+                    [self initGrid:currentGrid++];
+                }
                 sceneState = SceneState_Running;
                 lastTimeInLoop = 0;
                 return;
@@ -1380,7 +1400,12 @@
                     [sharedSoundManager resumeMusic];
                     return;
                 }
-                [self initGrid:currentGrid++];
+                if (randomGridPlayOption) {
+                    [self initGrid:arc4random() % numberOfGrids];
+                    ++currentGrid;
+                } else {
+                    [self initGrid:currentGrid++];
+                }
                 if (gameContinuing) {
                     gameContinuing = FALSE;
                 }
@@ -1620,9 +1645,15 @@
                                              justification:BitmapFontJustification_MiddleCentered
                                                       text:@"Game Over"];
 
-            [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
-                                       justification:BitmapFontJustification_TopCentered
-                                                text:@"Tap to play again, starting at current grid."];
+            if (randomGridPlayOption) {
+                [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
+                                           justification:BitmapFontJustification_TopCentered
+                                                    text:@"Tap to play again."];
+            } else {
+                [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
+                                           justification:BitmapFontJustification_TopCentered
+                                                    text:@"Tap to play again, starting at current grid."];
+            }
 
             [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
                                        justification:BitmapFontJustification_MiddleCentered
@@ -1866,11 +1897,18 @@
 
 - (void)handleSingleTap:(NSDictionary *)touches {
     [self resetGuardiansAndClearGrid];
-    --currentGrid;
-    gameContinuing = TRUE;
-    [self initGame];
-    sceneState = SceneState_LevelPauseAndInit;
-    initingTimer = TRUE;
+    if (randomGridPlayOption) {
+        currentGrid = 0;
+        gameContinuing = FALSE;
+        sceneState = SceneState_GameBegin;
+        [sharedSoundManager stopMusic];
+    } else {
+        --currentGrid;
+        gameContinuing = TRUE;
+        [self initGame];
+        sceneState = SceneState_LevelPauseAndInit;
+        initingTimer = TRUE;
+    }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {

@@ -55,6 +55,7 @@
 - (void)quitGame {
     appDelegate.glView.sceneState = SceneState_GameBegin;
     appDelegate.glView.currentGrid = 0;
+    appDelegate.glView.gridDifficulty = 0;
     if (appDelegate.ios4orGreater) {
         [appDelegate.viewController dismissGLView];
     } else {

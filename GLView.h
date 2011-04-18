@@ -56,7 +56,7 @@ typedef enum {
     NSMutableArray *powerUps;
     Ship *ship;
     int cubeCount;
-    int currentGrid, numberOfGrids, lastGridPlayed;
+    int currentGrid, numberOfGrids, lastGridPlayed, gridDifficulty;
 
     CGFloat drag_min;
 
@@ -95,6 +95,7 @@ typedef enum {
 @property (nonatomic, assign) SkillLevel skillLevel;
 @property (nonatomic, assign) double lastTimeInLoop;
 @property (nonatomic, assign) int currentGrid;
+@property (nonatomic, assign) int gridDifficulty;
 @property (nonatomic, assign) int score;
 @property (nonatomic, assign) int playerLives;
 @property (nonatomic, assign) bool trackingTime;

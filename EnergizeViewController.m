@@ -98,8 +98,15 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [appDelegate loadSettings];
-    [mainMenu.startAtGridButton setTitle:[NSString stringWithFormat:@"Start at Grid: %i", appDelegate.savedLastGridPlayed]
-                                forState:UIControlStateNormal];
+    if (appDelegate.glView.randomGridPlayOption) {
+        mainMenu.startAtGridButton.enabled = FALSE;
+        [mainMenu.startAtGridButton setTitle:[NSString stringWithFormat:@"Start at Grid: %i", appDelegate.savedLastGridPlayed]
+                                    forState:UIControlStateNormal];
+    } else {
+        mainMenu.startAtGridButton.enabled = TRUE;
+        [mainMenu.startAtGridButton setTitle:[NSString stringWithFormat:@"Start at Grid: %i", appDelegate.savedLastGridPlayed]
+                                    forState:UIControlStateNormal];
+    }
 }
 
 

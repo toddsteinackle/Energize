@@ -186,6 +186,7 @@
 
 - (IBAction)startGameAtGrid {
     appDelegate.glView.currentGrid = appDelegate.savedLastGridPlayed - 1;
+    appDelegate.glView.gridDifficulty = appDelegate.savedLastGridPlayed -1;
     [appDelegate.viewController showGLView];
 }
 - (IBAction)presentControlSettings {
