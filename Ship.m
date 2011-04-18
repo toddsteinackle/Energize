@@ -103,6 +103,7 @@
     safePeriod = 0.5;
     shield = [[Shield alloc] initWithPixelLocation:CGPointMake(0, 0) containingShip:self];
     colliding = FALSE;
+    [sharedSoundManager stopSoundWithKey:@"shield_enabled"];
     return self;
 }
 
