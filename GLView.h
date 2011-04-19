@@ -78,6 +78,7 @@ typedef enum {
     bool trackingTime, beatTimer, initingTimer, timerBonus, powerUpTimerReInit, playInitTimerSound;
     bool shipThrustingDefault;
     bool randomGridPlayOption;
+    bool allGridsCompletedThisGame;
 
     CGFloat timer, timeToCompleteGrid, initingTimerTracker, timeToInitTimerDisplay;
     CGFloat asteroidSpeed, powerUpSpeed;
