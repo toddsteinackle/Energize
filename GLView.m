@@ -181,7 +181,7 @@
     currentCubeValue = 100;
     playerLives = 4;
     timer = 0;
-    allGridsCompletedThisGame = FALSE;
+    gridDifficulty = 0;
 }
 
 - (void)initGrid:(int)grid {
@@ -1782,16 +1782,11 @@
                         sceneState = SceneState_AllGridsCompleted;
                         [appDelegate resetLastGridPlayed];
                         lastGridPlayed = 1;
-                        allGridsCompletedThisGame = TRUE;
                         [sharedSoundManager pauseMusic];
                         [sharedSoundManager playSoundWithKey:@"all_grids_completed"];
                         [sharedSoundManager fadeMusicVolumeFrom:0.0 toVolume:sharedSoundManager.musicVolume duration:5.0 stop:NO];
                         [sharedSoundManager resumeMusic];
                         return;
-                    }
-                    if (allGridsCompletedThisGame) {
-                        gridDifficulty = currentGrid;
-                        allGridsCompletedThisGame = FALSE;
                     }
                 }
                 if (randomGridPlayOption) {
