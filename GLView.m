@@ -177,7 +177,7 @@
 - (void)initGame {
 
     score = 0;
-    nextFreeShip = freeShipValue = 50000;
+    nextFreeShip = freeShipValue = 100000;
     currentCubeValue = 100;
     playerLives = 4;
     timer = 0;
