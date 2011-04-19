@@ -800,6 +800,7 @@
                     [cubes addObject:cube];
                     [cube release];
                     ++cubeCount;
+                    timeToCompleteGrid += 1.0;
                     break;
 
                 case 'd':
@@ -811,6 +812,7 @@
                     [cubes addObject:cube];
                     [cube release];
                     ++cubeCount;
+                    timeToCompleteGrid += 1.5;
                     break;
 
 
@@ -828,11 +830,17 @@
             }
         }
     }
+    if (timeToCompleteGrid > 50.0) {
+        timeToCompleteGrid = 50.0;
+    }
+    timer = timeToCompleteGrid;
 #ifdef GAMEPLAY_DEBUG
     NSLog(@"starting cubeCount -- %i", cubeCount);
 #endif
 #ifdef RANDOMGRID_DEBUG
+    NSLog(@"Grid: %i", grid);
     NSLog(@"starting cubeCount -- %i", cubeCount);
+    NSLog(@"time to complete grid: %f", timeToCompleteGrid);
 #endif
 
 #pragma mark skill levels
@@ -861,8 +869,6 @@
                         g.chanceForFourFireballs = 15;
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
-
-                    timer = timeToCompleteGrid = 25;
 
                     asteroidLaunchDelay = 3.0;
                     asteroidLaunchOdds = 12;
@@ -910,8 +916,6 @@
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
 
-                    timer = timeToCompleteGrid = 30;
-
                     asteroidLaunchDelay = 2.5;
                     asteroidLaunchOdds = 10;
                     maxAsteroids = 3;
@@ -957,8 +961,6 @@
                         g.chanceForFourFireballs = 10;
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
-
-                    timer = timeToCompleteGrid = 30;
 
                     asteroidLaunchDelay = 2.0;
                     asteroidLaunchOdds = 8;
@@ -1006,8 +1008,6 @@
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
 
-                    timer = timeToCompleteGrid = 30;
-
                     asteroidLaunchDelay = 2.0;
                     asteroidLaunchOdds = 10;
                     maxAsteroids = 4;
@@ -1043,8 +1043,6 @@
                         g.chanceForFourFireballs = 5;
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
-
-                    timer = timeToCompleteGrid = 30;
 
                     asteroidLaunchDelay = 2.0;
                     asteroidLaunchOdds = 8;
@@ -1099,8 +1097,6 @@
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
 
-                    timer = timeToCompleteGrid = 30;
-
                     asteroidLaunchDelay = 3.0;
                     asteroidLaunchOdds = 7;
                     maxAsteroids = 3;
@@ -1146,8 +1142,6 @@
                         g.chanceForFourFireballs = 9;
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
-
-                    timer = timeToCompleteGrid = 30;
 
                     asteroidLaunchDelay = 2.5;
                     asteroidLaunchOdds = 6;
@@ -1195,8 +1189,6 @@
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
 
-                    timer = timeToCompleteGrid = 30;
-
                     asteroidLaunchDelay = 2.0;
                     asteroidLaunchOdds = 5;
                     maxAsteroids = 4;
@@ -1243,8 +1235,6 @@
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
 
-                    timer = timeToCompleteGrid = 35;
-
                     asteroidLaunchDelay = 2.0;
                     asteroidLaunchOdds = 4;
                     maxAsteroids = 4;
@@ -1280,8 +1270,6 @@
                         g.chanceForFourFireballs = 4;
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
-
-                    timer = timeToCompleteGrid = 35;
 
                     asteroidLaunchDelay = 2.0;
                     asteroidLaunchOdds = 3;
@@ -1333,8 +1321,6 @@
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
 
-                    timer = timeToCompleteGrid = 30;
-
                     asteroidLaunchDelay = 3.0;
                     asteroidLaunchOdds = 6;
                     maxAsteroids = 5;
@@ -1380,8 +1366,6 @@
                         g.chanceForFourFireballs = 8;
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
-
-                    timer = timeToCompleteGrid = 30;
 
                     asteroidLaunchDelay = 2.5;
                     asteroidLaunchOdds = 5;
@@ -1429,8 +1413,6 @@
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
 
-                    timer = timeToCompleteGrid = 30;
-
                     asteroidLaunchDelay = 2.0;
                     asteroidLaunchOdds = 4;
                     maxAsteroids = 5;
@@ -1477,8 +1459,6 @@
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
 
-                    timer = timeToCompleteGrid = 35;
-
                     asteroidLaunchDelay = 2.0;
                     asteroidLaunchOdds = 3;
                     maxAsteroids = 5;
@@ -1514,8 +1494,6 @@
                         g.chanceForFourFireballs = 3;
                         g.fireDelay = (arc4random() % g.baseFireDelay + 1) + RANDOM_MINUS_1_TO_1();
                     }
-
-                    timer = timeToCompleteGrid = 35;
 
                     asteroidLaunchDelay = 2.0;
                     asteroidLaunchOdds = 2;
