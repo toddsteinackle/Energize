@@ -337,6 +337,9 @@
 #endif
         state = EntityState_Dead;
         shield.state = EntityState_Idle;
+        if (isShielded) {
+            [sharedSoundManager stopSoundWithKey:@"shield_enabled"];
+        }
         appDelegate.glView.playerLives--;
         if (!exploding) {
             otherEntity.state = EntityState_Dead;
