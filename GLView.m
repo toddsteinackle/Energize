@@ -2250,7 +2250,7 @@
         if (appDelegate.retinaDisplay) {
             loc.x *= 2; loc.y *= 2;
         }
-        if (CGRectContainsPoint(CGRectMake(appDelegate.GUARDIAN_RIGHT_BASE, 0,
+        if (numTaps == 2 && CGRectContainsPoint(CGRectMake(appDelegate.GUARDIAN_RIGHT_BASE, 0,
                                            79*appDelegate.widthScaleFactor, 76*appDelegate.heightScaleFactor), loc)) {
             [self.viewController showPauseView];
             return;
