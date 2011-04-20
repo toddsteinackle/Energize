@@ -815,7 +815,7 @@
                     [cubes addObject:cube];
                     [cube release];
                     ++cubeCount;
-                    timeToCompleteGrid += 1.0;
+                    timeToCompleteGrid += .25;
                     break;
 
                 case 'd':
@@ -827,7 +827,7 @@
                     [cubes addObject:cube];
                     [cube release];
                     ++cubeCount;
-                    timeToCompleteGrid += 1.5;
+                    timeToCompleteGrid += .5;
                     break;
 
 
@@ -845,8 +845,8 @@
             }
         }
     }
-    if (timeToCompleteGrid > 50.0) {
-        timeToCompleteGrid = 50.0;
+    if (timeToCompleteGrid > 35.0) {
+        timeToCompleteGrid = 35.0;
     }
     timer = timeToCompleteGrid;
 #ifdef GAMEPLAY_DEBUG
