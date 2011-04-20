@@ -184,6 +184,21 @@
     playerLives = 4;
     timer = 0;
     gridDifficulty = 0;
+    if (randomGridPlayOption) {
+        switch (skillLevel) {
+            case SkillLevel_Easy:
+                gridDifficulty = 20;
+                break;
+            case SkillLevel_Normal:
+                gridDifficulty = 30;
+                break;
+            case SkillLevel_Hard:
+                gridDifficulty = 40;
+                break;
+            default:
+                break;
+        }
+    }
 }
 
 - (void)initGrid:(int)grid {
@@ -866,6 +881,10 @@
 
 #pragma mark SkillLevel_Easy
         case SkillLevel_Easy:
+#ifdef RANDOMGRID_DEBUG
+            NSLog(@"SkillLevel_Easy");
+            NSLog(@"gridDifficulty: %i", gridDifficulty);
+#endif
             switch (gridDifficulty++) {
                 case 0:
                 case 1:
@@ -1091,6 +1110,7 @@
 #pragma mark SkillLevel_Normal
         case SkillLevel_Normal:
 #ifdef RANDOMGRID_DEBUG
+            NSLog(@"SkillLevel_Normal");
             NSLog(@"gridDifficulty: %i", gridDifficulty);
 #endif
             switch (gridDifficulty++) {
@@ -1317,6 +1337,10 @@
 
 #pragma mark SkillLevel_Hard
         case SkillLevel_Hard:
+#ifdef RANDOMGRID_DEBUG
+            NSLog(@"SkillLevel_Hard");
+            NSLog(@"gridDifficulty: %i", gridDifficulty);
+#endif
             switch (gridDifficulty++) {
                 case 0:
                 case 1:
