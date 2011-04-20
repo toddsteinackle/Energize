@@ -87,6 +87,7 @@ typedef enum {
     double powerUpLaunchDelay, powerUpTimer;
 
     int tapsNeededToToggleThrust;
+    NSTimer *timer_object;
 
 }
 
@@ -126,5 +127,6 @@ typedef enum {
 - (void)freeShipCheck;
 - (void)loadSounds;
 - (void)removeSounds;
+- (void)stopTimer;
 
 @end

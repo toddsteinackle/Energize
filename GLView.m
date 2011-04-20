@@ -2195,8 +2195,10 @@
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
 
     UITouch *aTouch = [touches anyObject];
+    CGPoint loc = [aTouch locationInView:self];
     switch (sceneState) {
         case SceneState_GameOver:
+        case SceneState_AllGridsCompleted:
             if (aTouch.tapCount == 2) {
                 [NSObject cancelPreviousPerformRequestsWithTarget:self];
             }
@@ -2204,6 +2206,23 @@
 
         default:
             break;
+    }
+    if (sceneState != SceneState_GameBegin && sceneState != SceneState_GuardianTransport) {
+        if (appDelegate.retinaDisplay) {
+            loc.x *= 2; loc.y *= 2;
+        }
+        if (CGRectContainsPoint(CGRectMake(appDelegate.GUARDIAN_RIGHT_BASE, 0,
+                                            79*appDelegate.widthScaleFactor, 76*appDelegate.heightScaleFactor), loc)) {
+            [self stopTimer];
+            timer_object = [NSTimer scheduledTimerWithTimeInterval:.2
+                                                            target:self.viewController
+                                                          selector:@selector(showPauseView)
+                                                          userInfo:nil
+                                                           repeats:NO];
+            [timer_object retain];
+
+
+        }
     }
 }
 
@@ -2261,20 +2280,19 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
 
+    [self stopTimer];
     UITouch* touch = [touches anyObject];
+    NSUInteger numTaps = [touch tapCount];
     CGPoint loc = [touch locationInView:self];
 #ifdef INPUT_DEBUG
     NSLog(@"x -- %f y -- %f", loc.x, loc.y);
 #endif
-    NSUInteger numTaps = [touch tapCount];
-
     if (sceneState != SceneState_GameBegin && sceneState != SceneState_GuardianTransport) {
         if (appDelegate.retinaDisplay) {
             loc.x *= 2; loc.y *= 2;
         }
-        if (numTaps == 2 && CGRectContainsPoint(CGRectMake(appDelegate.GUARDIAN_RIGHT_BASE, 0,
+        if (CGRectContainsPoint(CGRectMake(appDelegate.GUARDIAN_RIGHT_BASE, 0,
                                            79*appDelegate.widthScaleFactor, 76*appDelegate.heightScaleFactor), loc)) {
-            [self.viewController showPauseView];
             return;
         }
     }
@@ -2337,8 +2355,13 @@
     }
 }
 
+- (void)stopTimer {
+    if([timer_object isValid]){
+        [timer_object invalidate];
+    }
+}
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event {
-
+    [self stopTimer];
 }
 
 @end
