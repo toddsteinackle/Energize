@@ -2105,11 +2105,11 @@
 
             [largeMessageFont renderStringJustifiedInFrame:CGRectMake(0, appDelegate.SCREEN_HEIGHT/2, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2)
                                              justification:BitmapFontJustification_MiddleCentered
-                                                      text:@"Game Over"];
+                                                      text:@"Congratulations!"];
 
             [statusFont renderStringJustifiedInFrame:CGRectMake(0, appDelegate.SCREEN_HEIGHT/2, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2)
                                        justification:BitmapFontJustification_BottomCentered
-                                                text:@"Congratulations! All grids completed."];
+                                                text:@"All grids completed."];
 
             [statusFont renderStringJustifiedInFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2-30*appDelegate.heightScaleFactor)
                                        justification:BitmapFontJustification_TopCentered
