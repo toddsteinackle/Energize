@@ -519,7 +519,9 @@ BOOL isGameCenterAvailable() {
         [settings setObject:[NSNumber numberWithDouble:self.DRAG_MIN] forKey:@"minDragDistance"];
         [settings setObject:[NSNumber numberWithInt:1] forKey:@"skillLevel"];
         [settings setObject:[NSNumber numberWithBool:FALSE] forKey:@"randomGridPlayOption"];
-        [settings setObject:[NSNumber numberWithInt:1] forKey:@"lastGridPlayed"];
+        [settings setObject:[NSNumber numberWithInt:1] forKey:@"lastGridPlayed_easy"];
+        [settings setObject:[NSNumber numberWithInt:1] forKey:@"lastGridPlayed_normal"];
+        [settings setObject:[NSNumber numberWithInt:1] forKey:@"lastGridPlayed_hard"];
     }
 
     // Get the prefs from the pref file
@@ -530,7 +532,20 @@ BOOL isGameCenterAvailable() {
     self.glView.drag_min = [[settings valueForKey:@"minDragDistance"] doubleValue];
     self.glView.skillLevel = [[settings valueForKey:@"skillLevel"] intValue];
     self.glView.randomGridPlayOption = [[settings valueForKey:@"randomGridPlayOption"] boolValue];
-    savedLastGridPlayed = [[settings valueForKey:@"lastGridPlayed"] intValue];
+    switch (self.glView.skillLevel) {
+        case SkillLevel_Easy:
+            savedLastGridPlayed = [[settings valueForKey:@"lastGridPlayed_easy"] intValue];
+            break;
+        case SkillLevel_Normal:
+            savedLastGridPlayed = [[settings valueForKey:@"lastGridPlayed_normal"] intValue];
+            break;
+        case SkillLevel_Hard:
+            savedLastGridPlayed = [[settings valueForKey:@"lastGridPlayed_hard"] intValue];
+            break;
+        default:
+            break;
+    }
+
 }
 
 - (void)saveSettings {
@@ -542,7 +557,9 @@ BOOL isGameCenterAvailable() {
     NSNumber *minDragDistance = [NSNumber numberWithDouble:self.glView.drag_min];
     NSNumber *skillLevel = [NSNumber numberWithInt:self.glView.skillLevel];
     NSNumber *randomGridPlayOption = [NSNumber numberWithBool:self.glView.randomGridPlayOption];
-    NSNumber *lastGridPlayed = [NSNumber numberWithInt:self.glView.lastGridPlayed];
+    NSNumber *lastGridPlayed_easy = [NSNumber numberWithInt:self.glView.lastGridPlayed_easy];
+    NSNumber *lastGridPlayed_normal = [NSNumber numberWithInt:self.glView.lastGridPlayed_normal];
+    NSNumber *lastGridPlayed_hard = [NSNumber numberWithInt:self.glView.lastGridPlayed_hard];
     [settings setObject:mv forKey:@"musicVolume"];
     [settings setObject:fv forKey:@"fxVolume"];
     [settings setObject:shipThrust forKey:@"defaultShipThrust"];
@@ -550,8 +567,16 @@ BOOL isGameCenterAvailable() {
     [settings setObject:minDragDistance forKey:@"minDragDistance"];
     [settings setObject:skillLevel forKey:@"skillLevel"];
     [settings setObject:randomGridPlayOption forKey:@"randomGridPlayOption"];
-    if ([[settings valueForKey:@"lastGridPlayed"] intValue] < self.glView.lastGridPlayed) {
-        [settings setObject:lastGridPlayed forKey:@"lastGridPlayed"];
+    if ([[settings valueForKey:@"lastGridPlayed_easy"] intValue] < self.glView.lastGridPlayed_easy) {
+        [settings setObject:lastGridPlayed_easy forKey:@"lastGridPlayed_easy"];
+    }
+
+    if ([[settings valueForKey:@"lastGridPlayed_normal"] intValue] < self.glView.lastGridPlayed_normal) {
+        [settings setObject:lastGridPlayed_normal forKey:@"lastGridPlayed_normal"];
+    }
+
+    if ([[settings valueForKey:@"lastGridPlayed_hard"] intValue] < self.glView.lastGridPlayed_hard) {
+        [settings setObject:lastGridPlayed_hard forKey:@"lastGridPlayed_hard"];
     }
     [settings writeToFile:settingsFilePath atomically:YES];
 #ifdef GAMEENGINE_DEBUG
@@ -563,7 +588,19 @@ BOOL isGameCenterAvailable() {
 }
 
 - (void)resetLastGridPlayed {
-    [settings setObject:[NSNumber numberWithInt:1] forKey:@"lastGridPlayed"];
+    switch (self.glView.skillLevel) {
+        case SkillLevel_Easy:
+            [settings setObject:[NSNumber numberWithInt:1] forKey:@"lastGridPlayed_easy"];
+            break;
+        case SkillLevel_Normal:
+            [settings setObject:[NSNumber numberWithInt:1] forKey:@"lastGridPlayed_normal"];
+            break;
+        case SkillLevel_Hard:
+            [settings setObject:[NSNumber numberWithInt:1] forKey:@"lastGridPlayed_hard"];
+            break;
+        default:
+            break;
+    }
     [settings writeToFile:settingsFilePath atomically:YES];
 }
 

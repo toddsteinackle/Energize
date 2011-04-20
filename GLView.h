@@ -56,7 +56,8 @@ typedef enum {
     NSMutableArray *powerUps;
     Ship *ship;
     int cubeCount;
-    int currentGrid, numberOfGrids, lastGridPlayed, gridDifficulty;
+    int currentGrid, numberOfGrids, gridDifficulty;
+    int lastGridPlayed_easy, lastGridPlayed_normal, lastGridPlayed_hard;
 
     CGFloat drag_min;
 
@@ -105,7 +106,9 @@ typedef enum {
 @property (nonatomic, assign) int tapsNeededToToggleThrust;
 @property (nonatomic, assign) CGFloat drag_min;
 @property (nonatomic, assign) bool randomGridPlayOption;
-@property (nonatomic, assign) int lastGridPlayed;
+@property (nonatomic, assign) int lastGridPlayed_easy;
+@property (nonatomic, assign) int lastGridPlayed_normal;
+@property (nonatomic, assign) int lastGridPlayed_hard;
 
 - (void)initGame;
 - (void)initGuardians;

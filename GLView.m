@@ -46,7 +46,9 @@
 @synthesize tapsNeededToToggleThrust;
 @synthesize drag_min;
 @synthesize randomGridPlayOption;
-@synthesize lastGridPlayed;
+@synthesize lastGridPlayed_easy;
+@synthesize lastGridPlayed_normal;
+@synthesize lastGridPlayed_hard;
 @synthesize gridDifficulty;
 
 #pragma mark -
@@ -204,9 +206,22 @@
     asteroidTimer = powerUpTimer = 0;
     powerUpTimerReInit = FALSE;
     if (randomGridPlayOption) {
-        lastGridPlayed = 0;
+        lastGridPlayed_easy = lastGridPlayed_normal = lastGridPlayed_hard = 0;
     } else {
-        lastGridPlayed = grid + 1;
+        switch (skillLevel) {
+            case SkillLevel_Easy:
+                lastGridPlayed_easy = grid + 1;
+                break;
+            case SkillLevel_Normal:
+                lastGridPlayed_normal = grid + 1;
+                break;
+            case SkillLevel_Hard:
+                lastGridPlayed_hard = grid + 1;
+                break;
+            default:
+                break;
+        }
+
     }
 
 // [row][col]
@@ -1781,7 +1796,19 @@
                     if (currentGrid == numberOfGrids) {
                         sceneState = SceneState_AllGridsCompleted;
                         [appDelegate resetLastGridPlayed];
-                        lastGridPlayed = 1;
+                        switch (skillLevel) {
+                            case SkillLevel_Easy:
+                                lastGridPlayed_easy = 1;
+                                break;
+                            case SkillLevel_Normal:
+                                lastGridPlayed_normal = 1;
+                                break;
+                            case SkillLevel_Hard:
+                                lastGridPlayed_hard = 1;
+                                break;
+                            default:
+                                break;
+                        }
                         [sharedSoundManager pauseMusic];
                         [sharedSoundManager playSoundWithKey:@"all_grids_completed"];
                         [sharedSoundManager fadeMusicVolumeFrom:0.0 toVolume:sharedSoundManager.musicVolume duration:5.0 stop:NO];

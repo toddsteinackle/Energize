@@ -100,7 +100,7 @@
     [appDelegate loadSettings];
     if (appDelegate.glView.randomGridPlayOption) {
         mainMenu.startAtGridButton.enabled = FALSE;
-        [mainMenu.startAtGridButton setTitle:[NSString stringWithFormat:@"Start at Grid: %i", appDelegate.savedLastGridPlayed]
+        [mainMenu.startAtGridButton setTitle:[NSString stringWithFormat:@"Start at Grid:"]
                                     forState:UIControlStateNormal];
     } else {
         mainMenu.startAtGridButton.enabled = TRUE;
