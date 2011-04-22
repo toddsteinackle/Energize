@@ -29,6 +29,19 @@
     [leaderboardController release];
 }
 
+- (void)showAchievements {
+    GKAchievementViewController *achievements = [[GKAchievementViewController alloc] init];
+    if (achievements != nil) {
+        achievements.achievementDelegate = self;
+        [self presentModalViewController:achievements animated:YES];
+    }
+    [achievements release];
+}
+
+- (void)achievementViewControllerDidFinish:(GKAchievementViewController *)viewController {
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 - (void)showSettingsMenu {
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         settingsMenu = [[SettingsMenuViewController alloc] initWithNibName:@"SettingsMenuViewController-iPad" bundle:[NSBundle mainBundle]];

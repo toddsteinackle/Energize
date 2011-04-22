@@ -11,6 +11,8 @@
 @class EnergizeViewController;
 @class GLView;
 @class SoundManager;
+@class GKScore;
+@class GKAchievement;
 
 @interface EnergizeAppDelegate : NSObject <UIApplicationDelegate> {
     UIWindow *window;
@@ -69,6 +71,8 @@
     NSMutableDictionary *settings;
     NSString *settingsFilePath;
     int savedLastGridPlayed;
+    NSMutableArray *gkScores;
+    NSMutableDictionary *gkAchievements;
 
 
 #ifdef FRAME_COUNTER
@@ -154,6 +158,12 @@
 - (void)saveSettings;
 - (void)initSettingsFilePath;
 - (void)resetLastGridPlayed;
+- (void)reportScore:(int64_t)score forCategory:(NSString*)category;
+- (void)reportAchievementIdentifier:(NSString*)identifier percentComplete:(float)percent;
+- (void)saveGKScores;
+- (void)loadAndReportGKScores;
+- (void)saveGKAchievements;
+- (void)loadAndReportGKAchievements;
 
 @end
 

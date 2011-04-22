@@ -93,7 +93,7 @@
 					<object class="IBUISegmentedControl" id="115047596">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{138, 124}, {203, 44}}</string>
+						<string key="NSFrame">{{133, 124}, {213, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -101,7 +101,7 @@
 						<int key="IBSelectedSegmentIndex">0</int>
 						<object class="NSArray" key="IBSegmentTitles">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>In Order</string>
+							<string>Sequential</string>
 							<string>Random</string>
 						</object>
 						<object class="NSMutableArray" key="IBSegmentWidths">
@@ -170,8 +170,8 @@
 						<object class="NSArray" key="IBSegmentTitles">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>Easy</string>
-							<string>Normal</string>
-							<string>Difficult</string>
+							<string>Medium</string>
+							<string>Hard</string>
 						</object>
 						<object class="NSMutableArray" key="IBSegmentWidths">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -380,7 +380,7 @@
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>PlayOptionsMenuViewController</string>
 					<string>UIResponder</string>
-					<string>{{699, 661}, {480, 320}}</string>
+					<string>{{687, 546}, {480, 320}}</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<string>com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 					<object class="NSAffineTransform"/>
@@ -746,7 +746,7 @@
 			<integer value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">CubeStorm.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">Energize.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<bool key="EncodedWithXMLCoder">YES</bool>

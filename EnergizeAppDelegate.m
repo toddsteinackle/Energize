@@ -334,6 +334,8 @@ BOOL isGameCenterAvailable() {
 
     if (isGameCenterAvailable()) {
         gameCenterAvailable = TRUE;
+        gkScores = [[NSMutableArray alloc] init];
+        gkAchievements = [[NSMutableDictionary alloc] init];
     }
 
     sharedSoundManager = [SoundManager sharedSoundManager];
@@ -480,7 +482,8 @@ BOOL isGameCenterAvailable() {
 #ifdef GAMECENTER_DEBUG
         NSLog(@"player authenticated -- authenticationChanged");
 #endif
-        //[self loadAndReportGKScores];
+        [self loadAndReportGKScores];
+        [self loadAndReportGKAchievements];
     } else {
 #ifdef GAMECENTER_DEBUG
         NSLog(@"authenticationChanged player not authenticated");
@@ -488,6 +491,211 @@ BOOL isGameCenterAvailable() {
         // Insert code here to clean up any outstanding Game Center-related classes.
     }
 
+}
+
+- (void)reportScore:(int64_t)score forCategory:(NSString*)category {
+
+    GKScore *scoreReporter = [[[GKScore alloc] initWithCategory:category] autorelease];
+    scoreReporter.value = score;
+    [gkScores addObject:scoreReporter];
+    [self saveGKScores];
+#ifdef GAMECENTER_DEBUG
+    NSLog(@"before calling Game Center in reportScore");
+    for (GKScore *gkScore in gkScores) {
+        NSLog(@"%@", gkScore);
+    }
+#endif
+    [scoreReporter reportScoreWithCompletionHandler:^(NSError *error) {
+
+        if (error != nil) {
+            NSLog(@"error description: %@", [error localizedDescription]);
+        } else {
+#ifdef GAMECENTER_DEBUG
+            NSLog(@"score reported");
+#endif
+            [gkScores removeObject:scoreReporter];
+            [self saveGKScores];
+#ifdef GAMECENTER_DEBUG
+            NSLog(@"score object removed");
+            for (GKScore *gkScore in gkScores) {
+                NSLog(@"%@", gkScore);
+            }
+#endif
+        }
+
+
+    }];
+}
+
+- (void)reportAchievementIdentifier:(NSString*)identifier percentComplete:(float)percent {
+
+    GKAchievement *achievement = [[[GKAchievement alloc] initWithIdentifier:identifier] autorelease];
+    if (achievement) {
+        achievement.percentComplete = percent;
+        [gkAchievements setObject:achievement forKey:[GKLocalPlayer localPlayer].playerID];
+        [self saveGKAchievements];
+#ifdef GAMECENTER_DEBUG
+        NSLog(@"before calling Game Center in reportAchievementIdentifier");
+        NSString *key;
+        for (key in gkAchievements) {
+            NSLog(@"Player ID: %@, Achievement: %@", key, [gkAchievements objectForKey:key]);
+        }
+#endif
+        [achievement reportAchievementWithCompletionHandler:^(NSError *error) {
+
+             if (error != nil) {
+                 NSLog(@"error description: %@", [error localizedDescription]);
+             } else {
+#ifdef GAMECENTER_DEBUG
+                 NSLog(@"achievement reported");
+#endif
+                 [gkAchievements removeObjectForKey:[GKLocalPlayer localPlayer].playerID];
+                 [self saveGKAchievements];
+#ifdef GAMECENTER_DEBUG
+                 NSLog(@"achievement object removed");
+                 for (key in gkAchievements) {
+                     NSLog(@"Player ID: %@, Achievement: %@", key, [gkAchievements objectForKey:key]);
+                 }
+#endif
+             }
+
+         }];
+    }
+}
+
+- (void)loadAndReportGKScores {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+
+    NSMutableData *highScoresData;
+    NSKeyedUnarchiver *decoder;
+
+    NSString *documentPath = [documentsDirectory stringByAppendingPathComponent:@"GKScores.dat"];
+
+    highScoresData = [NSData dataWithContentsOfFile:documentPath];
+
+    if (highScoresData) {
+        decoder = [[NSKeyedUnarchiver alloc] initForReadingWithData:highScoresData];
+        gkScores = [[decoder decodeObjectForKey:@"GKScores"] retain];
+        [decoder release];
+#ifdef GAMECENTER_DEBUG
+        NSLog(@"before calling reportScore in loadAndReportGKScores");
+        for (GKScore *gkScore in gkScores) {
+            NSLog(@"%@", gkScore);
+        }
+#endif
+        for (GKScore *gkScore in gkScores) {
+
+            [gkScore reportScoreWithCompletionHandler:^(NSError *error) {
+
+                if (error != nil) {
+                    NSLog(@"error description: %@", [error localizedDescription]);
+                } else {
+                    [gkScores removeObject:gkScore];
+                    [self saveGKScores];
+#ifdef GAMECENTER_DEBUG
+                    NSLog(@"score object removed");
+                    for (GKScore *gkScore in gkScores) {
+                        NSLog(@"%@", gkScore);
+                    }
+#endif
+                }
+
+            }];
+        }
+    }
+}
+
+- (void)loadAndReportGKAchievements {
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+
+    NSMutableData *achievementsData;
+    NSKeyedUnarchiver *decoder;
+
+    NSString *documentPath = [documentsDirectory stringByAppendingPathComponent:@"GKAchievements.dat"];
+
+    achievementsData = [NSData dataWithContentsOfFile:documentPath];
+
+    if (achievementsData) {
+        decoder = [[NSKeyedUnarchiver alloc] initForReadingWithData:achievementsData];
+        gkAchievements = [[decoder decodeObjectForKey:@"GKAchievements"] retain];
+        [decoder release];
+#ifdef GAMECENTER_DEBUG
+        NSLog(@"before calling reportAchievementWithCompletionHandler in loadAndReportAchievements");
+        NSString *key;
+        for (key in gkAchievements) {
+            NSLog(@"Player ID: %@, Achievement: %@", key, [gkAchievements objectForKey:key]);
+        }
+#endif
+        for (key in gkAchievements) {
+
+            if ([key isEqualToString:[GKLocalPlayer localPlayer].playerID]) {
+
+                [[gkAchievements objectForKey:key] reportAchievementWithCompletionHandler:^(NSError *error) {
+
+                    if (error != nil) {
+                        NSLog(@"error description: %@", [error localizedDescription]);
+                    } else {
+#ifdef GAMECENTER_DEBUG
+                        NSLog(@"achievement reported");
+#endif
+                        [gkAchievements removeObjectForKey:[GKLocalPlayer localPlayer].playerID];
+                        [self saveGKAchievements];
+#ifdef GAMECENTER_DEBUG
+                        NSLog(@"achievement object removed");
+                        for (key in gkAchievements) {
+                            NSLog(@"Player ID: %@, Achievement: %@", key, [gkAchievements objectForKey:key]);
+                        }
+#endif
+                    }
+
+                }];
+            }
+        }
+    }
+}
+
+- (void)saveGKScores {
+    // Set up the path to the data file that the scores will be saved too.
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"GKScores.dat"];
+
+    // Set up the encoder and storage for scores
+    NSMutableData *scores;
+    NSKeyedArchiver *encoder;
+    scores = [NSMutableData data];
+    encoder = [[NSKeyedArchiver alloc] initForWritingWithMutableData:scores];
+
+    // Archive the scores
+    [encoder encodeObject:gkScores forKey:@"GKScores"];
+
+    // Finish encoding and write the contents of scores to file
+    [encoder finishEncoding];
+    [scores writeToFile:path atomically:YES];
+    [encoder release];
+}
+
+- (void)saveGKAchievements {
+    // Set up the path to the data file that the scores will be saved too.
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsDirectory = [paths objectAtIndex:0];
+    NSString *path = [documentsDirectory stringByAppendingPathComponent:@"GKAchievements.dat"];
+
+    // Set up the encoder and storage for scores
+    NSMutableData *scores;
+    NSKeyedArchiver *encoder;
+    scores = [NSMutableData data];
+    encoder = [[NSKeyedArchiver alloc] initForWritingWithMutableData:scores];
+
+    // Archive the scores
+    [encoder encodeObject:gkAchievements forKey:@"GKAchievements"];
+
+    // Finish encoding and write the contents of scores to file
+    [encoder finishEncoding];
+    [scores writeToFile:path atomically:YES];
+    [encoder release];
 }
 
 #pragma mark -
@@ -627,6 +835,10 @@ BOOL isGameCenterAvailable() {
 - (void)dealloc {
     [viewController release];
     [window release];
+    if (gameCenterAvailable) {
+        [gkScores release];
+        [gkAchievements release];
+    }
     [super dealloc];
 }
 

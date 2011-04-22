@@ -197,6 +197,10 @@
     [appDelegate.viewController showLeaderboard];
 }
 
+- (IBAction)presentAchievements {
+    [appDelegate.viewController showAchievements];
+}
+
 - (IBAction)presentPlayOptions {
     [appDelegate.viewController showPlayOptionsMenu];
 }

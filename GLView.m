@@ -204,7 +204,9 @@
 - (void)initGrid:(int)grid {
 
 #ifdef RANDOMGRID_DEBUG
-    NSLog(@"random grid: %i", grid);
+    if (randomGridPlayOption) {
+        NSLog(@"random grid: %i", grid);
+    }
 #endif
     [cubes removeAllObjects];
     [spikeMines removeAllObjects];
@@ -868,7 +870,9 @@
     NSLog(@"starting cubeCount -- %i", cubeCount);
 #endif
 #ifdef RANDOMGRID_DEBUG
-    NSLog(@"Grid: %i", grid);
+    if (!randomGridPlayOption) {
+        NSLog(@"Grid: %i", grid);
+    }
     NSLog(@"starting cubeCount -- %i", cubeCount);
     NSLog(@"time to complete grid: %f", timeToCompleteGrid);
 #endif
@@ -1819,6 +1823,25 @@
                 if (!randomGridPlayOption) {
                     if (currentGrid == numberOfGrids) {
                         sceneState = SceneState_AllGridsCompleted;
+                        if ([GKLocalPlayer localPlayer].isAuthenticated) {
+                            switch (skillLevel) {
+                                case SkillLevel_Easy:
+                                    [appDelegate reportAchievementIdentifier:@"com.noquarterarcade.energize.allGridsCompleted_easy"
+                                                             percentComplete:100.0];
+                                    break;
+                                case SkillLevel_Normal:
+                                    [appDelegate reportAchievementIdentifier:@"com.noquarterarcade.energize.allGridsCompleted_medium"
+                                                             percentComplete:100.0];
+                                    break;
+                                case SkillLevel_Hard:
+                                    [appDelegate reportAchievementIdentifier:@"com.noquarterarcade.energize.allGridsCompleted_hard"
+                                                             percentComplete:100.0];
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
                         [appDelegate resetLastGridPlayed];
                         switch (skillLevel) {
                             case SkillLevel_Easy:
@@ -1941,6 +1964,40 @@
                 ship.explosion.animation.state == kAnimationState_Stopped) {
                 if (playerLives == 0) {
                     sceneState = SceneState_GameOver;
+                    if (score > 0 && [GKLocalPlayer localPlayer].isAuthenticated) {
+                        if (randomGridPlayOption) {
+                            switch (skillLevel) {
+                                case SkillLevel_Easy:
+                                    [appDelegate reportScore:score forCategory:@"com.noquarterarcade.energize.Easy_Random"];
+                                    break;
+                                case SkillLevel_Normal:
+                                    [appDelegate reportScore:score forCategory:@"com.noquarterarcade.energize.Medium_Random"];
+                                    break;
+                                case SkillLevel_Hard:
+                                    [appDelegate reportScore:score forCategory:@"com.noquarterarcade.energize.Hard_Random"];
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        } else {
+                            switch (skillLevel) {
+                                case SkillLevel_Easy:
+                                    [appDelegate reportScore:score forCategory:@"com.noquarterarcade.energize.Easy_Sequential"];
+                                    break;
+                                case SkillLevel_Normal:
+                                    [appDelegate reportScore:score forCategory:@"com.noquarterarcade.energize.Medium_Sequential"];
+                                    break;
+                                case SkillLevel_Hard:
+                                    [appDelegate reportScore:score forCategory:@"com.noquarterarcade.energize.Hard_Sequential"];
+                                    break;
+
+                                default:
+                                    break;
+                            }
+                        }
+
+                    }
                     [sharedSoundManager pauseMusic];
                     [sharedSoundManager playSoundWithKey:@"game_over"];
                     [sharedSoundManager fadeMusicVolumeFrom:0.0 toVolume:sharedSoundManager.musicVolume duration:5.0 stop:NO];

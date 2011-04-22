@@ -15,7 +15,7 @@
 @class MainMenuView;
 @class PlayOptionsMenuViewController;
 
-@interface EnergizeViewController : UIViewController <GKLeaderboardViewControllerDelegate> {
+@interface EnergizeViewController : UIViewController <GKLeaderboardViewControllerDelegate, GKAchievementViewControllerDelegate> {
     GKLeaderboardViewController *leaderboardController;
     SettingsMenuViewController *settingsMenu;
     PlayOptionsMenuViewController *playOptionsMenu;
@@ -26,6 +26,8 @@
 
 - (void)showLeaderboard;
 - (void)leaderboardViewControllerDidFinish:(GKLeaderboardViewController *)viewController;
+- (void)showAchievements;
+- (void)achievementViewControllerDidFinish:(GKAchievementViewController *)viewController;
 - (void)showSettingsMenu;
 - (void)showGLView;
 - (void)dismissGLView;

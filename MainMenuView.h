@@ -27,6 +27,7 @@
 - (IBAction)presentGLView;
 - (IBAction)presentControlSettings;
 - (IBAction)presentLeaderboard;
+- (IBAction)presentAchievements;
 - (IBAction)presentPlayOptions;
 - (IBAction)startGameAtGrid;
 
