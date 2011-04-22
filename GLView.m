@@ -131,7 +131,7 @@
         pauseButton = [pss imageForKey:@"pause_button.png"];
 
         gameContinuing = allGridsCompletedLastGame = FALSE;
-        timeToInitTimerDisplay = 1.6;
+        timeToInitTimerDisplay = 1.4;
 
     }
 
@@ -842,7 +842,7 @@
                     [cubes addObject:cube];
                     [cube release];
                     ++cubeCount;
-                    timeToCompleteGrid += .25;
+                    timeToCompleteGrid += .75;
                     break;
 
                 case 'd':
@@ -854,7 +854,7 @@
                     [cubes addObject:cube];
                     [cube release];
                     ++cubeCount;
-                    timeToCompleteGrid += .5;
+                    timeToCompleteGrid += 1.0;
                     break;
 
 
