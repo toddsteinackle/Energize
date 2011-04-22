@@ -75,10 +75,11 @@ typedef enum {
     int playerLives;
     int maxAsteroids, asteroidLaunchOdds;
     int powerUpTimerLaunchOdds, powerUpFireballsLaunchOdds, powerUpShieldsLaunchOdds;
-    bool gameContinuing;
+    bool gameContinuing, startingGameAtGrid;
     bool trackingTime, beatTimer, initingTimer, timerBonus, powerUpTimerReInit, playInitTimerSound;
     bool shipThrustingDefault;
     bool randomGridPlayOption;
+    bool allGridsCompletedLastGame;
 
     CGFloat timer, timeToCompleteGrid, initingTimerTracker, timeToInitTimerDisplay;
     CGFloat asteroidSpeed, powerUpSpeed;
@@ -110,6 +111,9 @@ typedef enum {
 @property (nonatomic, assign) int lastGridPlayed_easy;
 @property (nonatomic, assign) int lastGridPlayed_normal;
 @property (nonatomic, assign) int lastGridPlayed_hard;
+@property (nonatomic, assign) bool startingGameAtGrid;
+@property (nonatomic, assign) bool gameContinuing;
+@property (nonatomic, assign) bool allGridsCompletedLastGame;
 
 - (void)initGame;
 - (void)initGuardians;

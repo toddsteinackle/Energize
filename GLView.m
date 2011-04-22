@@ -50,6 +50,9 @@
 @synthesize lastGridPlayed_normal;
 @synthesize lastGridPlayed_hard;
 @synthesize gridDifficulty;
+@synthesize startingGameAtGrid;
+@synthesize gameContinuing;
+@synthesize allGridsCompletedLastGame;
 
 #pragma mark -
 #pragma mark init
@@ -127,9 +130,8 @@
         timerBar = [pss imageForKey:@"timer_bar.png"];
         pauseButton = [pss imageForKey:@"pause_button.png"];
 
-        gameContinuing = FALSE;
+        gameContinuing = allGridsCompletedLastGame = FALSE;
         timeToInitTimerDisplay = 1.6;
-
 
     }
 
@@ -183,7 +185,14 @@
     currentCubeValue = 100;
     playerLives = 4;
     timer = 0;
-    gridDifficulty = 0;
+    if (allGridsCompletedLastGame) {
+        gridDifficulty = currentGrid;
+        allGridsCompletedLastGame = FALSE;
+    }
+    if (!gameContinuing && !startingGameAtGrid) {
+        gridDifficulty = 0;
+        startingGameAtGrid = FALSE;
+    }
     if (randomGridPlayOption) {
         switch (skillLevel) {
             case SkillLevel_Easy:
@@ -222,6 +231,7 @@
     timerBonusScore = 0;
     asteroidTimer = powerUpTimer = 0;
     powerUpTimerReInit = FALSE;
+    timeToCompleteGrid = 0;
     if (randomGridPlayOption) {
         lastGridPlayed_easy = lastGridPlayed_normal = lastGridPlayed_hard = 0;
     } else {
@@ -1823,6 +1833,7 @@
                 if (!randomGridPlayOption) {
                     if (currentGrid == numberOfGrids) {
                         sceneState = SceneState_AllGridsCompleted;
+                        allGridsCompletedLastGame = TRUE;
                         if ([GKLocalPlayer localPlayer].isAuthenticated) {
                             switch (skillLevel) {
                                 case SkillLevel_Easy:
@@ -2418,6 +2429,7 @@
                 [sharedSoundManager stopMusic];
             } else {
                 --currentGrid;
+                --gridDifficulty;
                 gameContinuing = TRUE;
                 [self initGame];
                 sceneState = SceneState_LevelPauseAndInit;
