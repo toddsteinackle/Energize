@@ -133,26 +133,32 @@
         gameContinuing = allGridsCompletedLastGame = FALSE;
         timeToInitTimerDisplay = 1.4;
 
+#pragma mark load sounds
+        [sharedSoundManager loadSoundWithKey:@"cube" soundFile:@"Movement3.caf"];
+        [sharedSoundManager loadSoundWithKey:@"explosion" soundFile:@"explosion.caf"];
+        [sharedSoundManager loadSoundWithKey:@"Impact6b" soundFile:@"Impact6b.caf"];
+        [sharedSoundManager loadSoundWithKey:@"guardian_fire" soundFile:@"Boing2.caf"];
+        [sharedSoundManager loadSoundWithKey:@"shield_enabled" soundFile:@"ForceField1bLp.caf"];
+        [sharedSoundManager loadSoundWithKey:@"fireballs_powerup" soundFile:@"PowerUp2.caf"];
+        [sharedSoundManager loadSoundWithKey:@"timer_powerup" soundFile:@"Flourish1b.caf"];
+        [sharedSoundManager loadSoundWithKey:@"grid_over" soundFile:@"Win5.caf"];
+        [sharedSoundManager loadSoundWithKey:@"game_over" soundFile:@"Negative2.caf"];
+        [sharedSoundManager loadSoundWithKey:@"all_grids_completed" soundFile:@"LevelUp1.caf"];
+        [sharedSoundManager loadSoundWithKey:@"free_ship" soundFile:@"Flourish5.caf"];
+        [sharedSoundManager loadMusicWithKey:@"background_music" musicFile:@"ActionStage05.m4a"];
     }
 
     return self;
 }
 
-- (void)loadSounds {
-    [sharedSoundManager loadSoundWithKey:@"cube" soundFile:@"Movement3.caf"];
-    [sharedSoundManager loadSoundWithKey:@"explosion" soundFile:@"explosion.caf"];
-    [sharedSoundManager loadSoundWithKey:@"Impact6b" soundFile:@"Impact6b.caf"];
-    [sharedSoundManager loadSoundWithKey:@"guardian_fire" soundFile:@"Boing2.caf"];
-    [sharedSoundManager loadSoundWithKey:@"shield_enabled" soundFile:@"ForceField1bLp.caf"];
-    [sharedSoundManager loadSoundWithKey:@"fireballs_powerup" soundFile:@"PowerUp2.caf"];
-    [sharedSoundManager loadSoundWithKey:@"timer_powerup" soundFile:@"Flourish1b.caf"];
-    [sharedSoundManager loadSoundWithKey:@"grid_over" soundFile:@"Win5.caf"];
-    [sharedSoundManager loadSoundWithKey:@"game_over" soundFile:@"Negative2.caf"];
-    [sharedSoundManager loadSoundWithKey:@"all_grids_completed" soundFile:@"LevelUp1.caf"];
-    [sharedSoundManager loadSoundWithKey:@"free_ship" soundFile:@"Flourish5.caf"];
-    [sharedSoundManager loadMusicWithKey:@"background_music" musicFile:@"ActionStage05.m4a"];
-}
-- (void)removeSounds {
+- (void)dealloc {
+    [guardians release];
+    [cubes release];
+    [spikeMines release];
+    [asteroids release];
+    [powerUps release];
+    [ship release];
+
     [sharedSoundManager removeSoundWithKey:@"cube"];
     [sharedSoundManager removeSoundWithKey:@"explosion"];
     [sharedSoundManager removeSoundWithKey:@"Impact6b"];
@@ -165,15 +171,6 @@
     [sharedSoundManager removeSoundWithKey:@"all_grids_completed"];
     [sharedSoundManager removeSoundWithKey:@"free_ship"];
     [sharedSoundManager removeMusicWithKey:@"background_music"];
-}
-
-- (void)dealloc {
-    [guardians release];
-    [cubes release];
-    [spikeMines release];
-    [asteroids release];
-    [powerUps release];
-    [ship release];
 
     [super dealloc];
 }

@@ -68,7 +68,7 @@
         appDelegate.currentViewController = appDelegate.viewController;
     }
     [sharedSoundManager stopMusic];
-    [appDelegate.glView removeSounds];
+    [sharedSoundManager playMusicWithKey:@"menu_music" timesToRepeat:-1];
     [appDelegate saveSettings];
     [appDelegate.viewController viewWillAppear:YES];
 }

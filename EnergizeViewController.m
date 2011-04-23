@@ -15,6 +15,7 @@
 #import "GLView.h"
 #import "AboutMenuViewController.h"
 #import "HelpMenuViewController.h"
+#import "SoundManager.h"
 
 @implementation EnergizeViewController
 
@@ -85,11 +86,11 @@
 }
 
 - (void)showGLView {
-    [appDelegate.glView loadSounds];
     appDelegate.currentViewController = glViewController;
     [appDelegate startAnimation];
     [self presentModalViewController:glViewController animated:YES];
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+    [sharedSoundManager stopMusic];
 }
 
 - (void)dismissGLView {
@@ -116,9 +117,12 @@
 
 - (void)customInit {
     appDelegate = (EnergizeAppDelegate *)[[UIApplication sharedApplication] delegate];
+    sharedSoundManager = [SoundManager sharedSoundManager];
     glViewController = [[OpenGLViewController alloc] initWithNibName:nil bundle:nil];
     mainMenu = [[MainMenuView alloc] initWithFrame:CGRectMake(0, 0, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT)];
     self.view = mainMenu;
+    [sharedSoundManager loadMusicWithKey:@"menu_music" musicFile:@"01IntroTitle.m4a"];
+    [sharedSoundManager playMusicWithKey:@"menu_music" timesToRepeat:-1];
 }
 
 
@@ -168,6 +172,7 @@
 - (void)dealloc {
     [glViewController release];
     [mainMenu release];
+    [sharedSoundManager removeMusicWithKey:@"menu_music"];
     [super dealloc];
 }
 

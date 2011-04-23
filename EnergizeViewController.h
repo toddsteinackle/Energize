@@ -16,6 +16,7 @@
 @class PlayOptionsMenuViewController;
 @class AboutMenuViewController;
 @class HelpMenuViewController;
+@class SoundManager;
 
 @interface EnergizeViewController : UIViewController <GKLeaderboardViewControllerDelegate, GKAchievementViewControllerDelegate> {
     GKLeaderboardViewController *leaderboardController;
@@ -26,6 +27,7 @@
     MainMenuView *mainMenu;
     AboutMenuViewController *aboutMenu;
     HelpMenuViewController *helpMenu;
+    SoundManager *sharedSoundManager;
 }
 
 - (void)showLeaderboard;
