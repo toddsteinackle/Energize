@@ -14,6 +14,8 @@
 @class OpenGLViewController;
 @class MainMenuView;
 @class PlayOptionsMenuViewController;
+@class AboutMenuViewController;
+@class HelpMenuViewController;
 
 @interface EnergizeViewController : UIViewController <GKLeaderboardViewControllerDelegate, GKAchievementViewControllerDelegate> {
     GKLeaderboardViewController *leaderboardController;
@@ -22,6 +24,8 @@
     EnergizeAppDelegate *appDelegate;
     OpenGLViewController *glViewController;
     MainMenuView *mainMenu;
+    AboutMenuViewController *aboutMenu;
+    HelpMenuViewController *helpMenu;
 }
 
 - (void)showLeaderboard;
@@ -33,6 +37,8 @@
 - (void)dismissGLView;
 - (void)customInit;
 - (void)showPlayOptionsMenu;
+- (void)showAbout;
+- (void)showHelp;
 
 @end
 

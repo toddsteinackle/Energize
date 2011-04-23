@@ -206,4 +206,12 @@
     [appDelegate.viewController showPlayOptionsMenu];
 }
 
+- (IBAction)presentAbout {
+    [appDelegate.viewController showAbout];
+}
+
+- (IBAction)presentHelp {
+    [appDelegate.viewController showHelp];
+}
+
 @end

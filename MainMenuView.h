@@ -30,5 +30,7 @@
 - (IBAction)presentAchievements;
 - (IBAction)presentPlayOptions;
 - (IBAction)startGameAtGrid;
+- (IBAction)presentAbout;
+- (IBAction)presentHelp;
 
 @end

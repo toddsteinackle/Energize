@@ -13,6 +13,8 @@
 #import "OpenGLViewController.h"
 #import "MainMenuView.h"
 #import "GLView.h"
+#import "AboutMenuViewController.h"
+#import "HelpMenuViewController.h"
 
 @implementation EnergizeViewController
 
@@ -60,6 +62,26 @@
     }
     [self presentModalViewController:playOptionsMenu animated:YES];
     appDelegate.currentViewController = playOptionsMenu;
+}
+
+- (void)showAbout {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        aboutMenu = [[AboutMenuViewController alloc] initWithNibName:@"AboutMenuViewController-iPad" bundle:[NSBundle mainBundle]];
+    } else {
+        aboutMenu = [[AboutMenuViewController alloc] initWithNibName:@"AboutMenuViewController" bundle:[NSBundle mainBundle]];
+    }
+    [self presentModalViewController:aboutMenu animated:YES];
+    appDelegate.currentViewController = aboutMenu;
+}
+
+- (void)showHelp {
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        helpMenu = [[HelpMenuViewController alloc] initWithNibName:@"HelpMenuViewController-iPad" bundle:[NSBundle mainBundle]];
+    } else {
+        helpMenu = [[HelpMenuViewController alloc] initWithNibName:@"HelpMenuViewController" bundle:[NSBundle mainBundle]];
+    }
+    [self presentModalViewController:helpMenu animated:YES];
+    appDelegate.currentViewController = helpMenu;
 }
 
 - (void)showGLView {

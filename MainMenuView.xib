@@ -510,6 +510,24 @@
 					</object>
 					<int key="connectionID">56</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">presentAbout</string>
+						<reference key="source" ref="188299529"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">57</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">presentHelp</string>
+						<reference key="source" ref="250268777"/>
+						<reference key="destination" ref="372490531"/>
+						<int key="IBEventType">7</int>
+					</object>
+					<int key="connectionID">58</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -799,7 +817,7 @@
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">56</int>
+			<int key="maxID">58</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -811,15 +829,19 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>presentAbout</string>
 							<string>presentAchievements</string>
 							<string>presentControlSettings</string>
 							<string>presentGLView</string>
+							<string>presentHelp</string>
 							<string>presentLeaderboard</string>
 							<string>presentPlayOptions</string>
 							<string>startGameAtGrid</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -832,15 +854,21 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>presentAbout</string>
 							<string>presentAchievements</string>
 							<string>presentControlSettings</string>
 							<string>presentGLView</string>
+							<string>presentHelp</string>
 							<string>presentLeaderboard</string>
 							<string>presentPlayOptions</string>
 							<string>startGameAtGrid</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBActionInfo">
+								<string key="name">presentAbout</string>
+								<string key="candidateClassName">id</string>
+							</object>
 							<object class="IBActionInfo">
 								<string key="name">presentAchievements</string>
 								<string key="candidateClassName">id</string>
@@ -851,6 +879,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">presentGLView</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">presentHelp</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">
