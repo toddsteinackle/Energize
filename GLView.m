@@ -1780,6 +1780,12 @@
                 [guardians removeAllObjects];
                 [self initGuardians];
                 [self initGame];
+                if (randomGridPlayOption) {
+                    [self initGrid:arc4random() % numberOfGrids];
+                    ++currentGrid;
+                } else {
+                    [self initGrid:currentGrid++];
+                }
                 sceneState = SceneState_GuardianTransport;
                 lastTimeInLoop = 0;
                 [sharedSoundManager playMusicWithKey:@"background_music" timesToRepeat:-1];
@@ -1798,12 +1804,6 @@
                 return;
             }
             if (lastTimeInLoop) {
-                if (randomGridPlayOption) {
-                    [self initGrid:arc4random() % numberOfGrids];
-                    ++currentGrid;
-                } else {
-                    [self initGrid:currentGrid++];
-                }
                 sceneState = SceneState_Running;
                 lastTimeInLoop = 0;
                 return;
