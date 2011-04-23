@@ -869,9 +869,6 @@
             }
         }
     }
-    if (timeToCompleteGrid > 35.0) {
-        timeToCompleteGrid = 35.0;
-    }
     timer = timeToCompleteGrid;
 #ifdef GAMEPLAY_DEBUG
     NSLog(@"starting cubeCount -- %i", cubeCount);
