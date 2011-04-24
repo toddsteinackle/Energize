@@ -621,9 +621,9 @@ BOOL isGameCenterAvailable() {
         decoder = [[NSKeyedUnarchiver alloc] initForReadingWithData:achievementsData];
         gkAchievements = [[decoder decodeObjectForKey:@"GKAchievements"] retain];
         [decoder release];
+        NSString *key;
 #ifdef GAMECENTER_DEBUG
         NSLog(@"before calling reportAchievementWithCompletionHandler in loadAndReportAchievements");
-        NSString *key;
         for (key in gkAchievements) {
             NSLog(@"Player ID: %@, Achievement: %@", key, [gkAchievements objectForKey:key]);
         }
