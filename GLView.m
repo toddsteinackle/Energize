@@ -2086,6 +2086,9 @@
             for (Guardian *g in guardians) {
                 [g render];
             }
+            if (powerUpTimerReInit) {
+                timerBarHeight = 1.0;
+            }
             [timerBar renderAtPoint:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE+12*appDelegate.widthScaleFactor,
                                                 appDelegate.GUARDIAN_BOTTOM_BOUND+8*appDelegate.heightScaleFactor)
                               scale:Scale2fMake(appDelegate.widthScaleFactor, timerBarHeight*appDelegate.heightScaleFactor)
