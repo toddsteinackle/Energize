@@ -121,11 +121,14 @@
 		5F5D2C36134187E8009D98E6 /* status-iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F5D2C34134187E8009D98E6 /* status-iphone.png */; };
 		5F5E29EF131DEEAE00ED7D66 /* GLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F5E29EE131DEEAE00ED7D66 /* GLView.m */; };
 		5F73F2761301F83A0017A10A /* PauseMenuViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F73F2751301F83A0017A10A /* PauseMenuViewController-iPad.xib */; };
+		5F8415BF1363AE0300D109F3 /* cube_dying_iphone.pex in Resources */ = {isa = PBXBuildFile; fileRef = 5F8415BD1363AE0300D109F3 /* cube_dying_iphone.pex */; };
+		5F8415C01363AE0300D109F3 /* cube_dying_retina.pex in Resources */ = {isa = PBXBuildFile; fileRef = 5F8415BE1363AE0300D109F3 /* cube_dying_retina.pex */; };
 		5F89744013633515009CBC98 /* timer_bar.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F89743F13633515009CBC98 /* timer_bar.png */; };
 		5F897442136335AE009CBC98 /* yellow_power.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F897441136335AE009CBC98 /* yellow_power.png */; };
 		5F897444136335FA009CBC98 /* green_power.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F897443136335FA009CBC98 /* green_power.png */; };
 		5F8974461363365C009CBC98 /* gray_power.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F8974451363365C009CBC98 /* gray_power.png */; };
 		5F89746113634973009CBC98 /* 01IntroTitle.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 5F89746013634973009CBC98 /* 01IntroTitle.m4a */; };
+		5F99D22C13637BCB00C11F11 /* cube_dying_ipad.pex in Resources */ = {isa = PBXBuildFile; fileRef = 5F99D22B13637BCB00C11F11 /* cube_dying_ipad.pex */; };
 		5F9B0F271343E1FA00AE10D3 /* largeMessageFont.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 5F9B0F251343E1FA00AE10D3 /* largeMessageFont.fnt */; };
 		5F9B0F281343E1FA00AE10D3 /* largeMessageFont.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F9B0F261343E1FA00AE10D3 /* largeMessageFont.png */; };
 		5FA464ED135B616600DAC108 /* PlayOptionsMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FA464EC135B616600DAC108 /* PlayOptionsMenuViewController.m */; };
@@ -351,11 +354,14 @@
 		5F5E29ED131DEEAE00ED7D66 /* GLView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLView.h; sourceTree = "<group>"; };
 		5F5E29EE131DEEAE00ED7D66 /* GLView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLView.m; sourceTree = "<group>"; };
 		5F73F2751301F83A0017A10A /* PauseMenuViewController-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = "PauseMenuViewController-iPad.xib"; sourceTree = "<group>"; };
+		5F8415BD1363AE0300D109F3 /* cube_dying_iphone.pex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube_dying_iphone.pex; sourceTree = "<group>"; };
+		5F8415BE1363AE0300D109F3 /* cube_dying_retina.pex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube_dying_retina.pex; sourceTree = "<group>"; };
 		5F89743F13633515009CBC98 /* timer_bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = timer_bar.png; sourceTree = "<group>"; };
 		5F897441136335AE009CBC98 /* yellow_power.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellow_power.png; sourceTree = "<group>"; };
 		5F897443136335FA009CBC98 /* green_power.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = green_power.png; sourceTree = "<group>"; };
 		5F8974451363365C009CBC98 /* gray_power.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gray_power.png; sourceTree = "<group>"; };
 		5F89746013634973009CBC98 /* 01IntroTitle.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 01IntroTitle.m4a; sourceTree = "<group>"; };
+		5F99D22B13637BCB00C11F11 /* cube_dying_ipad.pex */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube_dying_ipad.pex; sourceTree = "<group>"; };
 		5F9B0F251343E1FA00AE10D3 /* largeMessageFont.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = largeMessageFont.fnt; sourceTree = "<group>"; };
 		5F9B0F261343E1FA00AE10D3 /* largeMessageFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = largeMessageFont.png; sourceTree = "<group>"; };
 		5FA464EB135B616600DAC108 /* PlayOptionsMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayOptionsMenuViewController.h; sourceTree = "<group>"; };
@@ -711,6 +717,9 @@
 		5FDC9E3213588681002B97FB /* pex */ = {
 			isa = PBXGroup;
 			children = (
+				5F8415BD1363AE0300D109F3 /* cube_dying_iphone.pex */,
+				5F8415BE1363AE0300D109F3 /* cube_dying_retina.pex */,
+				5F99D22B13637BCB00C11F11 /* cube_dying_ipad.pex */,
 				5F0B6DA513353DC400ED5190 /* starfield-iphone.pex */,
 				5F3EEE591357C79A0021A318 /* starfield-retina.pex */,
 				5FF2A625131F347B0081BAA4 /* starfield.pex */,
@@ -1014,6 +1023,9 @@
 				5F897444136335FA009CBC98 /* green_power.png in Resources */,
 				5F8974461363365C009CBC98 /* gray_power.png in Resources */,
 				5F89746113634973009CBC98 /* 01IntroTitle.m4a in Resources */,
+				5F99D22C13637BCB00C11F11 /* cube_dying_ipad.pex in Resources */,
+				5F8415BF1363AE0300D109F3 /* cube_dying_iphone.pex in Resources */,
+				5F8415C01363AE0300D109F3 /* cube_dying_retina.pex in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

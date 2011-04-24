@@ -12,6 +12,7 @@
 #import "Animation.h"
 #import "EnergizeAppDelegate.h"
 #import "Primitives.h"
+#import "ParticleEmitter.h"
 
 
 @implementation Cube
@@ -52,6 +53,15 @@
         appearingDelay = apDelay;
         appearingTimer = 0;
         isDoubleCube = DoubleCube;
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            dyingEmitter = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"cube_dying_ipad.pex"];
+        } else {
+            if (appDelegate.retinaDisplay) {
+                dyingEmitter = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"cube_dying_retina.pex"];
+            } else {
+                dyingEmitter = [[ParticleEmitter alloc] initParticleEmitterWithFile:@"cube_dying_iphone.pex"];
+            }
+        }
     }
     return self;
 }
@@ -83,7 +93,9 @@
                 appearingTimer = 0;
             }
             break;
-
+        case EntityState_Dead:
+            [dyingEmitter updateWithDelta:aDelta];
+            break;
 
         default:
             break;
@@ -105,6 +117,9 @@
                                        scale:Scale2fMake(scaleWidth, scaleHeight)
                                     rotation:rotationAngle];
             break;
+        case EntityState_Dead:
+            [dyingEmitter renderParticles];
+            break;
 
         default:
             break;
@@ -118,6 +133,7 @@
 - (void)dealloc {
     [singleCube release];
     [doubleCube release];
+    [dyingEmitter release];
     [super dealloc];
 }
 

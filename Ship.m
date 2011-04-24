@@ -20,6 +20,7 @@
 #import "PowerUpFireballs.h"
 #import "PowerUpShields.h"
 #import "PowerUpTimer.h"
+#import "ParticleEmitter.h"
 
 
 @implementation Ship
@@ -328,6 +329,9 @@
 #ifdef GAMEPLAY_DEBUG
             NSLog(@"cubeCount -- %i", appDelegate.glView.cubeCount);
 #endif
+            otherEntity.dyingEmitter.sourcePosition = Vector2fMake(otherEntity.pixelLocation.x, otherEntity.pixelLocation.y);
+            [otherEntity.dyingEmitter setDuration:.2];
+            [otherEntity.dyingEmitter setActive:TRUE];
             return;
         }
     }

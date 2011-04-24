@@ -76,12 +76,12 @@ typedef enum {
     int maxAsteroids, asteroidLaunchOdds;
     int powerUpTimerLaunchOdds, powerUpFireballsLaunchOdds, powerUpShieldsLaunchOdds;
     bool gameContinuing, startingGameAtGrid;
-    bool trackingTime, beatTimer, initingTimer, timerBonus, powerUpTimerReInit, playInitTimerSound;
+    bool trackingTime, beatTimer, initingTimer, powerUpTimerReInit, playInitTimerSound;
     bool shipThrustingDefault;
     bool randomGridPlayOption;
     bool allGridsCompletedLastGame;
 
-    CGFloat timer, timeToCompleteGrid, initingTimerTracker, timeToInitTimerDisplay;
+    CGFloat timer, timeToCompleteGrid, initingTimerTracker, timeToInitTimerDisplay, timerBarHeight;
     CGFloat asteroidSpeed, powerUpSpeed;
 
     double asteroidLaunchDelay, asteroidTimer;
@@ -89,6 +89,7 @@ typedef enum {
 
     int tapsNeededToToggleThrust;
     NSTimer *timer_object;
+    int gridNumberDisplayed;
 
 }
 

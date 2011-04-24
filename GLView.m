@@ -85,7 +85,9 @@
         currentGrid = 0;
         gridDifficulty = 0;
         numberOfGrids = 50;
-
+        timerBonusScore = 0;
+        timer = 0;
+        gridNumberDisplayed = 0;
 
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             statusFont = [[BitmapFont alloc] initWithFontImageNamed:@"status.png"
@@ -181,7 +183,6 @@
     nextFreeShip = freeShipValue = 100000;
     currentCubeValue = 100;
     playerLives = 4;
-    timer = 0;
     if (allGridsCompletedLastGame) {
         gridDifficulty = currentGrid;
         allGridsCompletedLastGame = FALSE;
@@ -224,8 +225,6 @@
     initingTimer = TRUE;
     playInitTimerSound = TRUE;
     initingTimerTracker = 0;
-    timerBonus = FALSE;
-    timerBonusScore = 0;
     asteroidTimer = powerUpTimer = 0;
     powerUpTimerReInit = FALSE;
     timeToCompleteGrid = 0;
@@ -1759,9 +1758,6 @@
 
 - (void)calculateTimerBonus {
     timerBonusScore = 1000 * timer;
-    if (timerBonusScore > 0) {
-        timerBonus = TRUE;
-    }
 }
 
 #pragma mark -
@@ -1786,6 +1782,7 @@
                 } else {
                     [self initGrid:currentGrid++];
                 }
+                gridNumberDisplayed = currentGrid;
                 sceneState = SceneState_GuardianTransport;
                 lastTimeInLoop = 0;
                 [sharedSoundManager playMusicWithKey:@"background_music" timesToRepeat:-1];
@@ -1817,13 +1814,24 @@
             for (Guardian *g in guardians) {
                 [g updateWithDelta:aDelta];
             }
+            if (lastTimeInLoop == 0) {
+                if (randomGridPlayOption) {
+                    [self initGrid:arc4random() % numberOfGrids];
+                } else {
+                    if (currentGrid != numberOfGrids) {
+                        [self initGrid:currentGrid];
+                    }
+                }
+                if (gameContinuing && allGridsCompletedLastGame) {
+                    gridNumberDisplayed = numberOfGrids;
+                }
+            }
             if (CACurrentMediaTime() - lastTimeInLoop < 1.5) {
                 return;
             }
             if (lastTimeInLoop) {
                 score += timerBonusScore;
                 [self freeShipCheck];
-                timerBonusScore = 0;
                 if (!randomGridPlayOption) {
                     if (currentGrid == numberOfGrids) {
                         sceneState = SceneState_AllGridsCompleted;
@@ -1868,18 +1876,14 @@
                         return;
                     }
                 }
-                if (randomGridPlayOption) {
-                    [self initGrid:arc4random() % numberOfGrids];
-                    ++currentGrid;
-                } else {
-                    [self initGrid:currentGrid++];
-                }
                 if (gameContinuing) {
                     gameContinuing = FALSE;
                 }
                 for (Guardian *g in guardians) {
                     g.canFire = TRUE;
                 }
+                ++currentGrid;
+                gridNumberDisplayed = currentGrid;
                 sceneState = SceneState_Running;
                 lastTimeInLoop = 0;
                 [sharedSoundManager resumeMusic];
@@ -2081,8 +2085,12 @@
             for (Guardian *g in guardians) {
                 [g render];
             }
+            [timerBar renderAtPoint:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE+12*appDelegate.widthScaleFactor,
+                                                appDelegate.GUARDIAN_BOTTOM_BOUND+8*appDelegate.heightScaleFactor)
+                              scale:Scale2fMake(appDelegate.widthScaleFactor, timerBarHeight*appDelegate.heightScaleFactor)
+                           rotation:0];
             [sharedImageRenderManager renderImages];
-            if (timerBonus) {
+            if (!gameContinuing) {
                 [statusFont renderStringJustifiedInFrame:CGRectMake(0, appDelegate.SCREEN_HEIGHT/2, appDelegate.SCREEN_WIDTH, appDelegate.SCREEN_HEIGHT/2)
                                            justification:BitmapFontJustification_MiddleCentered
                                                     text:[NSString stringWithFormat:@"Timer Bonus: %i",timerBonusScore]];
@@ -2245,13 +2253,6 @@
                          scale:Scale2fMake(appDelegate.widthScaleFactor, appDelegate.heightScaleFactor)
                       rotation:0];
 
-    int gridNumberDisplayed;
-    if (gameContinuing) {
-        gridNumberDisplayed = currentGrid + 1;
-    } else {
-        gridNumberDisplayed = currentGrid;
-    }
-
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         [statusFont renderStringAt:CGPointMake(appDelegate.GUARDIAN_LEFT_BASE+appDelegate.GUARDIAN_WIDTH, appDelegate.GUARDIAN_TOP_BASE)
                               text:[NSString stringWithFormat:@"Grid: %i    Score: %i", gridNumberDisplayed, score]];
@@ -2260,16 +2261,19 @@
                               text:[NSString stringWithFormat:@"Grid: %i    Score: %i", gridNumberDisplayed, score]];
     }
 
-    if (sceneState != SceneState_GameOver && sceneState != SceneState_AllGridsCompleted) {
+    if (sceneState != SceneState_GameOver
+        && sceneState != SceneState_AllGridsCompleted
+        && sceneState != SceneState_LevelPauseAndInit) {
         if (initingTimer) {
             [timerBar renderAtPoint:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE+12*appDelegate.widthScaleFactor,
                                                 appDelegate.GUARDIAN_BOTTOM_BOUND+8*appDelegate.heightScaleFactor)
                               scale:Scale2fMake(appDelegate.widthScaleFactor, (initingTimerTracker/timeToInitTimerDisplay)*appDelegate.heightScaleFactor)
                            rotation:0];
         } else {
+            timerBarHeight = timer/timeToCompleteGrid;
             [timerBar renderAtPoint:CGPointMake(appDelegate.GUARDIAN_RIGHT_BASE+12*appDelegate.widthScaleFactor,
                                                 appDelegate.GUARDIAN_BOTTOM_BOUND+8*appDelegate.heightScaleFactor)
-                              scale:Scale2fMake(appDelegate.widthScaleFactor, (timer/timeToCompleteGrid)*appDelegate.heightScaleFactor)
+                              scale:Scale2fMake(appDelegate.widthScaleFactor, timerBarHeight*appDelegate.heightScaleFactor)
                            rotation:0];
         }
 
@@ -2403,6 +2407,7 @@
                                                                      forKey:@"location"];
                 [self performSelector:@selector(handleSingleTap:) withObject:touchLoc afterDelay:0.3];
             } else if (numTaps == 2) {
+                timerBonusScore = 0;
                 [self.viewController quitGame];
             }
             break;
@@ -2414,6 +2419,7 @@
 
 - (void)handleSingleTap:(NSDictionary *)touches {
     [self resetGuardiansAndClearGrid];
+    timerBarHeight = 0;
     switch (sceneState) {
         case SceneState_GameOver:
             if (randomGridPlayOption) {
@@ -2429,9 +2435,10 @@
                 sceneState = SceneState_LevelPauseAndInit;
                 initingTimer = TRUE;
             }
+            timerBonusScore = 0;
             break;
         case SceneState_AllGridsCompleted:
-            currentGrid = 0;
+            currentGrid = lastTimeInLoop = 0;
             gameContinuing = TRUE;
             sceneState = SceneState_LevelPauseAndInit;
             initingTimer = TRUE;
