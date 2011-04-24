@@ -12,6 +12,7 @@
 #import "EnergizeAppDelegate.h"
 #import "GLView.h"
 #import "SoundManager.h"
+#import "Ship.h"
 
 
 @implementation OpenGLViewController
@@ -42,6 +43,7 @@
     appDelegate.currentViewController = pauseMenu;
     [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
     [sharedSoundManager pauseMusic];
+    [sharedSoundManager stopSoundWithKey:@"shield_enabled"];
 }
 
 - (void)dismissPauseView {
@@ -50,6 +52,13 @@
     [appDelegate startAnimation];
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     [sharedSoundManager resumeMusic];
+    if (appDelegate.glView.ship.isShielded) {
+        [sharedSoundManager playSoundWithKey:@"shield_enabled"
+                                        gain:1.0
+                                       pitch:1.0
+                                    location:CGPointMake(0, 0)
+                                  shouldLoop:TRUE];
+    }
 }
 
 - (void)quitGame {

@@ -53,6 +53,7 @@
 @synthesize startingGameAtGrid;
 @synthesize gameContinuing;
 @synthesize allGridsCompletedLastGame;
+@synthesize ship;
 
 #pragma mark -
 #pragma mark init

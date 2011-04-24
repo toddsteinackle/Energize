@@ -115,6 +115,7 @@ typedef enum {
 @property (nonatomic, assign) bool startingGameAtGrid;
 @property (nonatomic, assign) bool gameContinuing;
 @property (nonatomic, assign) bool allGridsCompletedLastGame;
+@property (nonatomic, retain) Ship *ship;
 
 - (void)initGame;
 - (void)initGuardians;
