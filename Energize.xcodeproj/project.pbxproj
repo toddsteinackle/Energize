@@ -115,6 +115,7 @@
 		5F5AA1A312F66251006A2A2C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F5AA1A212F66251006A2A2C /* AVFoundation.framework */; };
 		5F5AA1AB12F6627C006A2A2C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F5AA1AA12F6627C006A2A2C /* AudioToolbox.framework */; };
 		5F5C61F713E31DB10057796D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F1F1556135D427E008B1E77 /* Default.png */; };
+		5F5C61FE13E327C50057796D /* ship-up.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F5C61FD13E327C50057796D /* ship-up.png */; };
 		5F5D2C1F13418378009D98E6 /* status.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 5F5D2C1D13418378009D98E6 /* status.fnt */; };
 		5F5D2C2013418378009D98E6 /* status.png in Resources */ = {isa = PBXBuildFile; fileRef = 5F5D2C1E13418378009D98E6 /* status.png */; };
 		5F5D2C35134187E8009D98E6 /* status-iphone.fnt in Resources */ = {isa = PBXBuildFile; fileRef = 5F5D2C33134187E8009D98E6 /* status-iphone.fnt */; };
@@ -347,6 +348,7 @@
 		5F5AA19A12F66211006A2A2C /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		5F5AA1A212F66251006A2A2C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5F5AA1AA12F6627C006A2A2C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		5F5C61FD13E327C50057796D /* ship-up.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ship-up.png"; sourceTree = "<group>"; };
 		5F5D2C1D13418378009D98E6 /* status.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = status.fnt; sourceTree = "<group>"; };
 		5F5D2C1E13418378009D98E6 /* status.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status.png; sourceTree = "<group>"; };
 		5F5D2C33134187E8009D98E6 /* status-iphone.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "status-iphone.fnt"; sourceTree = "<group>"; };
@@ -732,6 +734,7 @@
 			children = (
 				5F8974451363365C009CBC98 /* gray_power.png */,
 				5F897443136335FA009CBC98 /* green_power.png */,
+				5F5C61FD13E327C50057796D /* ship-up.png */,
 				5F897441136335AE009CBC98 /* yellow_power.png */,
 				5F89743F13633515009CBC98 /* timer_bar.png */,
 				5F08A3D81359E4B400B4F4E9 /* iPhoneRed0005@2x.png */,
@@ -1029,6 +1032,7 @@
 				5F8415BF1363AE0300D109F3 /* cube_dying_iphone.pex in Resources */,
 				5F8415C01363AE0300D109F3 /* cube_dying_retina.pex in Resources */,
 				5F5C61F713E31DB10057796D /* Default.png in Resources */,
+				5F5C61FE13E327C50057796D /* ship-up.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
