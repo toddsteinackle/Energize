@@ -181,7 +181,7 @@
 - (void)initGame {
 
     score = 0;
-    nextFreeShip = freeShipValue = 100000;
+    nextFreeShip = freeShipValue = 50000;
     currentCubeValue = 100;
     playerLives = 4;
     if (allGridsCompletedLastGame) {
