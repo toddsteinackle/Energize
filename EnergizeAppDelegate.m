@@ -725,7 +725,7 @@ BOOL isGameCenterAvailable() {
         [settings setObject:[NSNumber numberWithBool:TRUE] forKey:@"defaultShipThrust"];
         [settings setObject:[NSNumber numberWithInt:1] forKey:@"tapsToToggle"];
         [settings setObject:[NSNumber numberWithDouble:self.DRAG_MIN] forKey:@"minDragDistance"];
-        [settings setObject:[NSNumber numberWithInt:1] forKey:@"skillLevel"];
+        [settings setObject:[NSNumber numberWithInt:0] forKey:@"skillLevel"];
         [settings setObject:[NSNumber numberWithBool:FALSE] forKey:@"randomGridPlayOption"];
         [settings setObject:[NSNumber numberWithInt:1] forKey:@"lastGridPlayed_easy"];
         [settings setObject:[NSNumber numberWithInt:1] forKey:@"lastGridPlayed_normal"];
